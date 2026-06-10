@@ -1,0 +1,1106 @@
+[
+  {
+    "al_id": "AL-01",
+    "title": "Total Compensation Suite",
+    "description": "Model total compensation across base, bonus, equity, and benefits for up to four offers or scenarios.",
+    "category": "compensation_offers",
+    "slug": "25-total-compensation-suite",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-02",
+    "title": "Credential ROI Suite",
+    "description": "Calculate the NPV and payback period of professional certifications against career earnings uplift.",
+    "category": "education_path_roi",
+    "slug": "01-credential-roi-suite",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-03",
+    "title": "Human Capital Engine",
+    "description": "Quantify lifetime economic value of human capital across education, career path, and retirement scenarios.",
+    "category": "licensing_credentials",
+    "slug": "11-human-capital-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-04",
+    "title": "Geo-Fiscal Arbitrage Simulator",
+    "description": "Model income equivalency and net financial impact of relocating across 70 metros with state tax and cost-of-living adjustment.",
+    "category": "compensation_offers",
+    "slug": "26-geo-fiscal-arbitrage-simulator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-05",
+    "title": "Education Savings Projector",
+    "description": "Project 529 growth, state tax deductions, and college cost coverage across contribution and market scenarios.",
+    "category": "student_finance_debt",
+    "slug": "24-education-savings-projector",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-06+16",
+    "title": "Career Resilience Engine",
+    "description": "Score automation-displacement risk by occupation and model the ROI of upskilling or reskilling investments.",
+    "category": "career_transition_mobility",
+    "slug": "06-career-resilience-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-07",
+    "title": "Workforce Board ROI Report Generator",
+    "description": "Generate a WIOA-aligned ROI report for workforce development programs using credential and earnings outcome data.",
+    "category": "workforce_development",
+    "slug": "15-workforce-board-roi-report",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-08+14",
+    "title": "Career Transition Suite",
+    "description": "Model the financial cost and break-even timeline of switching careers or industries.",
+    "category": "career_transition_mobility",
+    "slug": "07-career-transition-suite",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-09",
+    "title": "Visa Strategy Navigator",
+    "description": "Map US visa pathways and historical approval rates for your occupation, nationality, and career timeline.",
+    "category": "immigration_visa",
+    "slug": "27-visa-strategy-navigator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-10",
+    "title": "Professional License Reciprocity Checker",
+    "description": "Check reciprocity and endorsement pathways for licensed professions across all 50 states.",
+    "category": "licensing_credentials",
+    "slug": "28-professional-license-reciprocity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-11",
+    "title": "Apprenticeship & Earn-and-Learn Matcher",
+    "description": "Identify apprenticeship programs by occupation and state with wage progression and credential outcome data.",
+    "category": "workforce_development",
+    "slug": "16-apprenticeship-matcher",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-12",
+    "title": "Scholarship ROI Tracker",
+    "description": "Calculate net ROI of scholarship applications by award value, time invested, and estimated win probability.",
+    "category": "student_finance_debt",
+    "slug": "14-scholarship-roi-tracker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-13",
+    "title": "Student Loan Repayment Optimizer",
+    "description": "Compare federal repayment plans—IDR, PSLF, standard—by monthly payment, total cost, and forgiveness outcome.",
+    "category": "student_finance_debt",
+    "slug": "22-student-loan-repayment-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-17",
+    "title": "FAFSA SAI Simulator",
+    "description": "Estimate your Student Aid Index from income, assets, and household data under current FAFSA methodology.",
+    "category": "student_finance_debt",
+    "slug": "02-fafsa-sai-simulator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-18",
+    "title": "CPD / CPE Credit Tracker",
+    "description": "Track continuing education credits against license renewal requirements by jurisdiction and credential type.",
+    "category": "licensing_credentials",
+    "slug": "12-cpd-credit-tracker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-20",
+    "title": "Exam Cost & Timeline Planner",
+    "description": "Model total cost and study timeline for 32 professional exams including fees, prep costs, and retake probability.",
+    "category": "licensing_credentials",
+    "slug": "13-exam-cost-planner",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-22",
+    "title": "Freelance / 1099 Total Cost Calculator",
+    "description": "Convert 1099 freelance rates to W-2 equivalents accounting for SE tax, benefits, and overhead costs.",
+    "category": "compensation_offers",
+    "slug": "23-freelance-1099-total-cost-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-23",
+    "title": "Benefits Open Enrollment Optimizer",
+    "description": "Compare health, HSA, FSA, and ancillary benefit elections by total annual cost and tax savings.",
+    "category": "compensation_offers",
+    "slug": "04-benefits-open-enrollment-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-24",
+    "title": "Separation Package Analyzer",
+    "description": "Evaluate severance packages by cash value, COBRA cost, non-compete terms, and negotiation leverage.",
+    "category": "career_transition_mobility",
+    "slug": "08-severance-decision-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-25",
+    "title": "Offer Negotiation Suite",
+    "description": "Model multi-variable offer negotiations with counteroffer impact on total 3-year compensation.",
+    "category": "compensation_offers",
+    "slug": "05-offer-negotiation-suite",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-26",
+    "title": "Graduate School ROI Comparator",
+    "description": "Compare graduate programs by tuition, opportunity cost, earnings uplift, and NPV break-even timeline.",
+    "category": "education_path_roi",
+    "slug": "03-graduate-school-roi-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-27",
+    "title": "Job Search ROI Tracker",
+    "description": "Track job search channels by application volume, conversion rates, and time-to-offer ROI.",
+    "category": "career_transition_mobility",
+    "slug": "09-job-search-roi-tracker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-28",
+    "title": "Career Break & Reentry Cost Engine",
+    "description": "Quantify the total financial cost of a career gap including forgone income, benefit loss, and reentry timeline.",
+    "category": "career_transition_mobility",
+    "slug": "10-career-break-reentry-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-29",
+    "title": "MBA Program Fit & ROI Ranker",
+    "description": "Compare up to 4 MBA programs by COA, opportunity cost, post-MBA salary by specialization, payback, and NPV. 40+ programs. AP2 inbound from AL-26; outbound to AL-30.",
+    "category": "education_path_roi",
+    "slug": "17-mba-program-fit-ranker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-30",
+    "title": "Test Prep Investment Analyzer",
+    "description": "ROI of test prep for GMAT/GRE/TOEFL/IELTS/LSAT/MCAT. Score gap + prep cost vs. admissions tier shift and scholarship lift. 2-tab tool.",
+    "category": "education_path_roi",
+    "slug": "18-test-prep-investment-analyzer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-31",
+    "title": "International Student Cost Modeler",
+    "description": "F-1 visa costs, OPT/STEM OPT earnings window, H-1B rates FY2020-24, non-US program comparison. 2-tab tool. Legal disclaimer required.",
+    "category": "education_path_roi",
+    "slug": "19-international-student-cost-modeler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-32",
+    "title": "Parent College ROI Planner",
+    "description": "529 projection, SAI/EFC asset impact, COA by school tier, loan vs. gift split. AP2 inbound from AL-17. 2-tab tool.",
+    "category": "student_finance_debt",
+    "slug": "20-parent-college-roi-planner",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-33",
+    "title": "Equity Compensation Analyzer",
+    "description": "RSU vesting (cliff + graded), ISO/NSO intrinsic value, AMT flag, equity vs. cash equivalence, 3-offer total comp NPV stack. 2-tab. Legal disclaimer required.",
+    "category": "compensation_offers",
+    "slug": "21-equity-compensation-analyzer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-34",
+    "title": "AI Skills Premium Calculator",
+    "description": "Calculate salary premium and NPV of AI skill acquisition by role, tool set, and labor market.",
+    "category": "compensation_offers",
+    "slug": "29-ai-skills-premium-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-35",
+    "title": "Federal vs. Private Sector Comp Comparator",
+    "description": "Compare federal GS/SES compensation to private-sector equivalents including FERS pension and full benefits.",
+    "category": "compensation_offers",
+    "slug": "30-federal-vs-private-comp-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-36",
+    "title": "Trade vs. Degree ROI Engine",
+    "description": "Model the NPV of trade apprenticeship versus four-year degree pathways by occupation and state.",
+    "category": "education_path_roi",
+    "slug": "31-trade-vs-degree-roi-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-37",
+    "title": "Remote Work Tax Mapper",
+    "description": "Identify state tax obligations, reciprocity agreements, and nexus risk for remote and hybrid workers.",
+    "category": "compensation_offers",
+    "slug": "32-remote-work-tax-mapper",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-38",
+    "title": "Non-Compete Risk & Enforceability Screener",
+    "description": "Screen non-compete clauses for enforceability risk by state law, role, and compensation threshold.",
+    "category": "career_transition_mobility",
+    "slug": "33-noncompete-risk-screener",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-39",
+    "title": "Professional Degree ROI Ranker",
+    "description": "Rank MD, JD, MBA, and other professional degrees by tuition, opportunity cost, and lifetime earnings NPV.",
+    "category": "education_path_roi",
+    "slug": "34-professional-degree-roi-ranker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-40",
+    "title": "Military-to-Civilian Salary Bridge",
+    "description": "Convert military compensation (BAH, BAS, VA benefits) to civilian equivalent salary for job comparisons.",
+    "category": "career_transition_mobility",
+    "slug": "35-military-civilian-salary-bridge",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-41",
+    "title": "Workforce Pell Eligibility Screener",
+    "description": "Estimates Workforce Pell Grant award for short-term credential programs (150-599 clock hours, 8-14 weeks) under OBBBA P.L. 119-21 (effective July 1, 2026). Inputs: AGI or SAI, family size, dependency status, clock hours, weeks, occupation category. Outputs: estimated SAI, base Pell eligibility, proration ratio, award, lifetime usage note.",
+    "category": "workforce_development",
+    "slug": "36-workforce-pell-eligibility-screener",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-42",
+    "title": "Workforce Pell Credential Value Ranker",
+    "description": "Ranks 21 Workforce Pell-eligible short-term credentials by ROI, wage gain, demand, and Pell coverage. Embeds BLS OEWS May 2023 wages and BLS OOH 2024-34 projections. Personalized to user SAI.",
+    "category": "workforce_development",
+    "slug": "37-workforce-pell-credential-ranker",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-43",
+    "title": "Early Career Net Worth Trajectory Engine",
+    "description": "10-year net worth projection for early-career individuals. Three savings scenarios (±10pp). Embedded 2026 tax brackets, 401k match, student debt paydown, SVG chart. Zero maintenance.",
+    "category": "compensation_offers",
+    "slug": "38-early-career-net-worth-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-44",
+    "title": "Signing Bonus Clawback Analyzer",
+    "description": "Models true net cost of signing bonus clawback. Four repayment scenarios including IRC §1341 credit. Pro-rated obligation timeline. Zero maintenance.",
+    "category": "compensation_offers",
+    "slug": "39-signing-bonus-clawback-analyzer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-45",
+    "title": "Part-Time / Gig Income Optimizer",
+    "description": "For hybrid W-2+1099 workers. Marginal effective rate on gig income (income tax + SE tax net of §164(f)), quarterly estimated payments, safe harbor, net hourly analysis.",
+    "category": "compensation_offers",
+    "slug": "40-gig-income-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-46",
+    "title": "Certification Renewal Cost Forecaster",
+    "description": "6-year renewal cash-flow planner for up to 6 professional certifications. 19 embedded credentials. Collision detection, study hours, CEU tracking.",
+    "category": "licensing_credentials",
+    "slug": "41-cert-renewal-forecaster",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-47",
+    "title": "ISA vs. Student Loan Comparator",
+    "description": "Compares ISA vs. student loan total repayment and NPV under a user income trajectory. Break-even income, year-by-year cash flow. Zero external data.",
+    "category": "student_finance_debt",
+    "slug": "42-isa-vs-loan-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-48",
+    "title": "Dual Enrollment ROI Calculator",
+    "description": "Quantifies tuition arbitrage, semester compression, and early workforce earnings NPV from dual enrollment. Pure math on user inputs — no embedded data.",
+    "category": "education_path_roi",
+    "slug": "43-dual-enrollment-roi-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-49",
+    "title": "Deferred Comp 457(b) Decision Engine",
+    "description": "Models after-tax value of 457(b) deferral vs. taxable account across current and retirement marginal rates, growth horizon, and LTCG rate. Computes break-even retirement rate, NPV advantage, and annual withdrawal comparison.",
+    "category": "compensation_benefits",
+    "slug": "44-deferred-comp-457b-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-50",
+    "title": "Tutor ROI Calculator",
+    "description": "Models expected value of tutoring investment: probability of score improvement × (merit scholarship NPV + admission value uplift) vs. tutor cost. Returns net ROI, break-even probability, and gross value.",
+    "category": "education_path_roi",
+    "slug": "45-tutor-roi-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-51",
+    "title": "Test Retake Decision Engine",
+    "description": "EV model for retake vs. apply-now on GRE/GMAT/LSAT/MCAT/SAT/ACT. Returns expected value of each path, EV advantage, break-even probability of improvement, and cycle delay cost.",
+    "category": "education_path_roi",
+    "slug": "46-test-retake-decision-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-52",
+    "title": "MBA Application Portfolio Optimizer",
+    "description": "Expected-value optimizer for MBA application school list. Models P(≥1 offer), expected scholarship, portfolio EV, and marginal value per additional school by tier.",
+    "category": "education_path_roi",
+    "slug": "47-mba-application-portfolio-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-53",
+    "title": "Tuition Reimbursement True Value Calculator",
+    "description": "Models true net value of employer tuition benefit: IRS §127 tax savings, clawback risk, study-time opportunity cost, credential lift. CA AB 692 flag.",
+    "category": "compensation_offers",
+    "slug": "48-tuition-reimbursement-true-value-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-54",
+    "title": "PhD vs. Industry Pivot Calculator",
+    "description": "NPV model for finishing a PhD vs. leaving for industry. Computes opportunity cost, break-even year, PSLF impact, and year-by-year cumulative earnings.",
+    "category": "education_path_roi",
+    "slug": "49-phd-vs-industry-pivot-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-55",
+    "title": "Law School ROI by Career Track",
+    "description": "10-yr NPV for BigLaw, In-House, Government, and Public Interest tracks. Models PSLF forgiveness, IDR vs. standard repayment, and break-even year.",
+    "category": "education_path_roi",
+    "slug": "50-law-school-roi-by-career-track",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-56",
+    "title": "GMAT vs. GRE Strategic Choice Engine",
+    "description": "Profile-based scoring engine recommending GMAT vs. GRE. Scores 7 dimensions, produces target score tables by tier, all-in cost comparison, and prep estimate.",
+    "category": "education_path_roi",
+    "slug": "51-gmat-vs-gre-strategic-choice-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-57",
+    "title": "Executive MBA vs. Full-Time MBA Decision Engine",
+    "description": "10-yr NPV of EMBA vs. FT MBA vs. No MBA. Models employer sponsorship, 2-yr salary gap, career pivot feasibility, and break-even year.",
+    "category": "education_path_roi",
+    "slug": "52-exec-mba-vs-fulltime-mba-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-59",
+    "title": "STEM OPT Financial Runway Planner",
+    "description": "Financial runway model for F-1 students on OPT/STEM OPT. H-1B lottery probability, savings milestones, worst-case balance, EB-2 NIW path, cap-exempt strategy.",
+    "category": "immigration_visa",
+    "slug": "53-stem-opt-financial-runway-planner",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-61",
+    "title": "TOEFL vs. IELTS vs. Duolingo Choice Engine",
+    "description": "Profile-based scoring engine recommending TOEFL, IELTS, or Duolingo for international MBA and graduate applicants. Scores 8 profile dimensions, produces target score tables by program tier, all-in cost comparison, and 2026 school acceptance policy notes including Wharton's new Duolingo acceptance.",
+    "category": "education_path_roi",
+    "slug": "54-toefl-ielts-duolingo-choice-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-62",
+    "title": "LSAT Score → Law School Tier Match & Financial Planner",
+    "description": "Maps LSAT score and GPA to realistic law school tier access (T14/T15–50/Regional) with financial outcomes: expected debt, 10-year NPV by career track, scholarship probability, PSLF forgiveness, and points-to-next-tier analysis.",
+    "category": "education_path_roi",
+    "slug": "55-lsat-tier-match-planner",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-63",
+    "title": "MBA Scholarship Strategy Engine",
+    "description": "Two-stage scholarship strategy engine: (1) Round Timing Optimizer — dollar EV of applying R1 vs. R2 vs. R3 given application readiness, admit-rate edge, and merit budget depletion; (2) Offer Negotiation EV — probability-weighted value of countering with a competing offer, by school type.",
+    "category": "education_path_roi",
+    "slug": "56-mba-scholarship-strategy-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-64",
+    "title": "MBA Admissions Consulting ROI Calculator",
+    "description": "Expected-value model for admissions consulting: converts claimed admission-probability uplift into dollar EV using tier salary premium NPVs, computes break-even uplift for the fee, and runs sensitivity across 2–15pp real uplift.",
+    "category": "education_path_roi",
+    "slug": "57-mba-admissions-consulting-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-65",
+    "title": "MBA Yield Decision Engine",
+    "description": "Weighted multi-criteria decision engine for choosing among 2–3 MBA admission offers: tier salary outcomes, net cost, career goal fit, network strength, cost of living — with sensitivity analysis across five priority profiles.",
+    "category": "education_path_roi",
+    "slug": "58-mba-yield-decision-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-66",
+    "title": "Dual Degree ROI Calculator",
+    "description": "Three-path NPV model for JD/MBA, MD/MBA, MPH/MBA, MPP/MBA decisions: primary degree only vs. concurrent dual vs. sequential. Computes dual marginal cost, cross-domain salary premium, break-even year, and concurrency savings.",
+    "category": "education_path_roi",
+    "slug": "59-dual-degree-roi-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-67",
+    "title": "Online MBA vs. EMBA vs. Full-Time MBA 4-Path Comparator",
+    "description": "Four-path NPV and goal-fit comparator: Online MBA, EMBA, Full-Time MBA, No MBA. Models income continuity, employer perception multipliers (GMAC 2025 ~90% online acceptance), salary reset vs. uplift mechanics, and pivot feasibility by career goal.",
+    "category": "education_path_roi",
+    "slug": "60-online-mba-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-68",
+    "title": "MBA Waitlist Expected Value Engine",
+    "description": "Three-option EV model for waitlisted MBA applicants: stay on list (hedged with safety deposit), withdraw and commit, or gap-year and reapply. Uses school-class yield rates to estimate P(off waitlist) and tier premium NPVs for upgrade value.",
+    "category": "education_path_roi",
+    "slug": "61-mba-waitlist-ev-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-69",
+    "title": "Deferred Enrollment MBA Decision Engine",
+    "description": "Option-value model for deferred MBA admits: accept a guaranteed seat now vs. decline and reapply to a higher tier later. Computes risk-adjusted EVs, break-even upgrade probability, and the dollar value of the guarantee.",
+    "category": "education_path_roi",
+    "slug": "62-deferred-enrollment-mba-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-70",
+    "title": "MBA Reapplicant EV Engine",
+    "description": "Expected-value engine for dinged MBA applicants: reapply same schools, restructure the portfolio, take the admit in hand, or skip the MBA. Models reapplicant admit probability from profile-change uplifts, prices the cycle-delay cost, and ranks improvement moves by pp-per-dollar and pp-per-hour efficiency.",
+    "category": "education_path_roi",
+    "slug": "63-mba-reapplicant-ev-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-71",
+    "title": "One-Year vs. Two-Year MBA Global Comparator",
+    "description": "Three-path NPV comparator (1-yr international MBA, 2-yr US MBA, no MBA) modeling the three mechanics generic calculators miss: opportunity-cost asymmetry (10 vs 21 months out), career-switch feasibility gates (no-internship double switch x0.60), and geo-placement gates (e.g., INSEAD <10% US placement). Embedded 12-program table, visa hard-stop logic, payback year, geo-fit scoring.",
+    "category": "education_path_roi",
+    "slug": "64-one-vs-two-year-mba-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-72",
+    "title": "Law School Early Decision EV Engine",
+    "description": "Computes the expected value of binding Early Decision vs. a Regular Decision portfolio for law school: ED admission boost by median position (splitter logic), forfeited scholarship negotiation leverage, break-even ED boost, ED guarantee programs, and debt/payment impact.",
+    "category": "education_path_roi",
+    "slug": "65-law-school-ed-ev-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-73",
+    "title": "MiM vs. MBA Timing Engine",
+    "description": "Lifetime-NPV timing engine for 21-24-year-olds with under two years of experience: MiM now vs. work 3-5 years then full-time MBA vs. no graduate degree. Computes NPV to age 35 and 45, the crossover salary where the verdict flips, payback years, 3/5/8% discount-rate sensitivity, and the MiM-then-MBA double-degree trap (x0.5 incremental-uplift haircut).",
+    "category": "education_path_roi",
+    "slug": "66-mim-vs-mba-timing-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-74",
+    "title": "Backward-Design Lesson Builder",
+    "description": "Scaffolds Understanding by Design (UbD) lesson planning across three stages: Desired Results, Assessment Evidence, and Learning Plan. Names the framework explicitly at each step so educators learn the method as they build.",
+    "category": "selected_studies_education",
+    "slug": "67-backward-design-lesson-builder",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-75",
+    "title": "Assessment Item Writer + Distractor Analyzer",
+    "description": "Generates multiple-choice items aligned to Bloom's taxonomy levels and classifies each distractor by error type, so every wrong answer teaches something about gaps in student understanding.",
+    "category": "selected_studies_education",
+    "slug": "68-assessment-item-writer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-76",
+    "title": "Classroom Decision Simulator",
+    "description": "Four branching real-classroom scenarios — disengaged student, pacing crisis, challenge question, authority test — with pedagogy-grounded feedback on every choice made.",
+    "category": "selected_studies_education",
+    "slug": "69-classroom-decision-simulator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-77",
+    "title": "GT Differentiation Designer",
+    "description": "Adapts a standard lesson for gifted and talented students via curriculum compacting, enrichment strategies (depth, complexity, abstraction, open-endedness), and acceleration options.",
+    "category": "selected_studies_education",
+    "slug": "70-gt-differentiation-designer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-78",
+    "title": "First-Time Instructor Toolkit",
+    "description": "Generates a syllabus framework, Week 1 lesson plan, and grading rubric starter from course inputs. Built for instructors of record in higher education, not teaching assistants.",
+    "category": "selected_studies_education",
+    "slug": "71-first-time-instructor-toolkit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-79",
+    "title": "CEFR Text Leveler",
+    "description": "Analyzes any pasted text against CEFR readability criteria: sentence length, vocabulary frequency tier, grammar structure flags, and specific simplification suggestions for A2, B1, and B2 target levels.",
+    "category": "selected_studies_esl",
+    "slug": "72-cefr-text-leveler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-80",
+    "title": "L1-Interference Spotter (Mandarin→English)",
+    "description": "Covers eight Mandarin-to-English transfer error categories — articles, tense vs. aspect, topic-comment order, copula omission, classifiers, phonology, question formation, negation — with examples, corrections, and teaching tips.",
+    "category": "selected_studies_esl",
+    "slug": "73-l1-interference-spotter",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-81",
+    "title": "Error-Correction Triage",
+    "description": "Classifies student errors as global vs. local and guides the decision of when and how to correct using the six Lyster-Ranta corrective feedback techniques with SLA research rationale for each.",
+    "category": "selected_studies_esl",
+    "slug": "74-error-correction-triage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-82",
+    "title": "TKT Framework Lesson Stager",
+    "description": "Generates a complete EFL lesson plan using PPP (Present-Practice-Produce), TBL (Task-Based Learning), or ESA (Engage-Study-Activate) with timing, activity types, CCQs, and ICQs.",
+    "category": "selected_studies_esl",
+    "slug": "75-tkt-framework-lesson-stager",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-83",
+    "title": "Primary Source Workbench",
+    "description": "SOAPSTone analysis framework, provenance checklist, bias inventory, and corroboration prompts for any historical document. Five embedded sources included or paste your own.",
+    "category": "selected_studies_history",
+    "slug": "76-primary-source-workbench",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-84",
+    "title": "Historiography Comparator",
+    "description": "Selects one of 10 historical events and shows how five schools — Traditional, Annales, Marxist, Revisionist, and Postmodern — would each interpret it. Includes a thesis-statement builder.",
+    "category": "selected_studies_history",
+    "slug": "77-historiography-comparator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-85",
+    "title": "Anachronism Detector",
+    "description": "Checks a claim or fiction excerpt against 80+ invention, institution, and language-origin dates. Flags out-of-period terms with source notes and includes a spot-the-anachronism quiz.",
+    "category": "selected_studies_history",
+    "slug": "78-anachronism-detector",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-86",
+    "title": "Counterfactual Stress-Tester",
+    "description": "Five-step framework for rigorous what-if history: evidence constraints, nearest possible world, first-order effects, second-order effects, and magnitude calibration. Flags five common counterfactual fallacies.",
+    "category": "selected_studies_history",
+    "slug": "79-counterfactual-stress-tester",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-87",
+    "title": "Franchise vs. Promotion/Relegation Comparator",
+    "description": "Eight-dimension comparison of closed franchise (NFL/NBA/MLB) vs. open promotion/relegation (EPL/Bundesliga): competitive balance, investment incentives, revenue distribution, fan culture, and labor relations. 2024 financial data embedded.",
+    "category": "selected_studies_sport",
+    "slug": "80-franchise-vs-promotion-relegation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-88",
+    "title": "Survey Study Designer",
+    "description": "Five-stage survey research workflow: research question sharpening, sampling strategy and sample-size estimation, instrument design with Likert builder, pilot plan, and analysis plan with SPSS paths and APA reporting templates.",
+    "category": "selected_studies_sport",
+    "slug": "81-survey-study-designer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-89",
+    "title": "Payroll Efficiency Classroom",
+    "description": "Guided lesson teaching $/fWAR efficiency (Moneyball for the masses): what WAR measures, why $/win varies, how to read a team report card. Embedded 2024 MLB payroll and WAR data. Ends with a budget-constrained GM for a Day exercise.",
+    "category": "selected_studies_sport",
+    "slug": "82-payroll-efficiency-classroom",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-90",
+    "title": "Umpire Accuracy Lab",
+    "description": "34,294 incorrect ball-strike calls per 2018 season; 14 per game; two-strike count bias. Measurement lesson on error rates and performance evaluation, plus a structured ABS debate with argument prompts for both sides.",
+    "category": "selected_studies_sport",
+    "slug": "83-umpire-accuracy-lab",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-91",
+    "title": "Micro Theory Sandbox",
+    "description": "Interactive SVG supply-and-demand diagrams with demand/supply shifter sliders, price floor/ceiling interventions, and consumer/producer surplus. Tab 2: cost curves (ATC/AVC/MC) and market structure selector.",
+    "category": "selected_studies_economics",
+    "slug": "84-micro-theory-sandbox",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-92",
+    "title": "US Macro Dashboard",
+    "description": "Interactive SVG charts for US GDP growth, CPI inflation, unemployment, and federal funds rate 1960–2024 with recession shading, decade zoom, and overlay compare.",
+    "category": "selected_studies_economics",
+    "slug": "85-comparative-economic-systems",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-93",
+    "title": "Phillips Curve Explorer",
+    "description": "Interactive scatter of US unemployment vs. inflation 1960–2024 by decade. Visualizes when the trade-off held, when stagflation broke it, and the flat 2010s vs. 2021-22 surge.",
+    "category": "selected_studies_economics",
+    "slug": "86-ask-the-economists-panel",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-94",
+    "title": "Recession Anatomy Lab",
+    "description": "Six US recessions (1973–2020) dissected: GDP decline, unemployment peak, cause, policy response, recovery. SVG comparison charts, timeline view, and ±3yr sparklines.",
+    "category": "selected_studies_economics",
+    "slug": "87-american-economic-history",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-95",
+    "title": "Principles of Economics Refresher",
+    "description": "Interactive Econ 101/102 review: supply-demand sandbox with directional-change quiz, GDP accounting (C+I+G+NX) with component sliders, market structures comparison table, and 30-card key-terms flashcard deck.",
+    "category": "selected_studies_economics",
+    "slug": "88-principles-refresher",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-96",
+    "title": "Sales OTE & Commission Analyzer",
+    "description": "Model your real W-2 outcome from an OTE offer: base/variable split, quota attainment scenarios, accelerator tiers, and draw/clawback risk.",
+    "category": "compensation_benefits",
+    "slug": "89-sales-ote-commission-analyzer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-97",
+    "title": "Counter-Offer Decision Engine",
+    "description": "Model the 5-year NPV of accepting a counter-offer vs. taking a new employer offer, with loyalty-tax risk and career trajectory analysis.",
+    "category": "career_planning",
+    "slug": "90-counter-offer-decision-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-98",
+    "title": "Relocation Package True Value Engine",
+    "description": "Strip the gross-up illusion from your employer relocation offer. Model lump sum vs. managed relo net value after taxes, actual moving costs, and housing delta.",
+    "category": "career_planning",
+    "slug": "91-relocation-package-value-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-99",
+    "title": "Dual-Career Household Income Optimizer",
+    "description": "Model childcare break-even salary, part-time sabbatical cost, and geographic relocation trade-offs for dual-earner couples.",
+    "category": "compensation_benefits",
+    "slug": "92-dual-career-household-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-100",
+    "title": "Internship ROI Calculator",
+    "description": "Model the opportunity cost of unpaid or low-pay internships against FTE conversion probability, career acceleration NPV, and salary premium.",
+    "category": "education_finance",
+    "slug": "93-internship-roi-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-101",
+    "title": "Community College Transfer Pathway ROI",
+    "description": "Compare the 2+2 pathway (2 years CC + transfer) against direct 4-year enrollment: tuition savings, transfer risk, and time-to-completion delta.",
+    "category": "education_finance",
+    "slug": "94-community-college-transfer-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-102",
+    "title": "Graduate Certificate vs. Master's Degree Engine",
+    "description": "Compare post-bacc credential options: total cost, time-to-market, salary lift, and NPV by field for 6-month certificate vs. 2-year master's degree.",
+    "category": "education_finance",
+    "slug": "95-grad-cert-vs-masters-engine",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-103",
+    "title": "Adult Learner Degree Completion ROI",
+    "description": "Model the ROI of completing your bachelor's through adult-friendly programs — online, WGU-style, or part-time evening — factoring in prior credits, employer assistance, and time-to-completion.",
+    "category": "education_finance",
+    "slug": "96-adult-learner-degree-completion-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-104",
+    "title": "Nursing & Allied Health Career Ladder ROI",
+    "description": "CNA to CRNA: model the cost, time, and salary at every rung of the nursing and allied health career ladder, with rung-to-rung ROI and cumulative NPV.",
+    "category": "licensing_credentials",
+    "slug": "97-nursing-career-ladder-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-105",
+    "title": "Side Hustle to Full-Time Business Transition Calculator",
+    "description": "Model revenue runway, COBRA health insurance bridge, SE tax step-up, emergency fund requirement, and the month your side hustle can replace your W-2.",
+    "category": "career_planning",
+    "slug": "98-side-hustle-transition-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-106",
+    "title": "L1-Interference Spotter: Spanish→English",
+    "description": "Catalog of 9 major Spanish→English transfer error categories with examples, CEFR-level context, correction strategies, and a work sample tagger for ESL/TEFL educators.",
+    "category": "selected_studies_esl_tefl",
+    "slug": "99-l1-interference-spotter-spanish",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-107",
+    "title": "Game Theory Payoff Matrix Builder",
+    "description": "Build 2×2 or 3×3 strategic payoff matrices, solve for Nash equilibria and dominant strategies, classify the game type, and generate a lesson-ready analysis.",
+    "category": "selected_studies_economics",
+    "slug": "100-game-theory-payoff-matrix",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-108",
+    "title": "RAP vs. Standard Decision Engine",
+    "description": "",
+    "category": "student_finance_debt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-109",
+    "title": "Grad Loan Cap Gap Planner",
+    "description": "",
+    "category": "student_finance_debt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-110",
+    "title": "529 Lifelong Learning Maximizer",
+    "description": "",
+    "category": "student_finance_debt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-111",
+    "title": "AI Displacement Risk Screener",
+    "description": "SOC code lookup with Frey-Osborne automation probability, task composition, and composite risk score. Suggests 3 adjacent lower-risk pivots.",
+    "category": "career_workforce",
+    "slug": "104-ai-displacement-risk-screener",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-112",
+    "title": "HDHP vs. PPO Break-Even Calculator",
+    "description": "Find the annual medical-spend level at which HDHP+HSA beats PPO in total out-of-pocket cost, including HSA tax benefit.",
+    "category": "compensation_benefits",
+    "slug": "105-hdhp-vs-ppo-break-even",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-113",
+    "title": "Employer Training Investment Payback Calculator",
+    "description": "Model cost-per-employee-trained vs. productivity lift, attrition reduction, and promotion-rate improvement to produce board-ready training ROI.",
+    "category": "career_workforce",
+    "slug": "106-employer-training-payback",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-114",
+    "title": "Turnover Cost Calculator",
+    "description": "Itemize the full cost of a single departure — separation, vacancy, recruitment, onboarding — by role level. Shows SHRM benchmark band and attrition savings slider.",
+    "category": "career_workforce",
+    "slug": "107-turnover-cost-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-115",
+    "title": "Retention Investment ROI Model",
+    "description": "Model net ROI of retention programs against baseline attrition cost. Calculates payback period, break-even attrition reduction, and 1/2/3-year net benefit.",
+    "category": "career_workforce",
+    "slug": "108-retention-investment-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-116",
+    "title": "ISO AMT Exposure Modeler",
+    "description": "Calculate AMT liability from ISO exercise spread using 2026 exemption amounts and phase-outs. Shows max shares exercisable without triggering AMT.",
+    "category": "compensation_benefits",
+    "slug": "109-iso-amt-exposure-modeler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-117",
+    "title": "ESPP Break-Even & Optimal Sell Analyzer",
+    "description": "Compare qualifying vs. disqualifying ESPP disposition tax outcomes. Finds break-even holding period for qualifying disposition and after-tax proceeds.",
+    "category": "compensation_benefits",
+    "slug": "110-espp-break-even-optimal-sell",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-118",
+    "title": "S-Corp Election Break-Even Modeler",
+    "description": "Find the net SE income level where S-Corp election SE tax savings exceed admin overhead. Uses 2026 SS wage base $184,500.",
+    "category": "career_workforce",
+    "slug": "111-scorp-election-break-even",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-119",
+    "title": "Solo 401(k) vs. SEP-IRA Optimizer",
+    "description": "Compare maximum contributions and tax savings across Solo 401(k), SEP-IRA, and SIMPLE IRA using 2026 IRS limits. Includes age-based catch-up.",
+    "category": "compensation_benefits",
+    "slug": "112-solo-401k-vs-sep-ira",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-120",
+    "title": "PSLF Qualifying Payment Counter",
+    "description": "Project PSLF progress: qualifying payments made/remaining, monthly payment under RAP/IBR/PAYE, and estimated forgiveness amount using 2026 FPL.",
+    "category": "student_finance_debt",
+    "slug": "113-pslf-qualifying-payment-counter",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-121",
+    "title": "Student Loan Refinancing Break-Even Calculator",
+    "description": "Weigh interest savings from private refinancing against PSLF eligibility loss, IDR protections, and origination fees. Go/no-go verdict.",
+    "category": "student_finance_debt",
+    "slug": "114-student-loan-refinancing-break-even",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-122",
+    "title": "RSU Withholding Gap Calculator",
+    "description": "Calculate the tax gap between 22% federal supplemental withholding on RSU vests and true marginal rate. Uses 2026 SS wage base and state buckets.",
+    "category": "compensation_benefits",
+    "slug": "115-rsu-withholding-gap",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-123",
+    "title": "Freelance Quarterly Estimated Tax Calculator",
+    "description": "Calculate quarterly IRS estimated payments: federal income tax, SE tax (SS+Medicare), and state buckets. Shows 2026 due dates and safe-harbor amounts.",
+    "category": "career_workforce",
+    "slug": "116-freelance-quarterly-estimated-tax",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-124",
+    "title": "Caregiver Income Impact & Lost Earnings Estimator",
+    "description": "Quantify total financial cost of unpaid caregiving: direct income loss, retirement savings gap, SS reduction, and career setback cost.",
+    "category": "career_workforce",
+    "slug": "117-caregiver-income-impact",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-125",
+    "title": "Teacher Salary Schedule & Lifetime Earnings Projector",
+    "description": "Project lifetime K-12 teacher earnings from a step-and-lane salary schedule. Model step advancement, COLA, and planned lane changes to reveal career earnings trajectory and final-year salary for pension planning.",
+    "category": "education_path_roi",
+    "slug": "118-teacher-salary-schedule-projector",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-126",
+    "title": "Master's / Lane-Change ROI for Educators",
+    "description": "Calculate NPV, payback, and break-even lane bump for a K-12 teacher pursuing a master's degree — net of tuition, opportunity cost, employer assistance, and Teacher Loan Forgiveness (ESEA §1059c).",
+    "category": "education_path_roi",
+    "slug": "119-educator-advanced-degree-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-127",
+    "title": "National Board Certification (NBCT) ROI Calculator",
+    "description": "Calculate the ROI of pursuing NBCT: NPV, payback months, benefit-cost ratio, and minimum stipend needed to break even — accounting for fee, retakes, study opportunity cost, and renewal cycle.",
+    "category": "licensing_credentials",
+    "slug": "120-nbct-roi-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-128",
+    "title": "Teacher Pension Multiplier & Vesting Estimator",
+    "description": "Project annual pension, lifetime PV, replacement rate, and vesting-cliff cost from a defined-benefit teacher pension plan. All plan parameters user-supplied; no embedded state tables.",
+    "category": "education_path_roi",
+    "slug": "121-teacher-pension-estimator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-135",
+    "title": "Raise-Ask Expected Value Calculator",
+    "description": "Model the expected monetary value of asking for a raise by weighting full grant, partial grant, and silence across a career horizon. Outputs EV, lifetime silence cost, recommended anchor, and a scripted ask framework.",
+    "category": "compensation_offers",
+    "slug": "128-raise-ask-ev-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-136",
+    "title": "Promotion vs. Job-Hop Calculator",
+    "description": "Compare 5-year cumulative present value of staying for a promotion versus jumping to a higher-paying role — netting ramp-up cost, benefits delta, tenure costs, unvested equity, and compounding merit raises.",
+    "category": "career_transition_mobility",
+    "slug": "129-promotion-vs-job-hop",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  }
+]

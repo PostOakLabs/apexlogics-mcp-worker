@@ -1,0 +1,18 @@
+{
+  "name": "apexlogics-mcp",
+  "main": "worker.mjs",
+  "workers_dev": true,
+  "compatibility_date": "2026-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  // Custom domain — already provisioned via dashboard; declared here for version control.
+  // On first deploy after adding this, Cloudflare will confirm the existing mapping.
+  "routes": [
+    {
+      "pattern": "mcp.apexlogics.org",
+      "custom_domain": true
+    }
+  ]
+}
