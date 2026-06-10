@@ -14,7 +14,7 @@ const REGISTRY_URL = "https://apexlogics.org/suite-registry.json";
 const REGISTRY_CACHE_KEY = "https://apexlogics-mcp-cache/suite-registry";
 const REGISTRY_TTL_SECONDS = 3600; // 1 hour
 
-// ── Workflow chains (27 live as of 2026-06-10) ─────────────────────────────
+// ── Workflow chains (29 live as of 2026-06-10) ─────────────────────────────
 const WORKFLOWS = {
   "career-pivot": {
     description: "End-to-end career pivot analysis",
@@ -96,6 +96,22 @@ const WORKFLOWS = {
       { tool: "ai-displacement-risk-scorer", note: "Score occupation's AI displacement exposure" },
       { tool: "ai-skills-premium-calculator", note: "Model pay premium for AI skill stack" },
       { tool: "credential-roi-suite", note: "ROI on upskilling credential" },
+    ],
+  },
+  "teacher-career-compensation": {
+    description: "Full K-12 teacher career financial model: salary schedule → degree ROI → NBCT ROI → pension",
+    steps: [
+      { tool: "118-teacher-salary-schedule-projector", note: "Build step-and-lane earnings trajectory; capture FAS for pension step" },
+      { tool: "119-educator-advanced-degree-roi", note: "Model NPV of master's or lane change (net of TLF ESEA §1059c)" },
+      { tool: "120-nbct-roi-calculator", note: "Quantify NBCT cert ROI against state stipend" },
+      { tool: "121-teacher-pension-estimator", note: "Project defined-benefit pension PV and vesting cliff" },
+    ],
+  },
+  "underpaid-stay-and-ask": {
+    description: "Am I underpaid? Model raise-ask EV then compare staying for promotion vs. job-hopping",
+    steps: [
+      { tool: "128-raise-ask-ev-calculator", note: "Calculate EV, lifetime silence cost, and scripted anchor for raise ask" },
+      { tool: "129-promotion-vs-job-hop", note: "Compare 5-yr PV of promotion path vs. hop offer; break-even premium" },
     ],
   },
 };
@@ -249,7 +265,7 @@ const TOOL_DEFINITIONS = [
   {
     name: "list_apexlogics_tools",
     description:
-      "Search the ApexLogics catalog of 117 deterministic, privacy-first edtech and careertech tools. Returns tool names, descriptions, URLs, and AP2 mandate types. Use this to find the right tool for a career, education, compensation, licensing, immigration, or workforce question.",
+      "Search the ApexLogics catalog of 123 deterministic, privacy-first edtech and careertech tools. Returns tool names, descriptions, URLs, and AP2 mandate types. Use this to find the right tool for a career, education, compensation, licensing, immigration, or workforce question.",
     inputSchema: {
       type: "object",
       properties: {
@@ -320,7 +336,7 @@ async function handleMcp(req, env) {
         capabilities: { tools: {}, prompts: {} },
         serverInfo: SERVER_INFO,
         instructions:
-          "ApexLogics is a 117-tool edtech and careertech suite. Use list_apexlogics_tools to find the right calculator for any career, education, compensation, licensing, or immigration question. Use build_workflow_links to chain tools together for multi-step analyses.",
+          "ApexLogics is a 123-tool edtech and careertech suite. Use list_apexlogics_tools to find the right calculator for any career, education, compensation, licensing, or immigration question. Use build_workflow_links to chain tools together for multi-step analyses.",
       };
       break;
 
