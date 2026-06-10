@@ -158,6 +158,7 @@ function handleBuildWorkflow({ workflow }) {
   return {
     workflow: name,
     description: wf.description,
+    workflow_page: `https://apexlogics.org/workflows/${name}.html`,
     steps: wf.steps.map((s, i) => ({
       step: i + 1,
       tool: s.tool,
