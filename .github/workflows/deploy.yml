@@ -1,0 +1,113 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Pre-flight — ApexLogics MCP Worker
+#
+# Cloudflare deploys automatically via the Cloudflare Workers GitHub App on
+# every push to main. This workflow runs BEFORE that deploy and acts as a
+# gate: if the registry is unreachable or fixtures look wrong, the push still
+# lands but the Cloudflare deploy will be working from whatever fixtures were
+# last committed.
+#
+# To set up the Cloudflare GitHub App integration (one-time):
+#   Cloudflare dashboard → Workers & Pages → your worker →
+#   Settings → Build → Connect → pick this repo → Deploy command: npx wrangler deploy
+#
+# Triggers
+#   • Push to main  → runs automatically
+#   • workflow_dispatch → manual trigger; dry_run skips the fixture staleness check
+#
+# No secrets required — Cloudflare auth is handled by the GitHub App, not here.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Pre-flight — MCP Worker
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — generate and verify fixtures only, skip staleness check"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+concurrency:
+  group: preflight-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    name: Generate & verify fixtures
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (shallow)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ── Generate fixtures ───────────────────────────────────────────────────
+      # Fetches live suite-registry.json from apexlogics.org and writes
+      # data/tools.json + data/workflows.json. Confirms the registry is reachable.
+      - name: Generate data fixtures
+        run: node generate.mjs
+
+      # ── Verify fixture sanity ───────────────────────────────────────────────
+      - name: Verify fixtures
+        run: |
+          if [ ! -f data/tools.json ] || [ ! -f data/workflows.json ]; then
+            echo "::error::generate.mjs did not produce expected fixtures"
+            exit 1
+          fi
+          TOOL_COUNT=$(python3 -c "import json; d=json.load(open('data/tools.json')); print(len(d))")
+          WF_COUNT=$(python3 -c "import json; d=json.load(open('data/workflows.json')); print(len(d))")
+          echo "✅ data/tools.json — $TOOL_COUNT tools"
+          echo "✅ data/workflows.json — $WF_COUNT workflow chains"
+          if [ "$TOOL_COUNT" -lt 50 ]; then
+            echo "::error::Only $TOOL_COUNT tools in fixture — expected ≥50. Registry fetch may have failed."
+            exit 1
+          fi
+
+      # ── Staleness check ─────────────────────────────────────────────────────
+      # Warns (does not fail) if committed data/ differs from freshly generated
+      # fixtures. A diff here means generate.mjs wasn't re-run before this push.
+      - name: Check fixture staleness
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          if ! git diff --quiet data/; then
+            echo "::warning::Committed data/ differs from freshly generated fixtures."
+            echo "::warning::Run 'node generate.mjs', commit data/, and push to keep fixtures fresh."
+            git diff --stat data/
+          else
+            echo "✅ Committed fixtures match fresh generation — up to date."
+          fi
+
+      # ── Summary ─────────────────────────────────────────────────────────────
+      - name: Pre-flight summary
+        if: always()
+        run: |
+          TOOL_COUNT=$(python3 -c "import json; d=json.load(open('data/tools.json')); print(len(d))" 2>/dev/null || echo "N/A")
+          WF_COUNT=$(python3 -c "import json; d=json.load(open('data/workflows.json')); print(len(d))" 2>/dev/null || echo "N/A")
+          {
+            echo "## MCP Worker pre-flight summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Tools in fixture | $TOOL_COUNT |"
+            echo "| Workflow chains | $WF_COUNT |"
+            echo "| Branch | \`${{ github.ref_name }}\` |"
+            echo "| Commit | \`${{ github.sha }}\` |"
+            echo "| Cloudflare deploy | triggered by GitHub App (see Deployments tab) |"
+          } >> "$GITHUB_STEP_SUMMARY"

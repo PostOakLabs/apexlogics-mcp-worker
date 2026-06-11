@@ -1,13 +1,16 @@
 {
   "name": "apexlogics-mcp-worker",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "description": "ApexLogics MCP Server — Cloudflare Worker",
+  "main": "worker.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node generate.mjs",
+    "deploy": "node generate.mjs && npx wrangler deploy",
+    "dev": "npx wrangler dev"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.22.0"
+  }
 }
