@@ -16,7 +16,24 @@ import { TOOL_SCHEMAS } from "./pilot.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
 
-const SERVER_META = { name: "apexlogics-tools", version: "1.0.0" };
+const SERVER_META = { name: "apexlogics-tools", version: "1.1.0" };
+
+// ── ChainGraph Standard v0.1 §6 — execution-hash verification ────────────────
+// Canonicalize (recursive key-sort, array order preserved) then SHA-256 over
+// {policy_parameters, output_payload}. Vendor-neutral: identical procedure
+// across AINumbers, OCS, and ApexLogics so any artifact verifies anywhere.
+function cgSortKeys(v) {
+  if (Array.isArray(v)) return v.map(cgSortKeys);
+  if (v && typeof v === "object") {
+    return Object.keys(v).sort().reduce((o, k) => (o[k] = cgSortKeys(v[k]), o), {});
+  }
+  return v;
+}
+async function cgExecutionHash(policy_parameters, output_payload) {
+  const canonical = JSON.stringify(cgSortKeys({ policy_parameters, output_payload }));
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(canonical));
+  return "sha256:" + [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
 
 // ── StatelessFetchTransport ───────────────────────────────────────────────────
 // Bridges the CF Workers Fetch API to the MCP SDK Transport interface.
@@ -213,6 +230,39 @@ function buildServer(env) {
     async (args) => {
       track(env, "build_workflow_links", args.workflow || "_index");
       return { content: [{ type: "text", text: JSON.stringify(handleBuildWorkflow(args), null, 2) }] };
+    }
+  );
+
+  // verify_execution_hash — ChainGraph Standard v0.1 §6. Recompute an artifact's
+  // execution hash so any agent can independently verify an ApexLogics (or any
+  // ChainGraph) artifact rather than trust it.
+  server.tool(
+    "verify_execution_hash",
+    TOOL_SCHEMAS.verify_execution_hash.description,
+    TOOL_SCHEMAS.verify_execution_hash.params,
+    async (args) => {
+      track(env, "verify_execution_hash", "");
+      const a = args.artifact;
+      const pp = args.policy_parameters ?? a?.policy_parameters;
+      const op = args.output_payload ?? a?.output_payload;
+      const claimed = args.claimed_hash ?? a?.execution_hash ?? null;
+      if (pp === undefined || op === undefined) {
+        return { content: [{ type: "text", text: "Provide a full artifact, or policy_parameters + output_payload (+ claimed_hash)." }] };
+      }
+      const computed = await cgExecutionHash(pp, op);
+      const valid = claimed != null && computed === claimed;
+      const out = {
+        valid,
+        computed_hash: computed,
+        claimed_hash: claimed,
+        tool_id: a?.tool_id ?? null,
+        chaingraph_version: a?.chaingraph_version ?? a?.ap2_version ?? null,
+        note: claimed == null
+          ? "No claimed hash supplied — returning the computed hash only."
+          : (valid ? "Verified: recomputed hash matches the artifact." : "MISMATCH: treat the artifact as unverified."),
+        spec: "ChainGraph Standard v0.1 §6",
+      };
+      return { content: [{ type: "text", text: JSON.stringify(out, null, 2) }] };
     }
   );
 

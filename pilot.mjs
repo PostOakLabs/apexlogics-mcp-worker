@@ -47,6 +47,29 @@ export const TOOL_SCHEMAS = {
         ),
     },
   },
+
+  verify_execution_hash: {
+    description:
+      "Independently verify a ChainGraph artifact (ChainGraph Standard v0.1 §6). Recomputes SHA-256 over the canonical (sorted-key, whitespace-stripped) JSON of {policy_parameters, output_payload} and compares it to the claimed execution_hash. Pass a full artifact, or policy_parameters + output_payload + claimed_hash. Works on artifacts from any ChainGraph vendor (ApexLogics, AINumbers, OCS).",
+    params: {
+      artifact: z
+        .record(z.any())
+        .optional()
+        .describe("A full ChainGraph artifact (with policy_parameters, output_payload, execution_hash)."),
+      policy_parameters: z
+        .record(z.any())
+        .optional()
+        .describe("Artifact policy_parameters (if not passing a full artifact)."),
+      output_payload: z
+        .record(z.any())
+        .optional()
+        .describe("Artifact output_payload (if not passing a full artifact)."),
+      claimed_hash: z
+        .string()
+        .optional()
+        .describe("execution_hash to check against (if not passing a full artifact)."),
+    },
+  },
 };
 
 // ── Workflow chains ────────────────────────────────────────────────────────
