@@ -169,9 +169,27 @@ function handleBuildWorkflow({ workflow }) {
   };
 }
 
+// ── Telemetry helper ──────────────────────────────────────────────────────────
+// CF Analytics Engine writeDataPoint is synchronous + fire-and-forget.
+// Schema: blobs[0]=tool, blobs[1]=param1, blobs[2]=param2, doubles[0]=1.
+// indexes[0] enables fast GROUP BY tool_name in Workers Analytics Engine SQL.
+// Optional-chained so local dev (no AE binding) silently no-ops.
+
+function track(env, tool, param1 = "", param2 = "") {
+  try {
+    env.AE?.writeDataPoint({
+      blobs: [tool, param1, param2],
+      doubles: [1],
+      indexes: [tool],
+    });
+  } catch (_) {
+    // never let telemetry errors surface to callers
+  }
+}
+
 // ── Server factory (new instance per request — stateless) ────────────────────
 
-function buildServer() {
+function buildServer(env) {
   const server = new McpServer({
     ...SERVER_META,
     instructions:
@@ -182,18 +200,20 @@ function buildServer() {
     "list_apexlogics_tools",
     TOOL_SCHEMAS.list_apexlogics_tools.description.replace("{COUNT}", String(toolsData.length)),
     TOOL_SCHEMAS.list_apexlogics_tools.params,
-    async (args) => ({
-      content: [{ type: "text", text: JSON.stringify(handleListTools(args), null, 2) }],
-    })
+    async (args) => {
+      track(env, "list_apexlogics_tools", args.query || "", args.category || "");
+      return { content: [{ type: "text", text: JSON.stringify(handleListTools(args), null, 2) }] };
+    }
   );
 
   server.tool(
     "build_workflow_links",
     TOOL_SCHEMAS.build_workflow_links.description,
     TOOL_SCHEMAS.build_workflow_links.params,
-    async (args) => ({
-      content: [{ type: "text", text: JSON.stringify(handleBuildWorkflow(args), null, 2) }],
-    })
+    async (args) => {
+      track(env, "build_workflow_links", args.workflow || "_index");
+      return { content: [{ type: "text", text: JSON.stringify(handleBuildWorkflow(args), null, 2) }] };
+    }
   );
 
   return server;
@@ -223,7 +243,7 @@ export default {
 
       try {
         const transport = new StatelessFetchTransport();
-        const server = buildServer();
+        const server = buildServer(env);
         await server.connect(transport);
         return await transport.handleRequest(request);
       } catch (e) {

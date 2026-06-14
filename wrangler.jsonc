@@ -7,6 +7,9 @@
   "observability": {
     "enabled": true
   },
+  "analytics_engine_datasets": [
+    { "binding": "AE", "dataset": "mcp_tool_calls" }
+  ],
   // Custom domain — already provisioned via dashboard; declared here for version control.
   // On first deploy after adding this, Cloudflare will confirm the existing mapping.
   "routes": [
