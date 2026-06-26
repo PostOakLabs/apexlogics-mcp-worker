@@ -4,8 +4,13 @@
   "workers_dev": true,
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
+  // Workers Logs — console output + invocation logs. Explicit form to match ocs-mcp /
+  // ainumbers-mcp (functionally identical to the prior "enabled": true shorthand).
   "observability": {
-    "enabled": true
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
   },
   "analytics_engine_datasets": [
     { "binding": "AE", "dataset": "mcp_tool_calls" }

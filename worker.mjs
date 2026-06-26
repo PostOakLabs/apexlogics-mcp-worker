@@ -218,7 +218,7 @@ function buildServer(env) {
     TOOL_SCHEMAS.list_apexlogics_tools.description.replace("{COUNT}", String(toolsData.length)),
     TOOL_SCHEMAS.list_apexlogics_tools.params,
     async (args) => {
-      track(env, "list_apexlogics_tools", args.query || "", args.category || "");
+      track(env, "list_apexlogics_tools", args.category || "", "");  // privacy: enumerable category only, never the raw query text
       return { content: [{ type: "text", text: JSON.stringify(handleListTools(args), null, 2) }] };
     }
   );
