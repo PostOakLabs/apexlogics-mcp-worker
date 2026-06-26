@@ -186,24 +186,6 @@ function handleBuildWorkflow({ workflow }) {
   };
 }
 
-// ── Telemetry helper ──────────────────────────────────────────────────────────
-// CF Analytics Engine writeDataPoint is synchronous + fire-and-forget.
-// Schema: blobs[0]=tool, blobs[1]=param1, blobs[2]=param2, doubles[0]=1.
-// indexes[0] enables fast GROUP BY tool_name in Workers Analytics Engine SQL.
-// Optional-chained so local dev (no AE binding) silently no-ops.
-
-function track(env, tool, param1 = "", param2 = "") {
-  try {
-    env.AE?.writeDataPoint({
-      blobs: [tool, param1, param2],
-      doubles: [1],
-      indexes: [tool],
-    });
-  } catch (_) {
-    // never let telemetry errors surface to callers
-  }
-}
-
 // ── Server factory (new instance per request — stateless) ────────────────────
 
 function buildServer(env) {
@@ -218,7 +200,6 @@ function buildServer(env) {
     TOOL_SCHEMAS.list_apexlogics_tools.description.replace("{COUNT}", String(toolsData.length)),
     TOOL_SCHEMAS.list_apexlogics_tools.params,
     async (args) => {
-      track(env, "list_apexlogics_tools", args.category || "", "");  // privacy: enumerable category only, never the raw query text
       return { content: [{ type: "text", text: JSON.stringify(handleListTools(args), null, 2) }] };
     }
   );
@@ -228,7 +209,6 @@ function buildServer(env) {
     TOOL_SCHEMAS.build_workflow_links.description,
     TOOL_SCHEMAS.build_workflow_links.params,
     async (args) => {
-      track(env, "build_workflow_links", args.workflow || "_index");
       return { content: [{ type: "text", text: JSON.stringify(handleBuildWorkflow(args), null, 2) }] };
     }
   );
@@ -241,7 +221,6 @@ function buildServer(env) {
     TOOL_SCHEMAS.verify_execution_hash.description,
     TOOL_SCHEMAS.verify_execution_hash.params,
     async (args) => {
-      track(env, "verify_execution_hash", "");
       const a = args.artifact;
       const pp = args.policy_parameters ?? a?.policy_parameters;
       const op = args.output_payload ?? a?.output_payload;
@@ -291,11 +270,41 @@ export default {
         return Response.json({ error: "POST required" }, { status: 405, headers: CORS_HEADERS });
       }
 
+      // Parse a clone for telemetry — the transport consumes the original request stream.
+      // Structural metadata only; never payloads, parameters, or outputs.
+      const body = await request.clone().json().catch(() => undefined);
+      const isToolCall = body?.method === "tools/call";
+      const toolName   = isToolCall ? (body?.params?.name ?? "unknown") : null;
+      const chainDepth = isToolCall ? (body?.params?.arguments?.chain_depth ?? 0) : null;
+      const t0 = Date.now();
+
       try {
         const transport = new StatelessFetchTransport();
         const server = buildServer(env);
         await server.connect(transport);
-        return await transport.handleRequest(request);
+        const response = await transport.handleRequest(request);
+
+        // Fire-and-forget Analytics Engine telemetry — never blocks the response.
+        // Salted, non-reversible caller hash (no PII). Mirrors ainumbers-mcp / ocs-mcp.
+        if (isToolCall && env.ANALYTICS) {
+          const latencyMs = Date.now() - t0;
+          const success   = response.status < 500;
+          const callerRaw = request.headers.get("CF-Connecting-IP") ?? request.headers.get("X-Forwarded-For") ?? "";
+          const callerBuf = await crypto.subtle.digest("SHA-256",
+            new TextEncoder().encode("apexlogics-mcp-v1:" + callerRaw));
+          const callerHash = "sha256:" + Array.from(new Uint8Array(callerBuf)).map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 16);
+          ctx.waitUntil(Promise.resolve().then(() => {
+            try {
+              env.ANALYTICS.writeDataPoint({
+                blobs:   [toolName, callerHash, success ? "ok" : "error"],
+                doubles: [latencyMs, chainDepth ?? 0],
+                indexes: [toolName],
+              });
+            } catch (_) { /* telemetry is best-effort; never affect the response */ }
+          }));
+        }
+
+        return response;
       } catch (e) {
         return Response.json(
           { error: e.message, stack: e.stack },
