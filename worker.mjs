@@ -13,27 +13,21 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { TOOL_SCHEMAS } from "./pilot.mjs";
+import { executionHash } from "./_hash.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
 
-const SERVER_META = { name: "apexlogics-tools", version: "1.1.0" };
+const SERVER_META = { name: "apexlogics-tools", version: "1.2.0" };
 
-// ── ChainGraph Standard v0.1 §6 — execution-hash verification ────────────────
-// Canonicalize (recursive key-sort, array order preserved) then SHA-256 over
-// {policy_parameters, output_payload}. Vendor-neutral: identical procedure
-// across AINumbers, OCS, and ApexLogics so any artifact verifies anywhere.
-function cgSortKeys(v) {
-  if (Array.isArray(v)) return v.map(cgSortKeys);
-  if (v && typeof v === "object") {
-    return Object.keys(v).sort().reduce((o, k) => (o[k] = cgSortKeys(v[k]), o), {});
-  }
-  return v;
-}
-async function cgExecutionHash(policy_parameters, output_payload) {
-  const canonical = JSON.stringify(cgSortKeys({ policy_parameters, output_payload }));
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(canonical));
-  return "sha256:" + [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
+// ── OCG Standard §4 — execution-hash verification ────────────────────────────
+// Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
+// SHA-256 over {policy_parameters, output_payload}). executionHash() returns
+// BARE lowercase hex — byte-identical to AINumbers/OCS so any artifact verifies
+// anywhere. CUTOVER 2026-07-04: pre-cutover ApexLogics artifacts carried a
+// "sha256:" prefix on the SAME hex payload; normHash() strips the optional
+// prefix on BOTH sides so OLD (prefixed) and NEW (bare) artifacts both verify
+// through one code path. See CHAINGRAPH-ADOPTION.md hash-cutover note.
+const normHash = (h) => (typeof h === "string" ? h.replace(/^sha256:/, "") : h);
 
 // ── StatelessFetchTransport ───────────────────────────────────────────────────
 // Bridges the CF Workers Fetch API to the MCP SDK Transport interface.
@@ -213,9 +207,11 @@ function buildServer(env) {
     }
   );
 
-  // verify_execution_hash — ChainGraph Standard v0.1 §6. Recompute an artifact's
-  // execution hash so any agent can independently verify an ApexLogics (or any
-  // ChainGraph) artifact rather than trust it.
+  // verify_execution_hash — OCG Standard §4. Recompute an artifact's execution
+  // hash so any agent can independently verify an ApexLogics (or any OCG
+  // vendor's) artifact rather than trust it. Vendor-neutral: bare-hex JCS.
+  // Normalizes the optional "sha256:" prefix so pre-2026-07-04 (prefixed) and
+  // post-cutover (bare) ApexLogics artifacts both verify.
   server.tool(
     "verify_execution_hash",
     TOOL_SCHEMAS.verify_execution_hash.description,
@@ -228,8 +224,21 @@ function buildServer(env) {
       if (pp === undefined || op === undefined) {
         return { content: [{ type: "text", text: "Provide a full artifact, or policy_parameters + output_payload (+ claimed_hash)." }] };
       }
-      const computed = await cgExecutionHash(pp, op);
-      const valid = claimed != null && computed === claimed;
+      let computed;
+      try {
+        computed = await executionHash(pp, op);
+      } catch (e) {
+        // _hash.mjs assertIJson() rejects non-finite / unsafe-integer values
+        // rather than emit an unstable hash — report, do not 500.
+        return { content: [{ type: "text", text: JSON.stringify({
+          valid: false,
+          error: "non-canonical-input",
+          detail: e.message,
+          note: "policy_parameters/output_payload contain a value outside I-JSON (NaN/Infinity or an integer beyond 2^53). Not hashable under OCG §4; treat as unverified.",
+          spec: "OCG Standard §4 (RFC 8785 JCS + SHA-256)",
+        }, null, 2) }] };
+      }
+      const valid = claimed != null && normHash(computed) === normHash(claimed);
       const out = {
         valid,
         computed_hash: computed,
@@ -237,9 +246,9 @@ function buildServer(env) {
         tool_id: a?.tool_id ?? null,
         chaingraph_version: a?.chaingraph_version ?? a?.ap2_version ?? null,
         note: claimed == null
-          ? "No claimed hash supplied — returning the computed hash only."
-          : (valid ? "Verified: recomputed hash matches the artifact." : "MISMATCH: treat the artifact as unverified."),
-        spec: "ChainGraph Standard v0.1 §6",
+          ? "No claimed hash supplied — returning the computed hash only (bare hex, OCG §4)."
+          : (valid ? "Verified: recomputed hash matches the artifact (sha256: prefix normalized)." : "MISMATCH: treat the artifact as unverified."),
+        spec: "OCG Standard §4 (RFC 8785 JCS + SHA-256)",
       };
       return { content: [{ type: "text", text: JSON.stringify(out, null, 2) }] };
     }
