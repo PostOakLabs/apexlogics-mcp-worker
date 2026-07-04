@@ -113,6 +113,22 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '124-contractor-launch-break-even',
+    toolHtml: REPO + 'tools/124-contractor-launch-break-even/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/124-contractor-launch-break-even.golden.json',
+    fields: {
+      w2Salary: 65000, benefitsValue: 12000, taxRate: 22, startupCosts: 12500, monthlyOverhead: 1500,
+      materialsMarkup: 15, materialsRevenue: 2000, ownerPay: 70000, rampMonths: 6,
+      billableHours: 32, weeksWorked: 48, rampUtilization: 40,
+    },
+    kernelInputs: {
+      w2Salary: 65000, benefitsValue: 12000, taxRate: 22, startupCosts: 12500, monthlyOverhead: 1500,
+      materialsMarkup: 15, materialsRevenue: 2000, ownerPay: 70000, rampMonths: 6,
+      billableHours: 32, weeksWorked: 48, rampUtilization: 40,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
