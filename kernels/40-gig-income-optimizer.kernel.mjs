@@ -215,7 +215,6 @@ export async function buildArtifact(pp, { now, parent_hashes = [], parent_tool_i
       zero_pii_verified:    true,
       deterministic_run:    true,
       apex_meta: {
-        ap2_version:      '2.0',
         ap2_mandate_type: 'gig_income_record',
         al_id:            'AL-45',
         tool_name:        'Part-Time / Gig Income Optimizer',
