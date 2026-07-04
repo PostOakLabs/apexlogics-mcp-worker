@@ -4,9 +4,11 @@
 // nodes report gpu_browser_only. Extend as kernels are extracted (D1.2 batch).
 
 import * as t40 from './40-gig-income-optimizer.kernel.mjs';
+import * as t133 from './133-shift-differential-overtime-optimizer.kernel.mjs';
 
 export const KERNELS = {
   '40-gig-income-optimizer': t40,
+  '133-shift-differential-overtime-optimizer': t133,
 };
 
 export function getKernel(tool_id) {
