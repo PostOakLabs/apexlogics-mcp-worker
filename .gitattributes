@@ -1,0 +1,8 @@
+# Guest-legal kernels and their vendored _hash.mjs must stay LF byte-exact so the
+# OCG §17 guest ImageID / vendor-fresh sha (_hash.mjs body sha256 9d60ba8b) never
+# drifts on a CRLF-autocrlf checkout. Pin all source + data to LF.
+* text=auto eol=lf
+*.mjs text eol=lf
+*.js  text eol=lf
+*.json text eol=lf
+*.md  text eol=lf
