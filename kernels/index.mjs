@@ -5,10 +5,16 @@
 
 import * as t40 from './40-gig-income-optimizer.kernel.mjs';
 import * as t133 from './133-shift-differential-overtime-optimizer.kernel.mjs';
+import * as t135 from './135-option-exercise-window.kernel.mjs';
+import * as t136 from './136-severance-ui-timing.kernel.mjs';
+import * as t140 from './140-83b-election-decision.kernel.mjs';
 
 export const KERNELS = {
   '40-gig-income-optimizer': t40,
   '133-shift-differential-overtime-optimizer': t133,
+  '135-option-exercise-window': t135,
+  '136-severance-ui-timing': t136,
+  '140-83b-election-decision': t140,
 };
 
 export function getKernel(tool_id) {

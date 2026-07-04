@@ -71,6 +71,48 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '135-option-exercise-window',
+    toolHtml: REPO + 'tools/135-option-exercise-window/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/135-option-exercise-window.golden.json',
+    fields: {
+      vestedShares: 10000, strikePrice: 2, fmv: 15, optionType: 'iso', windowDays: 90, cashAvailable: 50000,
+      exitLow: 5, exitBase: 15, exitHigh: 40, pBear: 20, pBase: 50, pBull: 30,
+    },
+    kernelInputs: {
+      vestedShares: 10000, strikePrice: 2, fmv: 15, optionType: 'iso', windowDays: 90, cashAvailable: 50000,
+      exitLow: 5, exitBase: 15, exitHigh: 40, pBear: 20, pBase: 50, pBull: 30,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '136-severance-ui-timing',
+    toolHtml: REPO + 'tools/136-severance-ui-timing/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/136-severance-ui-timing.golden.json',
+    fields: {
+      severanceForm: 'continuation', severanceTotal: 30000, weeklySalary: 2000,
+      stateBucket: 'standard', weeklyBenefit: 500, searchWeeks: 20,
+    },
+    kernelInputs: {
+      severanceForm: 'continuation', severanceTotal: 30000, weeklySalary: 2000,
+      stateBucket: 'standard', weeklyBenefit: 500, searchWeeks: 20,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '140-83b-election-decision',
+    toolHtml: REPO + 'tools/140-83b-election-decision/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/140-83b-election-decision.golden.json',
+    fields: {
+      shares: 10000, strikePrice: 0.5, fmvAtGrant: 1, vestingYears: 4, grantType: 'rsa',
+      fmvLow: 2, fmvBase: 10, fmvHigh: 50, forfeitureProb: 20, taxBracket: 0.37, ltcgRate: 0.20, exitYears: 5,
+    },
+    kernelInputs: {
+      shares: 10000, strikePrice: 0.5, fmvAtGrant: 1, vestingYears: 4, grantType: 'rsa',
+      fmvBase: 10, forfeitureProb: 20, taxBracket: 0.37, ltcgRate: 0.20,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
