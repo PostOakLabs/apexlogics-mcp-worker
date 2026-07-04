@@ -10,7 +10,7 @@ import { z } from "zod";
 export const TOOL_SCHEMAS = {
   list_apexlogics_tools: {
     description:
-      "Search the ApexLogics catalog of {COUNT} deterministic, privacy-first edtech and careertech tools. Returns tool names, descriptions, URLs, and AP2 mandate types. Use to find the right calculator for any career, education, compensation, licensing, immigration, or workforce question.",
+      "Search the ApexLogics catalog of {COUNT} deterministic, privacy-first edtech and careertech tools. Returns tool names, descriptions, URLs, and Policy Mandate types. Use to find the right calculator for any career, education, compensation, licensing, immigration, or workforce question.",
     params: {
       query: z
         .string()

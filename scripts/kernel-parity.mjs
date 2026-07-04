@@ -136,11 +136,17 @@ async function runBrowserArtifact(caseDef) {
   sandbox.window = sandbox;
   sandbox.globalThis = sandbox;
 
-  // After the tool's code, reassign dlFile to CAPTURE the artifact JSON instead of
-  // triggering a download, then expose an async runner that walks the REAL path:
-  // calculate() populates _lastResults, exportAP2() assembles the exact preimage + hash.
+  // After the tool's code, capture the artifact JSON instead of triggering a download,
+  // by TWO universal hooks (defined INSIDE the vm so their globalThis is the sandbox):
+  //   - reassign dlFile   → tools that download via the dlFile() helper (e.g. tool-40).
+  //   - reassign Blob      → tools that build `new Blob([JSON.stringify(...)])` inline
+  //                          then a.click() (e.g. tool-129). exportAP2 makes exactly one
+  //                          Blob, so the last capture is the artifact.
+  // Then an async runner walks the REAL path: calculate() populates _lastResult(s),
+  // exportAP2() assembles the exact preimage + hash.
   const harness = `
 ;dlFile = function (_name, content) { globalThis.__captured = content; };
+globalThis.Blob = function (parts) { try { globalThis.__captured = Array.isArray(parts) ? parts.map(String).join('') : String(parts); } catch (_e) {} };
 globalThis.__run = async function () {
   calculate();
   await exportAP2();
