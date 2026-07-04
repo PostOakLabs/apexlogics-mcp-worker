@@ -1,0 +1,29 @@
+{
+  "_note": "Representative per-step inputs so a no-input run_chain still executes kernel-backed steps. Keyed by chain name, then by step tool_id -> policy_parameters (the kernel's raw input contract). Version-pinned; NO live data. Extended as kernels ship (D1.2).",
+  "education-path-decision-engine": {
+    "40-gig-income-optimizer": {
+      "w2_salary": 90000,
+      "filing_status": "single",
+      "state_rate_pct": 5,
+      "gross_gig_income": 30000,
+      "business_expenses": 4000,
+      "billing_rate_hr": 60,
+      "prior_year_federal_tax": 15000,
+      "w2_withholding": 12000,
+      "prior_year_agi": 90000
+    }
+  },
+  "ai-displacement-career-transition": {
+    "40-gig-income-optimizer": {
+      "w2_salary": 90000,
+      "filing_status": "single",
+      "state_rate_pct": 5,
+      "gross_gig_income": 30000,
+      "business_expenses": 4000,
+      "billing_rate_hr": 60,
+      "prior_year_federal_tax": 15000,
+      "w2_withholding": 12000,
+      "prior_year_agi": 90000
+    }
+  }
+}

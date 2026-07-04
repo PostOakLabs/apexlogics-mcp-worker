@@ -70,6 +70,25 @@ export const TOOL_SCHEMAS = {
         .describe("execution_hash to check against (if not passing a full artifact)."),
     },
   },
+
+  run_chain: {
+    description:
+      "Execute a named ApexLogics ChainGraph chain SERVER-SIDE (OpenChainGraph §21). Runs each kernel-backed step deterministically, threads each step's execution_hash into the next step's parent_hashes, and folds the outputs into ONE composite artifact with a reproducible composite_execution_hash. Steps without a server kernel report no_kernel_browser_only (use the browser tool at its URL); GPU steps report gpu_browser_only. Zero network, zero PII. Omit chain to list available chains. Verify any result with verify_execution_hash.",
+    params: {
+      chain: z
+        .string()
+        .optional()
+        .describe(
+          "Chain name from the catalog (chaingraph.chains[].name), e.g. 'education-path-decision-engine'. Omit to list all runnable chains."
+        ),
+      inputs: z
+        .record(z.any())
+        .optional()
+        .describe(
+          "Optional map of step tool_id -> policy_parameters (the tool's raw input fields). Omitted steps fall back to a version-pinned fixture, else {}."
+        ),
+    },
+  },
 };
 
 // ── Workflow chains ────────────────────────────────────────────────────────

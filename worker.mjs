@@ -14,10 +14,12 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { TOOL_SCHEMAS } from "./pilot.mjs";
 import { executionHash } from "./_hash.mjs";
+import { runChain } from "./run_chain.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
+import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "json" };
 
-const SERVER_META = { name: "apexlogics-tools", version: "1.2.0" };
+const SERVER_META = { name: "apexlogics-tools", version: "1.3.0" };
 
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
 // Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
@@ -180,6 +182,31 @@ function handleBuildWorkflow({ workflow }) {
   };
 }
 
+// run_chain — OCG Standard §21. Execute a named chain server-side and return the
+// composite artifact + reproducible composite_execution_hash. Omit chain to list
+// runnable chains. Non-kernel steps degrade to no_kernel_browser_only (not an error).
+async function handleRunChain({ chain, inputs }) {
+  const name = (chain || "").trim();
+  if (!name) {
+    return {
+      available_chains: (chaingraphData.chains ?? []).map((c) => ({
+        name: c.name,
+        title: c.title ?? c.name,
+        steps: (c.steps ?? []).length,
+      })),
+      usage: 'Pass chain: "<name>" to run it server-side. Optionally pass inputs: { "<tool_id>": { ...fields } }.',
+    };
+  }
+  try {
+    return await runChain(name, inputs);
+  } catch (e) {
+    return {
+      error: e.message,
+      available: (chaingraphData.chains ?? []).map((c) => c.name),
+    };
+  }
+}
+
 // ── Server factory (new instance per request — stateless) ────────────────────
 
 function buildServer(env) {
@@ -251,6 +278,15 @@ function buildServer(env) {
         spec: "OCG Standard §4 (RFC 8785 JCS + SHA-256)",
       };
       return { content: [{ type: "text", text: JSON.stringify(out, null, 2) }] };
+    }
+  );
+
+  server.tool(
+    "run_chain",
+    TOOL_SCHEMAS.run_chain.description,
+    TOOL_SCHEMAS.run_chain.params,
+    async (args) => {
+      return { content: [{ type: "text", text: JSON.stringify(await handleRunChain(args), null, 2) }] };
     }
   );
 
