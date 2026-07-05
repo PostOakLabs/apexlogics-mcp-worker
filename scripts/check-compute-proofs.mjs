@@ -12,11 +12,14 @@
  *     (comment/rename) stays valid (only a §17 re-stamp needed), but an output-CHANGING edit
  *     breaks it (must re-prove). Deliberately does NOT key on the source digest (§17's job).
  *
- * The cryptographic seal was verified against the BN254 verifier at prove time (run_verify →
- * VERIFY_PASS before the receipt was staged); this gate guards against later drift between the
- * embedded proof and the kernel/catalog. Zero-dep, no network, no GPU — CI-standalone.
+ * §18.1: additionally re-verifies the cryptographic Groth16-BN254 SEAL in-gate via the vendored
+ * self-contained reference verifier (kernels/_computeproof.mjs → verifySeal; @noble/curves BN254
+ * pairing check, no GPU/network). The seal was first checked at prove time (run_verify → VERIFY_PASS);
+ * this makes CI re-confirm it without the prover box, catching a tampered or substituted seal.
+ * Zero-dep, no network, no GPU — CI-standalone.
  */
 import { readFileSync } from 'node:fs';
+import { verifySeal } from '../kernels/_computeproof.mjs';
 
 const IMAGE_ID = 'sha256:a1a0bc89b5b1febaeda3519f6dbade0fa5ac16beeb143c4e1b01689573567bc6';
 const GRAPH = new URL('../data/chaingraph/chaingraph.json', import.meta.url);
@@ -55,6 +58,12 @@ for (const n of proven) {
     problems.push(`${id}: has a compute_proof but compute_proof_ready='${n.compute_proof_ready}'`);
     continue;
   }
+  // §18.1: re-verify the cryptographic Groth16-BN254 seal itself (self-contained pairing check,
+  // vendored @noble/curves; no GPU, no network). Binds A/B/C to the ReceiptClaim derived from
+  // (imageId, canonical journal) — catches a tampered/substituted seal that still parses.
+  let sealOk = false;
+  try { sealOk = verifySeal(p) === true; } catch (e) { problems.push(`${id}: verifySeal threw: ${e.message}`); continue; }
+  if (!sealOk) { problems.push(`${id}: BN254 Groth16 seal FAILED cryptographic verification`); continue; }
   ok++;
 }
 
@@ -63,4 +72,4 @@ if (problems.length) {
   for (const p of problems) console.error('  - ' + p);
   process.exit(1);
 }
-console.log(`✓ COMPUTE-PROOFS: all ${ok} §18 proofs bind ImageID a1a0bc89 + journal.output == current kernel output.`);
+console.log(`✓ COMPUTE-PROOFS: all ${ok} §18 proofs bind ImageID a1a0bc89 + journal.output == current kernel output + BN254 Groth16 seal cryptographically verifies.`);
