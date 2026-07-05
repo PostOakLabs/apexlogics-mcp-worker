@@ -109,6 +109,14 @@
       "pBear": 20,
       "pBase": 50,
       "pBull": 30
+    },
+    "136-severance-ui-timing": {
+      "severanceForm": "continuation",
+      "severanceTotal": 30000,
+      "weeklySalary": 2000,
+      "stateBucket": "standard",
+      "weeklyBenefit": 500,
+      "searchWeeks": 20
     }
   }
 }
