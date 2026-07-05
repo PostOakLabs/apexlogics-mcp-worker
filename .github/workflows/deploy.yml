@@ -87,6 +87,13 @@ jobs:
       - name: 🔒 §12 chain-freeze gate
         run: node scripts/chain-freeze.mjs
 
+      # ── §18 compute-proof binding ───────────────────────────────────────────
+      # Re-binds every embedded zk compute_proof to its kernel: ImageID a1a0bc89 +
+      # journal.output == compute(proven inputs). Catches an output-changing kernel
+      # edit that would leave a stale proof. Zero-dep, no GPU, no network.
+      - name: 🔒 §18 compute-proof binding gate
+        run: node scripts/check-compute-proofs.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.

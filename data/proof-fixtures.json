@@ -1,0 +1,74 @@
+{
+  "_note": "Inputs each §18 compute_proof journal.output is bound to (from kernel-parity CASES). Verified by scripts/check-compute-proofs.mjs.",
+  "fixtures": {
+    "40-gig-income-optimizer": {
+      "w2_salary": 90000,
+      "filing_status": "single",
+      "state_rate_pct": 5,
+      "gross_gig_income": 30000,
+      "business_expenses": 4000,
+      "billing_rate_hr": 60,
+      "prior_year_federal_tax": 15000,
+      "w2_withholding": 12000,
+      "prior_year_agi": 90000
+    },
+    "109-iso-amt-exposure-modeler": {
+      "shares": 1000,
+      "strikePrice": 2,
+      "fmv": 12,
+      "ordinaryIncome": 150000,
+      "otherAMT": 0,
+      "filingStatus": "single"
+    },
+    "38-early-career-net-worth-engine": {
+      "startSalary": 65000,
+      "salaryGrowth": 3,
+      "savingsRate": 15,
+      "filingStatus": "single",
+      "debtBalance": 25000,
+      "loanRate": 5.5,
+      "monthlyPayment": 280,
+      "contrib401k": 6,
+      "matchPct": 50,
+      "matchCap": 6,
+      "investReturn": 7
+    },
+    "143-federal-buyout-decision": {
+      "currentSalary": 110000,
+      "yearsService": 18,
+      "currentAge": 52,
+      "retirementSystem": "fers",
+      "retirementAge": 62,
+      "severancePay": 40000,
+      "continuedHealthMonths": 6,
+      "taxRate": 0.24,
+      "monthlyHealthCost": 700,
+      "pensionReducPct": 10,
+      "privateOfferLow": 90000,
+      "privateOfferBase": 120000,
+      "privateOfferHigh": 150000,
+      "searchMonths": 4,
+      "stayYears": 5
+    },
+    "137-qbi-199a-optimizer": {
+      "qbi": 150000,
+      "taxableIncome": 230000,
+      "filingStatus": "single",
+      "sstb": "no",
+      "w2Wages": 40000,
+      "ubia": 100000,
+      "threshold": 201775,
+      "phaseoutBand": 75000
+    },
+    "126-skillbridge-credential-transfer-roi": {
+      "civSalary": 75000,
+      "salaryGrowth": 3.5,
+      "taxRate": 22,
+      "projYears": 5,
+      "sbMonths": 4,
+      "sbOffer": 85000,
+      "sbConvPct": 70,
+      "creds": []
+    }
+  }
+}
