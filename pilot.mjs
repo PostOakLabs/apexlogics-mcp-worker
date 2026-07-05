@@ -71,6 +71,46 @@ export const TOOL_SCHEMAS = {
     },
   },
 
+  find_tool: {
+    description:
+      "Ranked BM25 search over the ApexLogics catalog of deterministic, privacy-first edtech and careertech calculators. Returns the best-matching tools with URLs and Policy Mandate types, most relevant first. Use for ONE specific calculator answering a single question — e.g. 'ISO AMT exposure', 'teacher pension estimate', 'H-1B job-change risk', 'freelance quarterly tax'. For a multi-step journey across several tools use find_chain instead; to execute a chain server-side use run_chain; for the full unranked catalog use list_apexlogics_tools.",
+    params: {
+      query: z
+        .string()
+        .describe(
+          "Natural-language or keyword query describing the single calculation you need (e.g. 'severance after tax', 'QSBS 1202 exclusion', 'RSU withholding gap')."
+        ),
+      top_n: z
+        .number()
+        .int()
+        .min(1)
+        .max(10)
+        .optional()
+        .default(5)
+        .describe("Max ranked results to return (default 5, max 10)."),
+    },
+  },
+
+  find_chain: {
+    description:
+      "Ranked BM25 search over the ApexLogics ChainGraph chains — multi-tool decision journeys that fold several calculators into one composite. Returns matching chains with their ordered steps, most relevant first. Use when the user has a MULTI-STEP goal spanning tools — e.g. 'plan a career pivot', 'equity exit and 83(b)', 'veteran GI Bill transition', 'new job offer end to end'. For a single calculator use find_tool; to run a matched chain server-side use run_chain (pass its name); for human-readable deep-link workflow pages use build_workflow_links.",
+    params: {
+      query: z
+        .string()
+        .describe(
+          "Natural-language or keyword query describing the multi-step goal (e.g. 'teacher lifetime compensation', 'self-employment tax optimization', 'immigration career planning')."
+        ),
+      top_n: z
+        .number()
+        .int()
+        .min(1)
+        .max(10)
+        .optional()
+        .default(5)
+        .describe("Max ranked results to return (default 5, max 10)."),
+    },
+  },
+
   run_chain: {
     description:
       "Execute a named ApexLogics ChainGraph chain SERVER-SIDE (OpenChainGraph §21). Runs each kernel-backed step deterministically, threads each step's execution_hash into the next step's parent_hashes, and folds the outputs into ONE composite artifact with a reproducible composite_execution_hash. Steps without a server kernel report no_kernel_browser_only (use the browser tool at its URL); GPU steps report gpu_browser_only. Zero network, zero PII. Omit chain to list available chains. Verify any result with verify_execution_hash.",

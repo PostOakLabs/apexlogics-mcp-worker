@@ -19,7 +19,7 @@ import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
 import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "json" };
 
-const SERVER_META = { name: "apexlogics-tools", version: "1.3.0" };
+const SERVER_META = { name: "apexlogics-tools", version: "1.4.0" };
 
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
 // Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
@@ -30,6 +30,61 @@ const SERVER_META = { name: "apexlogics-tools", version: "1.3.0" };
 // prefix on BOTH sides so OLD (prefixed) and NEW (bare) artifacts both verify
 // through one code path. See CHAINGRAPH-ADOPTION.md hash-cutover note.
 const normHash = (h) => (typeof h === "string" ? h.replace(/^sha256:/, "") : h);
+
+// ── Discovery layer — BM25 over the catalog (find_tool) and chains (find_chain) ─
+// Index built once at module load (123 tools + 38 chains — cheap; no precomputed
+// data file, so nothing to keep fresh). Workers-runtime safe: plain arithmetic only.
+// Ported from the AINumbers mcp-apps-poc discovery region (SSOT reference; not forked).
+function tokenizeForIndex(text) {
+  return (text ?? "").toLowerCase()
+    .replace(/[^a-z0-9_-]/g, " ")
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+}
+
+function buildIndex(docs, getText) {
+  const N = docs.length;
+  const tfs = docs.map((doc) => {
+    const counts = {};
+    for (const t of tokenizeForIndex(getText(doc))) counts[t] = (counts[t] || 0) + 1;
+    return counts;
+  });
+  const docLengths = tfs.map((tf) => Object.values(tf).reduce((s, c) => s + c, 0));
+  const avgDocLength = docLengths.reduce((s, c) => s + c, 0) / N || 1;
+  const df = {};
+  for (const tf of tfs) for (const t of Object.keys(tf)) df[t] = (df[t] || 0) + 1;
+  const idf = {};
+  for (const [t, f] of Object.entries(df)) idf[t] = Math.log((N - f + 0.5) / (f + 0.5) + 1);
+  return { docs, tfs, docLengths, avgDocLength, idf };
+}
+
+function bm25Search(query, index, { k1 = 1.2, b = 0.75, topN = 5 } = {}) {
+  const terms = tokenizeForIndex(query);
+  if (!terms.length) return [];
+  const { docs, tfs, docLengths, avgDocLength, idf } = index;
+  const scores = new Array(docs.length).fill(0);
+  for (const t of terms) {
+    const idfScore = idf[t] ?? 0;
+    if (!idfScore) continue;
+    for (let i = 0; i < docs.length; i++) {
+      const tf = tfs[i][t] ?? 0;
+      if (!tf) continue;
+      scores[i] += idfScore * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * docLengths[i] / avgDocLength));
+    }
+  }
+  return docs
+    .map((doc, i) => ({ doc, score: scores[i] }))
+    .filter((r) => r.score > 0)
+    .sort((a, c) => c.score - a.score)
+    .slice(0, topN);
+}
+
+const TOOL_INDEX = buildIndex(toolsData, (t) =>
+  [t.title, t.description, t.category, t.al_id, t.slug].filter(Boolean).join(" ")
+);
+const CHAIN_INDEX = buildIndex(chaingraphData.chains ?? [], (c) =>
+  [c.name, c.title, c.persona, ...(c.steps ?? []).map((s) => s.tool_id)].filter(Boolean).join(" ")
+);
 
 // ── StatelessFetchTransport ───────────────────────────────────────────────────
 // Bridges the CF Workers Fetch API to the MCP SDK Transport interface.
@@ -207,14 +262,84 @@ async function handleRunChain({ chain, inputs }) {
   }
 }
 
+// find_tool — ranked BM25 over the tool catalog. For a single calculator; use
+// find_chain for multi-step journeys, list_apexlogics_tools for the full list.
+function handleFindTool({ query, top_n = 5 }) {
+  const q = (query || "").trim();
+  const topN = Math.min(Math.max(top_n || 5, 1), 10);
+  if (!q) return { error: "Provide a query.", hint: "e.g. 'ISO AMT exposure' or 'teacher pension'." };
+  const hits = bm25Search(q, TOOL_INDEX, { topN });
+  if (!hits.length) {
+    return { query: q, results: [], hint: "No tool matched. Try find_chain for a multi-step goal or list_apexlogics_tools for the full catalog." };
+  }
+  return {
+    query: q,
+    returned: hits.length,
+    results: hits.map(({ doc: t, score }) => ({
+      al_id: t.al_id,
+      title: t.title,
+      description: t.description,
+      category: t.category,
+      url: `https://apexlogics.org/tools/${t.slug}/`,
+      ap2_type: t.ap2_mandate_type,
+      ap2_export: t.ap2_export,
+      score: Math.round(score * 1000) / 1000,
+    })),
+    _tip: "Run a multi-tool journey with find_chain / run_chain.",
+  };
+}
+
+// find_chain — ranked BM25 over the catalog chains. For multi-step journeys; run a
+// match server-side with run_chain, or build_workflow_links for deep-link pages.
+function handleFindChain({ query, top_n = 5 }) {
+  const q = (query || "").trim();
+  const topN = Math.min(Math.max(top_n || 5, 1), 10);
+  if (!q) return { error: "Provide a query.", hint: "e.g. 'career pivot' or 'equity exit 83b'." };
+  const hits = bm25Search(q, CHAIN_INDEX, { topN });
+  if (!hits.length) {
+    return { query: q, results: [], hint: "No chain matched. Try find_tool for a single calculator." };
+  }
+  return {
+    query: q,
+    returned: hits.length,
+    results: hits.map(({ doc: c, score }) => ({
+      name: c.name,
+      title: c.title ?? c.name,
+      persona: c.persona ?? null,
+      steps: (c.steps ?? []).map((s) => s.tool_id),
+      run: `run_chain(chain: "${c.name}")`,
+      score: Math.round(score * 1000) / 1000,
+    })),
+    _tip: "Execute a match server-side with run_chain, passing its name.",
+  };
+}
+
 // ── Server factory (new instance per request — stateless) ────────────────────
 
 function buildServer(env) {
   const server = new McpServer({
     ...SERVER_META,
     instructions:
-      `ApexLogics is a ${toolsData.length}-tool edtech and careertech suite. Use list_apexlogics_tools to find the right calculator for any career, education, compensation, licensing, or immigration question. Use build_workflow_links to chain tools together for multi-step analyses.`,
+      `ApexLogics is a ${toolsData.length}-tool edtech and careertech suite. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog; build_workflow_links returns deep-link workflow pages.`,
   });
+
+  server.tool(
+    "find_tool",
+    TOOL_SCHEMAS.find_tool.description,
+    TOOL_SCHEMAS.find_tool.params,
+    async (args) => {
+      return { content: [{ type: "text", text: JSON.stringify(handleFindTool(args), null, 2) }] };
+    }
+  );
+
+  server.tool(
+    "find_chain",
+    TOOL_SCHEMAS.find_chain.description,
+    TOOL_SCHEMAS.find_chain.params,
+    async (args) => {
+      return { content: [{ type: "text", text: JSON.stringify(handleFindChain(args), null, 2) }] };
+    }
+  );
 
   server.tool(
     "list_apexlogics_tools",
@@ -310,6 +435,31 @@ export default {
       );
     }
 
+    // Agent-directory / MCP-client discovery: served over plain GET before connecting.
+    if (url.pathname === "/.well-known/mcp/server-card.json") {
+      return Response.json(
+        {
+          schema_version: "mcp-server-card-v1",
+          name: "apexlogics-mcp",
+          title: "ApexLogics MCP",
+          description:
+            `Live MCP endpoint for the ApexLogics edtech and careertech suite: ${toolsData.length} deterministic, privacy-first calculators plus chainable OpenChainGraph compute nodes with verifiable SHA-256 execution hashes. Ranked catalog search (find_tool / find_chain) and server-side chain execution (run_chain). Zero PII, zero network after page load, zero payload logging.`,
+          version: SERVER_META.version,
+          publisher: { name: "Post Oak Labs", url: "https://postoaklabs.com" },
+          license: "CC-BY-4.0",
+          endpoints: [
+            { url: "https://mcp.apexlogics.org/mcp", transport: "streamable-http", protocol_version: "2025-06-18", authentication: "none" },
+          ],
+          capabilities: { tools: {}, resources: {}, prompts: {} },
+          registry: "org.apexlogics/tools",
+          documentation: "https://apexlogics.org/about.html",
+          standard: "https://ainumbers.co/chaingraph/openchain-graph-spec.html",
+          llms_txt: "https://apexlogics.org/llms.txt",
+        },
+        { headers: { ...CORS_HEADERS, "Cache-Control": "public, max-age=3600" } }
+      );
+    }
+
     if (url.pathname === "/mcp") {
       if (request.method !== "POST") {
         return Response.json({ error: "POST required" }, { status: 405, headers: CORS_HEADERS });
@@ -361,3 +511,6 @@ export default {
     return new Response("Not found", { status: 404, headers: CORS_HEADERS });
   },
 };
+
+// Exported for the discovery self-test (scripts) and reuse — no runtime effect on the Worker.
+export { handleFindTool, handleFindChain, bm25Search, TOOL_INDEX, CHAIN_INDEX };
