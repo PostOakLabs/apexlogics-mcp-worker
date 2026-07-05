@@ -32,6 +32,24 @@ const REPO = HERE + '../../repo/';
 // ─────────────────────────────────────────────────────────────────────────────
 const CASES = [
   {
+    tool_id: '118-teacher-salary-schedule-projector',
+    toolHtml: REPO + 'tools/118-teacher-salary-schedule-projector/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/118-teacher-salary-schedule-projector.golden.json',
+    fields: {
+      currentLane: 3, currentStep: 5, currentSalary: 58000, annualStepIncrease: 1200,
+      yearsToRetirement: 20, colaPct: 2.0,
+      laneChange1Year: 3, laneChange1Target: 4, laneChange1Bump: 4000,
+      laneChange2Year: 8, laneChange2Target: 5, laneChange2Bump: 6000,
+    },
+    kernelInputs: {
+      currentLane: 3, currentStep: 5, currentSalary: 58000, annualStepIncrease: 1200,
+      yearsToRetirement: 20, colaPct: 2.0,
+      laneChange1Year: 3, laneChange1Target: 4, laneChange1Bump: 4000,
+      laneChange2Year: 8, laneChange2Target: 5, laneChange2Bump: 6000,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
     tool_id: '40-gig-income-optimizer',
     toolHtml: REPO + 'tools/40-gig-income-optimizer/index.html',
     goldenPath: REPO + 'chaingraph/kernels/fixtures/40-gig-income-optimizer.golden.json',
