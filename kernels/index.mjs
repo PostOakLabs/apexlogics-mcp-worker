@@ -21,8 +21,10 @@ import * as t138 from './138-scorp-reasonable-comp.kernel.mjs';
 import * as t139 from './139-home-office-augusta.kernel.mjs';
 import * as t143 from './143-federal-buyout-decision.kernel.mjs';
 import * as t145 from './145-greencard-wait-cost.kernel.mjs';
+import * as t121 from './121-teacher-pension-estimator.kernel.mjs';
 
 export const KERNELS = {
+  '121-teacher-pension-estimator': t121,
   '40-gig-income-optimizer': t40,
   '124-contractor-launch-break-even': t124,
   '125-gi-bill-benefit-maximizer': t125,

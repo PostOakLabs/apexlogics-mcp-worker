@@ -318,6 +318,21 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    // _detmath integer-exponent tier: browser uses Math.pow(1+rate, int), kernel uses ipow (loop-mult).
+    tool_id: '121-teacher-pension-estimator',
+    toolHtml: REPO + 'tools/121-teacher-pension-estimator/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/121-teacher-pension-estimator.golden.json',
+    fields: {
+      multiplier: 2, vestingYears: 5, fasType: 3, currentYears: 10, plannedRetYears: 30,
+      currentSalary: 62000, salaryGrowthPct: 3, estYearsInRetirement: 25, pensionCola: 2, discountRate: 4,
+    },
+    kernelInputs: {
+      multiplier: 2, vestingYears: 5, fasType: 3, currentYears: 10, plannedRetYears: 30,
+      currentSalary: 62000, salaryGrowthPct: 3, estYearsInRetirement: 25, pensionCola: 2, discountRate: 4,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
