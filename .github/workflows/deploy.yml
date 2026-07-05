@@ -73,6 +73,13 @@ jobs:
           done
           [ "$fail" -eq 0 ] && echo "✅ All .mjs files pass syntax check" || exit 1
 
+      # ── §17 compute-images freshness ────────────────────────────────────────
+      # Asserts each kernel-backed node's sha256-source stamp equals the sha256 of
+      # its LF-normalized kernel source, so run_chain's build_identity never
+      # publishes a stale digest. Zero-dep; no CF creds. See .gitattributes eol=lf.
+      - name: 🔒 §17 compute-images freshness gate
+        run: node scripts/check-compute-images.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.
