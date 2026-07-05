@@ -117,6 +117,17 @@
       "stateBucket": "standard",
       "weeklyBenefit": 500,
       "searchWeeks": 20
+    },
+    "140-83b-election-decision": {
+      "shares": 10000,
+      "strikePrice": 0.5,
+      "fmvAtGrant": 1,
+      "vestingYears": 4,
+      "grantType": "rsa",
+      "fmvBase": 10,
+      "forfeitureProb": 20,
+      "taxBracket": 0.37,
+      "ltcgRate": 0.2
     }
   }
 }
