@@ -153,5 +153,30 @@
       "pBase": 50,
       "pBull": 30
     }
+  },
+  "equity-exit-planning": {
+    "140-83b-election-decision": {
+      "shares": 10000,
+      "strikePrice": 0.5,
+      "fmvAtGrant": 1,
+      "vestingYears": 4,
+      "grantType": "rsa",
+      "fmvBase": 10,
+      "forfeitureProb": 20,
+      "taxBracket": 0.37,
+      "ltcgRate": 0.2
+    },
+    "141-equity-exit-waterfall": {
+      "exitValuation": 80000000,
+      "totalInvested": 15000000,
+      "preferredOwnership": 30,
+      "prefMultiple": 1,
+      "participationType": "non",
+      "participationCap": 3,
+      "yourRole": "founder",
+      "yourOwnership": 8,
+      "yourStrikeTotal": 20000,
+      "yourCostBasis": 5000
+    }
   }
 }
