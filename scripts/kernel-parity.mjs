@@ -520,6 +520,44 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
   },
+  {
+    // _detmath integer-exponent tier: browser uses Math.pow(1+meritPct, yr-1) where yr-1
+    // is always an integer (0..horizon-1). Kernel uses ipow (loop-mult). Math.round on
+    // all outputs absorbs any last-ULP difference → byte-exact.
+    // DOM id `partialFrac` is exported as key `partialFracPct` in _cgDomain.inputs.
+    // `downsideRisk` is a checkbox; harness hardcodes .checked=false so kernel gets false.
+    tool_id: '128-raise-ask-ev-calculator',
+    toolHtml: REPO + 'tools/128-raise-ask-ev-calculator/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/128-raise-ask-ev-calculator.golden.json',
+    fields: {
+      currentBase: 80000, targetAsk: 90000, pFull: 70, pPartial: 20, pNone: 10,
+      partialFrac: 50, meritPct: 3, horizon: 5, downsideRisk: false,
+    },
+    kernelInputs: {
+      currentBase: 80000, targetAsk: 90000, pFull: 70, pPartial: 20, pNone: 10,
+      partialFrac: 50, meritPct: 3, horizon: 5, downsideRisk: false,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
+    // No Math.pow — all year-over-year merit compounding is plain multiplication.
+    // Break-even binary search (50 iters) is also purely arithmetic.
+    // `loosesBenefits` checkbox: harness hardcodes .checked=false → benefitsDelta=0.
+    tool_id: '129-promotion-vs-job-hop',
+    toolHtml: REPO + 'tools/129-promotion-vs-job-hop/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/129-promotion-vs-job-hop.golden.json',
+    fields: {
+      currentBase: 80000, meritPct: 3, horizon: 5, promoRaisePct: 15, promoMonths: 12,
+      hopPremiumPct: 20, unvestedEquity: 10000, rampMonths: 3, tenureResetPct: 5,
+      loosesBenefits: false,
+    },
+    kernelInputs: {
+      currentBase: 80000, meritPct: 3, horizon: 5, promoRaisePct: 15, promoMonths: 12,
+      hopPremiumPct: 20, unvestedEquity: 10000, rampMonths: 3, tenureResetPct: 5,
+      benefitsDelta: 0,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────

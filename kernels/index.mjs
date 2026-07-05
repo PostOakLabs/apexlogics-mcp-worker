@@ -31,6 +31,8 @@ import * as t141 from './141-equity-exit-waterfall.kernel.mjs';
 import * as t142 from './142-qsbs-1202-estimator.kernel.mjs';
 import * as t144 from './144-h1b-job-change-risk.kernel.mjs';
 import * as t109 from './109-iso-amt-exposure-modeler.kernel.mjs';
+import * as t128 from './128-raise-ask-ev-calculator.kernel.mjs';
+import * as t129 from './129-promotion-vs-job-hop.kernel.mjs';
 import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
 
 export const KERNELS = {
@@ -62,6 +64,8 @@ export const KERNELS = {
   '142-qsbs-1202-estimator': t142,
   '144-h1b-job-change-risk': t144,
   '109-iso-amt-exposure-modeler': t109,
+  '128-raise-ask-ev-calculator': t128,
+  '129-promotion-vs-job-hop': t129,
   '38-early-career-net-worth-engine': t38,
 };
 
