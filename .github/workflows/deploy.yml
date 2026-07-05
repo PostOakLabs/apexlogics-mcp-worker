@@ -80,6 +80,13 @@ jobs:
       - name: 🔒 §17 compute-images freshness gate
         run: node scripts/check-compute-images.mjs
 
+      # ── §12 chain composite freeze ──────────────────────────────────────────
+      # Recomputes every frozen chain's composite_execution_hash via run_chain and
+      # compares to data/chain-goldens.json. Catches a kernel/chain/gate change that
+      # would silently alter a composite. Zero-dep, no CF creds, no network.
+      - name: 🔒 §12 chain-freeze gate
+        run: node scripts/chain-freeze.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.
