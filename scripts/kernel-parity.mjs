@@ -333,6 +333,65 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '119-educator-advanced-degree-roi',
+    toolHtml: REPO + 'tools/119-educator-advanced-degree-roi/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/119-educator-advanced-degree-roi.golden.json',
+    fields: {
+      totalTuition: 18000, monthsToComplete: 24, employerAssistPct: 0, studyHoursPerWeek: 10,
+      currentLaneSalary: 58000, laneBump: 4500, yearsToRetirement: 20, discountRate: 4.0,
+      colaPct: 2.0, pensionMultiplier: 2.0, tlfEligible: false, tlfAmount: 0,
+    },
+    kernelInputs: {
+      totalTuition: 18000, monthsToComplete: 24, employerAssistPct: 0, studyHoursPerWeek: 10,
+      currentLaneSalary: 58000, laneBump: 4500, yearsToRetirement: 20, discountRate: 4.0,
+      colaPct: 2.0, pensionMultiplier: 2.0, tlfEligible: false, tlfAmount: 0,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    // _detmath integer-exponent tier: browser uses Math.pow(1+rate, int), kernel uses ipow (loop-mult).
+    tool_id: '122-trade-wage-progression-projector',
+    toolHtml: REPO + 'tools/122-trade-wage-progression-projector/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/122-trade-wage-progression-projector.golden.json',
+    fields: {
+      trade: 'electrician', currentStage: 'apprentice', journeymanWage: 31.00, apprenticeYears: 4,
+      masterPremium: 25, weeklyHours: 40, otHours: 100, annualRaise: 2.5, yearsProject: 20,
+      currentYear: 1, degreeCost: 40000, degreeStartSalary: 55000, degreeRaise: 3,
+    },
+    kernelInputs: {
+      trade: 'electrician', currentStage: 'apprentice', journeymanWage: 31.00, apprenticeYears: 4,
+      masterPremium: 25, weeklyHours: 40, otHours: 100, annualRaise: 2.5, yearsProject: 20,
+      currentYear: 1, degreeCost: 40000, degreeStartSalary: 55000, degreeRaise: 3,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    // _detmath integer-exponent tier: browser uses Math.pow(1+rate, int) in npvCalc, kernel uses ipow.
+    // The browser's calculate() loops fixed ids 1-4 unconditionally (getElementById never returns
+    // null in the fake DOM harness), so ids 2-4 (absent from `fields`) come back as all-zero certs
+    // named "Cert #2".."Cert #4" (empty .value -> falls back to that name, all numeric .value ""
+    // -> parseFloat NaN -> || 0). The kernel's `certs` array mirrors that exact 4-cert shape so
+    // both sides sum/rank the same all-zero entries alongside the one real cert.
+    tool_id: '123-trade-specialization-roi',
+    toolHtml: REPO + 'tools/123-trade-specialization-roi/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/123-trade-specialization-roi.golden.json',
+    fields: {
+      currentEarnings: 62000, yearsRemaining: 20, discountRate: 4.0,
+      'certName-1': 'OSHA 30', 'cost-1': 500, 'premium-1': 2000, 'newWork-1': 1500,
+      'renewCost-1': 100, 'renewYears-1': 3,
+    },
+    kernelInputs: {
+      currentEarnings: 62000, yearsRemaining: 20, discountRate: 4.0,
+      certs: [
+        { name: 'OSHA 30', cost: 500, premium: 2000, newWork: 1500, renewCost: 100, renewYears: 3 },
+        { name: 'Cert #2', cost: 0, premium: 0, newWork: 0, renewCost: 0, renewYears: 0 },
+        { name: 'Cert #3', cost: 0, premium: 0, newWork: 0, renewCost: 0, renewYears: 0 },
+        { name: 'Cert #4', cost: 0, premium: 0, newWork: 0, renewCost: 0, renewYears: 0 },
+      ],
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────

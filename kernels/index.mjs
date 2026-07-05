@@ -22,9 +22,15 @@ import * as t139 from './139-home-office-augusta.kernel.mjs';
 import * as t143 from './143-federal-buyout-decision.kernel.mjs';
 import * as t145 from './145-greencard-wait-cost.kernel.mjs';
 import * as t121 from './121-teacher-pension-estimator.kernel.mjs';
+import * as t119 from './119-educator-advanced-degree-roi.kernel.mjs';
+import * as t122 from './122-trade-wage-progression-projector.kernel.mjs';
+import * as t123 from './123-trade-specialization-roi.kernel.mjs';
 
 export const KERNELS = {
+  '119-educator-advanced-degree-roi': t119,
   '121-teacher-pension-estimator': t121,
+  '122-trade-wage-progression-projector': t122,
+  '123-trade-specialization-roi': t123,
   '40-gig-income-optimizer': t40,
   '124-contractor-launch-break-even': t124,
   '125-gi-bill-benefit-maximizer': t125,
