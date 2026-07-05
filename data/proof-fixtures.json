@@ -128,6 +128,20 @@
       "forfeitureProb": 20,
       "taxBracket": 0.37,
       "ltcgRate": 0.2
+    },
+    "124-contractor-launch-break-even": {
+      "w2Salary": 65000,
+      "benefitsValue": 12000,
+      "taxRate": 22,
+      "startupCosts": 12500,
+      "monthlyOverhead": 1500,
+      "materialsMarkup": 15,
+      "materialsRevenue": 2000,
+      "ownerPay": 70000,
+      "rampMonths": 6,
+      "billableHours": 32,
+      "weeksWorked": 48,
+      "rampUtilization": 40
     }
   }
 }

@@ -178,5 +178,36 @@
       "yourStrikeTotal": 20000,
       "yourCostBasis": 5000
     }
+  },
+  "skilled-trades-career-builder": {
+    "122-trade-wage-progression-projector": {
+      "trade": "electrician",
+      "currentStage": "apprentice",
+      "journeymanWage": 31,
+      "apprenticeYears": 4,
+      "masterPremium": 25,
+      "weeklyHours": 40,
+      "otHours": 100,
+      "annualRaise": 2.5,
+      "yearsProject": 20,
+      "currentYear": 1,
+      "degreeCost": 40000,
+      "degreeStartSalary": 55000,
+      "degreeRaise": 3
+    },
+    "124-contractor-launch-break-even": {
+      "w2Salary": 65000,
+      "benefitsValue": 12000,
+      "taxRate": 22,
+      "startupCosts": 12500,
+      "monthlyOverhead": 1500,
+      "materialsMarkup": 15,
+      "materialsRevenue": 2000,
+      "ownerPay": 70000,
+      "rampMonths": 6,
+      "billableHours": 32,
+      "weeksWorked": 48,
+      "rampUtilization": 40
+    }
   }
 }
