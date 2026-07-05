@@ -23,6 +23,10 @@ const HASH_BODY_SHA = '9d60ba8b9a14900b9cc1f4878de4e92f5d8e622a128413840be9ea94b
 // _gateval runs in the worker/runner, NOT the zkVM guest, so line-ending choice is free.
 const GATEVAL_SHA   = 'bc85b96e1b9fbc67036bb4ed5bbb622e9478acbe4cf8381c3521e5f9e43c9b54';
 const DETMATH_SHA   = 'fd3ebdb0a5192b04bd33703ab03d1daf0b80cf0887bb84958ab9488467c516cd';
+// §18.1 self-contained BN254 Groth16 seal verifier + its vendored @noble/curves bundle.
+// Runs in the worker/CI (check-compute-proofs), NOT the zkVM guest — pin the LF sha.
+const COMPUTEPROOF_SHA = '544e2f8910e1aaae3692c58758003b267998d9f2f1533267745b96a2291e393f';
+const NOBLE_BN254_SHA  = 'd389cfa8eb9081831b29c2c187ab4ebde9609be7afd8fd910359b65d13a65f8c';
 
 let red = false;
 const check = (label, actual, expected) => {
@@ -44,6 +48,11 @@ check('kernels/_gateval.mjs', sha(readFileSync(HERE + '../kernels/_gateval.mjs')
 // _detmath.mjs — vendored verbatim from AINumbers SSOT (pure-JS fdlibm; OCG §18.5 deterministic
 // transcendentals). Byte-identical copy must also be inlined in any browser tool that uses det.pow.
 check('kernels/_detmath.mjs', sha(readFileSync(HERE + '../kernels/_detmath.mjs')), DETMATH_SHA);
+
+// _computeproof.mjs + _noble-bn254.bundle.mjs — vendored verbatim from AINumbers SSOT (§18.1
+// reference seal verifier + BN254 curve bundle). Re-run per proof by check-compute-proofs.mjs.
+check('kernels/_computeproof.mjs', sha(readFileSync(HERE + '../kernels/_computeproof.mjs')), COMPUTEPROOF_SHA);
+check('kernels/_noble-bn254.bundle.mjs', sha(readFileSync(HERE + '../kernels/_noble-bn254.bundle.mjs')), NOBLE_BN254_SHA);
 
 console.log(red ? '\n✗ VENDOR-FRESH: a vendored SSOT file drifted — do not deploy.' : '\n✓ vendored SSOT files are fresh.');
 process.exit(red ? 1 : 0);
