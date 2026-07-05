@@ -69,6 +69,32 @@
       "sbOffer": 85000,
       "sbConvPct": 70,
       "creds": []
+    },
+    "119-educator-advanced-degree-roi": {
+      "totalTuition": 18000,
+      "monthsToComplete": 24,
+      "employerAssistPct": 0,
+      "studyHoursPerWeek": 10,
+      "currentLaneSalary": 58000,
+      "laneBump": 4500,
+      "yearsToRetirement": 20,
+      "discountRate": 4,
+      "colaPct": 2,
+      "pensionMultiplier": 2,
+      "tlfEligible": false,
+      "tlfAmount": 0
+    },
+    "120-nbct-roi-calculator": {
+      "assessFee": 1900,
+      "retakesCost": 475,
+      "prepHoursPerWeek": 6,
+      "prepMonths": 10,
+      "currentHourlyRate": 35,
+      "annualStipend": 5000,
+      "stipendYears": 10,
+      "renewalCost": 1250,
+      "renewalYear": 5,
+      "discountRate": 4
     }
   }
 }
