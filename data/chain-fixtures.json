@@ -121,5 +121,37 @@
       "renewalYear": 5,
       "discountRate": 4
     }
+  },
+  "job-separation-financial-playbook": {
+    "134-cobra-vs-aca-optimizer": {
+      "cobraMonthly": 650,
+      "benchmarkMonthly": 550,
+      "coverageMonths": 12,
+      "estimatedAGI": 45000,
+      "householdSize": 2,
+      "state": "lower48"
+    },
+    "136-severance-ui-timing": {
+      "severanceForm": "continuation",
+      "severanceTotal": 30000,
+      "weeklySalary": 2000,
+      "stateBucket": "standard",
+      "weeklyBenefit": 500,
+      "searchWeeks": 20
+    },
+    "135-option-exercise-window": {
+      "vestedShares": 10000,
+      "strikePrice": 2,
+      "fmv": 15,
+      "optionType": "iso",
+      "windowDays": 90,
+      "cashAvailable": 50000,
+      "exitLow": 5,
+      "exitBase": 15,
+      "exitHigh": 40,
+      "pBear": 20,
+      "pBase": 50,
+      "pBull": 30
+    }
   }
 }
