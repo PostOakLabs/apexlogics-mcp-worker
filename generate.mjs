@@ -2,42 +2,91 @@
  * generate.mjs — Pre-generates ./data/ fixtures from the live suite-registry.json.
  * Run before every deploy when tool catalog or workflows change:
  *   node generate.mjs && npx wrangler deploy
+ *
+ * Resilience: retries up to 4 times with exponential backoff on transient errors
+ * (429, 5xx, network). Falls back to the committed data/tools.json if all retries
+ * fail — so a rate-limit spike never blocks a CI deploy that has fresh committed
+ * fixtures.
  */
 
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from "fs";
 import { WORKFLOWS } from "./pilot.mjs";
 
 const REGISTRY_URL = "https://apexlogics.org/suite-registry.json";
+const MAX_RETRIES = 4;
+const BASE_DELAY_MS = 2000;
 
-console.log("Fetching suite-registry.json...");
-const res = await fetch(REGISTRY_URL);
-if (!res.ok) throw new Error(`Registry fetch failed: ${res.status} ${res.statusText}`);
+async function fetchWithRetry(url) {
+  let lastErr;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      const delay = BASE_DELAY_MS * 2 ** (attempt - 1); // 2s, 4s, 8s, 16s
+      console.log(`  Retrying in ${delay / 1000}s (attempt ${attempt}/${MAX_RETRIES})...`);
+      await new Promise((r) => setTimeout(r, delay));
+    }
+    try {
+      const res = await fetch(url);
+      if (res.status === 429 || res.status >= 500) {
+        lastErr = new Error(`Registry fetch failed: ${res.status} ${res.statusText}`);
+        console.warn(`  HTTP ${res.status} — will retry`);
+        continue;
+      }
+      if (!res.ok) throw new Error(`Registry fetch failed: ${res.status} ${res.statusText}`);
+      return res;
+    } catch (e) {
+      lastErr = e;
+      console.warn(`  Fetch error: ${e.message}`);
+    }
+  }
+  throw lastErr;
+}
 
-const raw = await res.text();
-// Parse defensively: if trailing garbage causes a parse error, truncate at the reported position
-let registry;
-try {
-  registry = JSON.parse(raw);
-} catch (e) {
-  const pos = parseInt((e.message.match(/position (\d+)/) || [])[1]);
-  if (!isNaN(pos)) {
-    registry = JSON.parse(raw.substring(0, pos));
-  } else {
+function parseRegistry(raw) {
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    // Defensive: if trailing garbage causes parse error, truncate at reported position
+    const pos = parseInt((e.message.match(/position (\d+)/) || [])[1]);
+    if (!isNaN(pos)) return JSON.parse(raw.substring(0, pos));
     throw e;
   }
 }
 
-const tools = (registry.tools || []).map((t) => ({
-  al_id: t.al_id,
-  title: t.title,
-  description: t.description || "",
-  category: t.category || "",
-  slug: t.slug,
-  ap2_mandate_type: t.ap2_mandate_type || null,
-  ap2_export: t.ap2_export || false,
-}));
-
 mkdirSync("./data", { recursive: true });
+
+let tools;
+
+console.log("Fetching suite-registry.json...");
+try {
+  const res = await fetchWithRetry(REGISTRY_URL);
+  const raw = await res.text();
+  const registry = parseRegistry(raw);
+  tools = (registry.tools || []).map((t) => ({
+    al_id: t.al_id,
+    title: t.title,
+    description: t.description || "",
+    category: t.category || "",
+    slug: t.slug,
+    ap2_mandate_type: t.ap2_mandate_type || null,
+    ap2_export: t.ap2_export || false,
+  }));
+  console.log(`✓ Fetched ${tools.length} tools from live registry`);
+} catch (e) {
+  // Fall back to committed fixture so a rate-limit spike doesn't break the deploy
+  const fallbackPath = "./data/tools.json";
+  if (existsSync(fallbackPath)) {
+    console.warn(`\n⚠  Registry unreachable after retries: ${e.message}`);
+    console.warn(`   Falling back to committed ${fallbackPath} — fixtures may be stale.`);
+    tools = JSON.parse(readFileSync(fallbackPath, "utf8"));
+    console.warn(`   Using ${tools.length} tools from committed fixture.\n`);
+  } else {
+    throw new Error(
+      `Registry fetch failed and no fallback fixture exists at ${fallbackPath}.\n` +
+        `Run 'node generate.mjs' locally and commit data/tools.json first.\n` +
+        `Original error: ${e.message}`
+    );
+  }
+}
 
 writeFileSync("./data/tools.json", JSON.stringify(tools, null, 2));
 console.log(`✓ data/tools.json — ${tools.length} tools`);
