@@ -32,6 +32,24 @@ const REPO = HERE + '../../repo/';
 // ─────────────────────────────────────────────────────────────────────────────
 const CASES = [
   {
+    // Direct-artifact shape (tool-40 family). Inputs mirror the DOM ids
+    // (shares/strikePrice/fmv/ordinaryIncome/otherAMT/filingStatus); values match the
+    // previously-orphaned golden so the regenerated golden preserves the same scenario.
+    tool_id: '109-iso-amt-exposure-modeler',
+    calcFn: 'calcISOAMT',
+    toolHtml: REPO + 'tools/109-iso-amt-exposure-modeler/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/109-iso-amt-exposure-modeler.golden.json',
+    fields: {
+      shares: 1000, strikePrice: 2, fmv: 12, ordinaryIncome: 150000,
+      otherAMT: 0, filingStatus: 'single',
+    },
+    kernelInputs: {
+      shares: 1000, strikePrice: 2, fmv: 12, ordinaryIncome: 150000,
+      otherAMT: 0, filingStatus: 'single',
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
     tool_id: '118-teacher-salary-schedule-projector',
     toolHtml: REPO + 'tools/118-teacher-salary-schedule-projector/index.html',
     goldenPath: REPO + 'chaingraph/kernels/fixtures/118-teacher-salary-schedule-projector.golden.json',
@@ -537,16 +555,20 @@ function makeDocument(fields) {
 }
 
 // Extract the <script> block that defines the tool's compute+export path.
-function extractComputeScript(html) {
+// Most tools name their calc entry `calculate()`; some (e.g. 109 `calcISOAMT`) differ —
+// a case may set `calcFn` to override the required/invoked name.
+function extractComputeScript(html, calcFn = 'calculate') {
   const blocks = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
-  const block = blocks.find((b) => /function\s+exportAP2\b/.test(b) && /function\s+calculate\b/.test(b));
-  if (!block) throw new Error('Could not find the calculate()+exportAP2() <script> block in the tool HTML.');
+  const calcRe = new RegExp('function\\s+' + calcFn + '\\b');
+  const block = blocks.find((b) => /function\s+exportAP2\b/.test(b) && calcRe.test(b));
+  if (!block) throw new Error(`Could not find the ${calcFn}()+exportAP2() <script> block in the tool HTML.`);
   return block;
 }
 
 async function runBrowserArtifact(caseDef) {
   const html = readFileSync(caseDef.toolHtml, 'utf8');
-  const script = extractComputeScript(html);
+  const calcFn = caseDef.calcFn || 'calculate';
+  const script = extractComputeScript(html, calcFn);
 
   const sandbox = {
     console,
@@ -582,7 +604,7 @@ async function runBrowserArtifact(caseDef) {
 ;dlFile = function (_name, content) { globalThis.__captured = content; };
 globalThis.Blob = function (parts) { try { globalThis.__captured = Array.isArray(parts) ? parts.map(String).join('') : String(parts); } catch (_e) {} };
 globalThis.__run = async function () {
-  calculate();
+  ${calcFn}();
   await exportAP2();
   return globalThis.__captured;
 };
