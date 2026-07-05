@@ -11,6 +11,10 @@ import * as t140 from './140-83b-election-decision.kernel.mjs';
 import * as t124 from './124-contractor-launch-break-even.kernel.mjs';
 import * as t130 from './130-dependent-care-fsa-cdctc-optimizer.kernel.mjs';
 import * as t132 from './132-travel-nurse-vs-staff-comp.kernel.mjs';
+import * as t134 from './134-cobra-vs-aca-optimizer.kernel.mjs';
+import * as t137 from './137-qbi-199a-optimizer.kernel.mjs';
+import * as t138 from './138-scorp-reasonable-comp.kernel.mjs';
+import * as t139 from './139-home-office-augusta.kernel.mjs';
 import * as t143 from './143-federal-buyout-decision.kernel.mjs';
 import * as t145 from './145-greencard-wait-cost.kernel.mjs';
 
@@ -20,8 +24,12 @@ export const KERNELS = {
   '130-dependent-care-fsa-cdctc-optimizer': t130,
   '132-travel-nurse-vs-staff-comp': t132,
   '133-shift-differential-overtime-optimizer': t133,
+  '134-cobra-vs-aca-optimizer': t134,
   '135-option-exercise-window': t135,
   '136-severance-ui-timing': t136,
+  '137-qbi-199a-optimizer': t137,
+  '138-scorp-reasonable-comp': t138,
+  '139-home-office-augusta': t139,
   '140-83b-election-decision': t140,
   '143-federal-buyout-decision': t143,
   '145-greencard-wait-cost': t145,

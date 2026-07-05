@@ -195,6 +195,63 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '137-qbi-199a-optimizer',
+    toolHtml: REPO + 'tools/137-qbi-199a-optimizer/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/137-qbi-199a-optimizer.golden.json',
+    fields: {
+      qbi: 150000, taxableIncome: 230000, filingStatus: 'single', sstb: 'no',
+      w2Wages: 40000, ubia: 100000, threshold: 201775, phaseoutBand: 75000,
+    },
+    kernelInputs: {
+      qbi: 150000, taxableIncome: 230000, filingStatus: 'single', sstb: 'no',
+      w2Wages: 40000, ubia: 100000, threshold: 201775, phaseoutBand: 75000,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '138-scorp-reasonable-comp',
+    toolHtml: REPO + 'tools/138-scorp-reasonable-comp/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/138-scorp-reasonable-comp.golden.json',
+    fields: {
+      industry: 'consulting', role: 'sole_owner',
+      netIncome: 150000, proposedSalary: 70000, filingStatus: 'single', customBenchmark: 90000,
+    },
+    kernelInputs: {
+      netIncome: 150000, proposedSalary: 70000, filingStatus: 'single', customBenchmark: 90000,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '139-home-office-augusta',
+    toolHtml: REPO + 'tools/139-home-office-augusta/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/139-home-office-augusta.golden.json',
+    fields: {
+      officeSqFt: 200, homeSqFt: 2000, businessUsePct: '', annualRent: 24000, utilities: 3600,
+      otherHomeExp: 1200, grossIncome: 120000, entityTypeHO: 'scorp',
+      rentalDays: 10, dailyRentalRate: 1000, corpTaxRate: 21, ownerMarginalRate: 32, entityTypeAug: 'scorp',
+    },
+    kernelInputs: {
+      officeSqFt: 200, homeSqFt: 2000, businessUsePct: '', annualRent: 24000, utilities: 3600,
+      otherHomeExp: 1200, grossIncome: 120000, entityTypeHO: 'scorp',
+      rentalDays: 10, dailyRentalRate: 1000, corpTaxRate: 21, ownerMarginalRate: 32, entityTypeAug: 'scorp',
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '134-cobra-vs-aca-optimizer',
+    toolHtml: REPO + 'tools/134-cobra-vs-aca-optimizer/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/134-cobra-vs-aca-optimizer.golden.json',
+    fields: {
+      cobraMonthly: 650, benchmarkMonthly: 550, coverageMonths: 12, agi: 45000,
+      householdSize: 2, stateAK: 'lower48', hsaToggle: false,
+    },
+    kernelInputs: {
+      cobraMonthly: 650, benchmarkMonthly: 550, coverageMonths: 12, estimatedAGI: 45000,
+      householdSize: 2, state: 'lower48',
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
