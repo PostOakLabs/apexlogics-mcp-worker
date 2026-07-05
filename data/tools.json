@@ -209,7 +209,7 @@
   {
     "al_id": "AL-29",
     "title": "MBA Program Fit & ROI Ranker",
-    "description": "Compare up to 4 MBA programs by COA, opportunity cost, post-MBA salary by specialization, payback, and NPV. 40+ programs. AP2 inbound from AL-26; outbound to AL-30.",
+    "description": "Compare up to 4 MBA programs by COA, opportunity cost, post-MBA salary by specialization, payback, and NPV. 40+ programs. Policy Mandate inbound from AL-26; outbound to AL-30.",
     "category": "education_path_roi",
     "slug": "17-mba-program-fit-ranker",
     "ap2_mandate_type": null,
@@ -236,7 +236,7 @@
   {
     "al_id": "AL-32",
     "title": "Parent College ROI Planner",
-    "description": "529 projection, SAI/EFC asset impact, COA by school tier, loan vs. gift split. AP2 inbound from AL-17. 2-tab tool.",
+    "description": "529 projection, SAI/EFC asset impact, COA by school tier, loan vs. gift split. Policy Mandate inbound from AL-17. 2-tab tool.",
     "category": "student_finance_debt",
     "slug": "20-parent-college-roi-planner",
     "ap2_mandate_type": null,
@@ -904,6 +904,7 @@
     "title": "RAP vs. Standard Decision Engine",
     "description": "",
     "category": "student_finance_debt",
+    "slug": "101-rap-vs-standard-decision-engine",
     "ap2_mandate_type": null,
     "ap2_export": true
   },
@@ -912,6 +913,7 @@
     "title": "Grad Loan Cap Gap Planner",
     "description": "",
     "category": "student_finance_debt",
+    "slug": "102-grad-loan-cap-gap-planner",
     "ap2_mandate_type": null,
     "ap2_export": true
   },
@@ -920,6 +922,7 @@
     "title": "529 Lifelong Learning Maximizer",
     "description": "",
     "category": "student_finance_debt",
+    "slug": "103-529-lifelong-learning-maximizer",
     "ap2_mandate_type": null,
     "ap2_export": true
   },
@@ -1100,6 +1103,213 @@
     "description": "Compare 5-year cumulative present value of staying for a promotion versus jumping to a higher-paying role — netting ramp-up cost, benefits delta, tenure costs, unvested equity, and compounding merit raises.",
     "category": "career_transition_mobility",
     "slug": "129-promotion-vs-job-hop",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-141",
+    "title": "COBRA vs. ACA Coverage Optimizer",
+    "description": "Compare COBRA full-premium cost against ACA marketplace net premiums using 2026 §36B PTC table. Break-even AGI calculation with 400% FPL cliff warning. HSA eligibility flag. Export coverage_transition_record.",
+    "category": "career_transition_mobility",
+    "slug": "134-cobra-vs-aca-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-142",
+    "title": "Option Exercise Window Analyzer",
+    "description": "Model option exercise decision after job separation. EV across three exit scenarios, max shares affordable, AMT flag for ISOs with spread >$50K. 90-day countdown with expiry warning.",
+    "category": "compensation_benefits",
+    "slug": "135-option-exercise-window",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-143",
+    "title": "Severance + UI Timing Sequencer",
+    "description": "Optimize severance form (lump sum vs. continuation) for maximum unemployment benefit eligibility. Week-by-week timeline, state UI bucket model, benefits-at-risk quantification.",
+    "category": "career_transition_mobility",
+    "slug": "136-severance-ui-timing",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-144",
+    "title": "QBI §199A Optimizer",
+    "description": "Calculate §199A pass-through deduction using 2026 OBBBA permanent thresholds ($201,775/$403,500). Handles below-threshold, phase-out band, W-2/UBIA limitation, SSTB exclusion, and $400 floor.",
+    "category": "career_workforce",
+    "slug": "137-qbi-199a-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-145",
+    "title": "S-Corp Reasonable Comp Analyzer",
+    "description": "Benchmark S-corp owner salary against industry/role pairs. Calculates FICA savings vs. sole-prop SE tax. Audit risk scoring using Watson v. US ratio framework. SS wage base $184,500 (2026).",
+    "category": "career_workforce",
+    "slug": "138-scorp-reasonable-comp",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-146",
+    "title": "Home Office + Augusta Rule Optimizer",
+    "description": "Compare regular vs. simplified home office deduction methods. Augusta Rule (§280A(g)): S-corp rents home from owner for ≤14 days — owner tax-free, corp deducts. Combined deduction summary.",
+    "category": "career_workforce",
+    "slug": "139-home-office-augusta",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-147",
+    "title": "83(b) Election Decision Engine",
+    "description": "For early-exercise options or restricted stock at grant, model the tax-now vs. tax-at-vest tradeoff. LTCG clock starts at grant with election. Low/Base/High FMV scenarios with savings table. Forfeiture downside. Zero-spread auto-detected. File/skip verdict.",
+    "category": "compensation_benefits",
+    "slug": "140-83b-election-decision",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-148",
+    "title": "Equity Exit Waterfall Modeler",
+    "description": "Model liquidation waterfall for non-participating, fully participating, and capped participating preferred. Visual waterfall bar. Break-even exit price for common. Converts to common if pro-rata exceeds preference.",
+    "category": "compensation_benefits",
+    "slug": "141-equity-exit-waterfall",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-149",
+    "title": "QSBS §1202 Exclusion Estimator",
+    "description": "Estimate IRC §1202 QSBS exclusion: 50/75/100% tier by acquisition date (pre-2010/2010/post-Sep-2010). 8-item eligibility checklist. $10M/$10× basis cap. AMT preference flag for pre-2010 tiers. State non-conformity warning.",
+    "category": "compensation_benefits",
+    "slug": "142-qsbs-1202-estimator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-150",
+    "title": "Federal / Public Buyout Decision Engine",
+    "description": "Compare federal/public-sector voluntary buyout vs. staying: net VSIP after tax, FEHB health bridge value, FERS/CSRS/state pension early-exit cost, 5-year income comparison, 5-factor scorecard verdict.",
+    "category": "workforce_exit",
+    "slug": "143-federal-buyout-decision",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-151",
+    "title": "H-1B Job-Change Risk & Cost Calculator",
+    "description": "Model filing timeline, gap risk, legal costs, and financial impact of changing jobs on H-1B. AC21 portability eligibility, unlawful-presence exposure (3yr/10yr bar), 6-yr cap extension check, attorney + USCIS fees, 3-year income comparison. Risk verdict: low/medium/high.",
+    "category": "immigration_visa",
+    "slug": "144-h1b-job-change-risk",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-152",
+    "title": "Green-Card Priority-Date Wait-Cost Estimator",
+    "description": "Quantify the financial cost of an EB green-card backlog: year-by-year salary opportunity cost, career mobility restriction cost, H-1B extension fees. Covers EB-1/2/3/NIW across all chargeability countries. AC21 extension rules. Strategies to reduce wait cost.",
+    "category": "immigration_visa",
+    "slug": "145-greencard-wait-cost",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-153",
+    "title": "Policy Mandate Advisor Prompt Composer",
+    "description": "Transform one or more Policy Mandate decision artifacts into advisor-framed LLM prompts with Claude.ai and ChatGPT deep links. Five task frames, 15 audience targets, domain-specific regulatory citations, stochastic framing rules, escalation conditions, and execution-hash provenance chain.",
+    "category": "agentic_tooling",
+    "slug": "ap2-advisor-prompt-composer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-129",
+    "title": "Trade Wage Progression Projector",
+    "description": "Project apprentice → journeyman → master wage arc for electrician, plumber, HVAC, welder, carpenter. BLS 2025 defaults. Compare earn-while-you-learn cumulative earnings against 4-year college path including student debt. 10- and 20-year NPV.",
+    "category": "career_transition_mobility",
+    "slug": "122-trade-wage-progression-projector",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-130",
+    "title": "Trade Specialization & Cert ROI Calculator",
+    "description": "Rank up to 4 trade certifications — EPA 608, Master Electrician, CDL-A, AWS Welder, NICET — by NPV, payback period, and benefit-cost ratio. Inputs: exam cost, study time, salary lift, pass probability. Optimal credential sequencing.",
+    "category": "career_transition_mobility",
+    "slug": "123-trade-specialization-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-131",
+    "title": "Contractor Launch Break-Even Calculator",
+    "description": "Find the billable-rate floor and month your solo contracting income clears your W-2 take-home. Iterative SE tax solve (SECA 15.3% with §164(f)), overhead, startup costs, 24-month utilization ramp. Break-even month and sensitivity table.",
+    "category": "career_transition_mobility",
+    "slug": "124-contractor-launch-break-even",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-132",
+    "title": "GI Bill Benefit Maximizer",
+    "description": "Compare Post-9/11 (Ch. 33) vs. MGIB (Ch. 30) benefit: tuition cap, BAH stipend, Yellow Ribbon matching, books allowance vs. opportunity cost. FY2025 VA rate tables: public cap $27,120, private $28,937, books $41.67/mo, MGIB $2,295/mo.",
+    "category": "career_transition_mobility",
+    "slug": "125-gi-bill-benefit-maximizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-133",
+    "title": "SkillBridge & Credential Transfer ROI",
+    "description": "Rank SkillBridge programs and MAP/ACE military credit transfers by salary lift and 5-year ROI. Up to 4 credentials with presets for CompTIA Security+, PMP, CDL-A, AWS SAA, NREMT. SkillBridge EV weighted by conversion probability. DoDI 1322.29 (180-day window).",
+    "category": "career_transition_mobility",
+    "slug": "126-skillbridge-credential-transfer-roi",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-134",
+    "title": "Veteran Income Bridge Planner",
+    "description": "Stack severance, VA disability (FY2025 embedded rates 10%–100%), TSP, unemployment, spouse income, and bridge employment against expenses. 24-month cash-flow bridge with color-coded surplus/gap rows. Coverage ratio shows when civilian income closes the gap.",
+    "category": "career_transition_mobility",
+    "slug": "127-veteran-income-bridge",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-137",
+    "title": "Dependent Care FSA vs. CDCTC Optimizer",
+    "description": "Find the childcare tax strategy maximizing savings: DC-FSA alone (IRC §129, $5K MFJ, FICA 7.65% savings), CDCTC alone (IRC §21, 35%→20% phase-down), or optimal combination. $250 sweep finds best FSA split. Three-strategy compare grid. 2025 limits.",
+    "category": "compensation_benefits",
+    "slug": "130-dependent-care-fsa-cdctc-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-138",
+    "title": "Parental Leave Income Gap Planner",
+    "description": "Week-by-week leave schedule stacking employer paid leave, state PFL/SDI (CA 65%, NY 67%, NJ 85%, WA 75%, CO 90%, OR 60%), and FMLA unpaid weeks. Calculates gap, savings needed pre-leave, and post-return recovery months.",
+    "category": "compensation_benefits",
+    "slug": "131-parental-leave-income-gap",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-139",
+    "title": "Travel Nurse vs. Staff Comp Analyzer",
+    "description": "True net pay comparison: staff gross vs. travel taxable base + tax-free housing + M&IE stipends (IRS Rev. Rul. 59-58; GSA 2025 rates), minus agency costs and contract gap weeks. Side-by-side winner badge. Annual net difference.",
+    "category": "compensation_benefits",
+    "slug": "132-travel-nurse-vs-staff-comp",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-140",
+    "title": "Shift Differential & OT Optimizer",
+    "description": "Model day, evening, night, weekend shift schedules. Correctly stacks shift differentials into FLSA regular rate (29 CFR §778.207) before calculating OT premium. Annual net comparison for each schedule. Best row highlighted. Childcare cost offset for evening/night.",
+    "category": "compensation_benefits",
+    "slug": "133-shift-differential-overtime-optimizer",
     "ap2_mandate_type": null,
     "ap2_export": true
   }
