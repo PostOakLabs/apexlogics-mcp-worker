@@ -95,6 +95,20 @@
       "renewalCost": 1250,
       "renewalYear": 5,
       "discountRate": 4
+    },
+    "135-option-exercise-window": {
+      "vestedShares": 10000,
+      "strikePrice": 2,
+      "fmv": 15,
+      "optionType": "iso",
+      "windowDays": 90,
+      "cashAvailable": 50000,
+      "exitLow": 5,
+      "exitBase": 15,
+      "exitHigh": 40,
+      "pBear": 20,
+      "pBase": 50,
+      "pBull": 30
     }
   }
 }
