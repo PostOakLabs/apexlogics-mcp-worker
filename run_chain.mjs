@@ -179,7 +179,7 @@ export async function runChain(chainNameOrConfig, inputs = undefined, deps = und
     mode: 'server_run_chain', chain: chainName, compute_mode: 'server',
     step_count: chainSteps.length,
     steps_ran: ran.length,
-    steps: resultsList.map((r) => ({ order: r.order, tool_id: r.tool_id, status: r.status, inputs_source: r.inputs_source ?? null, execution_hash: r.execution_hash ?? null, error: r.error ?? null, hint: r.hint ?? null })),
+    steps: resultsList.map((r) => ({ order: r.order, tool_id: r.tool_id, status: r.status, inputs_source: r.inputs_source ?? null, execution_hash: r.execution_hash ?? null, compute_proof: r.artifact?.audit_signature?.compute_proof ?? null, build_identity: r.artifact?.audit_signature?.build_identity ?? null, error: r.error ?? null, hint: r.hint ?? null })),
     composite_execution_hash: composite_hash,
     composite_artifact,
     spec: hasGates
