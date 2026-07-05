@@ -129,6 +129,72 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '130-dependent-care-fsa-cdctc-optimizer',
+    toolHtml: REPO + 'tools/130-dependent-care-fsa-cdctc-optimizer/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/130-dependent-care-fsa-cdctc-optimizer.golden.json',
+    fields: {
+      filingStatus: 'mfj', agi: 95000, marginalRate: 22, stateRate: 5,
+      numChildren: 2, childcareCost: 18000, fsaAvailable: 'yes', fsaContrib: 0,
+    },
+    kernelInputs: {
+      filingStatus: 'mfj', agi: 95000, marginalRate: 22, stateRate: 5,
+      numChildren: 2, childcareCost: 18000, fsaAvailable: 'yes',
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '132-travel-nurse-vs-staff-comp',
+    toolHtml: REPO + 'tools/132-travel-nurse-vs-staff-comp/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/132-travel-nurse-vs-staff-comp.golden.json',
+    fields: {
+      staffRate: 38, staffHours: 36, staffBenefits: 12000, staffWeeks: 50, taxRate: 22,
+      travelBase: 22, housingStipend: 1200, mieStipend: 350, contractWeeks: 13,
+      contractsPerYear: 3, gapWeeks: 3, travelHours: 36, travelCost: 1500, ttpHousingCost: 200,
+    },
+    kernelInputs: {
+      staffRate: 38, staffHours: 36, staffBenefits: 12000, staffWeeks: 50, taxRate: 22,
+      travelBase: 22, housingStipend: 1200, mieStipend: 350, contractWeeks: 13,
+      contractsPerYear: 3, gapWeeks: 3, travelHours: 36, travelCost: 1500, ttpHousingCost: 200,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '143-federal-buyout-decision',
+    toolHtml: REPO + 'tools/143-federal-buyout-decision/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/143-federal-buyout-decision.golden.json',
+    fields: {
+      currentSalary: 110000, yearsService: 18, currentAge: 52, retirementSystem: 'fers',
+      retirementAge: 62, severancePay: 40000, continuedHealthMonths: 6, taxRate: 0.24,
+      monthlyHealthCost: 700, pensionReducPct: 10, privateOfferLow: 90000,
+      privateOfferBase: 120000, privateOfferHigh: 150000, searchMonths: 4, stayYears: 5,
+    },
+    kernelInputs: {
+      currentSalary: 110000, yearsService: 18, currentAge: 52, retirementSystem: 'fers',
+      retirementAge: 62, severancePay: 40000, continuedHealthMonths: 6, taxRate: 0.24,
+      monthlyHealthCost: 700, pensionReducPct: 10, privateOfferLow: 90000,
+      privateOfferBase: 120000, privateOfferHigh: 150000, searchMonths: 4, stayYears: 5,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '145-greencard-wait-cost',
+    toolHtml: REPO + 'tools/145-greencard-wait-cost/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/145-greencard-wait-cost.golden.json',
+    fields: {
+      category: 'eb2', chargeability: 'india', estimatedWaitYears: 8, i140Approved: 'approved',
+      i485Filed: 'no', h1bYearsRemaining: 2, currentSalary: 130000, opportunitySalary: 150000,
+      annualRaise: 3, opportunityGrowthPct: 4, mobilityRestriction: 2000,
+      h1bExtensionCost: 4500, h1bExtensionFreqYears: 3, otherAnnualImmigCost: 1500,
+    },
+    kernelInputs: {
+      category: 'eb2', chargeability: 'india', estimatedWaitYears: 8, i140Approved: 'approved',
+      i485Filed: 'no', h1bYearsRemaining: 2, currentSalary: 130000, opportunitySalary: 150000,
+      annualRaise: 3, opportunityGrowthPct: 4, mobilityRestriction: 2000,
+      h1bExtensionCost: 4500, h1bExtensionFreqYears: 3, otherAnnualImmigCost: 1500,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
