@@ -558,6 +558,45 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
   },
+  {
+    // _cgDomain family. No Math.pow — all arithmetic (SAI estimate, r5 rounding, proration).
+    // `.check-item` checkboxes come from querySelectorAll → [] in the harness → allOk=true,
+    // failCount=0. `_dep` toggle never fires in the harness → dependency_status='independent'
+    // (kernel default). Eligible scenario: SAI 1168, base Pell 6225, prorated award, status
+    // 'eligible' (occupation set + no blocking reasons) — routes the §4a chain's pass branch.
+    tool_id: '36-workforce-pell-eligibility-screener',
+    toolHtml: REPO + 'tools/36-workforce-pell-eligibility-screener/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/36-workforce-pell-eligibility-screener.golden.json',
+    fields: {
+      agi: 25000, saiDirect: '', familySize: 3, pellYearsUsed: 0, degreeLevel: 'undergraduate',
+      clockHours: 400, programWeeks: 10, occCategory: 'healthcare', programCost: 8000,
+    },
+    kernelInputs: {
+      agi: 25000, saiDirect: '', familySize: 3, pellYearsUsed: 0, degreeLevel: 'undergraduate',
+      clockHours: 400, programWeeks: 10, occCategory: 'healthcare', programCost: 8000,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
+    // _cgDomain-ish (inputs/summary/handoff) shape. Compute entry is calcGap (not
+    // calculate); export preimage is driven by lastGapResult only — the Tab-2
+    // amortization (Math.pow) is NOT in the hash preimage, so the kernel is pure
+    // arithmetic. Gap>0 scenario (law program, COA over caps) → routes the §4a
+    // chain's has-gap branch. OBBBA caps effective 2026-07-01.
+    tool_id: '102-grad-loan-cap-gap-planner',
+    calcFn: 'calcGap',
+    toolHtml: REPO + 'tools/102-grad-loan-cap-gap-planner/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/102-grad-loan-cap-gap-planner.golden.json',
+    fields: {
+      prog_type: 'law', coa: 75000, years: 3, existing_fed: 0,
+      fellowship: 5000, employer_tuition: 0, savings_contrib: 30000, other_aid: 0,
+    },
+    kernelInputs: {
+      prog_type: 'law', coa: 75000, years: 3, existing_fed: 0,
+      fellowship: 5000, employer_tuition: 0, savings_contrib: 30000, other_aid: 0,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────

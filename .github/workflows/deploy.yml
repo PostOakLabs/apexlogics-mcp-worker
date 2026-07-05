@@ -89,6 +89,21 @@ jobs:
       - name: 🔒 §12 chain-freeze gate
         run: node scripts/chain-freeze.mjs
 
+      # ── §21.4 decision-gate suite ───────────────────────────────────────────
+      # gate-semantics: pinned vector suite for the shared _gateval evaluator
+      # (ops × types × first-match × default × determinism × tamper-detect).
+      # gate-branch-coverage: proves every gate branch is drivable and the
+      # coverage checker flags any uncovered branch (synthetic mock chain).
+      # validate-chains: static gate validation over the catalog + LIVE branch
+      # coverage — every GATED chain's branch-fixtures must drive every branch
+      # through the real run_chain loop. Zero-dep, no CF creds, no network.
+      - name: 🔒 §21.4 gate-semantics vectors
+        run: node scripts/gate-semantics.test.mjs
+      - name: 🔒 §21.4 gate branch-coverage mechanism
+        run: node scripts/gate-branch-coverage.test.mjs
+      - name: 🔒 §21.4 chain + live branch-coverage validation
+        run: node scripts/validate-chains.mjs
+
       # ── §18 compute-proof binding ───────────────────────────────────────────
       # Re-binds every embedded zk compute_proof to its kernel: ImageID a1a0bc89 +
       # journal.output == compute(proven inputs). Catches an output-changing kernel

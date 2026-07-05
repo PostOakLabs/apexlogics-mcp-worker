@@ -289,5 +289,30 @@
       "travelCost": 1500,
       "ttpHousingCost": 200
     }
+  },
+  "workforce-pell-eligibility-path": {
+    "36-workforce-pell-eligibility-screener": {
+      "agi": 25000,
+      "saiDirect": "",
+      "familySize": 3,
+      "pellYearsUsed": 0,
+      "degreeLevel": "undergraduate",
+      "clockHours": 400,
+      "programWeeks": 10,
+      "occCategory": "healthcare",
+      "programCost": 8000
+    }
+  },
+  "grad-loan-gap-funding-path": {
+    "102-grad-loan-cap-gap-planner": {
+      "prog_type": "law",
+      "coa": 75000,
+      "years": 3,
+      "existing_fed": 0,
+      "fellowship": 5000,
+      "employer_tuition": 0,
+      "savings_contrib": 30000,
+      "other_aid": 0
+    }
   }
 }

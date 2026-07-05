@@ -34,6 +34,8 @@ import * as t109 from './109-iso-amt-exposure-modeler.kernel.mjs';
 import * as t128 from './128-raise-ask-ev-calculator.kernel.mjs';
 import * as t129 from './129-promotion-vs-job-hop.kernel.mjs';
 import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
+import * as t36 from './36-workforce-pell-eligibility-screener.kernel.mjs';
+import * as t102 from './102-grad-loan-cap-gap-planner.kernel.mjs';
 
 export const KERNELS = {
   '118-teacher-salary-schedule-projector': t118,
@@ -67,6 +69,8 @@ export const KERNELS = {
   '128-raise-ask-ev-calculator': t128,
   '129-promotion-vs-job-hop': t129,
   '38-early-career-net-worth-engine': t38,
+  '36-workforce-pell-eligibility-screener': t36,
+  '102-grad-loan-cap-gap-planner': t102,
 };
 
 export function getKernel(tool_id) {
