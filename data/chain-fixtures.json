@@ -209,5 +209,34 @@
       "weeksWorked": 48,
       "rampUtilization": 40
     }
+  },
+  "working-parent-childcare": {
+    "130-dependent-care-fsa-cdctc-optimizer": {
+      "filingStatus": "mfj",
+      "agi": 95000,
+      "marginalRate": 22,
+      "stateRate": 5,
+      "numChildren": 2,
+      "childcareCost": 18000,
+      "fsaAvailable": "yes"
+    }
+  },
+  "nurse-shift-travel-comp": {
+    "132-travel-nurse-vs-staff-comp": {
+      "staffRate": 38,
+      "staffHours": 36,
+      "staffBenefits": 12000,
+      "staffWeeks": 50,
+      "taxRate": 22,
+      "travelBase": 22,
+      "housingStipend": 1200,
+      "mieStipend": 350,
+      "contractWeeks": 13,
+      "contractsPerYear": 3,
+      "gapWeeks": 3,
+      "travelHours": 36,
+      "travelCost": 1500,
+      "ttpHousingCost": 200
+    }
   }
 }
