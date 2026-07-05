@@ -392,6 +392,22 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    // FRACTIONAL-EXPONENT _detmath tier: browser (patched to inline _detmath) AND kernel both
+    // use det.pow for the fractional discount exponent (certYear = prepMonths/12) -> bit-identical.
+    tool_id: '120-nbct-roi-calculator',
+    toolHtml: REPO + 'tools/120-nbct-roi-calculator/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/120-nbct-roi-calculator.golden.json',
+    fields: {
+      assessFee: 1900, retakesCost: 475, prepHoursPerWeek: 6, prepMonths: 10, currentHourlyRate: 35,
+      annualStipend: 5000, stipendYears: 10, renewalCost: 1250, renewalYear: 5, discountRate: 4,
+    },
+    kernelInputs: {
+      assessFee: 1900, retakesCost: 475, prepHoursPerWeek: 6, prepMonths: 10, currentHourlyRate: 35,
+      annualStipend: 5000, stipendYears: 10, renewalCost: 1250, renewalYear: 5, discountRate: 4,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
@@ -460,6 +476,7 @@ async function runBrowserArtifact(caseDef) {
   const sandbox = {
     console,
     Math, JSON, Number, parseFloat, parseInt, isNaN, isFinite, Infinity, NaN, String, Array, Object, Boolean, Date,
+    ArrayBuffer, Float64Array, Float32Array, Uint32Array, Int32Array, Uint8Array,   // _detmath fdlibm bit ops
     crypto: globalThis.crypto,
     TextEncoder, TextDecoder,
     URLSearchParams,

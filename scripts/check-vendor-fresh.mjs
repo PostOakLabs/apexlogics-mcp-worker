@@ -22,6 +22,7 @@ const HASH_BODY_SHA = '9d60ba8b9a14900b9cc1f4878de4e92f5d8e622a128413840be9ea94b
 // stores + checks out LF here, so pin the LF sha for a stable, checkout-invariant gate).
 // _gateval runs in the worker/runner, NOT the zkVM guest, so line-ending choice is free.
 const GATEVAL_SHA   = 'bc85b96e1b9fbc67036bb4ed5bbb622e9478acbe4cf8381c3521e5f9e43c9b54';
+const DETMATH_SHA   = 'fd3ebdb0a5192b04bd33703ab03d1daf0b80cf0887bb84958ab9488467c516cd';
 
 let red = false;
 const check = (label, actual, expected) => {
@@ -39,6 +40,10 @@ check('_hash.mjs (top-level body)', sha(Buffer.from(topBody, 'utf8')), HASH_BODY
 
 // _gateval.mjs — vendored verbatim.
 check('kernels/_gateval.mjs', sha(readFileSync(HERE + '../kernels/_gateval.mjs')), GATEVAL_SHA);
+
+// _detmath.mjs — vendored verbatim from AINumbers SSOT (pure-JS fdlibm; OCG §18.5 deterministic
+// transcendentals). Byte-identical copy must also be inlined in any browser tool that uses det.pow.
+check('kernels/_detmath.mjs', sha(readFileSync(HERE + '../kernels/_detmath.mjs')), DETMATH_SHA);
 
 console.log(red ? '\n✗ VENDOR-FRESH: a vendored SSOT file drifted — do not deploy.' : '\n✓ vendored SSOT files are fresh.');
 process.exit(red ? 1 : 0);

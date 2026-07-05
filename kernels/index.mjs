@@ -25,9 +25,11 @@ import * as t121 from './121-teacher-pension-estimator.kernel.mjs';
 import * as t119 from './119-educator-advanced-degree-roi.kernel.mjs';
 import * as t122 from './122-trade-wage-progression-projector.kernel.mjs';
 import * as t123 from './123-trade-specialization-roi.kernel.mjs';
+import * as t120 from './120-nbct-roi-calculator.kernel.mjs';
 
 export const KERNELS = {
   '119-educator-advanced-degree-roi': t119,
+  '120-nbct-roi-calculator': t120,
   '121-teacher-pension-estimator': t121,
   '122-trade-wage-progression-projector': t122,
   '123-trade-specialization-roi': t123,
