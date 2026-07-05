@@ -32,6 +32,25 @@ const REPO = HERE + '../../repo/';
 // ─────────────────────────────────────────────────────────────────────────────
 const CASES = [
   {
+    // Direct-artifact shape (tool-40 family); salary compounding uses integer-exponent
+    // ipow in the kernel. Inputs mirror the DOM ids; values match the previously-orphaned
+    // (stub) golden's inputs so the regenerated golden keeps the same scenario.
+    tool_id: '38-early-career-net-worth-engine',
+    toolHtml: REPO + 'tools/38-early-career-net-worth-engine/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/38-early-career-net-worth-engine.golden.json',
+    fields: {
+      startSalary: 65000, salaryGrowth: 3, savingsRate: 15, filingStatus: 'single',
+      debtBalance: 25000, loanRate: 5.5, monthlyPayment: 280, contrib401k: 6,
+      matchPct: 50, matchCap: 6, investReturn: 7,
+    },
+    kernelInputs: {
+      startSalary: 65000, salaryGrowth: 3, savingsRate: 15, filingStatus: 'single',
+      debtBalance: 25000, loanRate: 5.5, monthlyPayment: 280, contrib401k: 6,
+      matchPct: 50, matchCap: 6, investReturn: 7,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
     // Direct-artifact shape (tool-40 family). Inputs mirror the DOM ids
     // (shares/strikePrice/fmv/ordinaryIncome/otherAMT/filingStatus); values match the
     // previously-orphaned golden so the regenerated golden preserves the same scenario.

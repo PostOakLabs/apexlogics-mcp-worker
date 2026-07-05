@@ -31,6 +31,7 @@ import * as t141 from './141-equity-exit-waterfall.kernel.mjs';
 import * as t142 from './142-qsbs-1202-estimator.kernel.mjs';
 import * as t144 from './144-h1b-job-change-risk.kernel.mjs';
 import * as t109 from './109-iso-amt-exposure-modeler.kernel.mjs';
+import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
 
 export const KERNELS = {
   '118-teacher-salary-schedule-projector': t118,
@@ -61,6 +62,7 @@ export const KERNELS = {
   '142-qsbs-1202-estimator': t142,
   '144-h1b-job-change-risk': t144,
   '109-iso-amt-exposure-modeler': t109,
+  '38-early-career-net-worth-engine': t38,
 };
 
 export function getKernel(tool_id) {
