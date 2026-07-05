@@ -239,6 +239,72 @@ const CASES = [
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
   {
+    tool_id: '125-gi-bill-benefit-maximizer',
+    toolHtml: REPO + 'tools/125-gi-bill-benefit-maximizer/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/125-gi-bill-benefit-maximizer.golden.json',
+    fields: {
+      giBillChapter: '33', eligibilityPct: 1.0, schoolType: 'public', annualTuition: 12000,
+      bahRate: 2200, yellowRibbon: 0, programYears: 4, partTimeIncome: 800, altIncome: 3800,
+      postDegSalary: 70000, altSalary: 52000, salaryGrowth: 3, modelYears: 10, taxRate: 22,
+    },
+    kernelInputs: {
+      giBillChapter: '33', eligibilityPct: 1.0, schoolType: 'public', annualTuition: 12000,
+      bahRate: 2200, yellowRibbon: 0, programYears: 4, partTimeIncome: 800, altIncome: 3800,
+      postDegSalary: 70000, altSalary: 52000, salaryGrowth: 3, modelYears: 10, taxRate: 22,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '126-skillbridge-credential-transfer-roi',
+    toolHtml: REPO + 'tools/126-skillbridge-credential-transfer-roi/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/126-skillbridge-credential-transfer-roi.golden.json',
+    // fake DOM's querySelectorAll('.cred-block') returns [] (no live credential rows) —
+    // getCredentials() yields an empty array in BOTH the browser sandbox and the kernel.
+    fields: {
+      milPay: 4800, civSalary: 75000, gapMonths: 1, salaryGrowth: 3.5, taxRate: 22,
+      projYears: 5, sbMonths: 4, sbOffer: 85000, sbConvPct: 70,
+    },
+    kernelInputs: {
+      civSalary: 75000, salaryGrowth: 3.5, taxRate: 22, projYears: 5,
+      sbMonths: 4, sbOffer: 85000, sbConvPct: 70, creds: [],
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '127-veteran-income-bridge',
+    toolHtml: REPO + 'tools/127-veteran-income-bridge/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/127-veteran-income-bridge.golden.json',
+    fields: {
+      sepType: 'involuntary', yos: 8, basePay: 4200, age: 30, disabilityRating: 30,
+      gapMonths: 3, severanceLump: 0, tspBalance: 45000, tspMonthly: 500, spouseIncome: 1500,
+      uiMonthly: 1800, bridgeIncome: 0, savingsAvail: 15000, monthlyExpenses: 5500,
+      civSalary: 72000, taxRate: 22, modelMonths: 18,
+    },
+    kernelInputs: {
+      sepType: 'involuntary', yos: 8, basePay: 4200, age: 30, disabilityRating: 30,
+      gapMonths: 3, severanceLump: 0, tspMonthly: 500, spouseIncome: 1500,
+      uiMonthly: 1800, bridgeIncome: 0, savingsAvail: 15000, monthlyExpenses: 5500,
+      civSalary: 72000, taxRate: 22, modelMonths: 18,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
+    tool_id: '131-parental-leave-income-gap',
+    toolHtml: REPO + 'tools/131-parental-leave-income-gap/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/131-parental-leave-income-gap.golden.json',
+    fields: {
+      baseSalary: 85000, taxRate: 22, monthlyExpenses: 6500, partnerIncome: 4000, savings: 20000,
+      employerPaidWeeks: 6, employerPartialWeeks: 4, employerPartialPct: 60, stateProgram: 'ca',
+      statePflWeeks: 8, customPflRate: 60, totalLeaveWeeks: 16, babyExpense: 300,
+    },
+    kernelInputs: {
+      baseSalary: 85000, taxRate: 22, monthlyExpenses: 6500, partnerIncome: 4000, savings: 20000,
+      employerPaidWeeks: 6, employerPartialWeeks: 4, employerPartialPct: 60, stateProgram: 'ca',
+      statePflWeeks: 8, customPflRate: 60, totalLeaveWeeks: 16, babyExpense: 300,
+    },
+    goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
+  },
+  {
     tool_id: '134-cobra-vs-aca-optimizer',
     toolHtml: REPO + 'tools/134-cobra-vs-aca-optimizer/index.html',
     goldenPath: REPO + 'chaingraph/kernels/fixtures/134-cobra-vs-aca-optimizer.golden.json',

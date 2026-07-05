@@ -4,6 +4,10 @@
 // nodes report gpu_browser_only. Extend as kernels are extracted (D1.2 batch).
 
 import * as t40 from './40-gig-income-optimizer.kernel.mjs';
+import * as t125 from './125-gi-bill-benefit-maximizer.kernel.mjs';
+import * as t126 from './126-skillbridge-credential-transfer-roi.kernel.mjs';
+import * as t127 from './127-veteran-income-bridge.kernel.mjs';
+import * as t131 from './131-parental-leave-income-gap.kernel.mjs';
 import * as t133 from './133-shift-differential-overtime-optimizer.kernel.mjs';
 import * as t135 from './135-option-exercise-window.kernel.mjs';
 import * as t136 from './136-severance-ui-timing.kernel.mjs';
@@ -21,6 +25,10 @@ import * as t145 from './145-greencard-wait-cost.kernel.mjs';
 export const KERNELS = {
   '40-gig-income-optimizer': t40,
   '124-contractor-launch-break-even': t124,
+  '125-gi-bill-benefit-maximizer': t125,
+  '126-skillbridge-credential-transfer-roi': t126,
+  '127-veteran-income-bridge': t127,
+  '131-parental-leave-income-gap': t131,
   '130-dependent-care-fsa-cdctc-optimizer': t130,
   '132-travel-nurse-vs-staff-comp': t132,
   '133-shift-differential-overtime-optimizer': t133,
