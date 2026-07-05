@@ -23,6 +23,8 @@ name: Pre-flight — MCP Worker
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
     inputs:
       dry_run:
