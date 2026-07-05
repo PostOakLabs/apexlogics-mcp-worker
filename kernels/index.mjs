@@ -27,6 +27,9 @@ import * as t122 from './122-trade-wage-progression-projector.kernel.mjs';
 import * as t123 from './123-trade-specialization-roi.kernel.mjs';
 import * as t120 from './120-nbct-roi-calculator.kernel.mjs';
 import * as t118 from './118-teacher-salary-schedule-projector.kernel.mjs';
+import * as t141 from './141-equity-exit-waterfall.kernel.mjs';
+import * as t142 from './142-qsbs-1202-estimator.kernel.mjs';
+import * as t144 from './144-h1b-job-change-risk.kernel.mjs';
 
 export const KERNELS = {
   '118-teacher-salary-schedule-projector': t118,
@@ -53,6 +56,9 @@ export const KERNELS = {
   '140-83b-election-decision': t140,
   '143-federal-buyout-decision': t143,
   '145-greencard-wait-cost': t145,
+  '141-equity-exit-waterfall': t141,
+  '142-qsbs-1202-estimator': t142,
+  '144-h1b-job-change-risk': t144,
 };
 
 export function getKernel(tool_id) {

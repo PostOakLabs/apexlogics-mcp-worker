@@ -426,6 +426,63 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
+  {
+    tool_id: '141-equity-exit-waterfall',
+    toolHtml: REPO + 'tools/141-equity-exit-waterfall/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/141-equity-exit-waterfall.golden.json',
+    fields: {
+      exitValuation: 80000000, totalInvested: 15000000, preferredOwnership: 30,
+      prefMultiple: 1, participationType: 'non', participationCap: 3,
+      yourRole: 'founder', yourOwnership: 8, yourStrikeTotal: 20000, yourCostBasis: 5000,
+    },
+    kernelInputs: {
+      exitValuation: 80000000, totalInvested: 15000000, preferredOwnership: 30,
+      prefMultiple: 1, participationType: 'non', participationCap: 3,
+      yourRole: 'founder', yourOwnership: 8, yourStrikeTotal: 20000, yourCostBasis: 5000,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
+    tool_id: '142-qsbs-1202-estimator',
+    toolHtml: REPO + 'tools/142-qsbs-1202-estimator/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/142-qsbs-1202-estimator.golden.json',
+    // NOTE: the parity harness's fake DOM hardcodes `.checked` to false for every
+    // element (see makeDocument/elFor below) — it does not thread `fields` through
+    // checkbox state. So the browser side always sees all six eligibility booleans
+    // as false, regardless of what's requested here. kernelInputs mirrors that so
+    // both sides compute the same (not-eligible) case.
+    fields: {
+      acquireDate: 'obbba', grossAssets: 40, holdYears: 4, costBasis: 100000,
+      saleProceeds: 4000000, ltcgRate: 0.238, stateRate: 5,
+      isCCorp: true, isOriginalIssue: true, isActiveBusiness: true,
+      cashOrService: true, notPublic: true, noRepurchase: true,
+    },
+    kernelInputs: {
+      acquireDate: 'obbba', grossAssets: 40, holdYears: 4, costBasis: 100000,
+      saleProceeds: 4000000, ltcgRate: 0.238, stateRate: 5,
+      isCCorp: false, isOriginalIssue: false, isActiveBusiness: false,
+      cashOrService: false, notPublic: false, noRepurchase: false,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
+  {
+    tool_id: '144-h1b-job-change-risk',
+    toolHtml: REPO + 'tools/144-h1b-job-change-risk/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/144-h1b-job-change-risk.golden.json',
+    fields: {
+      h1bStatus: 'active', i94Expiry: 10, priorityDate: 'yes_backlogged', yearsOnH1b: 4,
+      nationality: 'india', currentSalary: 120000, newSalary: 150000, signingBonus: 10000,
+      startStrategy: 'portability', gapWeeks: 0, attorneyFee: 3000, uscisFilingFee: 780,
+      premiumProcessing: 2805, paidByEmployer: 'employer', transferTimeline: 8,
+    },
+    kernelInputs: {
+      h1bStatus: 'active', i94Expiry: 10, priorityDate: 'yes_backlogged', yearsOnH1b: 4,
+      nationality: 'india', currentSalary: 120000, newSalary: 150000, signingBonus: 10000,
+      startStrategy: 'portability', gapWeeks: 0, attorneyFee: 3000, uscisFilingFee: 780,
+      premiumProcessing: 2805, paidByEmployer: 'employer', transferTimeline: 8,
+    },
+    goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────
