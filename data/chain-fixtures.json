@@ -120,6 +120,18 @@
       "renewalCost": 1250,
       "renewalYear": 5,
       "discountRate": 4
+    },
+    "121-teacher-pension-estimator": {
+      "multiplier": 2,
+      "vestingYears": 5,
+      "fasType": 3,
+      "currentYears": 10,
+      "plannedRetYears": 30,
+      "currentSalary": 62000,
+      "salaryGrowthPct": 3,
+      "estYearsInRetirement": 25,
+      "pensionCola": 2,
+      "discountRate": 4
     }
   },
   "job-separation-financial-playbook": {
@@ -208,6 +220,45 @@
       "billableHours": 32,
       "weeksWorked": 48,
       "rampUtilization": 40
+    },
+    "123-trade-specialization-roi": {
+      "currentEarnings": 62000,
+      "yearsRemaining": 20,
+      "discountRate": 4,
+      "certs": [
+        {
+          "name": "OSHA 30",
+          "cost": 500,
+          "premium": 2000,
+          "newWork": 1500,
+          "renewCost": 100,
+          "renewYears": 3
+        },
+        {
+          "name": "Cert #2",
+          "cost": 0,
+          "premium": 0,
+          "newWork": 0,
+          "renewCost": 0,
+          "renewYears": 0
+        },
+        {
+          "name": "Cert #3",
+          "cost": 0,
+          "premium": 0,
+          "newWork": 0,
+          "renewCost": 0,
+          "renewYears": 0
+        },
+        {
+          "name": "Cert #4",
+          "cost": 0,
+          "premium": 0,
+          "newWork": 0,
+          "renewCost": 0,
+          "renewYears": 0
+        }
+      ]
     }
   },
   "working-parent-childcare": {
