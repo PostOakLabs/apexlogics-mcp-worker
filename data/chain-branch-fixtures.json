@@ -7,9 +7,15 @@
       "citation": "OBBBA P.L. 119-21 SAI cutoff $14,790; ED Dear Colleague Letter Jan 2026 Pell max $7,395; short-term program 150-599 clock hours / 8-14 weeks per Federal Register 2026-04520 (Workforce Pell Final Rule). Est. SAI 1,168 < cutoff, undergraduate, in-range program -> eligible.",
       "inputs": {
         "36-workforce-pell-eligibility-screener": {
-          "agi": 25000, "saiDirect": "", "familySize": 3, "pellYearsUsed": 0,
-          "degreeLevel": "undergraduate", "clockHours": 400, "programWeeks": 10,
-          "occCategory": "healthcare", "programCost": 8000
+          "agi": 25000,
+          "saiDirect": "",
+          "familySize": 3,
+          "pellYearsUsed": 0,
+          "degreeLevel": "undergraduate",
+          "clockHours": 400,
+          "programWeeks": 10,
+          "occCategory": "healthcare",
+          "programCost": 8000
         }
       }
     },
@@ -19,9 +25,15 @@
       "citation": "OBBBA P.L. 119-21 Workforce Pell excludes graduate/professional degree holders. A prior graduate degree -> ineligible, chain stops before credential ROI.",
       "inputs": {
         "36-workforce-pell-eligibility-screener": {
-          "agi": 25000, "saiDirect": "", "familySize": 3, "pellYearsUsed": 0,
-          "degreeLevel": "graduate", "clockHours": 400, "programWeeks": 10,
-          "occCategory": "healthcare", "programCost": 8000
+          "agi": 25000,
+          "saiDirect": "",
+          "familySize": 3,
+          "pellYearsUsed": 0,
+          "degreeLevel": "graduate",
+          "clockHours": 400,
+          "programWeeks": 10,
+          "occCategory": "healthcare",
+          "programCost": 8000
         }
       }
     }
@@ -33,8 +45,14 @@
       "citation": "OBBBA 2025 P.L. 119-21 professional loan cap $50,000/yr ($200k lifetime), effective 2026-07-01. Law program COA $75,000/yr for 3 years with $5,000 fellowship + $30,000 savings leaves a $30,000 funding gap -> continue to grad-school ROI.",
       "inputs": {
         "102-grad-loan-cap-gap-planner": {
-          "prog_type": "law", "coa": 75000, "years": 3, "existing_fed": 0,
-          "fellowship": 5000, "employer_tuition": 0, "savings_contrib": 30000, "other_aid": 0
+          "prog_type": "law",
+          "coa": 75000,
+          "years": 3,
+          "existing_fed": 0,
+          "fellowship": 5000,
+          "employer_tuition": 0,
+          "savings_contrib": 30000,
+          "other_aid": 0
         }
       }
     },
@@ -44,8 +62,64 @@
       "citation": "OBBBA 2025 P.L. 119-21 graduate loan cap $20,500/yr ($100k lifetime), effective 2026-07-01. Graduate program COA $15,000/yr sits below the annual cap, so federal loans cover it in full -> funding_gap <= 0, chain stops.",
       "inputs": {
         "102-grad-loan-cap-gap-planner": {
-          "prog_type": "grad_other", "coa": 15000, "years": 2, "existing_fed": 0,
-          "fellowship": 0, "employer_tuition": 0, "savings_contrib": 0, "other_aid": 0
+          "prog_type": "grad_other",
+          "coa": 15000,
+          "years": 2,
+          "existing_fed": 0,
+          "fellowship": 0,
+          "employer_tuition": 0,
+          "savings_contrib": 0,
+          "other_aid": 0
+        }
+      }
+    }
+  ],
+  "showcase-hash-seeded-art": [
+    {
+      "scenario": "rich-render",
+      "expect_next": "sc1-art-render",
+      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c1-1. Deterministic seed routing, no regulatory input. complexity 7 >= 4 -> route to the SVG render.",
+      "inputs": {
+        "sc1-hash-seeded-generative-art": {
+          "seed": 20260710,
+          "complexity": 7,
+          "palette": "sunset"
+        }
+      }
+    },
+    {
+      "scenario": "minimal-skip",
+      "expect_next": "end",
+      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c1-1. Deterministic seed routing, no regulatory input. complexity 2 < 4 -> minimal seed, chain stops before render.",
+      "inputs": {
+        "sc1-hash-seeded-generative-art": {
+          "seed": 41,
+          "complexity": 2,
+          "palette": "mono"
+        }
+      }
+    }
+  ],
+  "showcase-arg-puzzle-gates": [
+    {
+      "scenario": "solved",
+      "expect_next": "sc2-arg-stage-two",
+      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c2-1. Deterministic answer-fingerprint routing, no regulatory input. Answer RANSOM matches the gate-1 stage key -> solved, continue to stage two.",
+      "inputs": {
+        "sc2-arg-puzzle-gates": {
+          "puzzleId": "gate-1",
+          "answer": "RANSOM"
+        }
+      }
+    },
+    {
+      "scenario": "locked",
+      "expect_next": "end",
+      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c2-1. Deterministic answer-fingerprint routing, no regulatory input. Answer WRONG does not match the gate-1 stage key -> locked, chain stops.",
+      "inputs": {
+        "sc2-arg-puzzle-gates": {
+          "puzzleId": "gate-1",
+          "answer": "WRONG"
         }
       }
     }

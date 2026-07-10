@@ -597,6 +597,26 @@ const CASES = [
     },
     goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
   },
+  {
+    // Showcase c1-1. Pure integer LCG (Math.imul) — browser tool and kernel are
+    // trivially bit-identical. Complexity 7 >= 4 → the chain gate routes to render.
+    tool_id: 'sc1-hash-seeded-generative-art',
+    toolHtml: REPO + 'showcase/hash-seeded-generative-art/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/sc1-hash-seeded-generative-art.golden.json',
+    fields: { seed: 20260710, complexity: 7, palette: 'sunset' },
+    kernelInputs: { seed: 20260710, complexity: 7, palette: 'sunset' },
+    goldenGeneratedAt: '2026-07-10T00:00:00.000Z',
+  },
+  {
+    // Showcase c2-1 (flagship gated). djb2 checksum (Math.imul, 31-bit mask) —
+    // browser tool and kernel bit-identical. RANSOM matches the gate-1 key → solved.
+    tool_id: 'sc2-arg-puzzle-gates',
+    toolHtml: REPO + 'showcase/arg-puzzle-gates/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/sc2-arg-puzzle-gates.golden.json',
+    fields: { puzzleId: 'gate-1', answer: 'RANSOM' },
+    kernelInputs: { puzzleId: 'gate-1', answer: 'RANSOM' },
+    goldenGeneratedAt: '2026-07-10T00:00:00.000Z',
+  },
 ];
 
 // ─── permissive fake DOM so the tool's render() churn runs harmlessly ──────────

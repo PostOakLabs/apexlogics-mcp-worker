@@ -36,8 +36,12 @@ import * as t129 from './129-promotion-vs-job-hop.kernel.mjs';
 import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
 import * as t36 from './36-workforce-pell-eligibility-screener.kernel.mjs';
 import * as t102 from './102-grad-loan-cap-gap-planner.kernel.mjs';
+import * as tSc1 from './sc1-hash-seeded-generative-art.kernel.mjs';
+import * as tSc2 from './sc2-arg-puzzle-gates.kernel.mjs';
 
 export const KERNELS = {
+  'sc1-hash-seeded-generative-art': tSc1,
+  'sc2-arg-puzzle-gates': tSc2,
   '118-teacher-salary-schedule-projector': t118,
   '119-educator-advanced-degree-roi': t119,
   '120-nbct-roi-calculator': t120,
