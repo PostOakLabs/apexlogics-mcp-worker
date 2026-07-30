@@ -1,21 +1,17 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Pre-flight — ApexLogics MCP Worker
+# Pre-flight + Deploy — ApexLogics MCP Worker
 #
-# Cloudflare deploys automatically via the Cloudflare Workers GitHub App on
-# every push to main. This workflow runs BEFORE that deploy and acts as a
-# gate: if the registry is unreachable or fixtures look wrong, the push still
-# lands but the Cloudflare deploy will be working from whatever fixtures were
-# last committed.
-#
-# To set up the Cloudflare GitHub App integration (one-time):
-#   Cloudflare dashboard → Workers & Pages → your worker →
-#   Settings → Build → Connect → pick this repo → Deploy command: npx wrangler deploy
+# Deploy is a standalone job in this same workflow (see `deploy:` below) using
+# `cloudflare/wrangler-action@v3` with repo secrets CLOUDFLARE_API_TOKEN +
+# CLOUDFLARE_ACCOUNT_ID — the runbook §6 standardized method, not Cloudflare's
+# GitHub App. (Corrected 2026-07-30 — this comment previously described an
+# older GitHub-App-based design; the workflow itself was already updated to
+# the wrangler-action method, the comment just never caught up.)
 #
 # Triggers
-#   • Push to main  → runs automatically
+#   • Push to master → preflight runs, then deploy (gated on preflight passing)
+#   • Pull request    → preflight only, no deploy
 #   • workflow_dispatch → manual trigger; dry_run skips the fixture staleness check
-#
-# No secrets required — Cloudflare auth is handled by the GitHub App, not here.
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Pre-flight — MCP Worker
