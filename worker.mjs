@@ -19,6 +19,14 @@ import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
 import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "json" };
 
+// toolsData mixes two distinct catalogs (per suite-registry.json's own "showcase"
+// category): calculator tools and OCG-Industries showcase exemplars. Suite-wide
+// convention (apexlogics.org) reports these as two separate counts, never one
+// combined figure -- so anywhere this file describes "the suite" in prose, use
+// CALC_TOOL_COUNT, not the raw array length.
+const CALC_TOOL_COUNT = toolsData.filter((t) => t.category !== "showcase").length;
+const SHOWCASE_COUNT = toolsData.length - CALC_TOOL_COUNT;
+
 const SERVER_META = { name: "apexlogics-tools", version: "1.4.0" };
 
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
@@ -320,7 +328,7 @@ function buildServer(env) {
   const server = new McpServer({
     ...SERVER_META,
     instructions:
-      `ApexLogics is a ${toolsData.length}-tool edtech and careertech suite. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog; build_workflow_links returns deep-link workflow pages.`,
+      `ApexLogics is a ${CALC_TOOL_COUNT}-tool edtech and careertech suite, plus ${SHOWCASE_COUNT} OCG-Industries showcase exemplars. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog (tools + showcase); build_workflow_links returns deep-link workflow pages.`,
   });
 
   server.tool(
@@ -443,7 +451,7 @@ export default {
           name: "apexlogics-mcp",
           title: "ApexLogics MCP",
           description:
-            `Live MCP endpoint for the ApexLogics edtech and careertech suite: ${toolsData.length} deterministic, privacy-first calculators plus chainable OpenChainGraph compute nodes with verifiable SHA-256 execution hashes. Ranked catalog search (find_tool / find_chain) and server-side chain execution (run_chain). Zero PII, zero network after page load, zero payload logging.`,
+            `Live MCP endpoint for the ApexLogics edtech and careertech suite: ${CALC_TOOL_COUNT} deterministic, privacy-first calculators plus ${SHOWCASE_COUNT} chainable OpenChainGraph showcase compute nodes with verifiable SHA-256 execution hashes. Ranked catalog search (find_tool / find_chain) and server-side chain execution (run_chain). Zero PII, zero network after page load, zero payload logging.`,
           version: SERVER_META.version,
           publisher: { name: "Post Oak Labs", url: "https://postoaklabs.com" },
           license: "CC-BY-4.0",
