@@ -1219,7 +1219,7 @@
     "title": "Policy Mandate Advisor Prompt Composer",
     "description": "Transform one or more Policy Mandate decision artifacts into advisor-framed LLM prompts with Claude.ai and ChatGPT deep links. Five task frames, 15 audience targets, domain-specific regulatory citations, stochastic framing rules, escalation conditions, and execution-hash provenance chain.",
     "category": "agentic_tooling",
-    "slug": "ap2-advisor-prompt-composer",
+    "slug": "advisor-prompt-composer",
     "ap2_mandate_type": null,
     "ap2_export": true
   },
@@ -1310,6 +1310,1203 @@
     "description": "Model day, evening, night, weekend shift schedules. Correctly stacks shift differentials into FLSA regular rate (29 CFR §778.207) before calculating OT premium. Annual net comparison for each schedule. Best row highlighted. Childcare cost offset for evening/night.",
     "category": "compensation_benefits",
     "slug": "133-shift-differential-overtime-optimizer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-161",
+    "title": "Staking & Airdrop Income Tax Impact Modeler",
+    "description": "Given crypto receipt events, a filing status, and a business election, returns gross ordinary income, self-employment tax if applicable, incremental federal tax, NIIT, state tax, an effective rate, and the deferred gain sitting in the basis created, with an optional disposition model.",
+    "category": "digital_assets",
+    "slug": "147-staking-airdrop-income-tax",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-162",
+    "title": "RMD & Withdrawal Sequencer",
+    "description": "Given a set of retirement accounts, birth year, age attained, and a spending need, computes the required minimum distribution per account and in aggregate from the Uniform Lifetime Table, then sequences the remaining spending need across taxable, tax-deferred, and Roth money and computes the resulting federal tax and net spendable amount.",
+    "category": "retirement",
+    "slug": "148-rmd-withdrawal-sequencer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-163",
+    "title": "Roth Conversion Window Calculator",
+    "description": "Given a filing status, current ordinary income, IRMAA-relevant income items, a target bracket, and a convertible balance, computes the bracket-fill cap, the IRMAA-threshold cap, and the balance cap, and recommends the smaller of the three along with the resulting federal tax and IRMAA cliff exposure.",
+    "category": "retirement",
+    "slug": "149-roth-conversion-window",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-164",
+    "title": "IRMAA Bracket Calculator",
+    "description": "Given a filing status, look-back-year AGI and tax-exempt interest, and Medicare enrollment details, computes MAGI, the IRMAA tier, the resulting Part B and Part D surcharges, the distance to the next threshold, and the effect of additional income under consideration.",
+    "category": "retirement",
+    "slug": "150-irmaa-bracket-calculator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-165",
+    "title": "Medicare Plan Comparison",
+    "description": "Given shared utilization assumptions plus Path A (Original Medicare + Medigap + standalone Part D) and Path B (Medicare Advantage) plan parameters, prices both paths for a typical year and a bad-year stress test, applies the Part D out-of-pocket cap and the Advantage MOOP, and returns the annual difference and worst-case ceilings.",
+    "category": "retirement",
+    "slug": "151-medicare-plan-comparison",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-166",
+    "title": "Medicare Out-of-Pocket Exposure Modeler",
+    "description": "Given a coverage structure, IRMAA tier, and a year of Medicare utilization, walks the actual 2026 cost-sharing rules benefit period by benefit period and returns the medical and drug out-of-pocket cost, total exposure with premiums, and a routine/rough/worst-case scenario spread.",
+    "category": "retirement",
+    "slug": "152-medicare-oop-exposure",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-167",
+    "title": "Total Cost of Homeownership",
+    "description": "Given a purchase price, loan terms, recurring costs, growth assumptions, and a hold period, amortizes the mortgage month by month, grows each recurring cost year by year, and returns the gross and net cost of ownership over the hold, a break-even monthly rent, and a cost composition breakdown.",
+    "category": "real_estate",
+    "slug": "153-total-cost-of-homeownership",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-168",
+    "title": "Home Affordability (28/36)",
+    "description": "Given household income, other debt, cash available, and loan terms, runs the front-end and back-end debt-to-income ratios, takes the binding one, and solves by fixed 60-iteration bisection for the maximum purchase price it supports, including a rate-sensitivity stress test at plus one and plus two points.",
+    "category": "real_estate",
+    "slug": "154-home-affordability-28-36",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-169",
+    "title": "Rental Property Deal Screener",
+    "description": "Given acquisition, income, and operating expense inputs, computes NOI, cap rate, cap rate on total cost, DSCR, cash flow, cash on cash return, gross rent multiplier, and break-even occupancy, then screens the deal against five common investment thresholds.",
+    "category": "real_estate",
+    "slug": "155-rental-deal-screener",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-170",
+    "title": "Rental Depreciation & Tax Shield Modeler",
+    "description": "Given a rental property's basis, an optional cost segregation split with bonus depreciation, and income/tax context, runs the 27.5-year mid-month residential schedule plus any 5-year and 15-year components, tests the resulting loss against the passive activity loss rules, and optionally prices the section 1250 recapture and capital gain tax at an assumed sale. Offers both a corrected 27.5-year schedule (verified to sum to basis) and a legacy variant matching the original source spec's formula for comparison.",
+    "category": "real_estate",
+    "slug": "156-rental-depreciation-tax-shield",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-171",
+    "title": "Business Valuation Estimator",
+    "description": "Three method small business valuation blending an SDE multiple, an EBITDA multiple, and an asset based floor, with user-set weights and owner-dependence and customer-concentration discounts.",
+    "category": "small_business",
+    "slug": "157-business-valuation-estimator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-172",
+    "title": "Owner Salary Normalization",
+    "description": "Separates what a replacement manager would cost from an owner's total compensation package, producing comparable seller discretionary earnings and normalized EBITDA, plus a neutral reasonable-compensation pattern flag.",
+    "category": "small_business",
+    "slug": "158-owner-salary-normalization",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-173",
+    "title": "Business Sale Tax Impact Modeler",
+    "description": "Models federal tax on a business sale across asset allocation, section 1245 and 1250 depreciation recapture, QSBS section 1202 treatment, NIIT, state tax, and an installment-sale timing overlay.",
+    "category": "small_business",
+    "slug": "159-business-sale-tax-impact-modeler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-174",
+    "title": "Marital Asset Division",
+    "description": "Builds a marital balance sheet with repeatable asset rows and models an illustrative split under a community property or equitable distribution regime, tracking separate property apart and showing tax-deferred and taxable-gain assets at an after-tax equivalent.",
+    "category": "family_law",
+    "slug": "160-marital-asset-division",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-175",
+    "title": "Spousal Support Illustrative Range",
+    "description": "Runs the same inputs through several named, user-editable guideline conventions for spousal support and shows the spread between them, plus a duration range based on marriage length. Presented strictly as an illustrative range, never a forecast or a single estimate.",
+    "category": "family_law",
+    "slug": "161-spousal-support-illustrative-range",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-176",
+    "title": "QDRO Pension Split Modeler",
+    "description": "Models a defined benefit pension split using the coverture fraction, or a defined contribution account split using a segregated balance, including early commencement, survivor benefit cost, and a COLA-adjusted lifetime projection computed through an explicit loop.",
+    "category": "family_law",
+    "slug": "162-qdro-pension-split-modeler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-177",
+    "title": "Net Estate Value and Probate Exposure",
+    "description": "Sizes the probate pool and the non-probate pool of an estate separately, and puts an approximate range, never a point estimate, on what probate administration would cost.",
+    "category": "estate",
+    "slug": "163-net-estate-probate-exposure",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-178",
+    "title": "Estate Tax Liability",
+    "description": "Works out the taxable estate after deductions, applies the federal exemption including any deceased spousal unused amount, and adds a state-level estate or inheritance tax where one applies. The federal exemption is permanent; no sunset copy appears anywhere in this tool.",
+    "category": "estate",
+    "slug": "164-estate-tax-liability",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-179",
+    "title": "Annual Gift Exclusion Strategy",
+    "description": "Models a multi-year gifting plan across any number of recipients, including gift splitting between spouses and the five-year education account election, and shows what portion spills over into the lifetime exemption. The estate-tax-avoided row is suppressed unless the user's estate is above the federal exemption.",
+    "category": "estate",
+    "slug": "165-annual-gift-exclusion-strategy",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-180",
+    "title": "Long-Term Care Cost Estimator",
+    "description": "Compares what care actually costs across four settings: paid help at home, adult day care, assisted living, and a nursing home, correctly crediting facility settings (but not home settings) for avoided household costs, with a crossover-hours calculation and an insurance offset.",
+    "category": "long_term_care",
+    "slug": "166-ltc-cost-estimator",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-181",
+    "title": "Medicaid Spend-Down Modeler",
+    "description": "Models the gap between current countable assets and the Medicaid long-term-care asset limit, including the community spouse resource allowance and a transfer-penalty calculation. Covers exactly ten states (CA, FL, IL, MI, NJ, NY, OH, PA, TX, WA), stated prominently in the hero, with national defaults and a visible out-of-scope banner for any other state.",
+    "category": "long_term_care",
+    "slug": "167-medicaid-spend-down-modeler",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-108",
+    "title": "Agency Salability Pre-Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "agency-salability-precheck",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-75",
+    "title": "AI Content Disclosure (AI Act Article 50)",
+    "description": "Given a content type and five marking checklist items, returns disclosure requirement, disclosure regime (full or reduced), required and satisfied element counts, missing elements, echoed human review documentation, and a conformance status. Deterministic, zero external data. Policy Mandate v2.0: ai_content_disclosure_conformance_record.",
+    "category": "showcase",
+    "slug": "ai-content-disclosure-conformance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-70",
+    "title": "Anti-Counterfeit Consumer Verification",
+    "description": "Given a scanned GTIN and serial, a seller declared model, a passport model, and an optional expected passport digest, returns the GTIN check result, serial presence, model match, a scanned digest, a digest check, a signal count out of 4, and a status. Deterministic, zero external data. Policy Mandate v2.0: anticounterfeit_consumer_check_record.",
+    "category": "showcase",
+    "slug": "anticounterfeit-consumer-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-38",
+    "title": "Autonomous Command Audit",
+    "description": "",
+    "category": "showcase",
+    "slug": "autonomous-command-audit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-12",
+    "title": "Branching Fiction Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "branching-fiction",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-37",
+    "title": "Carbon Border Declaration Readiness",
+    "description": "",
+    "category": "showcase",
+    "slug": "cbam-declaration-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-94",
+    "title": "CBAM Filing Pack",
+    "description": "",
+    "category": "showcase",
+    "slug": "cbam-filing-pack",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-33",
+    "title": "CBDC Interop Handoff",
+    "description": "",
+    "category": "showcase",
+    "slug": "cbdc-interop-handoff",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-44",
+    "title": "Certificate Retirement Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "certificate-retirement-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-04",
+    "title": "Chaingraph Sonification",
+    "description": "",
+    "category": "showcase",
+    "slug": "chaingraph-sonification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-35",
+    "title": "Chart to Endpoint Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "chart-endpoint-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-61",
+    "title": "CI/CD Build Provenance",
+    "description": "Given a build descriptor entered once as the original and once as a rebuild (source ref, builder id, entrypoint, artifact name) and a claimed SLSA level, returns fingerprints for each descriptor, whether the rebuild reproduces the original, a mutated field count, field completeness, and the SLSA level the descriptor set can support. Deterministic, zero external data. Policy Mandate v2.0: cicd_build_provenance_record.",
+    "category": "showcase",
+    "slug": "cicd-build-provenance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-45",
+    "title": "Civic Decision Record",
+    "description": "",
+    "category": "showcase",
+    "slug": "civic-decision-record",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-21",
+    "title": "Claim Source Audit",
+    "description": "",
+    "category": "showcase",
+    "slug": "claim-source-audit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-41",
+    "title": "Claims Lifecycle Walk",
+    "description": "",
+    "category": "showcase",
+    "slug": "claims-lifecycle-walk",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-10",
+    "title": "Commit and Reveal Dice",
+    "description": "",
+    "category": "showcase",
+    "slug": "commit-reveal-dice",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-14",
+    "title": "Consent Scope Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "consent-scope-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-06",
+    "title": "Content Credential Binding",
+    "description": "",
+    "category": "showcase",
+    "slug": "content-credential-binding",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-74",
+    "title": "C2PA Content Credential Verification",
+    "description": "Given a credential entered once as signed and once as received (asset title, issuer, capture device, edit actions, content digest), returns fingerprints for each side, a manifest match flag, mutated field names and count, an assertion count, issuer presence, and a status. Deterministic, zero external data. Policy Mandate v2.0: content_credential_verification_record.",
+    "category": "showcase",
+    "slug": "content-credential-verification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-36",
+    "title": "Contract Lifecycle Diff",
+    "description": "",
+    "category": "showcase",
+    "slug": "contract-lifecycle-diff",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-77",
+    "title": "Cross-Vendor Provenance Interoperability",
+    "description": "Given three core fields entered twice (asset id, issuer, created day) and two source formats, returns field agreement count, disagreeing field names, a mappable flag, a format pair, a normalized digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: cross_vendor_provenance_interop_record.",
+    "category": "showcase",
+    "slug": "cross-vendor-provenance-interop",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-103",
+    "title": "Lot Receipt for Tracking Events",
+    "description": "",
+    "category": "showcase",
+    "slug": "cte-kde-lot-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-64",
+    "title": "Customs Declaration Lineage",
+    "description": "Given a customs declaration's core fields, its supporting document set, and an amendment index, returns missing field count, format checks for commodity code and origin country, supporting and missing document counts, the amendment index, a declaration digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: customs_declaration_lineage_record.",
+    "category": "showcase",
+    "slug": "customs-declaration-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-50",
+    "title": "Detector Dataset Certification",
+    "description": "",
+    "category": "showcase",
+    "slug": "dataset-certification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-76",
+    "title": "Deepfake Consumer Verification",
+    "description": "Given five yes, no, or unknown answers (credential present, credential matches source, publisher identifiable, disclosure label visible, independent report found), returns a signal total out of 10, unknown and no counts, a confidence band, a checkable-now flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: deepfake_consumer_verification_record.",
+    "category": "showcase",
+    "slug": "deepfake-consumer-verification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-69",
+    "title": "Luxury Goods and Digital Product Passport",
+    "description": "Given a GTIN, model reference, material composition, repairability note, revision index, and up to three handovers, returns the GTIN check result, mandatory attribute count, handover count, custody break count, chronology validity, a passport digest, a lineage digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: digital_product_passport_lineage_record.",
+    "category": "showcase",
+    "slug": "digital-product-passport-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-109",
+    "title": "Dispenser EDDS Readiness",
+    "description": "",
+    "category": "showcase",
+    "slug": "dispenser-traceability-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-62",
+    "title": "Document Integrity and Timestamp Anchor",
+    "description": "Given a document, an anchor day key (yyyymmdd), an anchor reference, and an optional previously issued digest, returns char and line counts, a document digest, an anchor digest binding the document to the day and reference, and a verification result of first-anchor, match, or mismatch. Deterministic, zero external data. Policy Mandate v2.0: document_integrity_anchor_record.",
+    "category": "showcase",
+    "slug": "document-integrity-anchor",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-63",
+    "title": "Electronic Bill of Lading Title Transfer",
+    "description": "Given an issuer and up to three transfer legs (from holder, to holder, leg day key), returns leg count, custody break count, ordering fault count, the derived current holder, a single-holder-ok flag, a lineage digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: ebl_title_transfer_record.",
+    "category": "showcase",
+    "slug": "ebl-title-transfer",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-13",
+    "title": "Edition Revision Ledger",
+    "description": "",
+    "category": "showcase",
+    "slug": "edition-revision-ledger",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-65",
+    "title": "E-Invoice Clearance (ViDA)",
+    "description": "Given an invoice's structural fields, returns the pass or fail result of five named clearance rules (invoice number present, issue date valid, VAT ids present, VAT arithmetic, total arithmetic), a failed rule count, the first failed rule, an invoice digest, and a status of cleared or rejected. Deterministic, zero external data. Policy Mandate v2.0: einvoice_clearance_vida_record.",
+    "category": "showcase",
+    "slug": "einvoice-clearance-vida",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-105",
+    "title": "EUDI Diploma Readiness",
+    "description": "",
+    "category": "showcase",
+    "slug": "eudi-diploma-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-72",
+    "title": "EUDR Due Diligence Statement Validation",
+    "description": "Given an eight element weighted checklist for an EUDR due diligence statement, returns element count, score out of 100, a comma joined list of missing elements, a blocking-missing flag, and a status of filable, blocked, or gaps. Deterministic, zero external data. Policy Mandate v2.0: eudr_dds_validation_record.",
+    "category": "showcase",
+    "slug": "eudr-dds-validation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-111",
+    "title": "EUDR Export Pack",
+    "description": "",
+    "category": "showcase",
+    "slug": "eudr-export-pack",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-73",
+    "title": "EUDR Supply-Chain Risk and Traceability",
+    "description": "Given total and geolocated plot counts, a country risk tier, supplier tier depth, and a mixed origin flag, returns geolocation coverage and gap in basis points, country risk weight, traceability credit, mixed origin penalty, a risk score out of 100, a risk band, a simplified due diligence eligibility flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: eudr_supply_chain_risk_record.",
+    "category": "showcase",
+    "slug": "eudr-supply-chain-risk",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-68",
+    "title": "Food Traceability and 24 Hour Recall (FSMA 204)",
+    "description": "Given a lot's three critical tracking events (event type, location, lot code, day) plus a request hour and a records-ready hour, returns a KDE missing count, lot code consistency, chronology validity, response hours, a within-24-hour flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: food_traceability_fsma204_record.",
+    "category": "showcase",
+    "slug": "food-traceability-fsma204",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-20",
+    "title": "Handoff Integrity",
+    "description": "",
+    "category": "showcase",
+    "slug": "handoff-integrity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-30",
+    "title": "Hedge Execution Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "hedge-execution-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-95",
+    "title": "Interconnection Readiness Score",
+    "description": "",
+    "category": "showcase",
+    "slug": "interconnection-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-29",
+    "title": "ISO 20022 Message Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "iso20022-message-lint",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-66",
+    "title": "Letter of Credit Document Set",
+    "description": "Given eight document types each marked required and presented, plus presentation day, expiry day, and presentation period, returns required, presented, and missing counts, a comma joined list of missing types, an expiry check, the echoed presentation period, a discrepancy count, and a status. Deterministic, zero external data. Policy Mandate v2.0: letter_of_credit_document_set_record.",
+    "category": "showcase",
+    "slug": "letter-of-credit-document-set",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-15",
+    "title": "Lore Canon Boundary",
+    "description": "",
+    "category": "showcase",
+    "slug": "lore-canon-boundary",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-28",
+    "title": "Mandate Audit Chain",
+    "description": "",
+    "category": "showcase",
+    "slug": "mandate-audit-chain",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-07",
+    "title": "Material Passport Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "material-passport-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-60",
+    "title": "MCP Server Attestation",
+    "description": "Given two pasted tool surfaces (one line per tool, name colon description) and a declared tool count, returns tool counts, content fingerprints for each surface, whether the surfaces match, whether the count matches what was declared, a positional changed-line count, and a status. Deterministic, zero external data. Policy Mandate v2.0: mcp_server_attestation_record.",
+    "category": "showcase",
+    "slug": "mcp-server-attestation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-05",
+    "title": "Generative Mesh Descriptor",
+    "description": "",
+    "category": "showcase",
+    "slug": "mesh-descriptor",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-71",
+    "title": "Multi-Party Supply-Chain Interoperability",
+    "description": "Given up to three party contributions (party id, node output digest, declared parent party), returns party count, digest present count, parent resolution faults, root count, a join digest, a graph-joins flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: multiparty_supply_chain_interop_record.",
+    "category": "showcase",
+    "slug": "multiparty-supply-chain-interop",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-43",
+    "title": "News Asset Provenance",
+    "description": "",
+    "category": "showcase",
+    "slug": "news-asset-provenance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-104",
+    "title": "Open Badges 3.0 Issuance Lint",
+    "description": "",
+    "category": "showcase",
+    "slug": "openbadge3-lint",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-97",
+    "title": "Prior-Auth Metrics Pack",
+    "description": "",
+    "category": "showcase",
+    "slug": "pa-metrics",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-98",
+    "title": "Payer AI-Decisioning Audit",
+    "description": "",
+    "category": "showcase",
+    "slug": "payer-ai-decision-audit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-100",
+    "title": "Wire and Payoff Instruction Binding",
+    "description": "",
+    "category": "showcase",
+    "slug": "payoff-instruction-binding",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-67",
+    "title": "Pharma Serialization and Saleable Returns",
+    "description": "Given a GTIN, serial, lot, and up to three custody steps (party, event type), returns the GTIN mod-10 check result with expected and entered check digits, step count, sequence validity against the commissioned, shipped, received, returned, decommissioned order, the first break step, a unit digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: pharma_serialization_custody_record.",
+    "category": "showcase",
+    "slug": "pharma-serialization-custody",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-47",
+    "title": "Pipeline Run Fingerprint",
+    "description": "",
+    "category": "showcase",
+    "slug": "pipeline-run-fingerprint",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-96",
+    "title": "Prior-Auth Deadline Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "prior-auth-deadline",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-40",
+    "title": "Professional Skills Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "professional-skills-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-08",
+    "title": "Proof of Play",
+    "description": "",
+    "category": "showcase",
+    "slug": "proof-of-play",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-27",
+    "title": "Rail Decision Provenance",
+    "description": "",
+    "category": "showcase",
+    "slug": "rail-decision-provenance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-110",
+    "title": "24-Hour Recall Pack",
+    "description": "",
+    "category": "showcase",
+    "slug": "recall-pack-24h",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-31",
+    "title": "Reconciliation Evidence Package",
+    "description": "",
+    "category": "showcase",
+    "slug": "reconciliation-evidence",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-03",
+    "title": "Remix Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "remix-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-39",
+    "title": "Replication Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "replication-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-34",
+    "title": "Reserve Attestation Integrity",
+    "description": "",
+    "category": "showcase",
+    "slug": "reserve-attestation-integrity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-102",
+    "title": "Saleable-Return Verification",
+    "description": "",
+    "category": "showcase",
+    "slug": "saleable-return-verification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-58",
+    "title": "SBOM Dependency Provenance",
+    "description": "Enter up to five dependency rows with a component name, version, and license, plus a distribution intent. Returns a component count, license conflict and unknown-license counts, a stable content fingerprint of the row set, and a pass or fail status. Deterministic, zero external data. Policy Mandate v2.0: sbom_dependency_provenance_record.",
+    "category": "showcase",
+    "slug": "sbom-dependency-provenance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-48",
+    "title": "Scenario Constraint Certification",
+    "description": "",
+    "category": "showcase",
+    "slug": "scenario-constraint-cert",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-106",
+    "title": "Skills-Verification Coverage Gate",
+    "description": "",
+    "category": "showcase",
+    "slug": "skills-verification-gate",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-16",
+    "title": "Source Chain Integrity",
+    "description": "",
+    "category": "showcase",
+    "slug": "source-chain-integrity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-101",
+    "title": "Suspect-Product Disposition Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "suspect-product-disposition",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-49",
+    "title": "Synthesis Route Continuity",
+    "description": "",
+    "category": "showcase",
+    "slug": "synthesis-route-continuity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-107",
+    "title": "EU-Taxonomy Green-CapEx Gate",
+    "description": "",
+    "category": "showcase",
+    "slug": "taxonomy-green-capex-gate",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-51",
+    "title": "Telemetry Acknowledgement Audit",
+    "description": "",
+    "category": "showcase",
+    "slug": "telemetry-ack-audit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-42",
+    "title": "Title Chain Continuity",
+    "description": "",
+    "category": "showcase",
+    "slug": "title-chain-continuity",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-09",
+    "title": "Training Path Attestation",
+    "description": "",
+    "category": "showcase",
+    "slug": "training-path-attestation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-32",
+    "title": "Treasury Memo Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "treasury-memo-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-99",
+    "title": "Tolerance-Cure Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "trid-tolerance-cure",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-59",
+    "title": "VEX Vulnerability Disclosure Timeline",
+    "description": "Given a discovery hour and the hour index at which the early warning, notification, and final report steps were filed, returns the due hour, on-time or late status, and slack for each step, plus a count of late steps and an overall cascade status. Deterministic, zero external data. Policy Mandate v2.0: vex_disclosure_timeline_record.",
+    "category": "showcase",
+    "slug": "vex-disclosure-timeline",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-11",
+    "title": "World State Checkpoint",
+    "description": "",
+    "category": "showcase",
+    "slug": "world-state-checkpoint",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-01",
+    "title": "Hash-Seeded Generative Art",
+    "description": "",
+    "category": "showcase",
+    "slug": "hash-seeded-generative-art",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-02",
+    "title": "ARG Puzzle Gates",
+    "description": "",
+    "category": "showcase",
+    "slug": "arg-puzzle-gates",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-160",
+    "title": "Crypto Tax-Loss Harvesting Calculator",
+    "description": "Given crypto lots with cost basis and current value, realized gains, carryforwards, filing status, and bracket, applies the capital loss netting order, the ordinary income offset cap, and an optional wash sale screen, returning harvestable loss, offsets, carryforwards, and estimated federal and state tax saved.",
+    "category": "digital_assets",
+    "slug": "146-crypto-tax-loss-harvesting",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-17",
+    "title": "Agent Memory Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "agent-memory",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-18",
+    "title": "Benchmark Provenance",
+    "description": "",
+    "category": "showcase",
+    "slug": "benchmark-provenance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-19",
+    "title": "Agent Authority Envelope",
+    "description": "",
+    "category": "showcase",
+    "slug": "agent-authority-envelope",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-22",
+    "title": "Fine-tuning Lineage",
+    "description": "",
+    "category": "showcase",
+    "slug": "finetune-lineage",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-23",
+    "title": "Geocache Fragment Verification",
+    "description": "",
+    "category": "showcase",
+    "slug": "geocache-verify",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-24",
+    "title": "Exhibit Visit Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "exhibit-visit-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-25",
+    "title": "Attendance Reconciliation",
+    "description": "",
+    "category": "showcase",
+    "slug": "attendance-reconciliation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-26",
+    "title": "Sensor Reading Plausibility",
+    "description": "",
+    "category": "showcase",
+    "slug": "sensor-reading-plausibility",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-46",
+    "title": "Workforce Credential Batch",
+    "description": "",
+    "category": "showcase",
+    "slug": "workforce-credential-batch",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-52",
+    "title": "Evidence Ledger Margin Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "evidence-ledger-margin",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-53",
+    "title": "DID Anchor Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "did-anchor-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-54",
+    "title": "Verification Reuse Check",
+    "description": "",
+    "category": "showcase",
+    "slug": "verification-reuse-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-55",
+    "title": "Credential Revocation Audit",
+    "description": "",
+    "category": "showcase",
+    "slug": "credential-revocation-audit",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-56",
+    "title": "Cross-Border eID Acceptance",
+    "description": "",
+    "category": "showcase",
+    "slug": "eid-acceptance-check",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-57",
+    "title": "Export Completeness Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "export-completeness-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-78",
+    "title": "Agent Identity Verification",
+    "description": "",
+    "category": "showcase",
+    "slug": "agent-identity-verification",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-79",
+    "title": "Agent Identity Publishing Readiness",
+    "description": "",
+    "category": "showcase",
+    "slug": "agent-identity-publishing-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-80",
+    "title": "SBOM Provenance Attestation",
+    "description": "",
+    "category": "showcase",
+    "slug": "sbom-provenance-attestation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-81",
+    "title": "CRA Product Conformance",
+    "description": "",
+    "category": "showcase",
+    "slug": "cra-product-conformance",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-82",
+    "title": "NIS2 Entity Scope and Obligations",
+    "description": "",
+    "category": "showcase",
+    "slug": "nis2-entity-scope-and-obligations",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-83",
+    "title": "NIS2 Incident Reporting and Supply-Chain Readiness",
+    "description": "",
+    "category": "showcase",
+    "slug": "nis2-incident-and-supply-chain-readiness",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-84",
+    "title": "EMIR Trade Report Validation",
+    "description": "",
+    "category": "showcase",
+    "slug": "emir-trade-report-validation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-85",
+    "title": "EMIR Reconciliation and Lifecycle",
+    "description": "",
+    "category": "showcase",
+    "slug": "emir-reconciliation-and-lifecycle",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-86",
+    "title": "IFRS 17 Measurement Model Classification Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "ifrs17-measurement-model-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-87",
+    "title": "Solvency II SCR Ratio Disclosure",
+    "description": "",
+    "category": "showcase",
+    "slug": "solvency2-scr-ratio-disclosure",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-88",
+    "title": "Solvency II to IFRS 17 Reconciliation",
+    "description": "",
+    "category": "showcase",
+    "slug": "sii-ifrs17-reconciliation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-89",
+    "title": "Risk Adjustment Attestation",
+    "description": "",
+    "category": "showcase",
+    "slug": "ifrs17-risk-adjustment-attestation",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-90",
+    "title": "Markdown Document Conversion Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "markdown-conversion-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-91",
+    "title": "Tabular Data Conversion Receipt",
+    "description": "",
+    "category": "showcase",
+    "slug": "tabular-conversion-receipt",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-92",
+    "title": "CAMT.053 Reconciliation Parse",
+    "description": "",
+    "category": "showcase",
+    "slug": "camt053-reconciliation-parse",
+    "ap2_mandate_type": null,
+    "ap2_export": true
+  },
+  {
+    "al_id": "SC-93",
+    "title": "Content Provenance Stamp",
+    "description": "",
+    "category": "showcase",
+    "slug": "content-provenance-stamp",
     "ap2_mandate_type": null,
     "ap2_export": true
   }
