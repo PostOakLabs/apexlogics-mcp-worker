@@ -33,6 +33,58 @@ const SHOWCASE_COUNT = toolsData.length - CALC_TOOL_COUNT;
 // worker-bundled code.
 const SERVER_META = { name: "apexlogics-tools", version: pkg.version };
 
+// ── MCP 2026-07-28 protocol layer (AL-MCP-728-A) ─────────────────────────────
+// The SDK (1.29) speaks the 2025-x eras only, so version negotiation, the
+// server/discover MUST, the unknown-tool error SHAPE, and the resultType stamp
+// are all handled AHEAD of the transport. Dual-era: modern clients carry
+// version/capabilities in params._meta (SEP-2575 removed the handshake), while
+// legacy `initialize` clients keep working through the SDK path for the full
+// twelve-month window.
+
+const PROTOCOL_VERSION = "2026-07-28";
+const LEGACY_PROTOCOL_VERSION = "2025-06-18";
+const SUPPORTED_PROTOCOL_VERSIONS = [PROTOCOL_VERSION, LEGACY_PROTOCOL_VERSION];
+const PROTOCOL_SUNSET = "2027-07-28"; // twelve months from the 2026-07-28 release
+
+const META_PROTOCOL_VERSION = "io.modelcontextprotocol/protocolVersion";
+const META_SERVER_INFO = "io.modelcontextprotocol/serverInfo";
+const META_DEPRECATION = "org.apexlogics/protocolDeprecation";
+
+const SERVER_CAPABILITIES = { tools: { listChanged: true } };
+
+const SERVER_INFO_META = {
+  name: SERVER_META.name,
+  version: SERVER_META.version,
+  title: "ApexLogics MCP",
+  websiteUrl: "https://apexlogics.org",
+};
+
+// Machine-readable notice handed to every old-protocol client. Dated, not a
+// cron: the sunset is a record, and removal is a future WU, never automatic.
+const LEGACY_DEPRECATION_NOTICE = {
+  status: "deprecated",
+  deprecatedVersion: LEGACY_PROTOCOL_VERSION,
+  supersededBy: PROTOCOL_VERSION,
+  sunsetDate: PROTOCOL_SUNSET,
+  supportedVersions: SUPPORTED_PROTOCOL_VERSIONS,
+  message:
+    "This client opened the connection with the pre-2026-07-28 initialize handshake. That era stays supported until 2027-07-28. Move to 2026-07-28 by sending params._meta['io.modelcontextprotocol/protocolVersion'] on each request instead of initialize.",
+};
+
+// Every method this server actually implements. Anything else over HTTP is a
+// 404 plus -32601 (a status change under the final text, not just a body one).
+// Notifications are id-less and never reach this gate -- they still 204.
+const KNOWN_METHODS = new Set([
+  "initialize",
+  "ping",
+  "tools/list",
+  "tools/call",
+  "server/discover",
+]);
+
+const SERVER_INSTRUCTIONS =
+  `ApexLogics is a ${CALC_TOOL_COUNT}-tool edtech and careertech suite, plus ${SHOWCASE_COUNT} OCG-Industries showcase exemplars. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog (tools + showcase); build_workflow_links returns deep-link workflow pages.`;
+
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
 // Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
 // SHA-256 over {policy_parameters, output_payload}). executionHash() returns
@@ -165,7 +217,7 @@ class StatelessFetchTransport {
     }
 
     const response = await responsePromise;
-    return Response.json(response, { headers: CORS_HEADERS });
+    return Response.json(stampResult(response, body), { headers: CORS_HEADERS });
   }
 }
 
@@ -176,6 +228,126 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Accept, MCP-Protocol-Version",
 };
+
+// ── Protocol interception (runs BEFORE the SDK transport) ────────────────────
+
+function jsonRpcError(id, code, message, status, data) {
+  const error = { code, message };
+  if (data !== undefined) error.data = data;
+  return Response.json(
+    { jsonrpc: "2.0", id: id ?? null, error },
+    { status, headers: CORS_HEADERS }
+  );
+}
+
+function jsonRpcResult(id, result) {
+  return Response.json(
+    { jsonrpc: "2.0", id: id ?? null, result },
+    { headers: CORS_HEADERS }
+  );
+}
+
+// The version the client is asking for: modern clients put it in params._meta,
+// legacy clients in initialize's params.protocolVersion. null = unstated.
+function requestedProtocolVersion(body) {
+  const fromMeta = body?.params?._meta?.[META_PROTOCOL_VERSION];
+  if (typeof fromMeta === "string") return fromMeta;
+  if (body?.method === "initialize") {
+    const fromInit = body?.params?.protocolVersion;
+    if (typeof fromInit === "string") return fromInit;
+  }
+  return null;
+}
+
+function discoverResult() {
+  return {
+    supportedVersions: SUPPORTED_PROTOCOL_VERSIONS,
+    capabilities: SERVER_CAPABILITIES,
+    instructions: SERVER_INSTRUCTIONS,
+    ttlMs: 3_600_000,
+    cacheScope: "global",
+    resultType: "complete",
+    _meta: {
+      [META_SERVER_INFO]: SERVER_INFO_META,
+      [META_DEPRECATION]: LEGACY_DEPRECATION_NOTICE,
+    },
+  };
+}
+
+// A 2026-07-28 client that still opens with `initialize` must be answered with
+// 2026-07-28. Left to the SDK it would negotiate DOWN to its own latest era and
+// echo a version this server does not implement -- the exact defect class the
+// final text forbids.
+function modernInitializeResult() {
+  return {
+    protocolVersion: PROTOCOL_VERSION,
+    capabilities: SERVER_CAPABILITIES,
+    serverInfo: { ...SERVER_META },
+    instructions: SERVER_INSTRUCTIONS,
+    resultType: "complete",
+    _meta: { [META_SERVER_INFO]: SERVER_INFO_META },
+  };
+}
+
+// Returns a Response to send instead of running the SDK, or null to continue.
+function interceptProtocol(body) {
+  if (!body || typeof body !== "object") return null;
+  const id = body.id;
+  const isRequest = id !== undefined && id !== null;
+  const method = body.method;
+
+  // Version negotiation ahead of the SDK's negotiate-down. Never echo a version
+  // we do not implement.
+  const asked = requestedProtocolVersion(body);
+  if (asked !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(asked)) {
+    return jsonRpcError(
+      id,
+      -32022,
+      `Unsupported protocol version: ${asked}`,
+      400,
+      { supported: SUPPORTED_PROTOCOL_VERSIONS, requested: asked }
+    );
+  }
+
+  if (!isRequest) return null; // notifications keep their 204 path
+
+  if (method === "server/discover") {
+    return jsonRpcResult(id, discoverResult());
+  }
+
+  if (method === "initialize" && asked === PROTOCOL_VERSION) {
+    return jsonRpcResult(id, modernInitializeResult());
+  }
+
+  // Unknown tool is a PROTOCOL error -- a JSON-RPC error object with -32602,
+  // not an isError tool result. SDK 1.29 wraps its own -32602 into a tool
+  // result (server/mcp.js createToolError), so the check has to happen here.
+  if (method === "tools/call") {
+    const name = body?.params?.name;
+    if (typeof name !== "string" || !Object.hasOwn(TOOL_SCHEMAS, name)) {
+      return jsonRpcError(id, -32602, `Unknown tool: ${name ?? "(missing)"}`, 200);
+    }
+  }
+
+  if (!KNOWN_METHODS.has(method)) {
+    return jsonRpcError(id, -32601, `Method not found: ${method ?? "(missing)"}`, 404);
+  }
+
+  return null;
+}
+
+// Stamp every SDK success result with resultType + serverInfo, and hand legacy
+// initialize clients the machine-readable deprecation notice.
+function stampResult(message, requestBody) {
+  const result = message?.result;
+  if (!result || typeof result !== "object") return message;
+  if (result.resultType === undefined) result.resultType = "complete";
+  result._meta = { ...(result._meta ?? {}), [META_SERVER_INFO]: SERVER_INFO_META };
+  if (requestBody?.method === "initialize") {
+    result._meta[META_DEPRECATION] = LEGACY_DEPRECATION_NOTICE;
+  }
+  return message;
+}
 
 // ── Tool handlers ─────────────────────────────────────────────────────────────
 
@@ -330,8 +502,7 @@ function handleFindChain({ query, top_n = 5 }) {
 function buildServer(env) {
   const server = new McpServer({
     ...SERVER_META,
-    instructions:
-      `ApexLogics is a ${CALC_TOOL_COUNT}-tool edtech and careertech suite, plus ${SHOWCASE_COUNT} OCG-Industries showcase exemplars. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog (tools + showcase); build_workflow_links returns deep-link workflow pages.`,
+    instructions: SERVER_INSTRUCTIONS,
   });
 
   server.tool(
@@ -459,9 +630,16 @@ export default {
           publisher: { name: "Post Oak Labs", url: "https://postoaklabs.com" },
           license: "CC-BY-4.0",
           endpoints: [
-            { url: "https://mcp.apexlogics.org/mcp", transport: "streamable-http", protocol_version: "2025-06-18", authentication: "none" },
+            {
+              url: "https://mcp.apexlogics.org/mcp",
+              transport: "streamable-http",
+              protocol_version: PROTOCOL_VERSION,
+              supported_protocol_versions: SUPPORTED_PROTOCOL_VERSIONS,
+              legacy_protocol_sunset: PROTOCOL_SUNSET,
+              authentication: "none",
+            },
           ],
-          capabilities: { tools: {}, resources: {}, prompts: {} },
+          capabilities: SERVER_CAPABILITIES,
           registry: "org.apexlogics/tools",
           documentation: "https://apexlogics.org/about.html",
           standard: "https://ainumbers.co/chaingraph/openchain-graph-spec.html",
@@ -483,6 +661,11 @@ export default {
       const toolName   = isToolCall ? (body?.params?.name ?? "unknown") : null;
       const chainDepth = isToolCall ? (body?.params?.arguments?.chain_depth ?? 0) : null;
       const t0 = Date.now();
+
+      // 2026-07-28 semantics the SDK cannot serve: version rejection,
+      // server/discover, modern initialize, unknown-tool shape, unknown method.
+      const intercepted = interceptProtocol(body);
+      if (intercepted) return intercepted;
 
       try {
         const transport = new StatelessFetchTransport();
