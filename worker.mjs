@@ -18,6 +18,7 @@ import { runChain } from "./run_chain.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
 import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "json" };
+import pkg from "./package.json" with { type: "json" };
 
 // toolsData mixes two distinct catalogs (per suite-registry.json's own "showcase"
 // category): calculator tools and OCG-Industries showcase exemplars. Suite-wide
@@ -27,7 +28,10 @@ import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "jso
 const CALC_TOOL_COUNT = toolsData.filter((t) => t.category !== "showcase").length;
 const SHOWCASE_COUNT = toolsData.length - CALC_TOOL_COUNT;
 
-const SERVER_META = { name: "apexlogics-tools", version: "1.4.0" };
+// package.json is the SSOT for version — server.json is kept in sync by hand
+// (checked at deploy time) since it's registry-facing static metadata, not
+// worker-bundled code.
+const SERVER_META = { name: "apexlogics-tools", version: pkg.version };
 
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
 // Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
@@ -170,8 +174,7 @@ class StatelessFetchTransport {
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Accept, MCP-Protocol-Version, Mcp-Session-Id",
-  "Access-Control-Expose-Headers": "Mcp-Session-Id",
+  "Access-Control-Allow-Headers": "Content-Type, Accept, MCP-Protocol-Version",
 };
 
 // ── Tool handlers ─────────────────────────────────────────────────────────────
@@ -509,8 +512,9 @@ export default {
 
         return response;
       } catch (e) {
+        console.error("mcp transport error", e.stack ?? e.message);
         return Response.json(
-          { error: e.message, stack: e.stack },
+          { jsonrpc: "2.0", id: body?.id ?? null, error: { code: -32603, message: "Internal error" } },
           { status: 500, headers: CORS_HEADERS }
         );
       }
