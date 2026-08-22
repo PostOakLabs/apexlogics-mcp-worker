@@ -603,5 +603,204 @@
         "note": "Compare staying for promotion vs. job-hopping"
       }
     ]
+  },
+  "2026-borrower-decision-journey": {
+    "description": "2026 student loan borrower decision journey: PSLF eligibility, OBBBA RAP repayment, Grad PLUS cap impact, and payoff strategy.",
+    "steps": [
+      {
+        "tool": "113-pslf-qualifying-payment-counter",
+        "note": "Check PSLF eligibility window — start here, it changes every downstream decision"
+      },
+      {
+        "tool": "101-rap-vs-standard-decision-engine",
+        "note": "Model income-driven repayment under OBBBA's RAP"
+      },
+      {
+        "tool": "102-grad-loan-cap-gap-planner",
+        "note": "Assess Grad PLUS borrowing cap impact for current/prospective grad students"
+      },
+      {
+        "tool": "22-student-loan-repayment-optimizer",
+        "note": "Compare all repayment plans side-by-side: Standard, Graduated, IDR, RAP, PSLF path"
+      },
+      {
+        "tool": "22-student-loan-repayment-optimizer",
+        "note": "For non-PSLF borrowers: build a payoff acceleration strategy"
+      }
+    ]
+  },
+  "course-design-studio": {
+    "description": "Design a course or curriculum: Bloom's objectives, pedagogical approach, assessment strategy, ESL/TEFL differentiation, and pacing.",
+    "steps": [
+      {
+        "tool": "68-assessment-item-writer",
+        "note": "Define learning objectives with Bloom's Taxonomy — drives assessment and pacing downstream"
+      },
+      {
+        "tool": "67-backward-design-lesson-builder",
+        "note": "Choose the pedagogical approach (lecture, flipped, project-based, inquiry-based)"
+      },
+      {
+        "tool": "68-assessment-item-writer",
+        "note": "Design the assessment strategy — formative/summative mix, rubrics, aligned to objectives"
+      },
+      {
+        "tool": "75-tkt-framework-lesson-stager",
+        "note": "Plan ESL/TEFL differentiation and CEFR-aligned delivery, if serving language learners"
+      },
+      {
+        "tool": "71-first-time-instructor-toolkit",
+        "note": "Sequence units and pacing across the semester/course arc"
+      }
+    ]
+  },
+  "equity-exit-planning": {
+    "description": "Plan an equity exit: 83(b) election timing and tax modeling, then the exit waterfall.",
+    "steps": [
+      {
+        "tool": "140-83b-election-decision",
+        "note": "Decide on the 83(b) election before the window closes"
+      },
+      {
+        "tool": "141-equity-exit-waterfall",
+        "note": "Model what you'll actually receive at exit"
+      }
+    ]
+  },
+  "immigration-career-planner": {
+    "description": "Plan an immigration-linked career path: H-1B job-change risk and green-card backlog wait cost.",
+    "steps": [
+      {
+        "tool": "144-h1b-job-change-risk",
+        "note": "Plan a job change without losing work authorization"
+      },
+      {
+        "tool": "145-greencard-wait-cost",
+        "note": "Model wait time and career decisions around the green-card backlog"
+      }
+    ]
+  },
+  "job-separation-financial-playbook": {
+    "description": "Job separation financial playbook: cheapest health coverage path, severance/UI sequencing, and option exercise window.",
+    "steps": [
+      {
+        "tool": "134-cobra-vs-aca-optimizer",
+        "note": "Find the cheapest health coverage path (COBRA vs. ACA)"
+      },
+      {
+        "tool": "136-severance-ui-timing",
+        "note": "Sequence severance to maximize unemployment benefits"
+      },
+      {
+        "tool": "135-option-exercise-window",
+        "note": "Model option exercise before the post-termination window closes"
+      }
+    ]
+  },
+  "nurse-shift-travel-comp": {
+    "description": "Nurse shift and travel compensation: staff-vs-travel comparison, travel nurse total comp, shift differential/OT optimization, and total comp.",
+    "steps": [
+      {
+        "tool": "90-counter-offer-decision-engine",
+        "note": "Compare travel vs. staff net pay, including tax-free stipends and travel costs"
+      },
+      {
+        "tool": "132-travel-nurse-vs-staff-comp",
+        "note": "Model detailed travel nurse total compensation — base rate, housing/M&IE stipends, gap weeks"
+      },
+      {
+        "tool": "133-shift-differential-overtime-optimizer",
+        "note": "Optimize shift schedule for maximum net pay, correctly stacking FLSA OT with differentials"
+      },
+      {
+        "tool": "25-total-compensation-suite",
+        "note": "Model total compensation across offers — benefits, 403(b) match, PTO, education benefits"
+      }
+    ]
+  },
+  "qsbs-federal-career-transition": {
+    "description": "QSBS exclusion modeling and federal-employee buyout decision for a career transition.",
+    "steps": [
+      {
+        "tool": "142-qsbs-1202-estimator",
+        "note": "Model the §1202 gain exclusion under OBBBA tiered rates"
+      },
+      {
+        "tool": "143-federal-buyout-decision",
+        "note": "Model VSIP buyout acceptance vs. staying to full retirement"
+      }
+    ]
+  },
+  "self-employment-tax-optimizer": {
+    "description": "Self-employment tax optimization: QBI pass-through deduction, S-corp reasonable-comp split, and home office/Augusta Rule.",
+    "steps": [
+      {
+        "tool": "137-qbi-199a-optimizer",
+        "note": "Calculate the QBI §199A pass-through deduction"
+      },
+      {
+        "tool": "138-scorp-reasonable-comp",
+        "note": "Find the optimal S-corp salary/distribution split"
+      },
+      {
+        "tool": "139-home-office-augusta",
+        "note": "Claim home office and Augusta Rule deductions"
+      }
+    ]
+  },
+  "skilled-trades-career-builder": {
+    "description": "Skilled trades career path: apprentice-to-master wage projection, certification ROI ranking, and contractor launch break-even.",
+    "steps": [
+      {
+        "tool": "122-trade-wage-progression-projector",
+        "note": "Project the apprentice → journeyman → master wage arc vs. a 4-year degree"
+      },
+      {
+        "tool": "123-trade-specialization-roi",
+        "note": "Rank certifications (EPA 608, Master Electrician, AWS Welder, NICET) by NPV and payback"
+      },
+      {
+        "tool": "124-contractor-launch-break-even",
+        "note": "Model the billable-rate floor and break-even month for going independent"
+      }
+    ]
+  },
+  "veteran-transition-gi-bill": {
+    "description": "Veteran military-to-civilian transition: GI Bill benefit maximization, SkillBridge/credential transfer ROI, and income bridge.",
+    "steps": [
+      {
+        "tool": "125-gi-bill-benefit-maximizer",
+        "note": "Maximize GI Bill benefit (Ch. 33 vs. Ch. 30) — tuition, BAH, Yellow Ribbon, books"
+      },
+      {
+        "tool": "126-skillbridge-credential-transfer-roi",
+        "note": "Rank SkillBridge internships and MAP/ACE credential transfers by ROI"
+      },
+      {
+        "tool": "127-veteran-income-bridge",
+        "note": "Map the income bridge during the transition gap — severance, VA disability, TSP, UI"
+      }
+    ]
+  },
+  "working-parent-childcare": {
+    "description": "Working parent childcare and leave planning: income gap during leave, dependent care tax optimization, and post-leave total comp.",
+    "steps": [
+      {
+        "tool": "05-offer-negotiation-suite",
+        "note": "Model the income gap during parental leave — employer paid leave, state PFL/SDI, FMLA"
+      },
+      {
+        "tool": "130-dependent-care-fsa-cdctc-optimizer",
+        "note": "Optimize Dependent Care FSA vs. CDCTC for the childcare tax strategy"
+      },
+      {
+        "tool": "131-parental-leave-income-gap",
+        "note": "Plan the week-by-week parental leave income bridge and savings needed"
+      },
+      {
+        "tool": "25-total-compensation-suite",
+        "note": "Model total compensation on return, including new childcare costs"
+      }
+    ]
   }
 }
