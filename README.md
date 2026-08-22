@@ -62,6 +62,13 @@ apexlogics-mcp-worker/
 
 CI-owned - pushes to `master` run gates (`kernel-parity.mjs`, syntax/semantics/branch-coverage checks) + `generate.mjs` (rebuilds the tool index against the live site registry) + a `wrangler deploy` dry-run, then auto-deploy. No manual `wrangler deploy`.
 
+### Definition of done (any change touching version or protocol_version)
+
+- `package.json` `version` is the single source of truth - `worker.mjs`'s `SERVER_META.version` imports it directly, never a hardcoded literal.
+- `server.json` `version` is updated by hand to match `package.json` on every bump (registry-facing static metadata, not bundled into the worker).
+- `protocol_version` (`server-card.json`'s `endpoints[].protocol_version`) is bumped only alongside an actual MCP protocol change - never silently drifts from what the transport advertises.
+- Post-deploy: verify with a real `tools/call`, never `tools/list` alone.
+
 ## License
 
 MIT - see [LICENSE](LICENSE).
