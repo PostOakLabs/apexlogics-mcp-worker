@@ -15,6 +15,14 @@
   "analytics_engine_datasets": [
     { "binding": "ANALYTICS", "dataset": "mcp_tool_calls" }
   ],
+  // Exposes the per-deploy Version ID (same id `wrangler deploy` prints as "Current
+  // Version ID") to the running Worker as env.CF_VERSION_METADATA.id. Surfaced on
+  // /healthz so the post-deploy smoke (AL-SMOKE-PIN) can confirm which build is
+  // answering before asserting behavior, instead of retrying blind against whatever
+  // colo responds.
+  "version_metadata": {
+    "binding": "CF_VERSION_METADATA"
+  },
   // Custom domain — already provisioned via dashboard; declared here for version control.
   // On first deploy after adding this, Cloudflare will confirm the existing mapping.
   "routes": [
