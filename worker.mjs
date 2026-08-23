@@ -226,7 +226,8 @@ class StatelessFetchTransport {
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Accept, MCP-Protocol-Version",
+  "Access-Control-Allow-Headers":
+    "Content-Type, Accept, MCP-Protocol-Version, Mcp-Method, Mcp-Name",
 };
 
 // ── Protocol interception (runs BEFORE the SDK transport) ────────────────────
@@ -247,16 +248,170 @@ function jsonRpcResult(id, result) {
   );
 }
 
-// The version the client is asking for: modern clients put it in params._meta,
-// legacy clients in initialize's params.protocolVersion. null = unstated.
-function requestedProtocolVersion(body) {
-  const fromMeta = body?.params?._meta?.[META_PROTOCOL_VERSION];
+// Per-request protocol fields live in params._meta, never at the body root.
+function requestMeta(body) {
+  return body?.params?._meta;
+}
+
+// The version the client is asking for, from the three places it can appear:
+// the SEP-2243 MCP-Protocol-Version header (modern, every POST), params._meta
+// (modern), and initialize's params.protocolVersion (legacy). null = unstated.
+//
+// AL-MCP-728-B carried item (2): the header used to be read by nothing, so
+// `MCP-Protocol-Version: 1999-01-01` on tools/list returned a normal 200 list
+// while the same version through initialize correctly 400'd. Folding the header
+// in HERE routes it through the one -32022 path 728-A already built, rather
+// than standing up a second negotiation code path.
+function requestedProtocolVersion(request, body) {
+  const fromHeader = request?.headers?.get("mcp-protocol-version");
+  if (typeof fromHeader === "string" && fromHeader !== "") return fromHeader;
+  const fromMeta = requestMeta(body)?.[META_PROTOCOL_VERSION];
   if (typeof fromMeta === "string") return fromMeta;
   if (body?.method === "initialize") {
     const fromInit = body?.params?.protocolVersion;
     if (typeof fromInit === "string") return fromInit;
   }
   return null;
+}
+
+// SEP-2243 required headers
+// -------------------------
+// A client MAY mirror JSON-RPC routing fields into HTTP headers so intermediaries
+// can route or authorize without parsing the body. A server that parses the body
+// MUST validate that the two agree, and MUST reject a disagreement with HTTP 400
+// plus -32020 HeaderMismatch. -32020, not -32001: the SEP's original code was
+// renumbered by modelcontextprotocol#2907. -32602 is a DIFFERENT condition
+// (unknown tool) and is never reused here.
+//
+// PRESENCE IS ERA-GATED, NOT BLANKET-REQUIRED. The final text calls these headers
+// REQUIRED and gives missing / mismatched / invalid-char one shared code. But
+// every legacy client in the field sends none of them, so rejecting absence
+// unconditionally would 400 every current MCP client against a live public
+// endpoint. A dual-era server selects era from how the client opens, so:
+//   - a request EXPLICITLY asserting 2026-07-28 is MODERN and is held to the
+//     modern rules, presence included;
+//   - anything else is LEGACY and keeps the permissive behavior.
+// Era is never decided by the server default falling through: an unversioned
+// legacy client must never be judged modern. Same shape as the sister compute
+// worker (shared-infra doctrine: one lineage, never a fork).
+function isModernEra(request, body) {
+  return (
+    body?.method !== "initialize" &&
+    requestedProtocolVersion(request, body) === PROTOCOL_VERSION
+  );
+}
+
+// `=?base64?<b64>?=`: any header value that is not safely plain-ASCII travels
+// Base64-encoded and MUST be decoded before comparison. A raw compare would
+// false-reject every non-ASCII tool name.
+const MCP_B64_SENTINEL = /^=\?base64\?(.*)\?=$/;
+
+function decodeMcpHeaderValue(raw) {
+  const m = MCP_B64_SENTINEL.exec(raw);
+  if (!m) return { ok: true, value: raw };
+  try {
+    const bin = atob(m[1]);
+    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+    return { ok: true, value: new TextDecoder("utf-8", { fatal: true }).decode(bytes) };
+  } catch {
+    return { ok: false, value: null };
+  }
+}
+
+// The body value a given header must agree with. undefined = the header does not
+// apply to this method, which is not a mismatch.
+function mcpNameBodyValue(body) {
+  const m = body?.method;
+  if (m === "tools/call" || m === "prompts/get") return body?.params?.name;
+  if (m === "resources/read") return body?.params?.uri;
+  return undefined;
+}
+
+// Mcp-Name is REQUIRED only on the methods carrying a name/uri in params.
+function mcpNameApplies(method) {
+  return method === "tools/call" || method === "prompts/get" || method === "resources/read";
+}
+
+// Returns null when conformant, else { header, headerValue, bodyValue, reason }.
+function validateMcpHeaders(request, body, modernEra) {
+  if (!body || typeof body !== "object") return null;
+  const h = request.headers; // Headers lookups are case-insensitive per fetch spec.
+
+  const checks = [
+    ["MCP-Protocol-Version", h.get("mcp-protocol-version"),
+      requestMeta(body)?.[META_PROTOCOL_VERSION], true],
+    ["Mcp-Method", h.get("mcp-method"), body?.method, true],
+    ["Mcp-Name", h.get("mcp-name"), mcpNameBodyValue(body), mcpNameApplies(body?.method)],
+  ];
+
+  for (const [name, rawHeader, bodyValue, required] of checks) {
+    if (rawHeader === null || rawHeader === undefined) {
+      // Absence is a violation only for a MODERN-era request, and only for a
+      // header that applies to this method. Same code and status as a mismatch:
+      // the final text gives one code for missing, mismatched and
+      // invalid-character alike.
+      if (modernEra && required) {
+        return { header: name, headerValue: null, bodyValue: null, reason: "missing" };
+      }
+      continue;
+    }
+    const decoded = decodeMcpHeaderValue(rawHeader.trim());
+    if (!decoded.ok) {
+      return { header: name, headerValue: rawHeader, bodyValue: null, reason: "undecodable Base64 sentinel value" };
+    }
+    if (bodyValue === undefined) continue; // header does not apply to this method
+    // Header NAMES are case-insensitive (handled by Headers); VALUES are not.
+    if (decoded.value !== String(bodyValue)) {
+      return { header: name, headerValue: decoded.value, bodyValue: String(bodyValue), reason: "does not match the request body" };
+    }
+  }
+  // Mcp-Param-{Name} headers come from an `x-mcp-header` annotation in a tool's
+  // inputSchema. We declare none, so unknown Mcp-Param-* headers are forwarded
+  // and ignored, never rejected.
+  return null;
+}
+
+function headerMismatchResponse(mismatch, body) {
+  const detail = mismatch.reason === "missing"
+    ? `${mismatch.header} header is missing (REQUIRED for ${PROTOCOL_VERSION} requests)`
+    : mismatch.bodyValue === null
+      ? `${mismatch.header} header value '${mismatch.headerValue}' has an ${mismatch.reason}`
+      : `${mismatch.header} header value '${mismatch.headerValue}' ${mismatch.reason} value '${mismatch.bodyValue}'`;
+  return jsonRpcError(body?.id, -32020, `Header mismatch: ${detail}`, 400);
+}
+
+// Per-request `_meta` (carried item (1) from AL-MCP-728-A)
+// -------------------------------------------------------
+// Both keys are REQUIRED on every modern request; a request missing one is
+// malformed and MUST be rejected with -32602 plus HTTP 400. Legacy-era requests
+// carry no _meta by definition and are exempt, which is why 728-A deferred this
+// enforcement into this row: the era gate lives here, so a false-reject can only
+// land in one lane.
+const MCP_REQUIRED_META_KEYS = [
+  META_PROTOCOL_VERSION,
+  "io.modelcontextprotocol/clientCapabilities",
+];
+
+function missingRequiredMeta(body) {
+  const meta = requestMeta(body);
+  if (!meta || typeof meta !== "object") return MCP_REQUIRED_META_KEYS.slice();
+  return MCP_REQUIRED_META_KEYS.filter((k) => meta[k] === undefined || meta[k] === null);
+}
+
+// -32021 MissingRequiredClientCapability. Wired so a handler needing a declared
+// client capability can demand it; data.requiredCapabilities lists what was
+// missing, status 400. NO TOOL ON THIS WORKER REQUIRES A DECLARED CLIENT
+// CAPABILITY, so REQUIRED_CLIENT_CAPABILITIES is empty and this path is
+// UNREACHABLE today. Deliberately given no synthetic trigger: inventing a
+// requirement purely to make -32021 observable would be a fabricated
+// conformance claim. Same standard the sister workers applied.
+const REQUIRED_CLIENT_CAPABILITIES = [];
+
+function missingClientCapabilities(body, required) {
+  if (!required || required.length === 0) return [];
+  const declared = requestMeta(body)?.["io.modelcontextprotocol/clientCapabilities"] || {};
+  const extensions = declared.extensions || {};
+  return required.filter((c) => extensions[c] === undefined && declared[c] === undefined);
 }
 
 function discoverResult() {
@@ -290,15 +445,17 @@ function modernInitializeResult() {
 }
 
 // Returns a Response to send instead of running the SDK, or null to continue.
-function interceptProtocol(body) {
+function interceptProtocol(request, body) {
   if (!body || typeof body !== "object") return null;
   const id = body.id;
   const isRequest = id !== undefined && id !== null;
   const method = body.method;
 
   // Version negotiation ahead of the SDK's negotiate-down. Never echo a version
-  // we do not implement.
-  const asked = requestedProtocolVersion(body);
+  // we do not implement. `asked` now also covers the MCP-Protocol-Version
+  // header, so a header assertion rejects through this same -32022 path instead
+  // of slipping past unvalidated (AL-MCP-728-B carried item (2)).
+  const asked = requestedProtocolVersion(request, body);
   if (asked !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(asked)) {
     return jsonRpcError(
       id,
@@ -307,6 +464,40 @@ function interceptProtocol(body) {
       400,
       { supported: SUPPORTED_PROTOCOL_VERSIONS, requested: asked }
     );
+  }
+
+  // Era selection runs AFTER the version gate, so an unsupported assertion is
+  // still -32022, and BEFORE every modern-era rule below.
+  const modernEra = isModernEra(request, body);
+
+  // SEP-2243 header validation runs BEFORE dispatch, so a mismatched header on a
+  // call to an unknown tool returns -32020 (transport), not -32602 (application).
+  const headerMismatch = validateMcpHeaders(request, body, modernEra);
+  if (headerMismatch) return headerMismatchResponse(headerMismatch, body);
+
+  // Per-request protocol fields: required on every modern-era request. Legacy-era
+  // requests carry no _meta by definition and are exempt.
+  if (modernEra) {
+    const missingMeta = missingRequiredMeta(body);
+    if (missingMeta.length > 0) {
+      return jsonRpcError(
+        id,
+        -32602,
+        "Invalid params: request _meta is missing required field(s): " + missingMeta.join(", "),
+        400,
+        { missingFields: missingMeta }
+      );
+    }
+    const lacking = missingClientCapabilities(body, REQUIRED_CLIENT_CAPABILITIES);
+    if (lacking.length > 0) {
+      return jsonRpcError(
+        id,
+        -32021,
+        "Missing required client capability: " + lacking.join(", "),
+        400,
+        { requiredCapabilities: lacking }
+      );
+    }
   }
 
   if (!isRequest) return null; // notifications keep their 204 path
@@ -664,7 +855,7 @@ export default {
 
       // 2026-07-28 semantics the SDK cannot serve: version rejection,
       // server/discover, modern initialize, unknown-tool shape, unknown method.
-      const intercepted = interceptProtocol(body);
+      const intercepted = interceptProtocol(request, body);
       if (intercepted) return intercepted;
 
       try {

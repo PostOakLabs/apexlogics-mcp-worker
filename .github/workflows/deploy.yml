@@ -71,6 +71,19 @@ jobs:
           done
           [ "$fail" -eq 0 ] && echo "✅ All .mjs files pass syntax check" || exit 1
 
+      # ── /mcp wire contract (AL-MCP-728-B) ───────────────────────────────────
+      # BLOCKING. Invokes the Worker's fetch handler directly against the committed
+      # ./data fixtures, so the SEP-2243 header rules, the 2026-07-28 era gating,
+      # per-request _meta enforcement, error shapes and the 405s are checked BEFORE
+      # anything deploys. Nothing else in this workflow exercises the /mcp wire.
+      # Every modern-era rejection is paired with a legacy control, so a change that
+      # strands old clients fails here rather than in the field.
+      # --self-test re-runs the whole suite against a worker with SEP-2243 validation
+      # disabled and fails if the suite stays green — a gate that has never failed is
+      # not known to work. Zero-dep, no CF creds, no network.
+      - name: 🔒 SEP-2243 + 2026-07-28 wire gate (offline)
+        run: node scripts/gate-mcp-era.mjs --self-test
+
       # ── §17 compute-images freshness ────────────────────────────────────────
       # Asserts each kernel-backed node's sha256-source stamp equals the sha256 of
       # its LF-normalized kernel source, so run_chain's build_identity never
@@ -208,3 +221,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.99.0"
           command: deploy
+
+      # ── Post-deploy /mcp wire smoke (AL-MCP-728-B) ──────────────────────────
+      # BLOCKING. The same rules the offline gate proves against source, re-proven
+      # against the LIVE endpoint — the only place the Cloudflare edge, the WAF and
+      # the custom-domain route are in the path. A WAF rule that strips or blocks
+      # Mcp-Method / Mcp-Name turns every modern client into a 400 while worker.mjs
+      # stays perfectly conformant; round-tripping the headers through a real request
+      # is the only check that can see that. Red here → roll back in Cloudflare.
+      - name: 🔌 Post-deploy /mcp wire smoke
+        run: node scripts/smoke-mcp.mjs
