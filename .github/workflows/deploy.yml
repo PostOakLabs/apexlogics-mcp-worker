@@ -215,6 +215,7 @@ jobs:
           echo "✅ Worker bundle OK — no upload"
 
       - name: Deploy worker
+        id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -222,12 +223,26 @@ jobs:
           wranglerVersion: "4.99.0"
           command: deploy
 
-      # ── Post-deploy /mcp wire smoke (AL-MCP-728-B) ──────────────────────────
+      # ── Post-deploy /mcp wire smoke (AL-MCP-728-B, pinned per AL-SMOKE-PIN) ──
       # BLOCKING. The same rules the offline gate proves against source, re-proven
       # against the LIVE endpoint — the only place the Cloudflare edge, the WAF and
       # the custom-domain route are in the path. A WAF rule that strips or blocks
       # Mcp-Method / Mcp-Name turns every modern client into a 400 while worker.mjs
       # stays perfectly conformant; round-tripping the headers through a real request
       # is the only check that can see that. Red here → roll back in Cloudflare.
+      #
+      # `wrangler deploy`'s stdout ("Current Version ID: <uuid>") is parsed here and
+      # passed to the smoke script, which polls /healthz's deployed_version field
+      # until THIS id answers, then runs the assertions exactly once. Without this,
+      # a partially-propagated edge makes "eventually something answered correctly"
+      # indistinguishable from a broken deploy answering correctly by chance.
       - name: 🔌 Post-deploy /mcp wire smoke
-        run: node scripts/smoke-mcp.mjs
+        run: |
+          VERSION_ID=$(printf '%s\n' "${{ steps.deploy.outputs.command-output }}" | grep -oE 'Current Version ID: [0-9a-f-]+' | awk '{print $NF}')
+          if [ -z "$VERSION_ID" ]; then
+            echo "::error::could not parse Current Version ID from wrangler deploy output — see command-output above"
+            printf '%s\n' "${{ steps.deploy.outputs.command-output }}"
+            exit 1
+          fi
+          echo "Pinning smoke to deployed Version ID: $VERSION_ID"
+          MCP_SMOKE_VERSION_ID="$VERSION_ID" node scripts/smoke-mcp.mjs

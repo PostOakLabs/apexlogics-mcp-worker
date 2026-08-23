@@ -856,7 +856,16 @@ export default {
 
     if (url.pathname === "/healthz" || url.pathname === "/") {
       return Response.json(
-        { status: "ok", server: SERVER_META, tools: Object.keys(TOOL_SCHEMAS) },
+        {
+          status: "ok",
+          server: SERVER_META,
+          tools: Object.keys(TOOL_SCHEMAS),
+          // Per-deploy build id (Cloudflare Version Metadata binding), NOT the semver
+          // in SERVER_META.version — this changes on every deploy even when package.json
+          // doesn't. AL-SMOKE-PIN polls this to confirm the new build is live before
+          // running behavior assertions.
+          deployed_version: env.CF_VERSION_METADATA?.id ?? null,
+        },
         { headers: CORS_HEADERS }
       );
     }

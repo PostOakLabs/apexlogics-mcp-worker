@@ -13,10 +13,22 @@
 // Every assertion that rejects a modern-era request is PAIRED with a legacy control asserting an
 // old client still gets 200 for the same shape. A fix that strands legacy clients must fail here.
 //
+// AL-SMOKE-PIN: the assertions below run EXACTLY ONCE, never retried. What retries is
+// the build pin ahead of them — polling /healthz's `deployed_version` (Cloudflare
+// Version Metadata) until it matches the id `wrangler deploy` just produced. That
+// separates "the new build isn't live everywhere yet" (pin keeps polling, then a clear
+// propagation message) from "the new build is live and broken" (single assertion pass,
+// real failure). Before this split, a partially-rolled-out edge could pass on attempt 4
+// of 6 with no way to tell whether that was the new build behaving or the old build
+// getting lucky on a request shape it happened to satisfy.
+//
 // Usage:  node scripts/smoke-mcp.mjs [url]
 //   url default: https://mcp.apexlogics.org/mcp (or env MCP_SMOKE_URL)
-//   env: MCP_SMOKE_RETRIES (6), MCP_SMOKE_DELAY_MS (4000), MCP_SMOKE_TIMEOUT_MS (15000)
-// Exit 0 = healthy; exit 1 = broken (fails the deploy job → roll back in Cloudflare).
+//   env: MCP_SMOKE_VERSION_ID   — build id to pin to (CI sets this from `wrangler deploy`
+//          output; omit for a local/manual run against whatever build currently answers)
+//        MCP_SMOKE_PIN_RETRIES (6), MCP_SMOKE_PIN_DELAY_MS (4000) — pin poll budget
+//        MCP_SMOKE_TIMEOUT_MS (15000) — per-request timeout, pin and assertions alike
+// Exit 0 = healthy; exit 1 = broken, or the new build never became authoritative.
 
 const URL_MCP = process.argv[2] || process.env.MCP_SMOKE_URL || 'https://mcp.apexlogics.org/mcp';
 const RETRIES = Number(process.env.MCP_SMOKE_RETRIES ?? 6);
@@ -312,43 +324,80 @@ async function errorShapes() {
   return { unknownTool: utObj.error.code };
 }
 
-(async () => {
-  let lastErr;
-  for (let i = 1; i <= RETRIES; i++) {
-    try {
-      const legacy = await legacyPath();
-      console.log(`✓ legacy path OK — header-less, _meta-less tools/list + real tools/call both 200 (${legacy.tools} tools)`);
+// ── (0) Build pin — confirm THIS deploy is answering before asserting anything ──
+// `deployed_version` comes from the Cloudflare Version Metadata binding (wrangler.jsonc
+// `version_metadata`), surfaced on /healthz — the same id `wrangler deploy` prints as
+// "Current Version ID". Without this, a response that lacks the new behavior is
+// indistinguishable from a build that never shipped: a partially-rolled-out edge can
+// answer with the OLD build on attempt 1, the NEW build on attempt 2, purely by which
+// colo served the request. Polling here removes that ambiguity — the assertions below
+// run exactly once, only after the edge is confirmed to be running MCP_SMOKE_VERSION_ID.
+const HEALTHZ_URL = URL_MCP.replace(/\/mcp$/, '/healthz');
+const PIN_VERSION = process.env.MCP_SMOKE_VERSION_ID || null;
+const PIN_RETRIES = Number(process.env.MCP_SMOKE_PIN_RETRIES ?? RETRIES);
+const PIN_DELAY = Number(process.env.MCP_SMOKE_PIN_DELAY_MS ?? DELAY);
 
-      const info = await legacyInitialize();
-      console.log(`✓ legacy initialize OK — ${info.name} v${info.version} (${URL_MCP})`);
-
-      const modern = await modernPath();
-      console.log(`✓ modern path OK — no-initialize tools/list + real tools/call, ${modern.tools} tools, server/discover ${modern.supported} versions; all three SEP-2243 headers round-tripped through the edge (WAF forwards them)`);
-
-      const sep = await sep2243Rejections();
-      console.log(`✓ SEP-2243 rejections OK — missing / mismatched / invalid-char all 400 + ${sep.code}; base64 sentinel decodes before comparing`);
-
-      const ver = await versionRejection();
-      console.log(`✓ version handling OK — header path 400 + ${ver.code} + data.supported/data.requested + id preserved; initialize NEGOTIATES ${ver.negotiated.join(', ')} down to ${LEGACY} with 200 + a working tools/call`);
-
-      const meta = await metaEnforcement();
-      console.log(`✓ modern _meta enforcement OK — missing required fields are 400 + ${meta.code}`);
-
-      const shapes = await errorShapes();
-      console.log(`✓ error shapes OK — unknown tool ${shapes.unknownTool}, unknown method 404/-32601, GET+DELETE 405, CORS advertises all three headers`);
-
-      process.exitCode = 0;
-      return;
-    } catch (e) {
-      lastErr = e;
-      console.error(`  attempt ${i}/${RETRIES} failed: ${e.message}`);
-      if (i < RETRIES) await new Promise((r) => setTimeout(r, DELAY));
-    }
+async function pollForVersion() {
+  if (!PIN_VERSION) {
+    console.log('⚠ MCP_SMOKE_VERSION_ID not set — skipping the build pin, asserting against whatever build');
+    console.log('  answers (fine for a local/manual run; CI always sets this from `wrangler deploy` output).');
+    return null;
   }
-  console.error(`\n✗ /mcp wire smoke FAILED after ${RETRIES} attempts: ${lastErr && lastErr.message}`);
-  console.error('  Likely causes: the deployed bundle is broken, or a Cloudflare WAF rule on');
-  console.error('  mcp.apexlogics.org is stripping or blocking one of the three SEP-2243 routing');
-  console.error('  headers (that failure looks like a 400 + -32020 on a request the offline gate passes).');
-  console.error('  Roll back in Cloudflare → apexlogics-mcp → Deployments.');
+  let lastSeen = '(no response)';
+  for (let i = 1; i <= PIN_RETRIES; i++) {
+    try {
+      const res = await fetch(HEALTHZ_URL, { signal: AbortSignal.timeout(TIMEOUT) });
+      const obj = await res.json();
+      lastSeen = obj?.deployed_version ?? '(null — binding missing or old build)';
+      if (lastSeen === PIN_VERSION) {
+        console.log(`✓ build pin confirmed — ${PIN_VERSION} is answering at the edge (attempt ${i}/${PIN_RETRIES})`);
+        return PIN_VERSION;
+      }
+      console.error(`  pin attempt ${i}/${PIN_RETRIES}: edge answered ${lastSeen}, want ${PIN_VERSION}`);
+    } catch (e) {
+      console.error(`  pin attempt ${i}/${PIN_RETRIES}: ${e.message}`);
+    }
+    if (i < PIN_RETRIES) await new Promise((r) => setTimeout(r, PIN_DELAY));
+  }
+  console.error(`\n✗ new version never became authoritative — wanted ${PIN_VERSION}, last saw ${lastSeen} after ${PIN_RETRIES} attempts (${PIN_DELAY}ms apart).`);
+  console.error('  This means the edge is still propagating the old build (wait and re-run), or the deploy');
+  console.error('  itself never shipped this version_id (check the Cloudflare dashboard). This is NOT an');
+  console.error('  assertion failure — no behavior was tested, because no build was confirmed live.');
   process.exit(1);
+}
+
+(async () => {
+  const pinned = await pollForVersion();
+  try {
+    const legacy = await legacyPath();
+    console.log(`✓ legacy path OK — header-less, _meta-less tools/list + real tools/call both 200 (${legacy.tools} tools)`);
+
+    const info = await legacyInitialize();
+    console.log(`✓ legacy initialize OK — ${info.name} v${info.version} (${URL_MCP})`);
+
+    const modern = await modernPath();
+    console.log(`✓ modern path OK — no-initialize tools/list + real tools/call, ${modern.tools} tools, server/discover ${modern.supported} versions; all three SEP-2243 headers round-tripped through the edge (WAF forwards them)`);
+
+    const sep = await sep2243Rejections();
+    console.log(`✓ SEP-2243 rejections OK — missing / mismatched / invalid-char all 400 + ${sep.code}; base64 sentinel decodes before comparing`);
+
+    const ver = await versionRejection();
+    console.log(`✓ version handling OK — header path 400 + ${ver.code} + data.supported/data.requested + id preserved; initialize NEGOTIATES ${ver.negotiated.join(', ')} down to ${LEGACY} with 200 + a working tools/call`);
+
+    const meta = await metaEnforcement();
+    console.log(`✓ modern _meta enforcement OK — missing required fields are 400 + ${meta.code}`);
+
+    const shapes = await errorShapes();
+    console.log(`✓ error shapes OK — unknown tool ${shapes.unknownTool}, unknown method 404/-32601, GET+DELETE 405, CORS advertises all three headers`);
+
+    console.log(`\n✓ /mcp wire smoke PASSED against ${pinned ? `confirmed build ${pinned}` : 'unpinned build (no MCP_SMOKE_VERSION_ID)'} — assertions ran exactly once, no retries.`);
+    process.exitCode = 0;
+  } catch (e) {
+    console.error(`\n✗ /mcp wire smoke FAILED against confirmed build ${pinned ?? '(unpinned)'}: ${e.message}`);
+    console.error('  This ran against a build the pin step confirmed is live, so this is a real behavior');
+    console.error('  regression, not propagation lag. Likely causes: the deployed bundle is broken, or a');
+    console.error('  Cloudflare WAF rule on mcp.apexlogics.org is stripping/blocking one of the three');
+    console.error('  SEP-2243 routing headers. Roll back in Cloudflare → apexlogics-mcp → Deployments.');
+    process.exit(1);
+  }
 })();
