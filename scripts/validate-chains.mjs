@@ -40,12 +40,13 @@ for (const chain of chains) {
   if (!Array.isArray(chain.steps) || chain.steps.length === 0) errors.push(`[L1:${id}] steps[] missing or empty`);
   (chain.steps || []).forEach((s, i) => {
     if (!s.tool_id) errors.push(`[L1:${id}] step ${i + 1} missing tool_id`);
-    // Unresolved node = WARNING: legacy chains reference combined/retired al_id aliases
-    // (e.g. AL-06/14/58/60 per CLAUDE.md); run_chain tolerates them (status unknown_node).
-    // A GATED step's tool_id, however, must resolve (its output drives routing).
+    // Unresolved node is a hard failure (AL-CHAIN-ALIAS, 2026-08-23): the last
+    // legacy combined/retired al_id references (AL-06/14/19/58/60) were remapped
+    // to their surviving node or removed from their chain. Any new unresolved
+    // tool_id is a real dead reference, not a tolerable alias — fail the gate so
+    // it cannot ride as a silent warning again.
     else if (!nodeIds.has(s.tool_id)) {
-      if (s.gate) errors.push(`[L1:${id}] GATED step ${i + 1} tool_id '${s.tool_id}' resolves to no nodes[] entry`);
-      else warnings.push(`[L1:${id}] step ${i + 1} tool_id '${s.tool_id}' resolves to no nodes[] entry (legacy alias)`);
+      errors.push(`[L1:${id}] step ${i + 1} tool_id '${s.tool_id}' resolves to no nodes[] entry`);
     }
   });
   for (const ge of validateChainGates(chain)) errors.push(`[L2:${id}] ${ge}`);
