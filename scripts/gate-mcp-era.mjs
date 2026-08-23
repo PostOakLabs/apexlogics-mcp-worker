@@ -223,17 +223,48 @@ async function runSuite(worker) {
     check('unsupported version HEADER preserves the request id', obj?.id === 12, `got ${obj?.id}`);
   }
   {
-    // The initialize path (owned by AL-MCP-728-A) must be unchanged.
+    // AL-MCP-NEGOTIATE: `initialize` NEGOTIATES. AL-MCP-728-A routed the legacy
+    // proposal through the assertion path, which 400'd the two most widely deployed
+    // client versions in the field. A proposal the server cannot meet gets 200 plus
+    // a version the client can act on -- and never a version we do not implement.
+    let gateId = 13;
+    for (const [proposed, expected] of [
+      ['2024-11-05', LEGACY],
+      ['2025-03-26', LEGACY],
+      ['1999-01-01', LEGACY],
+      [LEGACY, LEGACY],
+      [MODERN, MODERN],
+    ]) {
+      const id = gateId++;
+      const res = await post(
+        {},
+        {
+          jsonrpc: '2.0', id, method: 'initialize',
+          params: { protocolVersion: proposed, capabilities: {}, clientInfo: { name: 'gate', version: '1' } },
+        },
+      );
+      const obj = await readJson(res);
+      check(`initialize at ${proposed} is 200`, res.status === 200, `got ${res.status}`);
+      check(`initialize at ${proposed} is not an error`, !obj?.error, `got ${obj?.error?.code}`);
+      check(`initialize at ${proposed} answers ${expected}`,
+        obj?.result?.protocolVersion === expected, `got ${obj?.result?.protocolVersion}`);
+      check(`initialize at ${proposed} preserves the request id`, obj?.id === id, `got ${obj?.id}`);
+    }
+  }
+  {
+    // The -32022 path stays exactly where it belongs: a version ASSERTED through
+    // params._meta, same rule as the header above.
     const res = await post(
       {},
       {
-        jsonrpc: '2.0', id: 13, method: 'initialize',
-        params: { protocolVersion: '1999-01-01', capabilities: {}, clientInfo: { name: 'gate', version: '1' } },
+        jsonrpc: '2.0', id: 18, method: 'tools/list',
+        params: { _meta: { 'io.modelcontextprotocol/protocolVersion': '1999-01-01' } },
       },
     );
     const obj = await readJson(res);
-    check('unsupported version via initialize is 400', res.status === 400, `got ${res.status}`);
-    check('unsupported version via initialize is -32022', obj?.error?.code === -32022);
+    check('unsupported version ASSERTED via _meta is 400', res.status === 400, `got ${res.status}`);
+    check('unsupported version ASSERTED via _meta is -32022', obj?.error?.code === -32022,
+      `got ${obj?.error?.code}`);
   }
 
   // (6) Per-request `_meta` (carried item (1)) — both keys required on modern-era requests,

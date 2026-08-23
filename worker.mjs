@@ -262,16 +262,40 @@ function requestMeta(body) {
 // while the same version through initialize correctly 400'd. Folding the header
 // in HERE routes it through the one -32022 path 728-A already built, rather
 // than standing up a second negotiation code path.
-function requestedProtocolVersion(request, body) {
+function protocolVersionSources(request, body) {
   const fromHeader = request?.headers?.get("mcp-protocol-version");
-  if (typeof fromHeader === "string" && fromHeader !== "") return fromHeader;
   const fromMeta = requestMeta(body)?.[META_PROTOCOL_VERSION];
-  if (typeof fromMeta === "string") return fromMeta;
-  if (body?.method === "initialize") {
-    const fromInit = body?.params?.protocolVersion;
-    if (typeof fromInit === "string") return fromInit;
-  }
-  return null;
+  const fromInit =
+    body?.method === "initialize" ? body?.params?.protocolVersion : undefined;
+  return {
+    header: typeof fromHeader === "string" && fromHeader !== "" ? fromHeader : null,
+    meta: typeof fromMeta === "string" ? fromMeta : null,
+    init: typeof fromInit === "string" ? fromInit : null,
+  };
+}
+
+function requestedProtocolVersion(request, body) {
+  const src = protocolVersionSources(request, body);
+  return src.header ?? src.meta ?? src.init;
+}
+
+// AL-MCP-NEGOTIATE: an ASSERTION is the modern way a client states its version
+// -- the SEP-2243 header, or params._meta. Those two are held to -32022, because
+// a client that asserts a version has already committed to speaking it and there
+// is nothing left to negotiate.
+//
+// `initialize`'s params.protocolVersion is NOT an assertion. It is the legacy
+// PROPOSAL half of a negotiation, and the lifecycle spec answers a proposal the
+// server cannot meet with a version the server DOES support, letting the client
+// decide whether to continue. AL-MCP-728-A routed the proposal through the
+// assertion path, which 400'd 2024-11-05 and 2025-03-26 -- the original spec
+// version and the widely deployed middle one -- so a large share of the
+// third-party installed base never reached tools/list. S5's actual requirement
+// is "never ECHO a version you do not implement", which negotiating DOWN to
+// 2025-06-18 satisfies without breaking the handshake.
+function assertedProtocolVersion(request, body) {
+  const src = protocolVersionSources(request, body);
+  return src.header ?? src.meta;
 }
 
 // SEP-2243 required headers
@@ -444,6 +468,24 @@ function modernInitializeResult() {
   };
 }
 
+// A client whose proposed version this server does not implement is answered
+// with the best version it DOES implement for that client's era. Same shape as
+// the SDK's own legacy initialize result, plus the deprecation notice stampResult
+// would have attached, so the client sees no difference beyond the version.
+function negotiatedInitializeResult() {
+  return {
+    protocolVersion: LEGACY_PROTOCOL_VERSION,
+    capabilities: SERVER_CAPABILITIES,
+    serverInfo: { ...SERVER_META },
+    instructions: SERVER_INSTRUCTIONS,
+    resultType: "complete",
+    _meta: {
+      [META_SERVER_INFO]: SERVER_INFO_META,
+      [META_DEPRECATION]: LEGACY_DEPRECATION_NOTICE,
+    },
+  };
+}
+
 // Returns a Response to send instead of running the SDK, or null to continue.
 function interceptProtocol(request, body) {
   if (!body || typeof body !== "object") return null;
@@ -451,18 +493,19 @@ function interceptProtocol(request, body) {
   const isRequest = id !== undefined && id !== null;
   const method = body.method;
 
-  // Version negotiation ahead of the SDK's negotiate-down. Never echo a version
-  // we do not implement. `asked` now also covers the MCP-Protocol-Version
-  // header, so a header assertion rejects through this same -32022 path instead
-  // of slipping past unvalidated (AL-MCP-728-B carried item (2)).
+  // Version handling ahead of the SDK's negotiate-down. Never echo a version we
+  // do not implement. Only an ASSERTED version (SEP-2243 header, params._meta)
+  // rejects with -32022 -- the header path AL-MCP-728-B carried item (2) built.
+  // An `initialize` PROPOSAL negotiates instead; see assertedProtocolVersion.
   const asked = requestedProtocolVersion(request, body);
-  if (asked !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(asked)) {
+  const asserted = assertedProtocolVersion(request, body);
+  if (asserted !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(asserted)) {
     return jsonRpcError(
       id,
       -32022,
-      `Unsupported protocol version: ${asked}`,
+      `Unsupported protocol version: ${asserted}`,
       400,
-      { supported: SUPPORTED_PROTOCOL_VERSIONS, requested: asked }
+      { supported: SUPPORTED_PROTOCOL_VERSIONS, requested: asserted }
     );
   }
 
@@ -506,8 +549,18 @@ function interceptProtocol(request, body) {
     return jsonRpcResult(id, discoverResult());
   }
 
-  if (method === "initialize" && asked === PROTOCOL_VERSION) {
-    return jsonRpcResult(id, modernInitializeResult());
+  if (method === "initialize") {
+    // A 2026-07-28 client that still opens with `initialize` is answered with
+    // 2026-07-28 rather than the SDK's negotiate-down.
+    if (asked === PROTOCOL_VERSION) {
+      return jsonRpcResult(id, modernInitializeResult());
+    }
+    // A proposal this server does not implement (2024-11-05, 2025-03-26, or an
+    // unknown string) is answered with the version it does implement. The SDK
+    // path keeps handling the exactly-supported legacy case.
+    if (asked !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(asked)) {
+      return jsonRpcResult(id, negotiatedInitializeResult());
+    }
   }
 
   // Unknown tool is a PROTOCOL error -- a JSON-RPC error object with -32602,

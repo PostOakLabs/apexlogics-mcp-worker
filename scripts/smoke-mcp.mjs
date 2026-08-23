@@ -25,6 +25,7 @@ const TIMEOUT = Number(process.env.MCP_SMOKE_TIMEOUT_MS ?? 15000);
 
 const MODERN = '2026-07-28';
 const LEGACY = '2025-06-18';
+const SUPPORTED = [MODERN, LEGACY];
 const ACCEPT = 'application/json, text/event-stream';
 const EXPECTED_TOOLS = 6;
 
@@ -222,12 +223,47 @@ async function versionRejection() {
       { jsonrpc: '2.0', id: 401, method: 'tools/list', params: {} }),
     401, 'unsupported version via HEADER');
 
-  await assertRejected(
-    await post({}, { jsonrpc: '2.0', id: 402, method: 'initialize',
-      params: { protocolVersion: bad, capabilities: {}, clientInfo: { name: 'ci-smoke', version: '1' } } }),
-    402, 'unsupported version via initialize');
+  // AL-MCP-NEGOTIATE: `initialize` is a PROPOSAL, not an assertion. A version the
+  // server does not implement must come back 200 carrying a version the client can
+  // act on -- never a 400. This suite previously only ever proposed versions the
+  // server liked, so the regression that 400'd every 2024-11-05 and 2025-03-26
+  // client shipped green. These assertions are the reason it cannot happen twice.
+  let negotiatedId = 402;
+  const assertNegotiated = async (proposed, expected) => {
+    const id = negotiatedId++;
+    const res = await post({}, { jsonrpc: '2.0', id, method: 'initialize',
+      params: { protocolVersion: proposed, capabilities: {}, clientInfo: { name: 'ci-smoke', version: '1' } } });
+    const text = await res.clone().text();
+    must(res.status === 200,
+      `initialize at ${proposed} returned HTTP ${res.status}, expected 200: ${text.slice(0, 200)}`);
+    const obj = await readJson(res, `initialize ${proposed}`);
+    must(!obj?.error,
+      `initialize at ${proposed} errored ${obj?.error?.code}: ${obj?.error?.message}`);
+    const got = obj?.result?.protocolVersion;
+    must(got === expected,
+      `initialize at ${proposed} answered protocolVersion ${got}, expected ${expected}`);
+    must(SUPPORTED.includes(got),
+      `initialize at ${proposed} echoed unsupported version ${got}`);
+    must(obj?.result?.serverInfo?.name, `initialize at ${proposed} returned no serverInfo`);
+    return got;
+  };
 
-  return { code: -32022 };
+  await assertNegotiated('2024-11-05', LEGACY);
+  await assertNegotiated('2025-03-26', LEGACY);
+  await assertNegotiated(LEGACY, LEGACY);
+  await assertNegotiated(MODERN, MODERN);
+
+  // A real call has to work after the oldest handshake, not just the handshake itself.
+  const call = await post({}, { jsonrpc: '2.0', id: 420, method: 'tools/call',
+    params: { name: 'find_tool', arguments: { query: 'loan' } } });
+  must(call.status === 200, `tools/call after a 2024-11-05 handshake returned HTTP ${call.status}`);
+  const callObj = await readJson(call, 'tools/call after legacy handshake');
+  must(!callObj?.error,
+    `tools/call after a 2024-11-05 handshake errored ${callObj?.error?.code}: ${callObj?.error?.message}`);
+  must(Array.isArray(callObj?.result?.content) && callObj.result.content.length > 0,
+    'tools/call after a 2024-11-05 handshake returned no content');
+
+  return { code: -32022, negotiated: ['2024-11-05', '2025-03-26'] };
 }
 
 // ── (6) Per-request _meta (carried item (1)) ─────────────────────────────────
@@ -293,7 +329,7 @@ async function errorShapes() {
       console.log(`✓ SEP-2243 rejections OK — missing / mismatched / invalid-char all 400 + ${sep.code}; base64 sentinel decodes before comparing`);
 
       const ver = await versionRejection();
-      console.log(`✓ version rejection OK — HTTP 400 + ${ver.code} + data.supported/data.requested + id preserved, on both the header path and initialize`);
+      console.log(`✓ version handling OK — header path 400 + ${ver.code} + data.supported/data.requested + id preserved; initialize NEGOTIATES ${ver.negotiated.join(', ')} down to ${LEGACY} with 200 + a working tools/call`);
 
       const meta = await metaEnforcement();
       console.log(`✓ modern _meta enforcement OK — missing required fields are 400 + ${meta.code}`);
