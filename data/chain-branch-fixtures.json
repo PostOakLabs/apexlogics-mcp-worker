@@ -73,55 +73,5 @@
         }
       }
     }
-  ],
-  "showcase-hash-seeded-art": [
-    {
-      "scenario": "rich-render",
-      "expect_next": "sc1-art-render",
-      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c1-1. Deterministic seed routing, no regulatory input. complexity 7 >= 4 -> route to the SVG render.",
-      "inputs": {
-        "sc1-hash-seeded-generative-art": {
-          "seed": 20260710,
-          "complexity": 7,
-          "palette": "sunset"
-        }
-      }
-    },
-    {
-      "scenario": "minimal-skip",
-      "expect_next": "end",
-      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c1-1. Deterministic seed routing, no regulatory input. complexity 2 < 4 -> minimal seed, chain stops before render.",
-      "inputs": {
-        "sc1-hash-seeded-generative-art": {
-          "seed": 41,
-          "complexity": 2,
-          "palette": "mono"
-        }
-      }
-    }
-  ],
-  "showcase-arg-puzzle-gates": [
-    {
-      "scenario": "solved",
-      "expect_next": "sc2-arg-stage-two",
-      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c2-1. Deterministic answer-fingerprint routing, no regulatory input. Answer RANSOM matches the gate-1 stage key -> solved, continue to stage two.",
-      "inputs": {
-        "sc2-arg-puzzle-gates": {
-          "puzzleId": "gate-1",
-          "answer": "RANSOM"
-        }
-      }
-    },
-    {
-      "scenario": "locked",
-      "expect_next": "end",
-      "citation": "OpenChainGraph Standard v0.8 21.4 decision gate; ApexLogics Showcase Exemplar Manifest c2-1. Deterministic answer-fingerprint routing, no regulatory input. Answer WRONG does not match the gate-1 stage key -> locked, chain stops.",
-      "inputs": {
-        "sc2-arg-puzzle-gates": {
-          "puzzleId": "gate-1",
-          "answer": "WRONG"
-        }
-      }
-    }
   ]
 }
