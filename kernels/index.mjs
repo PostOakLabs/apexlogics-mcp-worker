@@ -36,6 +36,7 @@ import * as t129 from './129-promotion-vs-job-hop.kernel.mjs';
 import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
 import * as t36 from './36-workforce-pell-eligibility-screener.kernel.mjs';
 import * as t102 from './102-grad-loan-cap-gap-planner.kernel.mjs';
+import * as t22 from './22-student-loan-repayment-optimizer.kernel.mjs';
 import * as tSc1 from './sc1-hash-seeded-generative-art.kernel.mjs';
 import * as tSc2 from './sc2-arg-puzzle-gates.kernel.mjs';
 
@@ -75,6 +76,7 @@ export const KERNELS = {
   '38-early-career-net-worth-engine': t38,
   '36-workforce-pell-eligibility-screener': t36,
   '102-grad-loan-cap-gap-planner': t102,
+  '22-student-loan-repayment-optimizer': t22,
 };
 
 export function getKernel(tool_id) {
