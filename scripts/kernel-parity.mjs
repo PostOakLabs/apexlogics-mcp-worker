@@ -598,6 +598,23 @@ const CASES = [
     goldenGeneratedAt: '2026-07-05T00:00:00.000Z',
   },
   {
+    // _cgDomain-mandate-filter variant (AL-KX-1): calcAll() is the compute entry, buildAP2()
+    // the export preimage. Standard/Graduated always eligible; Extended requires bal>=30000;
+    // IBR/PAYE/ICR driven by AGI. Defaults-only scenario (loanType='ug', borrowerEra='new' —
+    // no DOM path can change them, see kernel header note).
+    tool_id: '22-student-loan-repayment-optimizer',
+    calcFn: 'calcAll',
+    toolHtml: REPO + 'tools/22-student-loan-repayment-optimizer/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/22-student-loan-repayment-optimizer.golden.json',
+    fields: {
+      balance: 45000, rate: 6.5, agi: 55000, family: 2, income_growth: 3,
+    },
+    kernelInputs: {
+      balance: 45000, rate: 6.5, agi: 55000, family: 2, income_growth: 3,
+    },
+    goldenGeneratedAt: '2026-09-03T00:00:00.000Z',
+  },
+  {
     // Showcase c1-1. Pure integer LCG (Math.imul) — browser tool and kernel are
     // trivially bit-identical. Complexity 7 >= 4 → the chain gate routes to render.
     tool_id: 'sc1-hash-seeded-generative-art',
@@ -640,6 +657,26 @@ function permissiveProxy() {
 
 function makeDocument(fields) {
   const PERM = permissiveProxy();
+  const dlState = { lastDownload: null };
+  // Some tools download via `document.createElement('a')` + `a.href = 'data:...'` +
+  // `a.click()` (no dlFile()/Blob() hook) — capture that path too.
+  const anchorProxy = () => {
+    let href = '';
+    const target = function () {};
+    return new Proxy(target, {
+      get(_t, prop) {
+        if (prop === 'href') return href;
+        if (prop === 'click') return () => {
+          const m = /^data:[^,]*,([\s\S]*)$/.exec(href);
+          if (m) { try { dlState.lastDownload = decodeURIComponent(m[1]); } catch (_e) { dlState.lastDownload = m[1]; } }
+        };
+        return PERM[prop];
+      },
+      set(_t, prop, v) { if (prop === 'href') href = v; return true; },
+      apply() { return PERM; },
+      has() { return true; },
+    });
+  };
   const elFor = (id) => {
     const has = Object.prototype.hasOwnProperty.call(fields, id);
     const val = has ? String(fields[id]) : '';
@@ -660,13 +697,14 @@ function makeDocument(fields) {
     getElementById: elFor,
     querySelector: () => PERM,
     querySelectorAll: () => [],
-    createElement: () => PERM,
+    createElement: (tag) => (tag === 'a' ? anchorProxy() : PERM),
     getElementsByClassName: () => [],
     getElementsByTagName: () => [],
     body: PERM,
     documentElement: PERM,
     addEventListener: () => {},
     createElementNS: () => PERM,
+    __dlState: dlState,
   };
 }
 
@@ -709,11 +747,13 @@ async function runBrowserArtifact(caseDef) {
   sandbox.globalThis = sandbox;
 
   // After the tool's code, capture the artifact JSON instead of triggering a download,
-  // by TWO universal hooks (defined INSIDE the vm so their globalThis is the sandbox):
+  // by THREE universal hooks (defined INSIDE the vm so their globalThis is the sandbox):
   //   - reassign dlFile   → tools that download via the dlFile() helper (e.g. tool-40).
   //   - reassign Blob      → tools that build `new Blob([JSON.stringify(...)])` inline
   //                          then a.click() (e.g. tool-129). exportAP2 makes exactly one
   //                          Blob, so the last capture is the artifact.
+  //   - document.createElement('a') + a.href='data:...' + a.click() (e.g. tool-22) →
+  //                          captured by makeDocument's anchorProxy into __dlState.
   // Then an async runner walks the REAL path: calculate() populates _lastResult(s),
   // exportAP2() assembles the exact preimage + hash.
   const harness = `
@@ -722,7 +762,7 @@ globalThis.Blob = function (parts) { try { globalThis.__captured = Array.isArray
 globalThis.__run = async function () {
   ${calcFn}();
   await exportAP2();
-  return globalThis.__captured;
+  return globalThis.__captured || (document.__dlState && document.__dlState.lastDownload) || null;
 };
 `;
   const context = vm.createContext(sandbox);
