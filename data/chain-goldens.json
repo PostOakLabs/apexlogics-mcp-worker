@@ -86,18 +86,16 @@
       ]
     },
     "showcase-arg-puzzle-gates": {
-      "composite_execution_hash": "47670480903beedc2cc352621e7e31e3698ea8f6fb148ff9dbd9a321cf813eb8",
-      "steps_ran": 2,
+      "composite_execution_hash": "7eb4d86a0c686ab33bbb07ecfbf2d1a25ce5ae36d3b8b25402c84ea1088be1b7",
+      "steps_ran": 1,
       "step_tool_ids": [
-        "sc2-arg-puzzle-gates",
         "sc2-arg-puzzle-gates"
       ]
     },
     "showcase-hash-seeded-art": {
-      "composite_execution_hash": "a94634cf154bde1bcffe08d735f63ab2dc4402750b37ad035d78883daa660834",
-      "steps_ran": 2,
+      "composite_execution_hash": "ef47f4a723e67bb62ea8ea22fd34b6bd43b175b5874948bca8b443dcbc044a30",
+      "steps_ran": 1,
       "step_tool_ids": [
-        "sc1-hash-seeded-generative-art",
         "sc1-hash-seeded-generative-art"
       ]
     },
