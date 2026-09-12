@@ -17,6 +17,7 @@ import { executionHash } from "./_hash.mjs";
 import { runChain } from "./run_chain.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
+import promptsData from "./data/prompts.json" with { type: "json" };
 import chaingraphData from "./data/chaingraph/chaingraph.json" with { type: "json" };
 import pkg from "./package.json" with { type: "json" };
 
@@ -50,7 +51,14 @@ const META_PROTOCOL_VERSION = "io.modelcontextprotocol/protocolVersion";
 const META_SERVER_INFO = "io.modelcontextprotocol/serverInfo";
 const META_DEPRECATION = "org.apexlogics/protocolDeprecation";
 
-const SERVER_CAPABILITIES = { tools: { listChanged: true } };
+// prompts (AL-PROMPTS-MCP): the example-prompt catalog is served through the
+// same SDK dispatch as tools -- both supported protocol eras (2026-07-28,
+// 2025-06-18) support prompts, so one registration path covers every client
+// and there is no era fork.
+const SERVER_CAPABILITIES = {
+  tools: { listChanged: true },
+  prompts: { listChanged: true },
+};
 
 const SERVER_INFO_META = {
   name: SERVER_META.name,
@@ -79,11 +87,13 @@ const KNOWN_METHODS = new Set([
   "ping",
   "tools/list",
   "tools/call",
+  "prompts/list",
+  "prompts/get",
   "server/discover",
 ]);
 
 const SERVER_INSTRUCTIONS =
-  `ApexLogics is a ${CALC_TOOL_COUNT}-tool edtech and careertech suite, plus ${SHOWCASE_COUNT} OCG-Industries showcase exemplars. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog (tools + showcase); build_workflow_links returns deep-link workflow pages.`;
+  `ApexLogics is a ${CALC_TOOL_COUNT}-tool edtech and careertech suite, plus ${SHOWCASE_COUNT} OCG-Industries showcase exemplars. Use find_tool for a ranked search when you need one specific calculator, find_chain for a ranked search when the goal spans several tools, and run_chain to execute a chain server-side. list_apexlogics_tools returns the full unranked catalog (tools + showcase); build_workflow_links returns deep-link workflow pages. prompts/list serves ${promptsData.count} copy-ready example prompts; prompts/get returns one by id.`;
 
 // ── OCG Standard §4 — execution-hash verification ────────────────────────────
 // Preimage canonicalization is the vendored SSOT _hash.mjs (RFC 8785 JCS +
@@ -840,6 +850,32 @@ function buildServer(env) {
       return { content: [{ type: "text", text: JSON.stringify(await handleRunChain(args), null, 2) }] };
     }
   );
+
+  // ── prompts/list + prompts/get (AL-PROMPTS-MCP) ─────────────────────────────
+  // Registered through the SAME SDK dispatch as tools (one code path, both
+  // protocol eras). The catalog is vendored verbatim from
+  // apexlogics.org/mcp/showcase-prompts.json by generate.mjs; the committed
+  // data/prompts.json is only a deploy fallback and scripts/check-prompts-parity.mjs
+  // asserts committed-vs-live parity in CI. Bodies are self-contained numbered
+  // steps, so prompts/get returns the body as the user message; any supplied
+  // argument values are appended as an "Input values" block rather than
+  // interpolated, because the bodies cite concrete example numbers by design.
+  for (const p of promptsData.prompts) {
+    const argsShape = {};
+    for (const a of p.arguments ?? []) {
+      argsShape[a.name] = z.string().optional().describe(a.description);
+    }
+    const config = { title: p.title, description: p.one_line };
+    if (Object.keys(argsShape).length > 0) config.argsSchema = argsShape;
+    server.registerPrompt(p.id, config, (args) => {
+      let text = p.body;
+      const supplied = Object.entries(args ?? {}).filter(([, v]) => v !== undefined && v !== "");
+      if (supplied.length > 0) {
+        text += "\n\nInput values:\n" + supplied.map(([k, v]) => `- ${k}: ${v}`).join("\n");
+      }
+      return { messages: [{ role: "user", content: { type: "text", text } }] };
+    });
+  }
 
   return server;
 }

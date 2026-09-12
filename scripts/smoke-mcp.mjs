@@ -152,6 +152,50 @@ async function modernPath() {
   return { tools: tools.length, supported: sv.length };
 }
 
+// ── (3b) Prompts — prompts/list + a REAL prompts/get (AL-PROMPTS-MCP, SO 9) ──
+// The catalog is vendored from the site's mcp/showcase-prompts.json; the count
+// and the known id are asserted for real, never inferred from the fixture alone.
+// Legacy-era control proves the shared dispatch serves both eras with no fork.
+const EXPECTED_PROMPTS = 31;
+const KNOWN_PROMPT = 'same-math-three-ways';
+
+async function promptsPath() {
+  const list = await modernCall(401, 'prompts/list', {});
+  must(list.status === 200, `modern prompts/list returned HTTP ${list.status}, expected 200`);
+  must(!list.obj?.error, `modern prompts/list error ${list.obj?.error?.code}: ${list.obj?.error?.message}`);
+  const prompts = list.obj?.result?.prompts ?? [];
+  must(prompts.length === EXPECTED_PROMPTS, `modern prompts/list returned ${prompts.length} prompts, expected ${EXPECTED_PROMPTS}`);
+  const known = prompts.find((p) => p.name === KNOWN_PROMPT);
+  must(known, `modern prompts/list is missing known prompt "${KNOWN_PROMPT}"`);
+  must(known.description && known.title, `prompt "${KNOWN_PROMPT}" is missing title/description`);
+
+  // A REAL prompts/get, never prompts/list alone (SO 9).
+  const get = await modernCall(402, 'prompts/get', { name: KNOWN_PROMPT });
+  must(get.status === 200, `modern prompts/get returned HTTP ${get.status}, expected 200`);
+  must(!get.obj?.error, `modern prompts/get error ${get.obj?.error?.code}: ${get.obj?.error?.message}`);
+  const msg = get.obj?.result?.messages?.[0];
+  must(msg?.role === 'user' && msg?.content?.type === 'text' && msg?.content?.text,
+    'modern prompts/get did not return a user text message');
+
+  // Argument override actually lands in the rendered message.
+  const withArgs = await modernCall(403, 'prompts/get', {
+    name: 'should-i-take-this-offer',
+    arguments: { offer_a_salary: '100000' },
+  });
+  const atext = withArgs.obj?.result?.messages?.[0]?.content?.text ?? '';
+  must(withArgs.status === 200 && atext.includes('offer_a_salary: 100000'),
+    'modern prompts/get with arguments did not surface the supplied values');
+
+  // Legacy-era control: same catalog, bare header-less request.
+  const legacy = await post({}, { jsonrpc: '2.0', id: 404, method: 'prompts/list', params: {} });
+  must(legacy.status === 200, `legacy bare prompts/list returned HTTP ${legacy.status}, expected 200`);
+  const lobj = await readJson(legacy, 'legacy prompts/list');
+  must((lobj?.result?.prompts?.length ?? 0) === EXPECTED_PROMPTS,
+    `legacy bare prompts/list returned ${(lobj?.result?.prompts ?? []).length} prompts, expected ${EXPECTED_PROMPTS}`);
+
+  return { prompts: prompts.length };
+}
+
 // ── (4) SEP-2243 rejections — the three failure modes, one code ──────────────
 async function sep2243Rejections() {
   const assert400 = async (res, code, label) => {
@@ -377,6 +421,9 @@ async function pollForVersion() {
 
     const modern = await modernPath();
     console.log(`✓ modern path OK — no-initialize tools/list + real tools/call, ${modern.tools} tools, server/discover ${modern.supported} versions; all three SEP-2243 headers round-tripped through the edge (WAF forwards them)`);
+
+    const prompts = await promptsPath();
+    console.log(`✓ prompts OK — prompts/list ${prompts.prompts} prompts + REAL prompts/get (${KNOWN_PROMPT}) with argument override; legacy bare prompts/list serves the same catalog`);
 
     const sep = await sep2243Rejections();
     console.log(`✓ SEP-2243 rejections OK — missing / mismatched / invalid-char all 400 + ${sep.code}; base64 sentinel decodes before comparing`);
