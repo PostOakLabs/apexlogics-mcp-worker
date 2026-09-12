@@ -951,16 +951,34 @@ export default {
       const chainDepth = isToolCall ? (body?.params?.arguments?.chain_depth ?? 0) : null;
       const t0 = Date.now();
 
+      // prompts/get: params.arguments is OPTIONAL per the MCP spec, but the SDK's
+      // zod parse requires the object itself (z.object(shape).parse(undefined)
+      // rejects with -32602 "expected object, received undefined"). The transport
+      // consumes the raw request stream, so normalize at the wire: rebuild the
+      // request with arguments: {} when absent. One dispatch path, BOTH eras, no
+      // effect when arguments are sent. Found by the post-deploy smoke against
+      // 1.5.0 (v2778eaeb): prompts/get without arguments reddened.
+      let wireRequest = request;
+      if (body?.method === "prompts/get" && body?.params && body.params.arguments === undefined) {
+        const normalized = JSON.parse(JSON.stringify(body));
+        normalized.params.arguments = {};
+        wireRequest = new Request(request.url, {
+          method: "POST",
+          headers: request.headers,
+          body: JSON.stringify(normalized),
+        });
+      }
+
       // 2026-07-28 semantics the SDK cannot serve: version rejection,
       // server/discover, modern initialize, unknown-tool shape, unknown method.
-      const intercepted = interceptProtocol(request, body);
+      const intercepted = interceptProtocol(wireRequest, body);
       if (intercepted) return intercepted;
 
       try {
         const transport = new StatelessFetchTransport();
         const server = buildServer(env);
         await server.connect(transport);
-        const response = await transport.handleRequest(request);
+        const response = await transport.handleRequest(wireRequest);
 
         // Fire-and-forget Analytics Engine telemetry — never blocks the response.
         // Salted, non-reversible caller hash (no PII). Mirrors ainumbers-mcp / ocs-mcp.
