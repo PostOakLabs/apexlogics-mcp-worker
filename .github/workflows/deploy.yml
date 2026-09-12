@@ -129,18 +129,32 @@ jobs:
       # ── Verify fixture sanity ───────────────────────────────────────────────
       - name: Verify fixtures
         run: |
-          if [ ! -f data/tools.json ] || [ ! -f data/workflows.json ]; then
+          if [ ! -f data/tools.json ] || [ ! -f data/workflows.json ] || [ ! -f data/prompts.json ]; then
             echo "::error::generate.mjs did not produce expected fixtures"
             exit 1
           fi
           TOOL_COUNT=$(python3 -c "import json; d=json.load(open('data/tools.json')); print(len(d))")
           WF_COUNT=$(python3 -c "import json; d=json.load(open('data/workflows.json')); print(len(d))")
+          PROMPT_COUNT=$(python3 -c "import json; d=json.load(open('data/prompts.json')); print(len(d['prompts']))")
           echo "✅ data/tools.json — $TOOL_COUNT tools"
           echo "✅ data/workflows.json — $WF_COUNT workflow chains"
+          echo "✅ data/prompts.json — $PROMPT_COUNT prompts (count field $(python3 -c "import json; print(json.load(open('data/prompts.json'))['count'])"))"
           if [ "$TOOL_COUNT" -lt 50 ]; then
             echo "::error::Only $TOOL_COUNT tools in fixture — expected ≥50. Registry fetch may have failed."
             exit 1
           fi
+          if [ "$PROMPT_COUNT" -lt 1 ]; then
+            echo "::error::No prompts in fixture — showcase-prompts fetch may have failed with no committed fallback."
+            exit 1
+          fi
+
+      # ── Site↔worker prompt parity (AL-PROMPTS-MCP — blocking) ───────────────
+      # data/prompts.json is vendored from apexlogics.org/mcp/showcase-prompts.json;
+      # this asserts the committed copy still matches the live site catalog
+      # (count + ids + every reader-facing field). Cache-busted fetch, UTF-8
+      # decode; network unreachable skips with a warning, any drift fails.
+      - name: 🔁 Prompts parity gate (site ↔ worker vendored copy)
+        run: node scripts/check-prompts-parity.mjs
 
       # ── Staleness check ─────────────────────────────────────────────────────
       # Warns (does not fail) if committed data/ differs from freshly generated
@@ -162,6 +176,7 @@ jobs:
         run: |
           TOOL_COUNT=$(python3 -c "import json; d=json.load(open('data/tools.json')); print(len(d))" 2>/dev/null || echo "N/A")
           WF_COUNT=$(python3 -c "import json; d=json.load(open('data/workflows.json')); print(len(d))" 2>/dev/null || echo "N/A")
+          PROMPT_COUNT=$(python3 -c "import json; d=json.load(open('data/prompts.json')); print(len(d['prompts']))" 2>/dev/null || echo "N/A")
           {
             echo "## MCP Worker pre-flight summary"
             echo ""
@@ -169,6 +184,7 @@ jobs:
             echo "|---|---|"
             echo "| Tools in fixture | $TOOL_COUNT |"
             echo "| Workflow chains | $WF_COUNT |"
+            echo "| Prompts in fixture | $PROMPT_COUNT |"
             echo "| Branch | \`${{ github.ref_name }}\` |"
             echo "| Commit | \`${{ github.sha }}\` |"
             echo "| Cloudflare deploy | via deploy job below (GitHub Actions) |"

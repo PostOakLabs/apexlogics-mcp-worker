@@ -32,6 +32,14 @@ Add to any MCP-compatible client config:
 
 `find_tool` runs a BM25 search over the live tool index - start there rather than hardcoding tool names, since counts and slugs drift as the suite grows.
 
+## Prompts (AL-PROMPTS-MCP)
+
+`prompts/list` serves the 31-prompt example catalog and `prompts/get` returns one by id (e.g. `same-math-three-ways`). The catalog is vendored verbatim from the site's [`mcp/showcase-prompts.json`](https://apexlogics.org/mcp/showcase-prompts.json) - `generate.mjs` re-fetches it on every deploy (cache-busted, UTF-8 decoded), the committed `data/prompts.json` is only a deploy fallback, and `scripts/check-prompts-parity.mjs` fails CI if the committed copy drifts from the live site catalog. There is no hand-synced second copy.
+
+Prompt bodies are self-contained numbered steps citing concrete example values, so `prompts/get` returns the body as the prompt text and appends any supplied argument values as an "Input values" block instead of interpolating them.
+
+**Protocol eras:** prompts are served through the same SDK dispatch as tools. Both supported protocol versions (2026-07-28 and the legacy 2025-06-18 window) include MCP prompts, so one code path serves every client - legacy clients are not forked off, and modern-era requests carry the SEP-2243 headers exactly as `tools/*` does (a mismatch is `-32020` before dispatch).
+
 ## What's Exposed
 
 Each ApexLogics calculator is wrapped as an MCP tool: deterministic inputs in, a structured result plus an AP2 policy-mandate export out. Tool/kernel counts are **not** hardcoded here - the live index at `find_tool` and the site's [`suite-registry.json`](https://apexlogics.org/suite-registry.json) are the source of truth.
@@ -51,7 +59,7 @@ The remaining 23 worker kernels carry an honest `compute_proof_ready: "deferred"
 apexlogics-mcp-worker/
 ├── worker.mjs         # MCP server entrypoint (Cloudflare Worker)
 ├── run_chain.mjs       # Chain execution over kernel graph
-├── generate.mjs         # Regenerates tools.json / find_tool index from live suite-registry.json
+├── generate.mjs         # Regenerates tools.json / workflows.json / prompts.json from live site JSON
 ├── kernels/            # Deterministic calculator kernels (.kernel.mjs) + shared _detmath/_gateval/_computeproof
 ├── data/                 # Chain fixtures, goldens, chaingraph.json
 ├── scripts/              # CI gates (kernel-parity, gate-static, gate-semantics, branch coverage)
