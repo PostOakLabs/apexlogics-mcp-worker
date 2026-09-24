@@ -85,7 +85,10 @@ try {
     description: t.description || "",
     category: t.category || "",
     slug: t.slug,
-    ap2_mandate_type: t.ap2_mandate_type || null,
+    // Registry field is ap2_mandate_types (plural array); the singular read here
+    // shipped an all-null catalog to agents until caught 2026-09-24
+    // (ROOT-CAUSE-REVIEW-2026-09-24, RC-3). Serve the primary (first) type.
+    ap2_mandate_type: Array.isArray(t.ap2_mandate_types) && t.ap2_mandate_types.length > 0 ? t.ap2_mandate_types[0] : null,
     ap2_export: t.ap2_export || false,
   }));
   console.log(`✓ Fetched ${tools.length} tools from live registry`);
@@ -104,6 +107,18 @@ try {
         `Original error: ${e.message}`
     );
   }
+}
+
+// RC-3 (ROOT-CAUSE-REVIEW-2026-09-24): the all-null mandate-type catalog must fail
+// the generate step, not deploy. Applies to the fallback path too — a stale fixture
+// that fails this check should block the deploy, not ship silently.
+const withMandateType = tools.filter((t) => t.ap2_mandate_type).length;
+if (tools.length > 0 && withMandateType / tools.length < 0.99) {
+  throw new Error(
+    `Mandate-type mapping regression: only ${withMandateType}/${tools.length} rows ` +
+      `have a non-null ap2_mandate_type (expected >=99%). generate.mjs must read ` +
+      `ap2_mandate_types[] (plural) from the registry — refusing to write fixtures.`
+  );
 }
 
 writeFileSync("./data/tools.json", JSON.stringify(tools, null, 2));
