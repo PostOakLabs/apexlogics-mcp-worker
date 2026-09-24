@@ -12,6 +12,12 @@
 #   • Push to master → preflight runs, then deploy (gated on preflight passing)
 #   • Pull request    → preflight only, no deploy
 #   • workflow_dispatch → manual trigger; dry_run skips the fixture staleness check
+#   • repository_dispatch (site-registry-changed) → fired by the site repo's
+#     deploy workflow (RC-3b, ROOT-CAUSE-REVIEW-2026-09-24) whenever main
+#     deploys, so the served catalog regenerates from the fresh registry
+#     automatically instead of racing the next manual worker push. Requires
+#     WORKER_DISPATCH_TOKEN (fine-grained PAT, Actions: write) in the SITE
+#     repo's secrets.
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Pre-flight — MCP Worker
@@ -21,6 +27,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  repository_dispatch:
+    types: [site-registry-changed]
   workflow_dispatch:
     inputs:
       dry_run:
@@ -198,7 +206,7 @@ jobs:
   deploy:
     name: Deploy to Cloudflare Workers
     needs: preflight
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'repository_dispatch'
     runs-on: ubuntu-latest
 
     steps:
