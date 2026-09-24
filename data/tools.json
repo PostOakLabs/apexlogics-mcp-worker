@@ -5,7 +5,7 @@
     "description": "Model total compensation across base, bonus, equity, and benefits for up to four offers or scenarios.",
     "category": "compensation_offers",
     "slug": "25-total-compensation-suite",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "total_comp_record",
     "ap2_export": true
   },
   {
@@ -14,7 +14,7 @@
     "description": "Calculate the NPV and payback period of professional certifications against career earnings uplift.",
     "category": "education_path_roi",
     "slug": "01-credential-roi-suite",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "credential_roi_evaluation",
     "ap2_export": true
   },
   {
@@ -23,7 +23,7 @@
     "description": "Quantify lifetime economic value of human capital across education, career path, and retirement scenarios.",
     "category": "licensing_credentials",
     "slug": "11-human-capital-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "human_capital_assessment",
     "ap2_export": true
   },
   {
@@ -32,7 +32,7 @@
     "description": "Model income equivalency and net financial impact of relocating across 70 metros with state tax and cost-of-living adjustment.",
     "category": "compensation_offers",
     "slug": "26-geo-fiscal-arbitrage-simulator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "geo_arbitrage_record",
     "ap2_export": true
   },
   {
@@ -41,7 +41,7 @@
     "description": "Project 529 growth, state tax deductions, and college cost coverage across contribution and market scenarios.",
     "category": "student_finance_debt",
     "slug": "24-education-savings-projector",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "education_savings_record",
     "ap2_export": true
   },
   {
@@ -50,7 +50,7 @@
     "description": "Score automation-displacement risk by occupation and model the ROI of upskilling or reskilling investments.",
     "category": "career_transition_mobility",
     "slug": "06-career-resilience-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "automation_exposure_score",
     "ap2_export": true
   },
   {
@@ -59,7 +59,7 @@
     "description": "Generate a WIOA-aligned ROI report for workforce development programs using credential and earnings outcome data.",
     "category": "workforce_development",
     "slug": "15-workforce-board-roi-report",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "workforce_program_roi",
     "ap2_export": true
   },
   {
@@ -68,7 +68,7 @@
     "description": "Model the financial cost and break-even timeline of switching careers or industries.",
     "category": "career_transition_mobility",
     "slug": "07-career-transition-suite",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "career_pivot_assessment",
     "ap2_export": true
   },
   {
@@ -77,7 +77,7 @@
     "description": "Map US visa pathways and historical approval rates for your occupation, nationality, and career timeline.",
     "category": "immigration_visa",
     "slug": "27-visa-strategy-navigator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "visa_strategy_record",
     "ap2_export": true
   },
   {
@@ -86,7 +86,7 @@
     "description": "Check reciprocity and endorsement pathways for licensed professions across all 50 states.",
     "category": "licensing_credentials",
     "slug": "28-professional-license-reciprocity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "license_reciprocity_record",
     "ap2_export": true
   },
   {
@@ -95,7 +95,7 @@
     "description": "Identify apprenticeship programs by occupation and state with wage progression and credential outcome data.",
     "category": "workforce_development",
     "slug": "16-apprenticeship-matcher",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "apprenticeship_match_record",
     "ap2_export": true
   },
   {
@@ -104,7 +104,7 @@
     "description": "Calculate net ROI of scholarship applications by award value, time invested, and estimated win probability.",
     "category": "student_finance_debt",
     "slug": "14-scholarship-roi-tracker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "scholarship_pipeline_plan",
     "ap2_export": true
   },
   {
@@ -113,7 +113,7 @@
     "description": "Compare federal repayment plans—IDR, PSLF, standard—by monthly payment, total cost, and forgiveness outcome.",
     "category": "student_finance_debt",
     "slug": "22-student-loan-repayment-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "loan_repayment_record",
     "ap2_export": true
   },
   {
@@ -122,7 +122,7 @@
     "description": "Estimate your Student Aid Index from income, assets, and household data under current FAFSA methodology.",
     "category": "student_finance_debt",
     "slug": "02-fafsa-sai-simulator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "fafsa_sai_estimate",
     "ap2_export": true
   },
   {
@@ -131,7 +131,7 @@
     "description": "Track continuing education credits against license renewal requirements by jurisdiction and credential type.",
     "category": "licensing_credentials",
     "slug": "12-cpd-credit-tracker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cpd_credit_record",
     "ap2_export": true
   },
   {
@@ -140,7 +140,7 @@
     "description": "Model total cost and study timeline for 32 professional exams including fees, prep costs, and retake probability.",
     "category": "licensing_credentials",
     "slug": "13-exam-cost-planner",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "exam_pathway_plan",
     "ap2_export": true
   },
   {
@@ -149,7 +149,7 @@
     "description": "Convert 1099 freelance rates to W-2 equivalents accounting for SE tax, benefits, and overhead costs.",
     "category": "compensation_offers",
     "slug": "23-freelance-1099-total-cost-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "freelance_total_cost_record",
     "ap2_export": true
   },
   {
@@ -158,7 +158,7 @@
     "description": "Compare health, HSA, FSA, and ancillary benefit elections by total annual cost and tax savings.",
     "category": "compensation_offers",
     "slug": "04-benefits-open-enrollment-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "benefits_election_record",
     "ap2_export": true
   },
   {
@@ -167,7 +167,7 @@
     "description": "Evaluate severance packages by cash value, COBRA cost, non-compete terms, and negotiation leverage.",
     "category": "career_transition_mobility",
     "slug": "08-severance-decision-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "severance_decision_record",
     "ap2_export": true
   },
   {
@@ -176,7 +176,7 @@
     "description": "Model multi-variable offer negotiations with counteroffer impact on total 3-year compensation.",
     "category": "compensation_offers",
     "slug": "05-offer-negotiation-suite",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "offer_negotiation_record",
     "ap2_export": true
   },
   {
@@ -185,7 +185,7 @@
     "description": "Compare graduate programs by tuition, opportunity cost, earnings uplift, and NPV break-even timeline.",
     "category": "education_path_roi",
     "slug": "03-graduate-school-roi-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "graduate_school_roi_record",
     "ap2_export": true
   },
   {
@@ -194,7 +194,7 @@
     "description": "Track job search channels by application volume, conversion rates, and time-to-offer ROI.",
     "category": "career_transition_mobility",
     "slug": "09-job-search-roi-tracker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "job_search_roi_record",
     "ap2_export": true
   },
   {
@@ -203,7 +203,7 @@
     "description": "Quantify the total financial cost of a career gap including forgone income, benefit loss, and reentry timeline.",
     "category": "career_transition_mobility",
     "slug": "10-career-break-reentry-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "career_break_record",
     "ap2_export": true
   },
   {
@@ -212,7 +212,7 @@
     "description": "Compare up to 4 MBA programs by COA, opportunity cost, post-MBA salary by specialization, payback, and NPV. 40+ programs. Policy Mandate inbound from AL-26; outbound to AL-30.",
     "category": "education_path_roi",
     "slug": "17-mba-program-fit-ranker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_roi_evaluation",
     "ap2_export": true
   },
   {
@@ -221,7 +221,7 @@
     "description": "ROI of test prep for GMAT/GRE/TOEFL/IELTS/LSAT/MCAT. Score gap + prep cost vs. admissions tier shift and scholarship lift. 2-tab tool.",
     "category": "education_path_roi",
     "slug": "18-test-prep-investment-analyzer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "test_prep_roi_record",
     "ap2_export": true
   },
   {
@@ -230,7 +230,7 @@
     "description": "F-1 visa costs, OPT/STEM OPT earnings window, H-1B rates FY2020-24, non-US program comparison. 2-tab tool. Legal disclaimer required.",
     "category": "education_path_roi",
     "slug": "19-international-student-cost-modeler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "international_student_cost_record",
     "ap2_export": true
   },
   {
@@ -239,7 +239,7 @@
     "description": "529 projection, SAI/EFC asset impact, COA by school tier, loan vs. gift split. Policy Mandate inbound from AL-17. 2-tab tool.",
     "category": "student_finance_debt",
     "slug": "20-parent-college-roi-planner",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "parent_college_roi_record",
     "ap2_export": true
   },
   {
@@ -248,7 +248,7 @@
     "description": "RSU vesting (cliff + graded), ISO/NSO intrinsic value, AMT flag, equity vs. cash equivalence, 3-offer total comp NPV stack. 2-tab. Legal disclaimer required.",
     "category": "compensation_offers",
     "slug": "21-equity-compensation-analyzer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "equity_compensation_record",
     "ap2_export": true
   },
   {
@@ -257,7 +257,7 @@
     "description": "Calculate salary premium and NPV of AI skill acquisition by role, tool set, and labor market.",
     "category": "compensation_offers",
     "slug": "29-ai-skills-premium-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ai_skills_premium_record",
     "ap2_export": true
   },
   {
@@ -266,7 +266,7 @@
     "description": "Compare federal GS/SES compensation to private-sector equivalents including FERS pension and full benefits.",
     "category": "compensation_offers",
     "slug": "30-federal-vs-private-comp-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "federal_comp_record",
     "ap2_export": true
   },
   {
@@ -275,7 +275,7 @@
     "description": "Model the NPV of trade apprenticeship versus four-year degree pathways by occupation and state.",
     "category": "education_path_roi",
     "slug": "31-trade-vs-degree-roi-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "education_path_record",
     "ap2_export": true
   },
   {
@@ -284,7 +284,7 @@
     "description": "Identify state tax obligations, reciprocity agreements, and nexus risk for remote and hybrid workers.",
     "category": "compensation_offers",
     "slug": "32-remote-work-tax-mapper",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "remote_tax_record",
     "ap2_export": true
   },
   {
@@ -293,7 +293,7 @@
     "description": "Screen non-compete clauses for enforceability risk by state law, role, and compensation threshold.",
     "category": "career_transition_mobility",
     "slug": "33-noncompete-risk-screener",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "noncompete_risk_record",
     "ap2_export": true
   },
   {
@@ -302,7 +302,7 @@
     "description": "Rank MD, JD, MBA, and other professional degrees by tuition, opportunity cost, and lifetime earnings NPV.",
     "category": "education_path_roi",
     "slug": "34-professional-degree-roi-ranker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "professional_degree_record",
     "ap2_export": true
   },
   {
@@ -311,7 +311,7 @@
     "description": "Convert military compensation (BAH, BAS, VA benefits) to civilian equivalent salary for job comparisons.",
     "category": "career_transition_mobility",
     "slug": "35-military-civilian-salary-bridge",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "military_civilian_record",
     "ap2_export": true
   },
   {
@@ -320,7 +320,7 @@
     "description": "Estimates Workforce Pell Grant award for short-term credential programs (150-599 clock hours, 8-14 weeks) under OBBBA P.L. 119-21 (effective July 1, 2026). Inputs: AGI or SAI, family size, dependency status, clock hours, weeks, occupation category. Outputs: estimated SAI, base Pell eligibility, proration ratio, award, lifetime usage note.",
     "category": "workforce_development",
     "slug": "36-workforce-pell-eligibility-screener",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "workforce_pell_record",
     "ap2_export": true
   },
   {
@@ -329,7 +329,7 @@
     "description": "Ranks 21 Workforce Pell-eligible short-term credentials by ROI, wage gain, demand, and Pell coverage. Embeds BLS OEWS May 2023 wages and BLS OOH 2024-34 projections. Personalized to user SAI.",
     "category": "workforce_development",
     "slug": "37-workforce-pell-credential-ranker",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "workforce_pell_credential_rank",
     "ap2_export": true
   },
   {
@@ -338,7 +338,7 @@
     "description": "10-year net worth projection for early-career individuals. Three savings scenarios (±10pp). Embedded 2026 tax brackets, 401k match, student debt paydown, SVG chart. Zero maintenance.",
     "category": "compensation_offers",
     "slug": "38-early-career-net-worth-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "net_worth_trajectory_record",
     "ap2_export": true
   },
   {
@@ -347,7 +347,7 @@
     "description": "Models true net cost of signing bonus clawback. Four repayment scenarios including IRC §1341 credit. Pro-rated obligation timeline. Zero maintenance.",
     "category": "compensation_offers",
     "slug": "39-signing-bonus-clawback-analyzer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "signing_bonus_record",
     "ap2_export": true
   },
   {
@@ -356,7 +356,7 @@
     "description": "For hybrid W-2+1099 workers. Marginal effective rate on gig income (income tax + SE tax net of §164(f)), quarterly estimated payments, safe harbor, net hourly analysis.",
     "category": "compensation_offers",
     "slug": "40-gig-income-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "gig_income_record",
     "ap2_export": true
   },
   {
@@ -365,7 +365,7 @@
     "description": "6-year renewal cash-flow planner for up to 6 professional certifications. 19 embedded credentials. Collision detection, study hours, CEU tracking.",
     "category": "licensing_credentials",
     "slug": "41-cert-renewal-forecaster",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cert_renewal_forecast_record",
     "ap2_export": true
   },
   {
@@ -374,7 +374,7 @@
     "description": "Compares ISA vs. student loan total repayment and NPV under a user income trajectory. Break-even income, year-by-year cash flow. Zero external data.",
     "category": "student_finance_debt",
     "slug": "42-isa-vs-loan-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "isa_loan_record",
     "ap2_export": true
   },
   {
@@ -383,7 +383,7 @@
     "description": "Quantifies tuition arbitrage, semester compression, and early workforce earnings NPV from dual enrollment. Pure math on user inputs — no embedded data.",
     "category": "education_path_roi",
     "slug": "43-dual-enrollment-roi-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dual_enrollment_record",
     "ap2_export": true
   },
   {
@@ -392,7 +392,7 @@
     "description": "Models after-tax value of 457(b) deferral vs. taxable account across current and retirement marginal rates, growth horizon, and LTCG rate. Computes break-even retirement rate, NPV advantage, and annual withdrawal comparison.",
     "category": "compensation_benefits",
     "slug": "44-deferred-comp-457b-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "deferred_comp_457b_record",
     "ap2_export": true
   },
   {
@@ -401,7 +401,7 @@
     "description": "Models expected value of tutoring investment: probability of score improvement × (merit scholarship NPV + admission value uplift) vs. tutor cost. Returns net ROI, break-even probability, and gross value.",
     "category": "education_path_roi",
     "slug": "45-tutor-roi-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "tutor_roi_record",
     "ap2_export": true
   },
   {
@@ -410,7 +410,7 @@
     "description": "EV model for retake vs. apply-now on GRE/GMAT/LSAT/MCAT/SAT/ACT. Returns expected value of each path, EV advantage, break-even probability of improvement, and cycle delay cost.",
     "category": "education_path_roi",
     "slug": "46-test-retake-decision-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "test_retake_record",
     "ap2_export": true
   },
   {
@@ -419,7 +419,7 @@
     "description": "Expected-value optimizer for MBA application school list. Models P(≥1 offer), expected scholarship, portfolio EV, and marginal value per additional school by tier.",
     "category": "education_path_roi",
     "slug": "47-mba-application-portfolio-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_portfolio_record",
     "ap2_export": true
   },
   {
@@ -428,7 +428,7 @@
     "description": "Models true net value of employer tuition benefit: IRS §127 tax savings, clawback risk, study-time opportunity cost, credential lift. CA AB 692 flag.",
     "category": "compensation_offers",
     "slug": "48-tuition-reimbursement-true-value-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "tuition_reimbursement_record",
     "ap2_export": true
   },
   {
@@ -437,7 +437,7 @@
     "description": "NPV model for finishing a PhD vs. leaving for industry. Computes opportunity cost, break-even year, PSLF impact, and year-by-year cumulative earnings.",
     "category": "education_path_roi",
     "slug": "49-phd-vs-industry-pivot-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "phd_pivot_record",
     "ap2_export": true
   },
   {
@@ -446,7 +446,7 @@
     "description": "10-yr NPV for BigLaw, In-House, Government, and Public Interest tracks. Models PSLF forgiveness, IDR vs. standard repayment, and break-even year.",
     "category": "education_path_roi",
     "slug": "50-law-school-roi-by-career-track",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "law_school_roi_record",
     "ap2_export": true
   },
   {
@@ -455,7 +455,7 @@
     "description": "Profile-based scoring engine recommending GMAT vs. GRE. Scores 7 dimensions, produces target score tables by tier, all-in cost comparison, and prep estimate.",
     "category": "education_path_roi",
     "slug": "51-gmat-vs-gre-strategic-choice-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "test_choice_record",
     "ap2_export": true
   },
   {
@@ -464,7 +464,7 @@
     "description": "10-yr NPV of EMBA vs. FT MBA vs. No MBA. Models employer sponsorship, 2-yr salary gap, career pivot feasibility, and break-even year.",
     "category": "education_path_roi",
     "slug": "52-exec-mba-vs-fulltime-mba-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "exec_mba_record",
     "ap2_export": true
   },
   {
@@ -473,7 +473,7 @@
     "description": "Financial runway model for F-1 students on OPT/STEM OPT. H-1B lottery probability, savings milestones, worst-case balance, EB-2 NIW path, cap-exempt strategy.",
     "category": "immigration_visa",
     "slug": "53-stem-opt-financial-runway-planner",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "stem_opt_record",
     "ap2_export": true
   },
   {
@@ -482,7 +482,7 @@
     "description": "Profile-based scoring engine recommending TOEFL, IELTS, or Duolingo for international MBA and graduate applicants. Scores 8 profile dimensions, produces target score tables by program tier, all-in cost comparison, and 2026 school acceptance policy notes including Wharton's new Duolingo acceptance.",
     "category": "education_path_roi",
     "slug": "54-toefl-ielts-duolingo-choice-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "english_test_choice_record",
     "ap2_export": true
   },
   {
@@ -491,7 +491,7 @@
     "description": "Maps LSAT score and GPA to realistic law school tier access (T14/T15–50/Regional) with financial outcomes: expected debt, 10-year NPV by career track, scholarship probability, PSLF forgiveness, and points-to-next-tier analysis.",
     "category": "education_path_roi",
     "slug": "55-lsat-tier-match-planner",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "lsat_tier_record",
     "ap2_export": true
   },
   {
@@ -500,7 +500,7 @@
     "description": "Two-stage scholarship strategy engine: (1) Round Timing Optimizer — dollar EV of applying R1 vs. R2 vs. R3 given application readiness, admit-rate edge, and merit budget depletion; (2) Offer Negotiation EV — probability-weighted value of countering with a competing offer, by school type.",
     "category": "education_path_roi",
     "slug": "56-mba-scholarship-strategy-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_scholarship_record",
     "ap2_export": true
   },
   {
@@ -509,7 +509,7 @@
     "description": "Expected-value model for admissions consulting: converts claimed admission-probability uplift into dollar EV using tier salary premium NPVs, computes break-even uplift for the fee, and runs sensitivity across 2–15pp real uplift.",
     "category": "education_path_roi",
     "slug": "57-mba-admissions-consulting-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "consulting_roi_record",
     "ap2_export": true
   },
   {
@@ -518,7 +518,7 @@
     "description": "Weighted multi-criteria decision engine for choosing among 2–3 MBA admission offers: tier salary outcomes, net cost, career goal fit, network strength, cost of living — with sensitivity analysis across five priority profiles.",
     "category": "education_path_roi",
     "slug": "58-mba-yield-decision-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_yield_record",
     "ap2_export": true
   },
   {
@@ -527,7 +527,7 @@
     "description": "Three-path NPV model for JD/MBA, MD/MBA, MPH/MBA, MPP/MBA decisions: primary degree only vs. concurrent dual vs. sequential. Computes dual marginal cost, cross-domain salary premium, break-even year, and concurrency savings.",
     "category": "education_path_roi",
     "slug": "59-dual-degree-roi-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dual_degree_record",
     "ap2_export": true
   },
   {
@@ -536,7 +536,7 @@
     "description": "Four-path NPV and goal-fit comparator: Online MBA, EMBA, Full-Time MBA, No MBA. Models income continuity, employer perception multipliers (GMAC 2025 ~90% online acceptance), salary reset vs. uplift mechanics, and pivot feasibility by career goal.",
     "category": "education_path_roi",
     "slug": "60-online-mba-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "online_mba_record",
     "ap2_export": true
   },
   {
@@ -545,7 +545,7 @@
     "description": "Three-option EV model for waitlisted MBA applicants: stay on list (hedged with safety deposit), withdraw and commit, or gap-year and reapply. Uses school-class yield rates to estimate P(off waitlist) and tier premium NPVs for upgrade value.",
     "category": "education_path_roi",
     "slug": "61-mba-waitlist-ev-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_waitlist_record",
     "ap2_export": true
   },
   {
@@ -554,7 +554,7 @@
     "description": "Option-value model for deferred MBA admits: accept a guaranteed seat now vs. decline and reapply to a higher tier later. Computes risk-adjusted EVs, break-even upgrade probability, and the dollar value of the guarantee.",
     "category": "education_path_roi",
     "slug": "62-deferred-enrollment-mba-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "deferred_mba_record",
     "ap2_export": true
   },
   {
@@ -563,7 +563,7 @@
     "description": "Expected-value engine for dinged MBA applicants: reapply same schools, restructure the portfolio, take the admit in hand, or skip the MBA. Models reapplicant admit probability from profile-change uplifts, prices the cycle-delay cost, and ranks improvement moves by pp-per-dollar and pp-per-hour efficiency.",
     "category": "education_path_roi",
     "slug": "63-mba-reapplicant-ev-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_reapplicant_record",
     "ap2_export": true
   },
   {
@@ -572,7 +572,7 @@
     "description": "Three-path NPV comparator (1-yr international MBA, 2-yr US MBA, no MBA) modeling the three mechanics generic calculators miss: opportunity-cost asymmetry (10 vs 21 months out), career-switch feasibility gates (no-internship double switch x0.60), and geo-placement gates (e.g., INSEAD <10% US placement). Embedded 12-program table, visa hard-stop logic, payback year, geo-fit scoring.",
     "category": "education_path_roi",
     "slug": "64-one-vs-two-year-mba-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mba_format_geo_record",
     "ap2_export": true
   },
   {
@@ -581,7 +581,7 @@
     "description": "Computes the expected value of binding Early Decision vs. a Regular Decision portfolio for law school: ED admission boost by median position (splitter logic), forfeited scholarship negotiation leverage, break-even ED boost, ED guarantee programs, and debt/payment impact.",
     "category": "education_path_roi",
     "slug": "65-law-school-ed-ev-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "law_ed_record",
     "ap2_export": true
   },
   {
@@ -590,7 +590,7 @@
     "description": "Lifetime-NPV timing engine for 21-24-year-olds with under two years of experience: MiM now vs. work 3-5 years then full-time MBA vs. no graduate degree. Computes NPV to age 35 and 45, the crossover salary where the verdict flips, payback years, 3/5/8% discount-rate sensitivity, and the MiM-then-MBA double-degree trap (x0.5 incremental-uplift haircut).",
     "category": "education_path_roi",
     "slug": "66-mim-vs-mba-timing-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mim_mba_timing_record",
     "ap2_export": true
   },
   {
@@ -599,7 +599,7 @@
     "description": "Scaffolds Understanding by Design (UbD) lesson planning across three stages: Desired Results, Assessment Evidence, and Learning Plan. Names the framework explicitly at each step so educators learn the method as they build.",
     "category": "selected_studies_education",
     "slug": "67-backward-design-lesson-builder",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "lesson_design_record",
     "ap2_export": true
   },
   {
@@ -608,7 +608,7 @@
     "description": "Generates multiple-choice items aligned to Bloom's taxonomy levels and classifies each distractor by error type, so every wrong answer teaches something about gaps in student understanding.",
     "category": "selected_studies_education",
     "slug": "68-assessment-item-writer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "assessment_item_record",
     "ap2_export": true
   },
   {
@@ -617,7 +617,7 @@
     "description": "Four branching real-classroom scenarios — disengaged student, pacing crisis, challenge question, authority test — with pedagogy-grounded feedback on every choice made.",
     "category": "selected_studies_education",
     "slug": "69-classroom-decision-simulator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "classroom_scenario_record",
     "ap2_export": true
   },
   {
@@ -626,7 +626,7 @@
     "description": "Adapts a standard lesson for gifted and talented students via curriculum compacting, enrichment strategies (depth, complexity, abstraction, open-endedness), and acceleration options.",
     "category": "selected_studies_education",
     "slug": "70-gt-differentiation-designer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "gt_differentiation_record",
     "ap2_export": true
   },
   {
@@ -635,7 +635,7 @@
     "description": "Generates a syllabus framework, Week 1 lesson plan, and grading rubric starter from course inputs. Built for instructors of record in higher education, not teaching assistants.",
     "category": "selected_studies_education",
     "slug": "71-first-time-instructor-toolkit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "instructor_toolkit_record",
     "ap2_export": true
   },
   {
@@ -644,7 +644,7 @@
     "description": "Analyzes any pasted text against CEFR readability criteria: sentence length, vocabulary frequency tier, grammar structure flags, and specific simplification suggestions for A2, B1, and B2 target levels.",
     "category": "selected_studies_esl",
     "slug": "72-cefr-text-leveler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cefr_leveling_record",
     "ap2_export": true
   },
   {
@@ -653,7 +653,7 @@
     "description": "Covers eight Mandarin-to-English transfer error categories — articles, tense vs. aspect, topic-comment order, copula omission, classifiers, phonology, question formation, negation — with examples, corrections, and teaching tips.",
     "category": "selected_studies_esl",
     "slug": "73-l1-interference-spotter",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "l1_interference_record",
     "ap2_export": true
   },
   {
@@ -662,7 +662,7 @@
     "description": "Classifies student errors as global vs. local and guides the decision of when and how to correct using the six Lyster-Ranta corrective feedback techniques with SLA research rationale for each.",
     "category": "selected_studies_esl",
     "slug": "74-error-correction-triage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "error_correction_record",
     "ap2_export": true
   },
   {
@@ -671,7 +671,7 @@
     "description": "Generates a complete EFL lesson plan using PPP (Present-Practice-Produce), TBL (Task-Based Learning), or ESA (Engage-Study-Activate) with timing, activity types, CCQs, and ICQs.",
     "category": "selected_studies_esl",
     "slug": "75-tkt-framework-lesson-stager",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "tkt_lesson_record",
     "ap2_export": true
   },
   {
@@ -680,7 +680,7 @@
     "description": "SOAPSTone analysis framework, provenance checklist, bias inventory, and corroboration prompts for any historical document. Five embedded sources included or paste your own.",
     "category": "selected_studies_history",
     "slug": "76-primary-source-workbench",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "primary_source_record",
     "ap2_export": true
   },
   {
@@ -689,7 +689,7 @@
     "description": "Selects one of 10 historical events and shows how five schools — Traditional, Annales, Marxist, Revisionist, and Postmodern — would each interpret it. Includes a thesis-statement builder.",
     "category": "selected_studies_history",
     "slug": "77-historiography-comparator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "historiography_record",
     "ap2_export": true
   },
   {
@@ -698,7 +698,7 @@
     "description": "Checks a claim or fiction excerpt against 80+ invention, institution, and language-origin dates. Flags out-of-period terms with source notes and includes a spot-the-anachronism quiz.",
     "category": "selected_studies_history",
     "slug": "78-anachronism-detector",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "anachronism_record",
     "ap2_export": true
   },
   {
@@ -707,7 +707,7 @@
     "description": "Five-step framework for rigorous what-if history: evidence constraints, nearest possible world, first-order effects, second-order effects, and magnitude calibration. Flags five common counterfactual fallacies.",
     "category": "selected_studies_history",
     "slug": "79-counterfactual-stress-tester",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "counterfactual_record",
     "ap2_export": true
   },
   {
@@ -716,7 +716,7 @@
     "description": "Eight-dimension comparison of closed franchise (NFL/NBA/MLB) vs. open promotion/relegation (EPL/Bundesliga): competitive balance, investment incentives, revenue distribution, fan culture, and labor relations. 2024 financial data embedded.",
     "category": "selected_studies_sport",
     "slug": "80-franchise-vs-promotion-relegation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "franchise_governance_record",
     "ap2_export": true
   },
   {
@@ -725,7 +725,7 @@
     "description": "Five-stage survey research workflow: research question sharpening, sampling strategy and sample-size estimation, instrument design with Likert builder, pilot plan, and analysis plan with SPSS paths and APA reporting templates.",
     "category": "selected_studies_sport",
     "slug": "81-survey-study-designer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "survey_design_record",
     "ap2_export": true
   },
   {
@@ -734,7 +734,7 @@
     "description": "Guided lesson teaching $/fWAR efficiency (Moneyball for the masses): what WAR measures, why $/win varies, how to read a team report card. Embedded 2024 MLB payroll and WAR data. Ends with a budget-constrained GM for a Day exercise.",
     "category": "selected_studies_sport",
     "slug": "82-payroll-efficiency-classroom",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "payroll_efficiency_record",
     "ap2_export": true
   },
   {
@@ -743,7 +743,7 @@
     "description": "34,294 incorrect ball-strike calls per 2018 season; 14 per game; two-strike count bias. Measurement lesson on error rates and performance evaluation, plus a structured ABS debate with argument prompts for both sides.",
     "category": "selected_studies_sport",
     "slug": "83-umpire-accuracy-lab",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "umpire_accuracy_record",
     "ap2_export": true
   },
   {
@@ -752,7 +752,7 @@
     "description": "Interactive SVG supply-and-demand diagrams with demand/supply shifter sliders, price floor/ceiling interventions, and consumer/producer surplus. Tab 2: cost curves (ATC/AVC/MC) and market structure selector.",
     "category": "selected_studies_economics",
     "slug": "84-micro-theory-sandbox",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "micro_theory_record",
     "ap2_export": true
   },
   {
@@ -761,7 +761,7 @@
     "description": "Interactive SVG charts for US GDP growth, CPI inflation, unemployment, and federal funds rate 1960–2024 with recession shading, decade zoom, and overlay compare.",
     "category": "selected_studies_economics",
     "slug": "85-comparative-economic-systems",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "economic_systems_record",
     "ap2_export": true
   },
   {
@@ -770,7 +770,7 @@
     "description": "Interactive scatter of US unemployment vs. inflation 1960–2024 by decade. Visualizes when the trade-off held, when stagflation broke it, and the flat 2010s vs. 2021-22 surge.",
     "category": "selected_studies_economics",
     "slug": "86-ask-the-economists-panel",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "economists_panel_record",
     "ap2_export": true
   },
   {
@@ -779,7 +779,7 @@
     "description": "Six US recessions (1973–2020) dissected: GDP decline, unemployment peak, cause, policy response, recovery. SVG comparison charts, timeline view, and ±3yr sparklines.",
     "category": "selected_studies_economics",
     "slug": "87-american-economic-history",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "economic_history_record",
     "ap2_export": true
   },
   {
@@ -788,7 +788,7 @@
     "description": "Interactive Econ 101/102 review: supply-demand sandbox with directional-change quiz, GDP accounting (C+I+G+NX) with component sliders, market structures comparison table, and 30-card key-terms flashcard deck.",
     "category": "selected_studies_economics",
     "slug": "88-principles-refresher",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "econ_principles_record",
     "ap2_export": true
   },
   {
@@ -797,7 +797,7 @@
     "description": "Model your real W-2 outcome from an OTE offer: base/variable split, quota attainment scenarios, accelerator tiers, and draw/clawback risk.",
     "category": "compensation_benefits",
     "slug": "89-sales-ote-commission-analyzer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "sales_comp_record",
     "ap2_export": true
   },
   {
@@ -806,7 +806,7 @@
     "description": "Model the 5-year NPV of accepting a counter-offer vs. taking a new employer offer, with loyalty-tax risk and career trajectory analysis.",
     "category": "career_planning",
     "slug": "90-counter-offer-decision-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "counter_offer_record",
     "ap2_export": true
   },
   {
@@ -815,7 +815,7 @@
     "description": "Strip the gross-up illusion from your employer relocation offer. Model lump sum vs. managed relo net value after taxes, actual moving costs, and housing delta.",
     "category": "career_planning",
     "slug": "91-relocation-package-value-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "relocation_package_record",
     "ap2_export": true
   },
   {
@@ -824,7 +824,7 @@
     "description": "Model childcare break-even salary, part-time sabbatical cost, and geographic relocation trade-offs for dual-earner couples.",
     "category": "compensation_benefits",
     "slug": "92-dual-career-household-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dual_career_record",
     "ap2_export": true
   },
   {
@@ -833,7 +833,7 @@
     "description": "Model the opportunity cost of unpaid or low-pay internships against FTE conversion probability, career acceleration NPV, and salary premium.",
     "category": "education_finance",
     "slug": "93-internship-roi-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "internship_roi_record",
     "ap2_export": true
   },
   {
@@ -842,7 +842,7 @@
     "description": "Compare the 2+2 pathway (2 years CC + transfer) against direct 4-year enrollment: tuition savings, transfer risk, and time-to-completion delta.",
     "category": "education_finance",
     "slug": "94-community-college-transfer-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cc_transfer_record",
     "ap2_export": true
   },
   {
@@ -851,7 +851,7 @@
     "description": "Compare post-bacc credential options: total cost, time-to-market, salary lift, and NPV by field for 6-month certificate vs. 2-year master's degree.",
     "category": "education_finance",
     "slug": "95-grad-cert-vs-masters-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "grad_cert_vs_masters_record",
     "ap2_export": true
   },
   {
@@ -860,7 +860,7 @@
     "description": "Model the ROI of completing your bachelor's through adult-friendly programs — online, WGU-style, or part-time evening — factoring in prior credits, employer assistance, and time-to-completion.",
     "category": "education_finance",
     "slug": "96-adult-learner-degree-completion-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "adult_learner_roi_record",
     "ap2_export": true
   },
   {
@@ -869,7 +869,7 @@
     "description": "CNA to CRNA: model the cost, time, and salary at every rung of the nursing and allied health career ladder, with rung-to-rung ROI and cumulative NPV.",
     "category": "licensing_credentials",
     "slug": "97-nursing-career-ladder-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "nursing_career_record",
     "ap2_export": true
   },
   {
@@ -878,7 +878,7 @@
     "description": "Model revenue runway, COBRA health insurance bridge, SE tax step-up, emergency fund requirement, and the month your side hustle can replace your W-2.",
     "category": "career_planning",
     "slug": "98-side-hustle-transition-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "side_hustle_transition_record",
     "ap2_export": true
   },
   {
@@ -887,7 +887,7 @@
     "description": "Catalog of 9 major Spanish→English transfer error categories with examples, CEFR-level context, correction strategies, and a work sample tagger for ESL/TEFL educators.",
     "category": "selected_studies_esl_tefl",
     "slug": "99-l1-interference-spotter-spanish",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "l1_interference_spanish_record",
     "ap2_export": true
   },
   {
@@ -896,7 +896,7 @@
     "description": "Build 2×2 or 3×3 strategic payoff matrices, solve for Nash equilibria and dominant strategies, classify the game type, and generate a lesson-ready analysis.",
     "category": "selected_studies_economics",
     "slug": "100-game-theory-payoff-matrix",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "game_theory_record",
     "ap2_export": true
   },
   {
@@ -905,7 +905,7 @@
     "description": "",
     "category": "student_finance_debt",
     "slug": "101-rap-vs-standard-decision-engine",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rap_decision_record",
     "ap2_export": true
   },
   {
@@ -914,7 +914,7 @@
     "description": "",
     "category": "student_finance_debt",
     "slug": "102-grad-loan-cap-gap-planner",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "grad_loan_gap_record",
     "ap2_export": true
   },
   {
@@ -923,7 +923,7 @@
     "description": "",
     "category": "student_finance_debt",
     "slug": "103-529-lifelong-learning-maximizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "529_lifelong_record",
     "ap2_export": true
   },
   {
@@ -932,7 +932,7 @@
     "description": "SOC code lookup with Frey-Osborne automation probability, task composition, and composite risk score. Suggests 3 adjacent lower-risk pivots.",
     "category": "career_workforce",
     "slug": "104-ai-displacement-risk-screener",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ai_displacement_record",
     "ap2_export": true
   },
   {
@@ -941,7 +941,7 @@
     "description": "Find the annual medical-spend level at which HDHP+HSA beats PPO in total out-of-pocket cost, including HSA tax benefit.",
     "category": "compensation_benefits",
     "slug": "105-hdhp-vs-ppo-break-even",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "health_plan_breakeven_record",
     "ap2_export": true
   },
   {
@@ -950,7 +950,7 @@
     "description": "Model cost-per-employee-trained vs. productivity lift, attrition reduction, and promotion-rate improvement to produce board-ready training ROI.",
     "category": "career_workforce",
     "slug": "106-employer-training-payback",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "training_roi_record",
     "ap2_export": true
   },
   {
@@ -959,7 +959,7 @@
     "description": "Itemize the full cost of a single departure — separation, vacancy, recruitment, onboarding — by role level. Shows SHRM benchmark band and attrition savings slider.",
     "category": "career_workforce",
     "slug": "107-turnover-cost-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "turnover_cost_record",
     "ap2_export": true
   },
   {
@@ -968,7 +968,7 @@
     "description": "Model net ROI of retention programs against baseline attrition cost. Calculates payback period, break-even attrition reduction, and 1/2/3-year net benefit.",
     "category": "career_workforce",
     "slug": "108-retention-investment-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "retention_roi_record",
     "ap2_export": true
   },
   {
@@ -977,7 +977,7 @@
     "description": "Calculate AMT liability from ISO exercise spread using 2026 exemption amounts and phase-outs. Shows max shares exercisable without triggering AMT.",
     "category": "compensation_benefits",
     "slug": "109-iso-amt-exposure-modeler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "iso_amt_record",
     "ap2_export": true
   },
   {
@@ -986,7 +986,7 @@
     "description": "Compare qualifying vs. disqualifying ESPP disposition tax outcomes. Finds break-even holding period for qualifying disposition and after-tax proceeds.",
     "category": "compensation_benefits",
     "slug": "110-espp-break-even-optimal-sell",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "espp_disposition_record",
     "ap2_export": true
   },
   {
@@ -995,7 +995,7 @@
     "description": "Find the net SE income level where S-Corp election SE tax savings exceed admin overhead. Uses 2026 SS wage base $184,500.",
     "category": "career_workforce",
     "slug": "111-scorp-election-break-even",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "scorp_election_record",
     "ap2_export": true
   },
   {
@@ -1004,7 +1004,7 @@
     "description": "Compare maximum contributions and tax savings across Solo 401(k), SEP-IRA, and SIMPLE IRA using 2026 IRS limits. Includes age-based catch-up.",
     "category": "compensation_benefits",
     "slug": "112-solo-401k-vs-sep-ira",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "selfemployed_retirement_record",
     "ap2_export": true
   },
   {
@@ -1013,7 +1013,7 @@
     "description": "Project PSLF progress: qualifying payments made/remaining, monthly payment under RAP/IBR/PAYE, and estimated forgiveness amount using 2026 FPL.",
     "category": "student_finance_debt",
     "slug": "113-pslf-qualifying-payment-counter",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pslf_progress_record",
     "ap2_export": true
   },
   {
@@ -1022,7 +1022,7 @@
     "description": "Weigh interest savings from private refinancing against PSLF eligibility loss, IDR protections, and origination fees. Go/no-go verdict.",
     "category": "student_finance_debt",
     "slug": "114-student-loan-refinancing-break-even",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "loan_refi_record",
     "ap2_export": true
   },
   {
@@ -1031,7 +1031,7 @@
     "description": "Calculate the tax gap between 22% federal supplemental withholding on RSU vests and true marginal rate. Uses 2026 SS wage base and state buckets.",
     "category": "compensation_benefits",
     "slug": "115-rsu-withholding-gap",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rsu_withholding_record",
     "ap2_export": true
   },
   {
@@ -1040,7 +1040,7 @@
     "description": "Calculate quarterly IRS estimated payments: federal income tax, SE tax (SS+Medicare), and state buckets. Shows 2026 due dates and safe-harbor amounts.",
     "category": "career_workforce",
     "slug": "116-freelance-quarterly-estimated-tax",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "freelance_quarterly_record",
     "ap2_export": true
   },
   {
@@ -1049,7 +1049,7 @@
     "description": "Quantify total financial cost of unpaid caregiving: direct income loss, retirement savings gap, SS reduction, and career setback cost.",
     "category": "career_workforce",
     "slug": "117-caregiver-income-impact",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "caregiver_impact_record",
     "ap2_export": true
   },
   {
@@ -1058,7 +1058,7 @@
     "description": "Project lifetime K-12 teacher earnings from a step-and-lane salary schedule. Model step advancement, COLA, and planned lane changes to reveal career earnings trajectory and final-year salary for pension planning.",
     "category": "education_path_roi",
     "slug": "118-teacher-salary-schedule-projector",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "teacher_salary_schedule_record",
     "ap2_export": true
   },
   {
@@ -1067,7 +1067,7 @@
     "description": "Calculate NPV, payback, and break-even lane bump for a K-12 teacher pursuing a master's degree — net of tuition, opportunity cost, employer assistance, and Teacher Loan Forgiveness (ESEA §1059c).",
     "category": "education_path_roi",
     "slug": "119-educator-advanced-degree-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "educator_advanced_degree_record",
     "ap2_export": true
   },
   {
@@ -1076,7 +1076,7 @@
     "description": "Calculate the ROI of pursuing NBCT: NPV, payback months, benefit-cost ratio, and minimum stipend needed to break even — accounting for fee, retakes, study opportunity cost, and renewal cycle.",
     "category": "licensing_credentials",
     "slug": "120-nbct-roi-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "nbct_roi_record",
     "ap2_export": true
   },
   {
@@ -1085,7 +1085,7 @@
     "description": "Project annual pension, lifetime PV, replacement rate, and vesting-cliff cost from a defined-benefit teacher pension plan. All plan parameters user-supplied; no embedded state tables.",
     "category": "education_path_roi",
     "slug": "121-teacher-pension-estimator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "teacher_pension_record",
     "ap2_export": true
   },
   {
@@ -1094,7 +1094,7 @@
     "description": "Model the expected monetary value of asking for a raise by weighting full grant, partial grant, and silence across a career horizon. Outputs EV, lifetime silence cost, recommended anchor, and a scripted ask framework.",
     "category": "compensation_offers",
     "slug": "128-raise-ask-ev-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "raise_ask_record",
     "ap2_export": true
   },
   {
@@ -1103,7 +1103,7 @@
     "description": "Compare 5-year cumulative present value of staying for a promotion versus jumping to a higher-paying role — netting ramp-up cost, benefits delta, tenure costs, unvested equity, and compounding merit raises.",
     "category": "career_transition_mobility",
     "slug": "129-promotion-vs-job-hop",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mobility_decision_record",
     "ap2_export": true
   },
   {
@@ -1112,7 +1112,7 @@
     "description": "Compare COBRA full-premium cost against ACA marketplace net premiums using 2026 §36B PTC table. Break-even AGI calculation with 400% FPL cliff warning. HSA eligibility flag. Export coverage_transition_record.",
     "category": "career_transition_mobility",
     "slug": "134-cobra-vs-aca-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "coverage_transition_record",
     "ap2_export": true
   },
   {
@@ -1121,7 +1121,7 @@
     "description": "Model option exercise decision after job separation. EV across three exit scenarios, max shares affordable, AMT flag for ISOs with spread >$50K. 90-day countdown with expiry warning.",
     "category": "compensation_benefits",
     "slug": "135-option-exercise-window",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "exercise_window_record",
     "ap2_export": true
   },
   {
@@ -1130,7 +1130,7 @@
     "description": "Optimize severance form (lump sum vs. continuation) for maximum unemployment benefit eligibility. Week-by-week timeline, state UI bucket model, benefits-at-risk quantification.",
     "category": "career_transition_mobility",
     "slug": "136-severance-ui-timing",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "severance_ui_timing_record",
     "ap2_export": true
   },
   {
@@ -1139,7 +1139,7 @@
     "description": "Calculate §199A pass-through deduction using 2026 OBBBA permanent thresholds ($201,775/$403,500). Handles below-threshold, phase-out band, W-2/UBIA limitation, SSTB exclusion, and $400 floor.",
     "category": "career_workforce",
     "slug": "137-qbi-199a-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "qbi_deduction_record",
     "ap2_export": true
   },
   {
@@ -1148,7 +1148,7 @@
     "description": "Benchmark S-corp owner salary against industry/role pairs. Calculates FICA savings vs. sole-prop SE tax. Audit risk scoring using Watson v. US ratio framework. SS wage base $184,500 (2026).",
     "category": "career_workforce",
     "slug": "138-scorp-reasonable-comp",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "reasonable_comp_record",
     "ap2_export": true
   },
   {
@@ -1157,7 +1157,7 @@
     "description": "Compare regular vs. simplified home office deduction methods. Augusta Rule (§280A(g)): S-corp rents home from owner for ≤14 days — owner tax-free, corp deducts. Combined deduction summary.",
     "category": "career_workforce",
     "slug": "139-home-office-augusta",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "home_office_record",
     "ap2_export": true
   },
   {
@@ -1166,7 +1166,7 @@
     "description": "For early-exercise options or restricted stock at grant, model the tax-now vs. tax-at-vest tradeoff. LTCG clock starts at grant with election. Low/Base/High FMV scenarios with savings table. Forfeiture downside. Zero-spread auto-detected. File/skip verdict.",
     "category": "compensation_benefits",
     "slug": "140-83b-election-decision",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eighty_three_b_record",
     "ap2_export": true
   },
   {
@@ -1175,7 +1175,7 @@
     "description": "Model liquidation waterfall for non-participating, fully participating, and capped participating preferred. Visual waterfall bar. Break-even exit price for common. Converts to common if pro-rata exceeds preference.",
     "category": "compensation_benefits",
     "slug": "141-equity-exit-waterfall",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "equity_waterfall_record",
     "ap2_export": true
   },
   {
@@ -1184,7 +1184,7 @@
     "description": "Estimate IRC §1202 QSBS exclusion: 50/75/100% tier by acquisition date (pre-2010/2010/post-Sep-2010). 8-item eligibility checklist. $10M/$10× basis cap. AMT preference flag for pre-2010 tiers. State non-conformity warning.",
     "category": "compensation_benefits",
     "slug": "142-qsbs-1202-estimator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "qsbs_exclusion_record",
     "ap2_export": true
   },
   {
@@ -1193,7 +1193,7 @@
     "description": "Compare federal/public-sector voluntary buyout vs. staying: net VSIP after tax, FEHB health bridge value, FERS/CSRS/state pension early-exit cost, 5-year income comparison, 5-factor scorecard verdict.",
     "category": "workforce_exit",
     "slug": "143-federal-buyout-decision",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "buyout_decision_record",
     "ap2_export": true
   },
   {
@@ -1202,7 +1202,7 @@
     "description": "Model filing timeline, gap risk, legal costs, and financial impact of changing jobs on H-1B. AC21 portability eligibility, unlawful-presence exposure (3yr/10yr bar), 6-yr cap extension check, attorney + USCIS fees, 3-year income comparison. Risk verdict: low/medium/high.",
     "category": "immigration_visa",
     "slug": "144-h1b-job-change-risk",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "h1b_change_record",
     "ap2_export": true
   },
   {
@@ -1211,7 +1211,7 @@
     "description": "Quantify the financial cost of an EB green-card backlog: year-by-year salary opportunity cost, career mobility restriction cost, H-1B extension fees. Covers EB-1/2/3/NIW across all chargeability countries. AC21 extension rules. Strategies to reduce wait cost.",
     "category": "immigration_visa",
     "slug": "145-greencard-wait-cost",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "greencard_wait_record",
     "ap2_export": true
   },
   {
@@ -1220,7 +1220,7 @@
     "description": "Transform one or more Policy Mandate decision artifacts into advisor-framed LLM prompts with Claude.ai and ChatGPT deep links. Five task frames, 15 audience targets, domain-specific regulatory citations, stochastic framing rules, escalation conditions, and execution-hash provenance chain.",
     "category": "agentic_tooling",
     "slug": "advisor-prompt-composer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "advisor_prompt_record",
     "ap2_export": true
   },
   {
@@ -1229,7 +1229,7 @@
     "description": "Project apprentice → journeyman → master wage arc for electrician, plumber, HVAC, welder, carpenter. BLS 2025 defaults. Compare earn-while-you-learn cumulative earnings against 4-year college path including student debt. 10- and 20-year NPV.",
     "category": "career_transition_mobility",
     "slug": "122-trade-wage-progression-projector",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "trade_wage_progression_record",
     "ap2_export": true
   },
   {
@@ -1238,7 +1238,7 @@
     "description": "Rank up to 4 trade certifications — EPA 608, Master Electrician, CDL-A, AWS Welder, NICET — by NPV, payback period, and benefit-cost ratio. Inputs: exam cost, study time, salary lift, pass probability. Optimal credential sequencing.",
     "category": "career_transition_mobility",
     "slug": "123-trade-specialization-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "trade_cert_roi_record",
     "ap2_export": true
   },
   {
@@ -1247,7 +1247,7 @@
     "description": "Find the billable-rate floor and month your solo contracting income clears your W-2 take-home. Iterative SE tax solve (SECA 15.3% with §164(f)), overhead, startup costs, 24-month utilization ramp. Break-even month and sensitivity table.",
     "category": "career_transition_mobility",
     "slug": "124-contractor-launch-break-even",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "contractor_launch_record",
     "ap2_export": true
   },
   {
@@ -1256,7 +1256,7 @@
     "description": "Compare Post-9/11 (Ch. 33) vs. MGIB (Ch. 30) benefit: tuition cap, BAH stipend, Yellow Ribbon matching, books allowance vs. opportunity cost. FY2025 VA rate tables: public cap $27,120, private $28,937, books $41.67/mo, MGIB $2,295/mo.",
     "category": "career_transition_mobility",
     "slug": "125-gi-bill-benefit-maximizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "gi_bill_benefit_record",
     "ap2_export": true
   },
   {
@@ -1265,7 +1265,7 @@
     "description": "Rank SkillBridge programs and MAP/ACE military credit transfers by salary lift and 5-year ROI. Up to 4 credentials with presets for CompTIA Security+, PMP, CDL-A, AWS SAA, NREMT. SkillBridge EV weighted by conversion probability. DoDI 1322.29 (180-day window).",
     "category": "career_transition_mobility",
     "slug": "126-skillbridge-credential-transfer-roi",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "skillbridge_credential_record",
     "ap2_export": true
   },
   {
@@ -1274,7 +1274,7 @@
     "description": "Stack severance, VA disability (FY2025 embedded rates 10%–100%), TSP, unemployment, spouse income, and bridge employment against expenses. 24-month cash-flow bridge with color-coded surplus/gap rows. Coverage ratio shows when civilian income closes the gap.",
     "category": "career_transition_mobility",
     "slug": "127-veteran-income-bridge",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "veteran_income_bridge_record",
     "ap2_export": true
   },
   {
@@ -1283,7 +1283,7 @@
     "description": "Find the childcare tax strategy maximizing savings: DC-FSA alone (IRC §129, $5K MFJ, FICA 7.65% savings), CDCTC alone (IRC §21, 35%→20% phase-down), or optimal combination. $250 sweep finds best FSA split. Three-strategy compare grid. 2025 limits.",
     "category": "compensation_benefits",
     "slug": "130-dependent-care-fsa-cdctc-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dependent_care_fsa_cdctc_record",
     "ap2_export": true
   },
   {
@@ -1292,7 +1292,7 @@
     "description": "Week-by-week leave schedule stacking employer paid leave, state PFL/SDI (CA 65%, NY 67%, NJ 85%, WA 75%, CO 90%, OR 60%), and FMLA unpaid weeks. Calculates gap, savings needed pre-leave, and post-return recovery months.",
     "category": "compensation_benefits",
     "slug": "131-parental-leave-income-gap",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "parental_leave_income_record",
     "ap2_export": true
   },
   {
@@ -1301,7 +1301,7 @@
     "description": "True net pay comparison: staff gross vs. travel taxable base + tax-free housing + M&IE stipends (IRS Rev. Rul. 59-58; GSA 2025 rates), minus agency costs and contract gap weeks. Side-by-side winner badge. Annual net difference.",
     "category": "compensation_benefits",
     "slug": "132-travel-nurse-vs-staff-comp",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "travel_nurse_comp_record",
     "ap2_export": true
   },
   {
@@ -1310,7 +1310,7 @@
     "description": "Model day, evening, night, weekend shift schedules. Correctly stacks shift differentials into FLSA regular rate (29 CFR §778.207) before calculating OT premium. Annual net comparison for each schedule. Best row highlighted. Childcare cost offset for evening/night.",
     "category": "compensation_benefits",
     "slug": "133-shift-differential-overtime-optimizer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "shift_differential_optimizer_record",
     "ap2_export": true
   },
   {
@@ -1319,7 +1319,7 @@
     "description": "Given crypto receipt events, a filing status, and a business election, returns gross ordinary income, self-employment tax if applicable, incremental federal tax, NIIT, state tax, an effective rate, and the deferred gain sitting in the basis created, with an optional disposition model.",
     "category": "digital_assets",
     "slug": "147-staking-airdrop-income-tax",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "staking_airdrop_income_record",
     "ap2_export": true
   },
   {
@@ -1328,7 +1328,7 @@
     "description": "Given a set of retirement accounts, birth year, age attained, and a spending need, computes the required minimum distribution per account and in aggregate from the Uniform Lifetime Table, then sequences the remaining spending need across taxable, tax-deferred, and Roth money and computes the resulting federal tax and net spendable amount.",
     "category": "retirement",
     "slug": "148-rmd-withdrawal-sequencer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rmd_withdrawal_sequence_record",
     "ap2_export": true
   },
   {
@@ -1337,7 +1337,7 @@
     "description": "Given a filing status, current ordinary income, IRMAA-relevant income items, a target bracket, and a convertible balance, computes the bracket-fill cap, the IRMAA-threshold cap, and the balance cap, and recommends the smaller of the three along with the resulting federal tax and IRMAA cliff exposure.",
     "category": "retirement",
     "slug": "149-roth-conversion-window",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "roth_conversion_window_record",
     "ap2_export": true
   },
   {
@@ -1346,7 +1346,7 @@
     "description": "Given a filing status, look-back-year AGI and tax-exempt interest, and Medicare enrollment details, computes MAGI, the IRMAA tier, the resulting Part B and Part D surcharges, the distance to the next threshold, and the effect of additional income under consideration.",
     "category": "retirement",
     "slug": "150-irmaa-bracket-calculator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "irmaa_bracket_record",
     "ap2_export": true
   },
   {
@@ -1355,7 +1355,7 @@
     "description": "Given shared utilization assumptions plus Path A (Original Medicare + Medigap + standalone Part D) and Path B (Medicare Advantage) plan parameters, prices both paths for a typical year and a bad-year stress test, applies the Part D out-of-pocket cap and the Advantage MOOP, and returns the annual difference and worst-case ceilings.",
     "category": "retirement",
     "slug": "151-medicare-plan-comparison",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "medicare_plan_comparison_record",
     "ap2_export": true
   },
   {
@@ -1364,7 +1364,7 @@
     "description": "Given a coverage structure, IRMAA tier, and a year of Medicare utilization, walks the actual 2026 cost-sharing rules benefit period by benefit period and returns the medical and drug out-of-pocket cost, total exposure with premiums, and a routine/rough/worst-case scenario spread.",
     "category": "retirement",
     "slug": "152-medicare-oop-exposure",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "medicare_oop_exposure_record",
     "ap2_export": true
   },
   {
@@ -1373,7 +1373,7 @@
     "description": "Given a purchase price, loan terms, recurring costs, growth assumptions, and a hold period, amortizes the mortgage month by month, grows each recurring cost year by year, and returns the gross and net cost of ownership over the hold, a break-even monthly rent, and a cost composition breakdown.",
     "category": "real_estate",
     "slug": "153-total-cost-of-homeownership",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "homeownership_tco_record",
     "ap2_export": true
   },
   {
@@ -1382,7 +1382,7 @@
     "description": "Given household income, other debt, cash available, and loan terms, runs the front-end and back-end debt-to-income ratios, takes the binding one, and solves by fixed 60-iteration bisection for the maximum purchase price it supports, including a rate-sensitivity stress test at plus one and plus two points.",
     "category": "real_estate",
     "slug": "154-home-affordability-28-36",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "home_affordability_record",
     "ap2_export": true
   },
   {
@@ -1391,7 +1391,7 @@
     "description": "Given acquisition, income, and operating expense inputs, computes NOI, cap rate, cap rate on total cost, DSCR, cash flow, cash on cash return, gross rent multiplier, and break-even occupancy, then screens the deal against five common investment thresholds.",
     "category": "real_estate",
     "slug": "155-rental-deal-screener",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rental_deal_screen_record",
     "ap2_export": true
   },
   {
@@ -1400,7 +1400,7 @@
     "description": "Given a rental property's basis, an optional cost segregation split with bonus depreciation, and income/tax context, runs the 27.5-year mid-month residential schedule plus any 5-year and 15-year components, tests the resulting loss against the passive activity loss rules, and optionally prices the section 1250 recapture and capital gain tax at an assumed sale. Offers both a corrected 27.5-year schedule (verified to sum to basis) and a legacy variant matching the original source spec's formula for comparison.",
     "category": "real_estate",
     "slug": "156-rental-depreciation-tax-shield",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rental_depreciation_shield_record",
     "ap2_export": true
   },
   {
@@ -1409,7 +1409,7 @@
     "description": "Three method small business valuation blending an SDE multiple, an EBITDA multiple, and an asset based floor, with user-set weights and owner-dependence and customer-concentration discounts.",
     "category": "small_business",
     "slug": "157-business-valuation-estimator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "business_valuation_record",
     "ap2_export": true
   },
   {
@@ -1418,7 +1418,7 @@
     "description": "Separates what a replacement manager would cost from an owner's total compensation package, producing comparable seller discretionary earnings and normalized EBITDA, plus a neutral reasonable-compensation pattern flag.",
     "category": "small_business",
     "slug": "158-owner-salary-normalization",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "owner_salary_normalization_record",
     "ap2_export": true
   },
   {
@@ -1427,7 +1427,7 @@
     "description": "Models federal tax on a business sale across asset allocation, section 1245 and 1250 depreciation recapture, QSBS section 1202 treatment, NIIT, state tax, and an installment-sale timing overlay.",
     "category": "small_business",
     "slug": "159-business-sale-tax-impact-modeler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "business_sale_tax_record",
     "ap2_export": true
   },
   {
@@ -1436,7 +1436,7 @@
     "description": "Builds a marital balance sheet with repeatable asset rows and models an illustrative split under a community property or equitable distribution regime, tracking separate property apart and showing tax-deferred and taxable-gain assets at an after-tax equivalent.",
     "category": "family_law",
     "slug": "160-marital-asset-division",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "marital_asset_division_record",
     "ap2_export": true
   },
   {
@@ -1445,7 +1445,7 @@
     "description": "Runs the same inputs through several named, user-editable guideline conventions for spousal support and shows the spread between them, plus a duration range based on marriage length. Presented strictly as an illustrative range, never a forecast or a single estimate.",
     "category": "family_law",
     "slug": "161-spousal-support-illustrative-range",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "spousal_support_range_record",
     "ap2_export": true
   },
   {
@@ -1454,7 +1454,7 @@
     "description": "Models a defined benefit pension split using the coverture fraction, or a defined contribution account split using a segregated balance, including early commencement, survivor benefit cost, and a COLA-adjusted lifetime projection computed through an explicit loop.",
     "category": "family_law",
     "slug": "162-qdro-pension-split-modeler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "qdro_pension_split_record",
     "ap2_export": true
   },
   {
@@ -1463,7 +1463,7 @@
     "description": "Sizes the probate pool and the non-probate pool of an estate separately, and puts an approximate range, never a point estimate, on what probate administration would cost.",
     "category": "estate",
     "slug": "163-net-estate-probate-exposure",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "net_estate_probate_record",
     "ap2_export": true
   },
   {
@@ -1472,7 +1472,7 @@
     "description": "Works out the taxable estate after deductions, applies the federal exemption including any deceased spousal unused amount, and adds a state-level estate or inheritance tax where one applies. The federal exemption is permanent; no sunset copy appears anywhere in this tool.",
     "category": "estate",
     "slug": "164-estate-tax-liability",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "estate_tax_liability_record",
     "ap2_export": true
   },
   {
@@ -1481,7 +1481,7 @@
     "description": "Models a multi-year gifting plan across any number of recipients, including gift splitting between spouses and the five-year education account election, and shows what portion spills over into the lifetime exemption. The estate-tax-avoided row is suppressed unless the user's estate is above the federal exemption.",
     "category": "estate",
     "slug": "165-annual-gift-exclusion-strategy",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "annual_gift_exclusion_record",
     "ap2_export": true
   },
   {
@@ -1490,7 +1490,7 @@
     "description": "Compares what care actually costs across four settings: paid help at home, adult day care, assisted living, and a nursing home, correctly crediting facility settings (but not home settings) for avoided household costs, with a crossover-hours calculation and an insurance offset.",
     "category": "long_term_care",
     "slug": "166-ltc-cost-estimator",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ltc_cost_estimate_record",
     "ap2_export": true
   },
   {
@@ -1499,7 +1499,7 @@
     "description": "Models the gap between current countable assets and the Medicaid long-term-care asset limit, including the community spouse resource allowance and a transfer-penalty calculation. Covers exactly ten states (CA, FL, IL, MI, NJ, NY, OH, PA, TX, WA), stated prominently in the hero, with national defaults and a visible out-of-scope banner for any other state.",
     "category": "long_term_care",
     "slug": "167-medicaid-spend-down-modeler",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "medicaid_spend_down_record",
     "ap2_export": true
   },
   {
@@ -1508,7 +1508,7 @@
     "description": "",
     "category": "showcase",
     "slug": "agency-salability-precheck",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "agency_salability_record",
     "ap2_export": true
   },
   {
@@ -1517,7 +1517,7 @@
     "description": "Given a content type and five marking checklist items, returns disclosure requirement, disclosure regime (full or reduced), required and satisfied element counts, missing elements, echoed human review documentation, and a conformance status. Deterministic, zero external data. Policy Mandate v2.0: ai_content_disclosure_conformance_record.",
     "category": "showcase",
     "slug": "ai-content-disclosure-conformance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ai_content_disclosure_conformance_record",
     "ap2_export": true
   },
   {
@@ -1526,7 +1526,7 @@
     "description": "Given a scanned GTIN and serial, a seller declared model, a passport model, and an optional expected passport digest, returns the GTIN check result, serial presence, model match, a scanned digest, a digest check, a signal count out of 4, and a status. Deterministic, zero external data. Policy Mandate v2.0: anticounterfeit_consumer_check_record.",
     "category": "showcase",
     "slug": "anticounterfeit-consumer-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "anticounterfeit_consumer_check_record",
     "ap2_export": true
   },
   {
@@ -1535,7 +1535,7 @@
     "description": "",
     "category": "showcase",
     "slug": "autonomous-command-audit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "autonomous_command_audit_record",
     "ap2_export": true
   },
   {
@@ -1544,7 +1544,7 @@
     "description": "",
     "category": "showcase",
     "slug": "branching-fiction",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "branching_fiction_record",
     "ap2_export": true
   },
   {
@@ -1553,7 +1553,7 @@
     "description": "",
     "category": "showcase",
     "slug": "cbam-declaration-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cbam_declaration_readiness_record",
     "ap2_export": true
   },
   {
@@ -1562,7 +1562,7 @@
     "description": "",
     "category": "showcase",
     "slug": "cbam-filing-pack",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cbam_filing_pack_record",
     "ap2_export": true
   },
   {
@@ -1571,7 +1571,7 @@
     "description": "",
     "category": "showcase",
     "slug": "cbdc-interop-handoff",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cbdc_interop_handoff_record",
     "ap2_export": true
   },
   {
@@ -1580,7 +1580,7 @@
     "description": "",
     "category": "showcase",
     "slug": "certificate-retirement-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "certificate_retirement_check_record",
     "ap2_export": true
   },
   {
@@ -1589,7 +1589,7 @@
     "description": "",
     "category": "showcase",
     "slug": "chaingraph-sonification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "chaingraph_sonification_record",
     "ap2_export": true
   },
   {
@@ -1598,7 +1598,7 @@
     "description": "",
     "category": "showcase",
     "slug": "chart-endpoint-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "chart_endpoint_lineage_record",
     "ap2_export": true
   },
   {
@@ -1607,7 +1607,7 @@
     "description": "Given a build descriptor entered once as the original and once as a rebuild (source ref, builder id, entrypoint, artifact name) and a claimed SLSA level, returns fingerprints for each descriptor, whether the rebuild reproduces the original, a mutated field count, field completeness, and the SLSA level the descriptor set can support. Deterministic, zero external data. Policy Mandate v2.0: cicd_build_provenance_record.",
     "category": "showcase",
     "slug": "cicd-build-provenance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cicd_build_provenance_record",
     "ap2_export": true
   },
   {
@@ -1616,7 +1616,7 @@
     "description": "",
     "category": "showcase",
     "slug": "civic-decision-record",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "civic_decision_record",
     "ap2_export": true
   },
   {
@@ -1625,7 +1625,7 @@
     "description": "",
     "category": "showcase",
     "slug": "claim-source-audit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "claim_source_audit_record",
     "ap2_export": true
   },
   {
@@ -1634,7 +1634,7 @@
     "description": "",
     "category": "showcase",
     "slug": "claims-lifecycle-walk",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "claims_lifecycle_walk_record",
     "ap2_export": true
   },
   {
@@ -1643,7 +1643,7 @@
     "description": "",
     "category": "showcase",
     "slug": "commit-reveal-dice",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "commit_reveal_dice_record",
     "ap2_export": true
   },
   {
@@ -1652,7 +1652,7 @@
     "description": "",
     "category": "showcase",
     "slug": "consent-scope-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "consent_scope_check_record",
     "ap2_export": true
   },
   {
@@ -1661,7 +1661,7 @@
     "description": "",
     "category": "showcase",
     "slug": "content-credential-binding",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "content_credential_binding_record",
     "ap2_export": true
   },
   {
@@ -1670,7 +1670,7 @@
     "description": "Given a credential entered once as signed and once as received (asset title, issuer, capture device, edit actions, content digest), returns fingerprints for each side, a manifest match flag, mutated field names and count, an assertion count, issuer presence, and a status. Deterministic, zero external data. Policy Mandate v2.0: content_credential_verification_record.",
     "category": "showcase",
     "slug": "content-credential-verification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "content_credential_verification_record",
     "ap2_export": true
   },
   {
@@ -1679,7 +1679,7 @@
     "description": "",
     "category": "showcase",
     "slug": "contract-lifecycle-diff",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "contract_lifecycle_diff_record",
     "ap2_export": true
   },
   {
@@ -1688,7 +1688,7 @@
     "description": "Given three core fields entered twice (asset id, issuer, created day) and two source formats, returns field agreement count, disagreeing field names, a mappable flag, a format pair, a normalized digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: cross_vendor_provenance_interop_record.",
     "category": "showcase",
     "slug": "cross-vendor-provenance-interop",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cross_vendor_provenance_interop_record",
     "ap2_export": true
   },
   {
@@ -1697,7 +1697,7 @@
     "description": "",
     "category": "showcase",
     "slug": "cte-kde-lot-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cte_kde_lot_record",
     "ap2_export": true
   },
   {
@@ -1706,7 +1706,7 @@
     "description": "Given a customs declaration's core fields, its supporting document set, and an amendment index, returns missing field count, format checks for commodity code and origin country, supporting and missing document counts, the amendment index, a declaration digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: customs_declaration_lineage_record.",
     "category": "showcase",
     "slug": "customs-declaration-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "customs_declaration_lineage_record",
     "ap2_export": true
   },
   {
@@ -1715,7 +1715,7 @@
     "description": "",
     "category": "showcase",
     "slug": "dataset-certification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dataset_certification_record",
     "ap2_export": true
   },
   {
@@ -1724,7 +1724,7 @@
     "description": "Given five yes, no, or unknown answers (credential present, credential matches source, publisher identifiable, disclosure label visible, independent report found), returns a signal total out of 10, unknown and no counts, a confidence band, a checkable-now flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: deepfake_consumer_verification_record.",
     "category": "showcase",
     "slug": "deepfake-consumer-verification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "deepfake_consumer_verification_record",
     "ap2_export": true
   },
   {
@@ -1733,7 +1733,7 @@
     "description": "Given a GTIN, model reference, material composition, repairability note, revision index, and up to three handovers, returns the GTIN check result, mandatory attribute count, handover count, custody break count, chronology validity, a passport digest, a lineage digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: digital_product_passport_lineage_record.",
     "category": "showcase",
     "slug": "digital-product-passport-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "digital_product_passport_lineage_record",
     "ap2_export": true
   },
   {
@@ -1742,7 +1742,7 @@
     "description": "",
     "category": "showcase",
     "slug": "dispenser-traceability-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "dispenser_readiness_record",
     "ap2_export": true
   },
   {
@@ -1751,7 +1751,7 @@
     "description": "Given a document, an anchor day key (yyyymmdd), an anchor reference, and an optional previously issued digest, returns char and line counts, a document digest, an anchor digest binding the document to the day and reference, and a verification result of first-anchor, match, or mismatch. Deterministic, zero external data. Policy Mandate v2.0: document_integrity_anchor_record.",
     "category": "showcase",
     "slug": "document-integrity-anchor",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "document_integrity_anchor_record",
     "ap2_export": true
   },
   {
@@ -1760,7 +1760,7 @@
     "description": "Given an issuer and up to three transfer legs (from holder, to holder, leg day key), returns leg count, custody break count, ordering fault count, the derived current holder, a single-holder-ok flag, a lineage digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: ebl_title_transfer_record.",
     "category": "showcase",
     "slug": "ebl-title-transfer",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ebl_title_transfer_record",
     "ap2_export": true
   },
   {
@@ -1769,7 +1769,7 @@
     "description": "",
     "category": "showcase",
     "slug": "edition-revision-ledger",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "edition_revision_ledger_record",
     "ap2_export": true
   },
   {
@@ -1778,7 +1778,7 @@
     "description": "Given an invoice's structural fields, returns the pass or fail result of five named clearance rules (invoice number present, issue date valid, VAT ids present, VAT arithmetic, total arithmetic), a failed rule count, the first failed rule, an invoice digest, and a status of cleared or rejected. Deterministic, zero external data. Policy Mandate v2.0: einvoice_clearance_vida_record.",
     "category": "showcase",
     "slug": "einvoice-clearance-vida",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "einvoice_clearance_vida_record",
     "ap2_export": true
   },
   {
@@ -1787,7 +1787,7 @@
     "description": "",
     "category": "showcase",
     "slug": "eudi-diploma-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eudi_diploma_readiness_record",
     "ap2_export": true
   },
   {
@@ -1796,7 +1796,7 @@
     "description": "Given an eight element weighted checklist for an EUDR due diligence statement, returns element count, score out of 100, a comma joined list of missing elements, a blocking-missing flag, and a status of filable, blocked, or gaps. Deterministic, zero external data. Policy Mandate v2.0: eudr_dds_validation_record.",
     "category": "showcase",
     "slug": "eudr-dds-validation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eudr_dds_validation_record",
     "ap2_export": true
   },
   {
@@ -1805,7 +1805,7 @@
     "description": "",
     "category": "showcase",
     "slug": "eudr-export-pack",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eudr_export_pack_record",
     "ap2_export": true
   },
   {
@@ -1814,7 +1814,7 @@
     "description": "Given total and geolocated plot counts, a country risk tier, supplier tier depth, and a mixed origin flag, returns geolocation coverage and gap in basis points, country risk weight, traceability credit, mixed origin penalty, a risk score out of 100, a risk band, a simplified due diligence eligibility flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: eudr_supply_chain_risk_record.",
     "category": "showcase",
     "slug": "eudr-supply-chain-risk",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eudr_supply_chain_risk_record",
     "ap2_export": true
   },
   {
@@ -1823,7 +1823,7 @@
     "description": "Given a lot's three critical tracking events (event type, location, lot code, day) plus a request hour and a records-ready hour, returns a KDE missing count, lot code consistency, chronology validity, response hours, a within-24-hour flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: food_traceability_fsma204_record.",
     "category": "showcase",
     "slug": "food-traceability-fsma204",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "food_traceability_fsma204_record",
     "ap2_export": true
   },
   {
@@ -1832,7 +1832,7 @@
     "description": "",
     "category": "showcase",
     "slug": "handoff-integrity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "handoff_integrity_record",
     "ap2_export": true
   },
   {
@@ -1841,7 +1841,7 @@
     "description": "",
     "category": "showcase",
     "slug": "hedge-execution-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "hedge_execution_lineage_record",
     "ap2_export": true
   },
   {
@@ -1850,7 +1850,7 @@
     "description": "",
     "category": "showcase",
     "slug": "interconnection-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "interconnection_readiness_record",
     "ap2_export": true
   },
   {
@@ -1859,7 +1859,7 @@
     "description": "",
     "category": "showcase",
     "slug": "iso20022-message-lint",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "iso20022_message_lint_record",
     "ap2_export": true
   },
   {
@@ -1868,7 +1868,7 @@
     "description": "Given eight document types each marked required and presented, plus presentation day, expiry day, and presentation period, returns required, presented, and missing counts, a comma joined list of missing types, an expiry check, the echoed presentation period, a discrepancy count, and a status. Deterministic, zero external data. Policy Mandate v2.0: letter_of_credit_document_set_record.",
     "category": "showcase",
     "slug": "letter-of-credit-document-set",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "letter_of_credit_document_set_record",
     "ap2_export": true
   },
   {
@@ -1877,7 +1877,7 @@
     "description": "",
     "category": "showcase",
     "slug": "lore-canon-boundary",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "lore_canon_boundary_record",
     "ap2_export": true
   },
   {
@@ -1886,7 +1886,7 @@
     "description": "",
     "category": "showcase",
     "slug": "mandate-audit-chain",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mandate_audit_chain_record",
     "ap2_export": true
   },
   {
@@ -1895,7 +1895,7 @@
     "description": "",
     "category": "showcase",
     "slug": "material-passport-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "material_passport_lineage_record",
     "ap2_export": true
   },
   {
@@ -1904,7 +1904,7 @@
     "description": "Given two pasted tool surfaces (one line per tool, name colon description) and a declared tool count, returns tool counts, content fingerprints for each surface, whether the surfaces match, whether the count matches what was declared, a positional changed-line count, and a status. Deterministic, zero external data. Policy Mandate v2.0: mcp_server_attestation_record.",
     "category": "showcase",
     "slug": "mcp-server-attestation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mcp_server_attestation_record",
     "ap2_export": true
   },
   {
@@ -1913,7 +1913,7 @@
     "description": "",
     "category": "showcase",
     "slug": "mesh-descriptor",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "mesh_descriptor_record",
     "ap2_export": true
   },
   {
@@ -1922,7 +1922,7 @@
     "description": "Given up to three party contributions (party id, node output digest, declared parent party), returns party count, digest present count, parent resolution faults, root count, a join digest, a graph-joins flag, and a status. Deterministic, zero external data. Policy Mandate v2.0: multiparty_supply_chain_interop_record.",
     "category": "showcase",
     "slug": "multiparty-supply-chain-interop",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "multiparty_supply_chain_interop_record",
     "ap2_export": true
   },
   {
@@ -1931,7 +1931,7 @@
     "description": "",
     "category": "showcase",
     "slug": "news-asset-provenance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "news_asset_provenance_record",
     "ap2_export": true
   },
   {
@@ -1940,7 +1940,7 @@
     "description": "",
     "category": "showcase",
     "slug": "openbadge3-lint",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "openbadge3_lint_record",
     "ap2_export": true
   },
   {
@@ -1949,7 +1949,7 @@
     "description": "",
     "category": "showcase",
     "slug": "pa-metrics",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pa_metrics_record",
     "ap2_export": true
   },
   {
@@ -1958,7 +1958,7 @@
     "description": "",
     "category": "showcase",
     "slug": "payer-ai-decision-audit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "payer_ai_decision_audit_record",
     "ap2_export": true
   },
   {
@@ -1967,7 +1967,7 @@
     "description": "",
     "category": "showcase",
     "slug": "payoff-instruction-binding",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "payoff_instruction_binding_record",
     "ap2_export": true
   },
   {
@@ -1976,7 +1976,7 @@
     "description": "Given a GTIN, serial, lot, and up to three custody steps (party, event type), returns the GTIN mod-10 check result with expected and entered check digits, step count, sequence validity against the commissioned, shipped, received, returned, decommissioned order, the first break step, a unit digest, and a status. Deterministic, zero external data. Policy Mandate v2.0: pharma_serialization_custody_record.",
     "category": "showcase",
     "slug": "pharma-serialization-custody",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pharma_serialization_custody_record",
     "ap2_export": true
   },
   {
@@ -1985,7 +1985,7 @@
     "description": "",
     "category": "showcase",
     "slug": "pipeline-run-fingerprint",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pipeline_run_fingerprint_record",
     "ap2_export": true
   },
   {
@@ -1994,7 +1994,7 @@
     "description": "",
     "category": "showcase",
     "slug": "prior-auth-deadline",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "prior_auth_deadline_record",
     "ap2_export": true
   },
   {
@@ -2003,7 +2003,7 @@
     "description": "",
     "category": "showcase",
     "slug": "professional-skills-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "professional_skills_lineage_record",
     "ap2_export": true
   },
   {
@@ -2012,7 +2012,7 @@
     "description": "",
     "category": "showcase",
     "slug": "proof-of-play",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "proof_of_play_record",
     "ap2_export": true
   },
   {
@@ -2021,7 +2021,7 @@
     "description": "",
     "category": "showcase",
     "slug": "rail-decision-provenance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "rail_decision_provenance_record",
     "ap2_export": true
   },
   {
@@ -2030,7 +2030,7 @@
     "description": "",
     "category": "showcase",
     "slug": "recall-pack-24h",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "recall_pack_record",
     "ap2_export": true
   },
   {
@@ -2039,7 +2039,7 @@
     "description": "",
     "category": "showcase",
     "slug": "reconciliation-evidence",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "reconciliation_evidence_record",
     "ap2_export": true
   },
   {
@@ -2048,7 +2048,7 @@
     "description": "",
     "category": "showcase",
     "slug": "remix-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "remix_lineage_record",
     "ap2_export": true
   },
   {
@@ -2057,7 +2057,7 @@
     "description": "",
     "category": "showcase",
     "slug": "replication-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "replication_receipt_record",
     "ap2_export": true
   },
   {
@@ -2066,7 +2066,7 @@
     "description": "",
     "category": "showcase",
     "slug": "reserve-attestation-integrity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "reserve_attestation_integrity_record",
     "ap2_export": true
   },
   {
@@ -2075,7 +2075,7 @@
     "description": "",
     "category": "showcase",
     "slug": "saleable-return-verification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pi_barcode_verification_record",
     "ap2_export": true
   },
   {
@@ -2084,7 +2084,7 @@
     "description": "Enter up to five dependency rows with a component name, version, and license, plus a distribution intent. Returns a component count, license conflict and unknown-license counts, a stable content fingerprint of the row set, and a pass or fail status. Deterministic, zero external data. Policy Mandate v2.0: sbom_dependency_provenance_record.",
     "category": "showcase",
     "slug": "sbom-dependency-provenance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "sbom_dependency_provenance_record",
     "ap2_export": true
   },
   {
@@ -2093,7 +2093,7 @@
     "description": "",
     "category": "showcase",
     "slug": "scenario-constraint-cert",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "scenario_constraint_cert_record",
     "ap2_export": true
   },
   {
@@ -2102,7 +2102,7 @@
     "description": "",
     "category": "showcase",
     "slug": "skills-verification-gate",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "skills_verification_gate_record",
     "ap2_export": true
   },
   {
@@ -2111,7 +2111,7 @@
     "description": "",
     "category": "showcase",
     "slug": "source-chain-integrity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "source_chain_integrity_record",
     "ap2_export": true
   },
   {
@@ -2120,7 +2120,7 @@
     "description": "",
     "category": "showcase",
     "slug": "suspect-product-disposition",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "pi_barcode_verification_record",
     "ap2_export": true
   },
   {
@@ -2129,7 +2129,7 @@
     "description": "",
     "category": "showcase",
     "slug": "synthesis-route-continuity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "synthesis_route_continuity_record",
     "ap2_export": true
   },
   {
@@ -2138,7 +2138,7 @@
     "description": "",
     "category": "showcase",
     "slug": "taxonomy-green-capex-gate",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "taxonomy_green_capex_record",
     "ap2_export": true
   },
   {
@@ -2147,7 +2147,7 @@
     "description": "",
     "category": "showcase",
     "slug": "telemetry-ack-audit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "telemetry_ack_audit_record",
     "ap2_export": true
   },
   {
@@ -2156,7 +2156,7 @@
     "description": "",
     "category": "showcase",
     "slug": "title-chain-continuity",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "title_chain_continuity_record",
     "ap2_export": true
   },
   {
@@ -2165,7 +2165,7 @@
     "description": "",
     "category": "showcase",
     "slug": "training-path-attestation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "training_path_attestation_record",
     "ap2_export": true
   },
   {
@@ -2174,7 +2174,7 @@
     "description": "",
     "category": "showcase",
     "slug": "treasury-memo-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "treasury_memo_lineage_record",
     "ap2_export": true
   },
   {
@@ -2183,7 +2183,7 @@
     "description": "",
     "category": "showcase",
     "slug": "trid-tolerance-cure",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "trid_tolerance_cure_record",
     "ap2_export": true
   },
   {
@@ -2192,7 +2192,7 @@
     "description": "Given a discovery hour and the hour index at which the early warning, notification, and final report steps were filed, returns the due hour, on-time or late status, and slack for each step, plus a count of late steps and an overall cascade status. Deterministic, zero external data. Policy Mandate v2.0: vex_disclosure_timeline_record.",
     "category": "showcase",
     "slug": "vex-disclosure-timeline",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "vex_disclosure_timeline_record",
     "ap2_export": true
   },
   {
@@ -2201,7 +2201,7 @@
     "description": "",
     "category": "showcase",
     "slug": "world-state-checkpoint",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "world_state_checkpoint_record",
     "ap2_export": true
   },
   {
@@ -2210,7 +2210,7 @@
     "description": "",
     "category": "showcase",
     "slug": "hash-seeded-generative-art",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "generative_art_record",
     "ap2_export": true
   },
   {
@@ -2219,7 +2219,7 @@
     "description": "",
     "category": "showcase",
     "slug": "arg-puzzle-gates",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "puzzle_gate_record",
     "ap2_export": true
   },
   {
@@ -2228,7 +2228,7 @@
     "description": "Given crypto lots with cost basis and current value, realized gains, carryforwards, filing status, and bracket, applies the capital loss netting order, the ordinary income offset cap, and an optional wash sale screen, returning harvestable loss, offsets, carryforwards, and estimated federal and state tax saved.",
     "category": "digital_assets",
     "slug": "146-crypto-tax-loss-harvesting",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "crypto_tax_loss_harvesting_record",
     "ap2_export": true
   },
   {
@@ -2237,7 +2237,7 @@
     "description": "",
     "category": "showcase",
     "slug": "agent-memory",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "agent_memory_record",
     "ap2_export": true
   },
   {
@@ -2246,7 +2246,7 @@
     "description": "",
     "category": "showcase",
     "slug": "benchmark-provenance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "benchmark_provenance_record",
     "ap2_export": true
   },
   {
@@ -2255,7 +2255,7 @@
     "description": "",
     "category": "showcase",
     "slug": "agent-authority-envelope",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "agent_authority_envelope_record",
     "ap2_export": true
   },
   {
@@ -2264,7 +2264,7 @@
     "description": "",
     "category": "showcase",
     "slug": "finetune-lineage",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "finetune_lineage_record",
     "ap2_export": true
   },
   {
@@ -2273,7 +2273,7 @@
     "description": "",
     "category": "showcase",
     "slug": "geocache-verify",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "geocache_verify_record",
     "ap2_export": true
   },
   {
@@ -2282,7 +2282,7 @@
     "description": "",
     "category": "showcase",
     "slug": "exhibit-visit-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "exhibit_visit_receipt_record",
     "ap2_export": true
   },
   {
@@ -2291,7 +2291,7 @@
     "description": "",
     "category": "showcase",
     "slug": "attendance-reconciliation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "attendance_reconciliation_record",
     "ap2_export": true
   },
   {
@@ -2300,7 +2300,7 @@
     "description": "",
     "category": "showcase",
     "slug": "sensor-reading-plausibility",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "sensor_reading_plausibility_record",
     "ap2_export": true
   },
   {
@@ -2309,7 +2309,7 @@
     "description": "",
     "category": "showcase",
     "slug": "workforce-credential-batch",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "workforce_credential_batch_record",
     "ap2_export": true
   },
   {
@@ -2318,7 +2318,7 @@
     "description": "",
     "category": "showcase",
     "slug": "evidence-ledger-margin",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "evidence_ledger_margin_record",
     "ap2_export": true
   },
   {
@@ -2327,7 +2327,7 @@
     "description": "",
     "category": "showcase",
     "slug": "did-anchor-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "did_anchor_check_record",
     "ap2_export": true
   },
   {
@@ -2336,7 +2336,7 @@
     "description": "",
     "category": "showcase",
     "slug": "verification-reuse-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "verification_reuse_check_record",
     "ap2_export": true
   },
   {
@@ -2345,7 +2345,7 @@
     "description": "",
     "category": "showcase",
     "slug": "credential-revocation-audit",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "credential_revocation_record",
     "ap2_export": true
   },
   {
@@ -2354,7 +2354,7 @@
     "description": "",
     "category": "showcase",
     "slug": "eid-acceptance-check",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "eid_acceptance_check_record",
     "ap2_export": true
   },
   {
@@ -2363,7 +2363,7 @@
     "description": "",
     "category": "showcase",
     "slug": "export-completeness-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "export_completeness_receipt_record",
     "ap2_export": true
   },
   {
@@ -2372,7 +2372,7 @@
     "description": "",
     "category": "showcase",
     "slug": "agent-identity-verification",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "agent_identity_verification_record",
     "ap2_export": true
   },
   {
@@ -2381,7 +2381,7 @@
     "description": "",
     "category": "showcase",
     "slug": "agent-identity-publishing-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "agent_identity_publishing_readiness_record",
     "ap2_export": true
   },
   {
@@ -2390,7 +2390,7 @@
     "description": "",
     "category": "showcase",
     "slug": "sbom-provenance-attestation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "sbom_provenance_attestation_record",
     "ap2_export": true
   },
   {
@@ -2399,7 +2399,7 @@
     "description": "",
     "category": "showcase",
     "slug": "cra-product-conformance",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "cra_product_conformance_record",
     "ap2_export": true
   },
   {
@@ -2408,7 +2408,7 @@
     "description": "",
     "category": "showcase",
     "slug": "nis2-entity-scope-and-obligations",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "nis2_entity_scope_and_obligations_record",
     "ap2_export": true
   },
   {
@@ -2417,7 +2417,7 @@
     "description": "",
     "category": "showcase",
     "slug": "nis2-incident-and-supply-chain-readiness",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "nis2_incident_and_supply_chain_readiness_record",
     "ap2_export": true
   },
   {
@@ -2426,7 +2426,7 @@
     "description": "",
     "category": "showcase",
     "slug": "emir-trade-report-validation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "emir_trade_report_validation_record",
     "ap2_export": true
   },
   {
@@ -2435,7 +2435,7 @@
     "description": "",
     "category": "showcase",
     "slug": "emir-reconciliation-and-lifecycle",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "emir_reconciliation_and_lifecycle_record",
     "ap2_export": true
   },
   {
@@ -2444,7 +2444,7 @@
     "description": "",
     "category": "showcase",
     "slug": "ifrs17-measurement-model-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ifrs17_measurement_model_receipt_record",
     "ap2_export": true
   },
   {
@@ -2453,7 +2453,7 @@
     "description": "",
     "category": "showcase",
     "slug": "solvency2-scr-ratio-disclosure",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "solvency2_scr_ratio_disclosure_record",
     "ap2_export": true
   },
   {
@@ -2462,7 +2462,7 @@
     "description": "",
     "category": "showcase",
     "slug": "sii-ifrs17-reconciliation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "sii_ifrs17_reconciliation_record",
     "ap2_export": true
   },
   {
@@ -2471,7 +2471,7 @@
     "description": "",
     "category": "showcase",
     "slug": "ifrs17-risk-adjustment-attestation",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "ifrs17_risk_adjustment_attestation_record",
     "ap2_export": true
   },
   {
@@ -2480,7 +2480,7 @@
     "description": "",
     "category": "showcase",
     "slug": "markdown-conversion-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "markdown_conversion_receipt_record",
     "ap2_export": true
   },
   {
@@ -2489,7 +2489,7 @@
     "description": "",
     "category": "showcase",
     "slug": "tabular-conversion-receipt",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "tabular_conversion_receipt_record",
     "ap2_export": true
   },
   {
@@ -2498,7 +2498,7 @@
     "description": "",
     "category": "showcase",
     "slug": "camt053-reconciliation-parse",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "camt053_reconciliation_parse_record",
     "ap2_export": true
   },
   {
@@ -2507,7 +2507,160 @@
     "description": "",
     "category": "showcase",
     "slug": "content-provenance-stamp",
-    "ap2_mandate_type": null,
+    "ap2_mandate_type": "content_provenance_stamp_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-182",
+    "title": "Degree Plan Change Engine",
+    "description": "Prices switching majors, adding a double major, adding a minor, or dropping a double major to a minor: lost-credit cost, extra-semester tuition and living cost, and delayed-graduation opportunity cost, weighed against the salary-delta NPV over a chosen horizon, with a break-even year and a go/no-go against a cheaper minor-or-internship alternative.",
+    "category": "education_path_roi",
+    "slug": "168-degree-plan-change-engine",
+    "ap2_mandate_type": "degree_plan_change_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-183",
+    "title": "Extra-Semester Funding Gap Planner",
+    "description": "Models the four cliffs that hit fifth-year and extra-semester students at once: the Pell 600% Lifetime Eligibility Used cap, federal loan aggregate limits, a scholarship semester cutoff, and the SAP 150% maximum timeframe rule. Produces a semester-by-semester fundable/not-fundable breakdown and ranks the cheapest gap-fill order.",
+    "category": "student_finance_debt",
+    "slug": "169-extra-semester-funding-gap",
+    "ap2_mandate_type": "extra_semester_funding_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-184",
+    "title": "Workforce Cost-per-Outcome Ladder",
+    "description": "Enter costs, enrollment, placements, and retention for up to three programs to produce the full DOL TEGL 6-13 cost ladder (Cost per Participant, Cost per Employed Exiter, Cost per Retained Employee, Cost per Individual with Earnings Increase) plus Cost per Employed Day, benchmark flags, and a side-by-side comparison for a funder-facing one-pager.",
+    "category": "workforce_development",
+    "slug": "170-workforce-cost-per-outcome",
+    "ap2_mandate_type": "cost_per_outcome_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-185",
+    "title": "Counterfactual Haircut Adjuster",
+    "description": "Enter a program's total cost, enrollment, and gross employed-at-exit count, then set a baseline counterfactual job-finding rate, substitution rate, and creaming discount to net out deadweight, displacement, and cohort selection bias. Produces a haircut-adjusted placement count and cost-per-outcome figure alongside the unadjusted gross numbers, with a one-click handoff into the Cost-per-Outcome Ladder (#170).",
+    "category": "workforce_development",
+    "slug": "171-counterfactual-haircut-adjuster",
+    "ap2_mandate_type": "counterfactual_haircut_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-186",
+    "title": "Lurking-Variable Reversal Detector",
+    "description": "Paste your own stratified 2x2 table (any number of strata, custom group/outcome/stratum labels) to get per-stratum odds ratios, the crude pooled odds ratio, the Mantel-Haenszel (1959) adjusted odds ratio, and an explicit reversal flag when the aggregate and stratified stories disagree. The Berkeley 1973 six-department admissions table ships built in as the worked example.",
+    "category": "selected_studies_methods",
+    "slug": "172-lurking-variable-reversal-detector",
+    "ap2_mandate_type": "reversal_detector_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-187",
+    "title": "Parallel-Trends & Placebo Checker",
+    "description": "A difference-in-differences companion that tests the parallel-trends assumption instead of asserting it. Enter 3 or more pre-treatment periods for a treatment group and a control group to get a pre-trend slope gap with a t-test, an event-study table of period-by-period treatment-minus-control differences relative to a baseline period, and an in-time placebo test that reruns the estimate at a fake treatment date inside the pre-period. A classic single pre/post 2x2 tab is included for completeness only.",
+    "category": "selected_studies_methods",
+    "slug": "173-parallel-trends-placebo-checker",
+    "ap2_mandate_type": "parallel_trends_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-189",
+    "title": "Exempt-Salary True Hourly Rate",
+    "description": "Compare two exempt-salary offers on true $/hr — unpaid overtime, commute time-value + cash cost, and PTO forfeiture bundled in, with the crossover weekly hours where the ranking flips.",
+    "category": "compensation_offers",
+    "slug": "175-exempt-true-hourly-rate",
+    "ap2_mandate_type": "true_hourly_rate_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-190",
+    "title": "Unused PTO Forfeiture Cost",
+    "description": "Price what use-it-or-lose-it caps and no-payout exits actually erase from comp: forfeited days, cap-drag on future accrual, and unpaid balance at exit, ranked by cheapest fix.",
+    "category": "compensation_benefits",
+    "slug": "176-pto-forfeiture-cost",
+    "ap2_mandate_type": "pto_forfeiture_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-191",
+    "title": "Interview-Process Burden & Offer EV",
+    "description": "Price the sunk and expected-remaining cost (hours, PTO, travel at true $/hr) of every interview pipeline against the offer's expected value, with a continue/withdraw verdict and a portfolio ranking across up to 3 pipelines.",
+    "category": "career_transition_mobility",
+    "slug": "177-interview-burden-offer-ev",
+    "ap2_mandate_type": "interview_burden_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-196",
+    "title": "Statistical Reasoning Lab",
+    "description": "Five deterministic labs bundled in one file: regression-to-the-mean (pre/post + correlation), survivorship bias (Wald's WWII armor problem + user selection-rate math), hot-hand run-length (closed-form expected streak length vs observed), base-rate/Bayes (prosecutor's fallacy), and a seeded-LCG deterministic p-hacking spec-curve multiverse (same seed always reproduces the same 16-path result).",
+    "category": "selected_studies_methods",
+    "slug": "182-statistical-reasoning-lab",
+    "ap2_mandate_type": "stats_reasoning_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-197",
+    "title": "Response-Rate Sensitivity Lab",
+    "description": "Interactive nonresponse-bias teaching demo: enter an observed survey mean among respondents plus worst-case scale bounds for non-respondents, drag a response-rate slider, and watch the Manski-style worst-case identified interval sweep in real time. A second calculator finds the minimum response rate needed for the worst-case bound to clear a chosen threshold ('sign the effect'). Classroom-framed, not an analyst bounds estimator.",
+    "category": "selected_studies_methods",
+    "slug": "183-response-rate-sensitivity",
+    "ap2_mandate_type": "response_sensitivity_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-198",
+    "title": "Levels-of-Analysis Lab (Ecological Fallacy)",
+    "description": "Paste a group-level table (group label, n, mean X, mean Y) and get the n-weighted ecological (group-level) correlation, computed closed-form across group means. Compare it against a known or assumed individual-level correlation you supply, and the tool flags a levels-of-analysis reversal or magnitude-inflation risk when the two disagree. Ships with Robinson's 1950 published state-vs-individual reversal (textbook figures, informational) and a synthetic school-level income-vs-test-score example.",
+    "category": "selected_studies_methods",
+    "slug": "184-levels-of-analysis-lab",
+    "ap2_mandate_type": "levels_analysis_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-188",
+    "title": "Credit-by-Exam ROI (AP / IB / CLEP)",
+    "description": "Price which AP, IB, and CLEP exams pay off at a specific college: per exam, the fee plus study hours valued at the user's hourly rate, against the credit grant the user transcribes from the college's policy, valued at the user's tuition rate per credit and weighted by the chance the credit applies to the degree. Exams rank by net dollars with KEEP/DROP calls, per-exam breakeven credits, and keep-vs-drop totals. No policy database is stored; every policy figure is user-transcribed.",
+    "category": "education_path_roi",
+    "slug": "174-credit-by-exam-roi",
+    "ap2_mandate_type": "exam_credit_roi_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-192",
+    "title": "Growing-Family Marginal Cost (2nd+ Child)",
+    "description": "Stack the true marginal cost of a second or later child against the current one-child baseline: USDA-stamped scale factors for housing, transport, food, healthcare, and other spend, childcare that stacks near full price after any sibling discount, flat FSA and child-tax-credit caps that do not scale, and the compound growth lost while savings are paused. Outputs gross and net monthly marginal, an 18-year total including lost compound, and levers ranked by monthly relief. No rate database stored; family figures are user-supplied.",
+    "category": "personal_finance_life_events",
+    "slug": "178-growing-family-marginal-cost",
+    "ap2_mandate_type": "family_marginal_cost_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-193",
+    "title": "Divorce House: Keep vs. Sell",
+    "description": "Price the largest check in a divorce two ways: keeping the marital home (refinance the balance plus the equity buyout at one income, carry taxes, insurance, and an upkeep reserve) versus selling (net proceeds after friction costs, invested at your return, with a rent reset that inflates). Compares net position at 5 and 10 years, reports the housing ratio with an affordability verdict, and flags refinance qualification and the 80 percent LTV line. Every figure is user-entered; deterministic arithmetic, not legal or tax advice.",
+    "category": "family_law",
+    "slug": "179-divorce-house-keep-vs-sell",
+    "ap2_mandate_type": "house_keep_sell_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-194",
+    "title": "Automation Payback",
+    "description": "Rank automation candidates by payback before you build: monthly reclaimable value (hours saved per week times the loaded hourly rate, plus the error cost the automation eliminates) against total cost of ownership (one-time build amortized over the horizon, subscription, and a maintenance haircut on recurring cost, default 20 percent). Outputs a ranked table with break-even months and BUILD/SKIP calls, portfolio totals for hours reclaimed and net dollars, and a verdict naming the best candidate and the fastest break-even. No tool-price database; every figure is a user estimate.",
+    "category": "career_workforce",
+    "slug": "180-automation-payback",
+    "ap2_mandate_type": "automation_payback_record",
+    "ap2_export": true
+  },
+  {
+    "al_id": "AL-195",
+    "title": "Scope-Creep Pricer (Change Orders)",
+    "description": "Turn scope creep into a priced change order: compare a fixed fee against the hours actually worked to get the baseline rate, the effective rate, and the effective-rate decay percentage. Prices the unpriced creep hours at your baseline rate, produces the change-order price at standard and rush multipliers (1.0x, 1.25x, 1.5x), and checks the effective rate against a walk-away floor with a renegotiate-or-decline verdict. Pure arithmetic on user-entered project figures; nothing stored.",
+    "category": "career_workforce",
+    "slug": "181-scope-creep-pricer",
+    "ap2_mandate_type": "scope_creep_record",
     "ap2_export": true
   }
 ]
