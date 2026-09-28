@@ -13,7 +13,7 @@ Sister worker: [ainumbers-mcp](https://mcp.ainumbers.co) (markets & institutions
 ## Live Endpoint
 
 ```
-https://mcp.apexlogics.org
+https://mcp.apexlogics.org/mcp
 ```
 
 ## Agent Quickstart
@@ -24,7 +24,7 @@ Add to any MCP-compatible client config:
 {
   "mcpServers": {
     "apexlogics": {
-      "url": "https://mcp.apexlogics.org"
+      "url": "https://mcp.apexlogics.org/mcp"
     }
   }
 }
@@ -49,9 +49,9 @@ Each ApexLogics calculator is wrapped as an MCP tool: deterministic inputs in, a
 Two distinct verification tiers exist across the suite - do not conflate them:
 
 - **§4 hash-verifiable (all browser tools + unproven kernels):** deterministic client-side execution, SHA-256 execution hashes over inputs/outputs. Reproducible, not zero-knowledge proven.
-- **§18 zk compute-proven (8 of 31 worker kernels only):** real Groth16-BN254 proofs generated via a RISC Zero zkVM (`RISC0_DEV_MODE=0`, Guest ImageID `a1a0bc89`), verified before being attached to the audit trail. Currently proven, by name: `40-gig-income-optimizer`, `109-iso-amt-exposure-modeler`, `38-early-career-net-worth-engine`, `137-qbi-199a-optimizer`, `143-federal-buyout-decision`, `126-skillbridge-credential-transfer-roi`, `119-educator-advanced-degree-roi`, `120-nbct-roi-calculator`.
+- **§18 zk compute-proven (17 of 36 worker kernels):** real Groth16-BN254 proofs generated via a RISC Zero zkVM (`RISC0_DEV_MODE=0`, Guest ImageID `a1a0bc89`), verified before being attached to the audit trail. The authoritative proven list lives in [`data/proof-fixtures.json`](data/proof-fixtures.json); currently: `38-early-career-net-worth-engine`, `40-gig-income-optimizer`, `109-iso-amt-exposure-modeler`, `119-educator-advanced-degree-roi`, `120-nbct-roi-calculator`, `121-teacher-pension-estimator`, `122-trade-wage-progression-projector`, `123-trade-specialization-roi`, `124-contractor-launch-break-even`, `126-skillbridge-credential-transfer-roi`, `130-dependent-care-fsa-cdctc-optimizer`, `132-travel-nurse-vs-staff-comp`, `135-option-exercise-window`, `136-severance-ui-timing`, `137-qbi-199a-optimizer`, `140-83b-election-decision`, `143-federal-buyout-decision`.
 
-The remaining 23 worker kernels carry an honest `compute_proof_ready: "deferred"` status. No blanket "ApexLogics is zk-proven" claim is accurate - any §18 claim must scope to the named list above.
+The remaining 19 worker kernels are not zk-proven and make no §18 claim. No blanket "ApexLogics is zk-proven" claim is accurate - any §18 claim must scope to the named list above. Receipts can be verified independently with [PostOakLabs/ocg-verify-action](https://github.com/PostOakLabs/ocg-verify-action).
 
 ## Structure
 
@@ -61,7 +61,8 @@ apexlogics-mcp-worker/
 ├── run_chain.mjs       # Chain execution over kernel graph
 ├── generate.mjs         # Regenerates tools.json / workflows.json / prompts.json from live site JSON
 ├── kernels/            # Deterministic calculator kernels (.kernel.mjs) + shared _detmath/_gateval/_computeproof
-├── data/                 # Chain fixtures, goldens, chaingraph.json
+├── data/                 # tools.json (tool SSOT), workflows.json, prompts.json,
+│                           proof-fixtures.json (17 proofs), chain fixtures/goldens
 ├── scripts/              # CI gates (kernel-parity, gate-static, gate-semantics, branch coverage)
 └── wrangler.jsonc        # Cloudflare Worker config (custom domain: mcp.apexlogics.org)
 ```
