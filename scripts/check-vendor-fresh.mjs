@@ -17,7 +17,7 @@ const HERE = fileURLToPath(new URL('.', import.meta.url));
 const sha = (buf) => createHash('sha256').update(buf).digest('hex');
 
 // Pinned SSOT digests (OCG §17 kernel identity). Update ONLY when the SSOT itself moves.
-const HASH_BODY_SHA = '9d60ba8b9a14900b9cc1f4878de4e92f5d8e622a128413840be9ea94bbae1cfb';
+const HASH_BODY_SHA = 'ef6fd5a1f28131dce8ca5ea3adcd1662e93cec682b7cecb3759a9647b6a56f04';
 // LF-normalized SSOT (the AINumbers working copy ships CRLF; .gitattributes eol=lf
 // stores + checks out LF here, so pin the LF sha for a stable, checkout-invariant gate).
 // _gateval runs in the worker/runner, NOT the zkVM guest, so line-ending choice is free.
