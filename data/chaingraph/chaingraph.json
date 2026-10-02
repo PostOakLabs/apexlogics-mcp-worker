@@ -5518,13 +5518,16 @@
       "persona": "worker",
       "steps": [
         {
-          "tool_id": "50-law-school-roi-by-career-track"
+          "tool_id": "08-severance-decision-engine"
         },
         {
-          "tool_id": "03-graduate-school-roi-comparator"
+          "tool_id": "10-career-break-reentry-engine"
         },
         {
-          "tool_id": "39-signing-bonus-clawback-analyzer"
+          "tool_id": "11-human-capital-engine"
+        },
+        {
+          "tool_id": "09-job-search-roi-tracker"
         }
       ]
     },

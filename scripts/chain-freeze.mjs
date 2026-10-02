@@ -10,6 +10,14 @@
  *
  *   node scripts/chain-freeze.mjs            # verify: recompute vs the frozen goldens
  *   node scripts/chain-freeze.mjs --capture  # (re)write the goldens from the real run
+ *   node scripts/chain-freeze.mjs --capture --only a,b
+ *                                            # scoped capture (AL-CHAIN-FIDELITY): re-freeze
+ *                                            # ONLY the named chains, merging into the
+ *                                            # existing goldens; every other entry is left
+ *                                            # byte-untouched so a mass recapture can never
+ *                                            # paper over drift in chains outside the scope.
+ *                                            # A named chain that produces no composite is
+ *                                            # REMOVED from the goldens (nothing to freeze).
  *
  * CI-STANDALONE: reads only worker-local files (data/chaingraph/chaingraph.json,
  * kernels/, data/chain-goldens.json) via run_chain. No ../repo, no ../AINumbers, no
@@ -24,7 +32,25 @@ const WORKER_GOLDEN = new URL('../data/chain-goldens.json', import.meta.url);
 const REPO_GOLDEN = new URL('../../repo/chaingraph/chains/chain-goldens.json', import.meta.url);
 const capture = process.argv.includes('--capture');
 
-const names = (cg.chains || []).map((c) => c.name).sort();
+// --only a,b,c — scoped capture: only the named chains are (re)frozen; all other
+// golden entries are carried over byte-identically from the existing file.
+const onlyIdx = process.argv.indexOf('--only');
+const onlyNames = onlyIdx !== -1 && process.argv[onlyIdx + 1]
+  ? process.argv[onlyIdx + 1].split(',').map((s) => s.trim()).filter(Boolean)
+  : null;
+if (!capture && onlyNames) {
+  console.error('✗ --only is only valid together with --capture');
+  process.exit(1);
+}
+for (const n of onlyNames ?? []) {
+  if (!(cg.chains ?? []).some((c) => c.name === n)) {
+    console.error(`✗ --only names unknown chain "${n}" (not in chaingraph.chains[].name)`);
+    process.exit(1);
+  }
+}
+
+let names = (cg.chains || []).map((c) => c.name).sort();
+if (onlyNames) names = names.filter((n) => onlyNames.includes(n));
 
 // Run every chain; keep only those that execute >=1 kernel step (non-null composite).
 async function runAll() {
@@ -45,12 +71,31 @@ async function runAll() {
 const live = await runAll();
 
 if (capture) {
+  let out;
+  if (onlyNames) {
+    // Scoped merge: start from the existing frozen set, then set/remove ONLY the
+    // named chains. Result key order is the alphabetical union (existing file is
+    // already alphabetical; new keys insert in sort position).
+    const existing = existsSync(WORKER_GOLDEN)
+      ? JSON.parse(readFileSync(WORKER_GOLDEN, 'utf8')).chains || {}
+      : {};
+    out = { ...existing };
+    for (const n of onlyNames) {
+      if (live[n]) out[n] = live[n];
+      else delete out[n];
+    }
+    out = Object.fromEntries(Object.entries(out).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+    const changed = onlyNames.filter((n) => JSON.stringify(existing[n]) !== JSON.stringify(out[n]));
+    console.log(`· scoped capture: ${changed.length ? changed.join(', ') : 'no golden entries changed'} (${onlyNames.length} chain(s) in scope, ${Object.keys(live).length} produced a composite)`);
+  } else {
+    out = live;
+  }
   const body = JSON.stringify({
     _note: 'OCG §12 chain composite-hash freeze. Regenerate: node scripts/chain-freeze.mjs --capture. Verified by chain-freeze.mjs (deploy.yml gate).',
-    chains: live,
+    chains: out,
   }, null, 2) + '\n';
   writeFileSync(WORKER_GOLDEN, body);
-  console.log(`✓ captured ${Object.keys(live).length} chain composites → data/chain-goldens.json`);
+  console.log(`✓ captured ${Object.keys(out).length} chain composites → data/chain-goldens.json`);
   if (existsSync(REPO_GOLDEN)) { writeFileSync(REPO_GOLDEN, body); console.log('✓ mirrored → repo/chaingraph/chains/chain-goldens.json'); }
   else { console.log('· repo copy not present (CI) — skipped mirror'); }
   process.exit(0);
