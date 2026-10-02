@@ -4714,7 +4714,7 @@
       "compute_images": [
         {
           "system": "sha256-source",
-          "image_id": "31677a38641f8306d516adde039a4c64d99bfc18eb437ec5ce42872d5d749146",
+          "image_id": "159e8d35395f0628bd60c814de66d99065dbb2d7f30af7ed8d3f0a983b0b5d0b",
           "valid_from": "2026-07-05T00:00:00.000Z"
         }
       ],

@@ -118,7 +118,7 @@ const CASES = [
       's3-hours': 36, 's3-diff': 20, 's3-ot': 8, 's3-weeks': 50, 's3-alt': 'none',
     },
     kernelInputs: {
-      baseRate: 40, otMultiplier: 1.5, taxRate: 24, childcareCost: 16000, altChildcareCost: 9000,
+      baseRate: 40, otThreshold: 40, otMultiplier: 1.5, taxRate: 24, childcareCost: 16000, altChildcareCost: 9000,
       's0-hours': 36, 's0-diff': 0,  's0-ot': 0, 's0-weeks': 50, 's0-alt': 'no',
       's1-hours': 36, 's1-diff': 10, 's1-ot': 4, 's1-weeks': 50, 's1-alt': 'no',
       's2-hours': 36, 's2-diff': 15, 's2-ot': 0, 's2-weeks': 48, 's2-alt': 'yes',

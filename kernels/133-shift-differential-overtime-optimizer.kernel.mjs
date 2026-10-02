@@ -3,10 +3,16 @@
  * OpenChainGraph server-side kernel — Shift Differential & Overtime Optimizer (AL-140).
  *
  * Compute ported VERBATIM from repo/tools/133-shift-differential-overtime-optimizer/index.html
- * (calculate() L260-297 + exportAP2 preimage assembly L348-378). _cgDomain-family preimage
+ * (calculate() + exportAP2 preimage assembly). _cgDomain-family preimage
  * (like AL-136): policy_parameters.inputs AND output_payload both = { inputs, outputs,
  * downstream_handoff_candidates, metadata }. Reproduces the browser §6 execution_hash
  * byte-for-byte; scripts/kernel-parity.mjs proves it by real execution.
+ *
+ * FLSA WEEKLY RULE (AL-133-OT-THRESHOLD, adopted from AINumbers art-340's implementation
+ * of 29 CFR §778 — the rule, not the code): overtime hours are TOTAL weekly hours above
+ * the otThreshold field; the shift differential is part of the regular rate; premium =
+ * (multiplier − 1) × regular rate × overtime hours. Parity vectors copied from art-340's
+ * fixture suite live in scripts/art340-parity-133.test.mjs.
  *
  * GUEST-LEGAL: imports only ./_hash.mjs; no Math.pow/log/exp/sin/cos (Math.max/min/round
  * only); no Date/Intl/locale; finite-guarded. Input keys mirror the tool's DOM field ids so
@@ -40,11 +46,11 @@ const pf = (v, d) => parseFloat(v) || d;
 export function compute(inputs = {}) {
   const g = (k) => inputs[k];
   const baseRate         = pf(g('baseRate'), 32);
+  const otThreshold      = pf(g('otThreshold'), 40);
   const otMult           = pf(g('otMultiplier'), 1.5);
   const taxRate          = (parseFloat(g('taxRate')) / 100) || 0.22;   // browser: /100 || 0.22
   const childcareCost    = pf(g('childcareCost'), 14400);
   const altChildcareCost = pf(g('altChildcareCost'), 8400);
-  // otThreshold (field) is read by the tool but unused in the compute — omitted.
 
   const results = [];
   for (let i = 0; i < 4; i++) {
@@ -54,11 +60,16 @@ export function compute(inputs = {}) {
     const weeks   = pf(g(`s${i}-weeks`), 50);
     const altCc   = g(`s${i}-alt`);
 
+    // FLSA weekly rule (adopted from art-340, see header): overtime hours are total
+    // weekly hours above the threshold; diff rides into the regular rate; premium =
+    // (multiplier − 1) × regular rate × overtime hours.
     const effectiveBase  = baseRate * (1 + diffPct);
-    const regularHours   = Math.max(0, hours - otHours);
-    const weeklyGross    = effectiveBase * regularHours + effectiveBase * otMult * otHours;
-    const diffValueWeekly = baseRate * diffPct * regularHours;
-    const otValueWeekly  = effectiveBase * (otMult - 1) * otHours;
+    const totalHours     = hours + otHours;
+    const otPremHours    = Math.max(0, totalHours - otThreshold);
+    const regularHours   = totalHours - otPremHours;
+    const weeklyGross    = effectiveBase * regularHours + effectiveBase * otMult * otPremHours;
+    const diffValueWeekly = baseRate * diffPct * totalHours;
+    const otValueWeekly  = effectiveBase * (otMult - 1) * otPremHours;
     const annualGross    = weeklyGross * weeks;
     const annualDiffValue = diffValueWeekly * weeks;
     const annualOTValue  = otValueWeekly * weeks;
@@ -66,7 +77,7 @@ export function compute(inputs = {}) {
     const tax = annualGross * taxRate;
     const netAnnual = annualGross - tax - cc;
 
-    results.push({ idx: i, name: PRESET_SHIFTS[i].name, hours: hours + otHours, effectiveBase, annualGross, annualDiffValue, annualOTValue, cc, tax, netAnnual });
+    results.push({ idx: i, name: PRESET_SHIFTS[i].name, hours: totalHours, effectiveBase, annualGross, annualDiffValue, annualOTValue, cc, tax, netAnnual });
   }
 
   const best = results.reduce((a, b) => a.netAnnual > b.netAnnual ? a : b);
@@ -75,7 +86,7 @@ export function compute(inputs = {}) {
 
   // ── exact preimage (_cgDomain, exportAP2 L351-378) ──────────────────────────
   const _cgDomain = {
-    inputs: { baseRate: baseRate, taxRatePct: taxRate * 100, schedulesModeled: results.length },
+    inputs: { baseRate: baseRate, otThreshold: otThreshold, taxRatePct: taxRate * 100, schedulesModeled: results.length },
     outputs: {
       bestSchedule:     best.name,
       bestNetAnnual:    Math.round(best.netAnnual),
