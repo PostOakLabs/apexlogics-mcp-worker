@@ -315,6 +315,18 @@
       "other_aid": 0
     }
   },
+  "2026-borrower-decision-journey": {
+    "102-grad-loan-cap-gap-planner": {
+      "prog_type": "law",
+      "coa": 75000,
+      "years": 3,
+      "existing_fed": 0,
+      "fellowship": 5000,
+      "employer_tuition": 0,
+      "savings_contrib": 30000,
+      "other_aid": 0
+    }
+  },
   "showcase-hash-seeded-art": {
     "sc1-hash-seeded-generative-art": {
       "seed": 20260710,

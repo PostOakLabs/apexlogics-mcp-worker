@@ -106,7 +106,7 @@ const SERVER_INSTRUCTIONS =
 const normHash = (h) => (typeof h === "string" ? h.replace(/^sha256:/, "") : h);
 
 // ── Discovery layer — BM25 over the catalog (find_tool) and chains (find_chain) ─
-// Index built once at module load (123 tools + 38 chains — cheap; no precomputed
+// Index built once at module load (123 tools + 46 chains — cheap; no precomputed
 // data file, so nothing to keep fresh). Workers-runtime safe: plain arithmetic only.
 // Ported from the AINumbers mcp-apps-poc discovery region (SSOT reference; not forked).
 function tokenizeForIndex(text) {
