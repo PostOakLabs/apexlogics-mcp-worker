@@ -85,6 +85,13 @@ try {
     description: t.description || "",
     category: t.category || "",
     slug: t.slug,
+    // AL-REGISTRY-TRUTH (2026-10-02): the registry now carries display_number on
+    // all 296 rows (single field, legacy display_num consolidated), plus
+    // data_vintage and sister_suite. Project them so list_apexlogics_tools and
+    // find_tool serve the corrected fields instead of a stale 7-field shape.
+    display_number: t.display_number ?? null,
+    data_vintage: t.data_vintage ?? null,
+    sister_suite: t.sister_suite ?? null,
     // Registry field is ap2_mandate_types (plural array); the singular read here
     // shipped an all-null catalog to agents until caught 2026-09-24
     // (ROOT-CAUSE-REVIEW-2026-09-24, RC-3). Serve the primary (first) type.
