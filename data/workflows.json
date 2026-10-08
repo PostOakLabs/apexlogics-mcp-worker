@@ -802,5 +802,34 @@
         "note": "Model total compensation on return, including new childcare costs"
       }
     ]
+  },
+  "program-evaluation-journey": {
+    "description": "Evaluate a workforce program end-to-end: design the study, verify the identification assumptions, net out deadweight and substitution, build the DOL cost-per-outcome ladder, and report board-facing ROI against WIOA targets.",
+    "steps": [
+      {
+        "tool": "81-survey-study-designer",
+        "note": "Sharpen the research question and fix the sampling strategy and sample size the evaluation runs on"
+      },
+      {
+        "tool": "173-parallel-trends-placebo-checker",
+        "note": "Enter 3 or more pre-treatment periods for treatment and control to test the pre-trend assumption before trusting the estimate"
+      },
+      {
+        "tool": "172-lurking-variable-reversal-detector",
+        "note": "Paste the stratified 2x2 outcome table to check the pooled result survives stratification"
+      },
+      {
+        "tool": "171-counterfactual-haircut-adjuster",
+        "note": "Net deadweight, substitution, and creaming out of the gross placement count"
+      },
+      {
+        "tool": "170-workforce-cost-per-outcome",
+        "note": "Enter cost, enrollment, placement, and retention data for the full DOL TEGL 6-13 cost ladder"
+      },
+      {
+        "tool": "15-workforce-board-roi-report",
+        "note": "Benchmark program outcomes against WIOA PY 2023 national targets for the board-facing ROI report"
+      }
+    ]
   }
 }
