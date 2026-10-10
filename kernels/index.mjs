@@ -37,6 +37,9 @@ import * as t38 from './38-early-career-net-worth-engine.kernel.mjs';
 import * as t36 from './36-workforce-pell-eligibility-screener.kernel.mjs';
 import * as t102 from './102-grad-loan-cap-gap-planner.kernel.mjs';
 import * as t22 from './22-student-loan-repayment-optimizer.kernel.mjs';
+import * as t170 from './170-workforce-cost-per-outcome.kernel.mjs';
+import * as t171 from './171-counterfactual-haircut-adjuster.kernel.mjs';
+import * as t173 from './173-parallel-trends-placebo-checker.kernel.mjs';
 import * as tSc1 from './sc1-hash-seeded-generative-art.kernel.mjs';
 import * as tSc2 from './sc2-arg-puzzle-gates.kernel.mjs';
 
@@ -77,6 +80,9 @@ export const KERNELS = {
   '36-workforce-pell-eligibility-screener': t36,
   '102-grad-loan-cap-gap-planner': t102,
   '22-student-loan-repayment-optimizer': t22,
+  '170-workforce-cost-per-outcome': t170,
+  '171-counterfactual-haircut-adjuster': t171,
+  '173-parallel-trends-placebo-checker': t173,
 };
 
 export function getKernel(tool_id) {

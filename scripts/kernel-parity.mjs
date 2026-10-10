@@ -615,6 +615,81 @@ const CASES = [
     goldenGeneratedAt: '2026-09-03T00:00:00.000Z',
   },
   {
+    // _cgDomain family. Compute entry is calcCostLadder (not calculate). The fake DOM
+    // hardcodes `.checked=false` (see makeDocument/elFor below), so Program B
+    // (`p1On`, checked in markup) and Program C (`p2On`) are both OFF and
+    // readProgram() returns null for them — the browser side runs Program-A-only.
+    // kernelInputs mirrors that with the slot-aligned `programs` array (one entry;
+    // disabled slots are absent exactly as the page's `.filter(Boolean)` leaves
+    // them). Values are the page's Program-A DOM defaults.
+    tool_id: '170-workforce-cost-per-outcome',
+    calcFn: 'calcCostLadder',
+    toolHtml: REPO + 'tools/170-workforce-cost-per-outcome/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/170-workforce-cost-per-outcome.golden.json',
+    fields: {
+      p0Name: 'Adult Career Training', p0Cost: 450000, p0Enrolled: 200, p0Employed: 150,
+      p0Retained: 120, p0Gain: 95, p0Days: 180, benchOutcome: 7500, benchCped: 26,
+    },
+    kernelInputs: {
+      programs: [
+        { name: 'Adult Career Training', cost: 450000, enrolled: 200, employed: 150, retained: 120, gain: 95, days: 180 },
+      ],
+      benchOutcome: 7500, benchCped: 26,
+    },
+    goldenGeneratedAt: '2026-10-10T00:00:00.000Z',
+  },
+  {
+    // _cgDomain family. Compute entry is calcHaircut (not calculate). Values are the
+    // page's DOM defaults (Program 450000/200/150; sliders 30/10/15). kernelInputs
+    // mirror the DOM ids; the kernel does the same parseFloat||0 and /100 coercion.
+    tool_id: '171-counterfactual-haircut-adjuster',
+    calcFn: 'calcHaircut',
+    toolHtml: REPO + 'tools/171-counterfactual-haircut-adjuster/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/171-counterfactual-haircut-adjuster.golden.json',
+    fields: {
+      progName: 'Adult Career Training', progCost: 450000, progEnrolled: 200,
+      progEmployed: 150, cfRate: 30, subRate: 10, creamRate: 15,
+    },
+    kernelInputs: {
+      progName: 'Adult Career Training', progCost: 450000, progEnrolled: 200,
+      progEmployed: 150, cfRate: 30, subRate: 10, creamRate: 15,
+    },
+    goldenGeneratedAt: '2026-10-10T00:00:00.000Z',
+  },
+  {
+    // calcFn is runTrends (the page's Tab-1 entry, not calculate). The page's
+    // top-level loadExample() runs at script load inside the harness sandbox, so
+    // runTrends/exportAP2 see exactly the 8-period example panel with treatment
+    // start at 'Period 6' (module state — the fake DOM's set-traps never matter).
+    // kernelInputs mirrors that exact top-level state. The p-value path
+    // (logGamma/betacf/regIncompleteBeta) uses Math.log/Math.exp
+    // same-expression-as-browser — the kernel-22 NOT-YET-GUEST-LEGAL precedent (a
+    // _detmath import would violate the kernels' _hash.mjs-only import fence).
+    // Event/placebo/twobytwo lastResult fields are never populated by the harness,
+    // so the preimage carries them as null — exactly what the kernel emits.
+    tool_id: '173-parallel-trends-placebo-checker',
+    calcFn: 'runTrends',
+    toolHtml: REPO + 'tools/173-parallel-trends-placebo-checker/index.html',
+    goldenPath: REPO + 'chaingraph/kernels/fixtures/173-parallel-trends-placebo-checker.golden.json',
+    fields: {
+      treatLabel: 'Treatment', controlLabel: 'Control',
+    },
+    kernelInputs: {
+      rows: [
+        { label: 'Period 1', treat: 40.2, control: 38.9 },
+        { label: 'Period 2', treat: 41.8, control: 40.1 },
+        { label: 'Period 3', treat: 43.1, control: 41.6 },
+        { label: 'Period 4', treat: 44.5, control: 43.0 },
+        { label: 'Period 5', treat: 46.0, control: 44.4 },
+        { label: 'Period 6', treat: 52.3, control: 45.9 },
+        { label: 'Period 7', treat: 57.1, control: 47.5 },
+        { label: 'Period 8', treat: 60.4, control: 49.0 },
+      ],
+      treatmentStartLabel: 'Period 6',
+    },
+    goldenGeneratedAt: '2026-10-10T00:00:00.000Z',
+  },
+  {
     // Showcase c1-1. Pure integer LCG (Math.imul) — browser tool and kernel are
     // trivially bit-identical. Complexity 7 >= 4 → the chain gate routes to render.
     tool_id: 'sc1-hash-seeded-generative-art',

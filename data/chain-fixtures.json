@@ -339,5 +339,44 @@
       "puzzleId": "gate-1",
       "answer": "RANSOM"
     }
+  },
+  "program-evaluation-journey": {
+    "173-parallel-trends-placebo-checker": {
+      "rows": [
+        { "label": "Period 1", "treat": 40.2, "control": 38.9 },
+        { "label": "Period 2", "treat": 41.8, "control": 40.1 },
+        { "label": "Period 3", "treat": 43.1, "control": 41.6 },
+        { "label": "Period 4", "treat": 44.5, "control": 43.0 },
+        { "label": "Period 5", "treat": 46.0, "control": 44.4 },
+        { "label": "Period 6", "treat": 52.3, "control": 45.9 },
+        { "label": "Period 7", "treat": 57.1, "control": 47.5 },
+        { "label": "Period 8", "treat": 60.4, "control": 49.0 }
+      ],
+      "treatmentStartLabel": "Period 6"
+    },
+    "171-counterfactual-haircut-adjuster": {
+      "progName": "Adult Career Training",
+      "progCost": 450000,
+      "progEnrolled": 200,
+      "progEmployed": 150,
+      "cfRate": 30,
+      "subRate": 10,
+      "creamRate": 15
+    },
+    "170-workforce-cost-per-outcome": {
+      "programs": [
+        {
+          "name": "Adult Career Training",
+          "cost": 450000,
+          "enrolled": 200,
+          "employed": 150,
+          "retained": 120,
+          "gain": 95,
+          "days": 180
+        }
+      ],
+      "benchOutcome": 7500,
+      "benchCped": 26
+    }
   }
 }
