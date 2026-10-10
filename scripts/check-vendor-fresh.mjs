@@ -21,11 +21,11 @@ const HASH_BODY_SHA = 'ef6fd5a1f28131dce8ca5ea3adcd1662e93cec682b7cecb3759a9647b
 // LF-normalized SSOT (the AINumbers working copy ships CRLF; .gitattributes eol=lf
 // stores + checks out LF here, so pin the LF sha for a stable, checkout-invariant gate).
 // _gateval runs in the worker/runner, NOT the zkVM guest, so line-ending choice is free.
-const GATEVAL_SHA   = 'bc85b96e1b9fbc67036bb4ed5bbb622e9478acbe4cf8381c3521e5f9e43c9b54';
+const GATEVAL_SHA   = '349d5d49d00624bac0591b9057adc1ea6d11830734b4730c0f65518d1ac2cbf2';
 const DETMATH_SHA   = 'fd3ebdb0a5192b04bd33703ab03d1daf0b80cf0887bb84958ab9488467c516cd';
 // §18.1 self-contained BN254 Groth16 seal verifier + its vendored @noble/curves bundle.
 // Runs in the worker/CI (check-compute-proofs), NOT the zkVM guest — pin the LF sha.
-const COMPUTEPROOF_SHA = '544e2f8910e1aaae3692c58758003b267998d9f2f1533267745b96a2291e393f';
+const COMPUTEPROOF_SHA = '1cc34cae13d2582185bc45c10e508063a514759eb538bd33c6e7f75e0fed4e56';
 const NOBLE_BN254_SHA  = 'd389cfa8eb9081831b29c2c187ab4ebde9609be7afd8fd910359b65d13a65f8c';
 
 let red = false;
