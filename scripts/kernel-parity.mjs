@@ -256,11 +256,11 @@ const CASES = [
     goldenPath: REPO + 'chaingraph/kernels/fixtures/137-qbi-199a-optimizer.golden.json',
     fields: {
       qbi: 150000, taxableIncome: 230000, filingStatus: 'single', sstb: 'no',
-      w2Wages: 40000, ubia: 100000, threshold: 201775, phaseoutBand: 75000,
+      w2Wages: 40000, ubia: 100000, threshold: 201750, phaseoutBand: 75000,
     },
     kernelInputs: {
       qbi: 150000, taxableIncome: 230000, filingStatus: 'single', sstb: 'no',
-      w2Wages: 40000, ubia: 100000, threshold: 201775, phaseoutBand: 75000,
+      w2Wages: 40000, ubia: 100000, threshold: 201750, phaseoutBand: 75000,
     },
     goldenGeneratedAt: '2026-07-04T00:00:00.000Z',
   },
