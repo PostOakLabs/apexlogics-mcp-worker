@@ -150,6 +150,13 @@ jobs:
       - name: 🔒 #130 2026 CDCTC vectors
         run: node scripts/cdctc-2026-130.test.mjs
 
+      # ── #142 §1202 rate vectors (AL-AUDIT2-QSBS) ────────────────────────────
+      # Section 1202 gain on a partial exclusion is taxed at up to 28% (plus NIIT
+      # when included), not the caller's LTCG rate; gain above the cap stays at
+      # the LTCG rate. Zero-dep, no network.
+      - name: 🔒 #142 §1202 vectors
+        run: node scripts/qsbs-1202-142.test.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.
