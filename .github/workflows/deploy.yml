@@ -157,6 +157,12 @@ jobs:
       - name: 🔒 #142 §1202 vectors
         run: node scripts/qsbs-1202-142.test.mjs
 
+      # ── #134 premium tax credit (AL-AUDIT2-ACA) ──────────────────────────────
+      # 2026 law (Rev. Proc. 2025-25 table, linear within bands, 2025 FPL, 400%
+      # cliff) as the main result; the ARPA/IRA schedule as ifEnhancedExtended.
+      - name: 🔒 #134 ACA premium tax credit vectors
+        run: node scripts/aca-ptc-134.test.mjs
+
       # ── Telemetry caller hash (AL-AUDIT2-CALLERHASH) ────────────────────────
       # Keyed with a secret, rotated per UTC day, and never falls back to an
       # unkeyed or public-salt hash of the IP. Zero-dep, no network.
