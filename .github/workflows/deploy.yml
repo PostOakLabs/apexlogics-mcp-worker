@@ -144,6 +144,12 @@ jobs:
       - name: 🔒 #137 §199A vectors
         run: node scripts/qbi-199a-137.test.mjs
 
+      # ── #130 2026 CDCTC schedule vectors (AL-AUDIT2-CDCTC) ──────────────────
+      # OBBBA §21 50% → 35% → 20% schedule with $2,000/$4,000 steps and the
+      # "or fraction thereof" rounding at every threshold. Zero-dep, no network.
+      - name: 🔒 #130 2026 CDCTC vectors
+        run: node scripts/cdctc-2026-130.test.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.
