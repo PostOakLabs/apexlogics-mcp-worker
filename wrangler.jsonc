@@ -4,12 +4,14 @@
   "workers_dev": true,
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
-  // Workers Logs — console output + invocation logs. Explicit form to match ocs-mcp /
-  // ainumbers-mcp (functionally identical to the prior "enabled": true shorthand).
+  // Workers Logs — console output (errors) only. Invocation logs are OFF: they record
+  // each request's metadata, which can include the caller's IP, and Workers Logs has no
+  // per-field redaction. No IP is logged or stored anywhere by this Worker (telemetry
+  // uses the keyed daily caller hash in _callerhash.mjs). AL-AUDIT2-NOIP.
   "observability": {
     "logs": {
       "enabled": true,
-      "invocation_logs": true
+      "invocation_logs": false
     }
   },
   "analytics_engine_datasets": [

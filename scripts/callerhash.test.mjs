@@ -27,5 +27,12 @@ const src = readFileSync(new URL('../worker.mjs', import.meta.url), 'utf8');
 ok('worker.mjs no longer contains the public salt', !src.includes('apexlogics-mcp-v1:'));
 ok('worker.mjs hashes callers through _callerhash.mjs with env.CALLER_HASH_SALT', /callerHashOf\(callerRaw, env\.CALLER_HASH_SALT\)/.test(src));
 
+// No IP in logs (AL-AUDIT2-NOIP): invocation logs off (no per-field redaction exists),
+// and no console call in the Worker passes the caller's IP.
+const wr = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8').replace(/^\s*\/\/.*$/mg, '');
+ok('wrangler: observability.logs.invocation_logs is false', JSON.parse(wr).observability?.logs?.invocation_logs === false);
+const consoleLines = src.split('\n').filter(l => /console\.(log|error|warn|info|debug)\(/.test(l));
+ok('no console call logs the caller IP', consoleLines.every(l => !/callerRaw|CF-Connecting-IP|X-Forwarded-For/i.test(l)));
+
 if (fail) { console.error(`\n✗ callerhash: ${fail} failed`); process.exit(1); }
 console.log('✓ callerhash: all vectors pass');
