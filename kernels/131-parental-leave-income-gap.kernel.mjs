@@ -39,19 +39,21 @@ const STATE_CAPS_WEEKLY = {
   none: 0, ca: 1620, ny: 1177, nj: 1055, wa: 1574, co: 1292, or: 1470, custom: 99999,
 };
 
+// Blank/absent -> default; an explicit 0 is kept (AL-ZERO-INPUTS: was `value || default`).
+const ov = (v, d) => { if (v === undefined || v === null || String(v).trim() === '') return d; const x = parseFloat(v); return Number.isFinite(x) ? x : d; };
 export function compute(inputs = {}) {
   const g = (k) => inputs[k];
   const baseSalary          = num(g('baseSalary')) || 85000;
-  const taxRate             = (num(g('taxRate')) / 100) || 0.22;
-  const monthlyExpenses     = num(g('monthlyExpenses')) || 6500;
+  const taxRate             = ov(g('taxRate'), 22) / 100;
+  const monthlyExpenses     = ov(g('monthlyExpenses'), 6500);
   const partnerIncome       = num(g('partnerIncome')) || 0;
-  const savings             = num(g('savings')) || 20000;
+  const savings             = ov(g('savings'), 20000);
   const employerPaidWeeks   = num(g('employerPaidWeeks')) || 0;
   const employerPartialWeeks = num(g('employerPartialWeeks')) || 0;
-  const employerPartialPct = (num(g('employerPartialPct')) / 100) || 0.60;
+  const employerPartialPct = ov(g('employerPartialPct'), 60) / 100;
   const stateProgram        = g('stateProgram');
   const statePflWeeks       = num(g('statePflWeeks')) || 0;
-  const customPflRate       = (num(g('customPflRate')) / 100) || 0.60;
+  const customPflRate       = ov(g('customPflRate'), 60) / 100;
   const totalLeaveWeeks     = num(g('totalLeaveWeeks')) || 16;
   const babyExpense         = num(g('babyExpense')) || 0;
 

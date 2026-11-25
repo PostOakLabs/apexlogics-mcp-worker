@@ -51,14 +51,16 @@ function calcStrategy(fsaContrib, agi, numChildren, childcareCost, marginalRate,
   return { fsaContrib, fsaTaxSavings, ficaSavings, cdctcCredit, totalSavings, netCost, effectiveRate };
 }
 
+// Blank/absent -> default; an explicit 0 is kept (AL-ZERO-INPUTS: was `value || default`).
+const ov = (v, d) => { if (v === undefined || v === null || String(v).trim() === '') return d; const x = parseFloat(v); return Number.isFinite(x) ? x : d; };
 export function compute(inputs = {}) {
   const g = (k) => inputs[k];
   const filingStatus  = g('filingStatus');
-  const agi           = parseFloat(g('agi')) || 95000;
-  const marginalRate  = parseFloat(g('marginalRate')) || 22;
-  const stateRate     = parseFloat(g('stateRate')) || 5;
+  const agi           = ov(g('agi'), 95000);
+  const marginalRate  = ov(g('marginalRate'), 22);
+  const stateRate     = ov(g('stateRate'), 5);
   const numChildren   = parseInt(g('numChildren'), 10) || 1;
-  const childcareCost = parseFloat(g('childcareCost')) || 18000;
+  const childcareCost = ov(g('childcareCost'), 18000);
   const fsaAvailable  = g('fsaAvailable') === 'yes';
 
   const fsaMax = filingStatus === 'mfs' ? FSA_MAX_MFS : FSA_MAX_MFJ;

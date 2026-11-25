@@ -66,12 +66,14 @@ function calcRegularTax(income, status) {
   return tax;
 }
 
+// Blank/absent -> default; an explicit 0 is kept (AL-ZERO-INPUTS: was `value || default`).
+const ov = (v, d) => { if (v === undefined || v === null || String(v).trim() === '') return d; const x = parseFloat(v); return Number.isFinite(x) ? x : d; };
 export function compute(inputs = {}) {
   const g = (k) => inputs[k];
   const shares   = dnum(g('shares'), 10000);
-  const strike   = dnum(g('strikePrice'), 2.50);
+  const strike   = ov(g('strikePrice'), 2.50);
   const fmv      = dnum(g('fmv'), 18);
-  const ordIncome = dnum(g('ordinaryIncome'), 175000);
+  const ordIncome = ov(g('ordinaryIncome'), 175000);
   const otherAMT = dnum(g('otherAMT'), 0);
   const status   = (g('filingStatus') === 'mfj') ? 'mfj' : 'single';
 
