@@ -6,7 +6,7 @@
  * (calcStrategy() L~260-279 + calculate() L281-321 + exportAP2 preimage L409-428). _cgDomain-family preimage.
  * Reproduces the browser §6 execution_hash byte-for-byte; kernel-parity.mjs proves it.
  *
- * GUEST-LEGAL: imports only ./_hash.mjs; Math.max/min/round/floor only (no pow/exp/log);
+ * GUEST-LEGAL: imports only ./_hash.mjs; Math.max/min/round/floor/ceil only (no pow/exp/log);
  * no Date/Intl/locale in the preimage path; finite-guarded. Input keys mirror DOM ids.
  */
 import { executionHash } from './_hash.mjs';
@@ -32,16 +32,23 @@ const EXP_CAP_2 = 6000;
 
 const num = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
 
-function getCDCTCRate(agi) {
-  if (agi <= 15000) return 0.35;
-  if (agi >= 43000) return 0.20;
-  return 0.35 - (Math.floor((agi - 15000) / 1000) * 0.01);
+function getCDCTCRate(agi, joint) {
+  // IRC §21(a)(2) as amended by OBBBA (Pub. L. 119-21 §70405), tax years after 2025:
+  // 50%, less 1 pp per $2,000 (or fraction) of AGI over $15,000, not below 35%;
+  // then less 1 pp per $2,000 ($4,000 joint) (or fraction) of AGI over $75,000
+  // ($150,000 joint), not below 20%.
+  let rate = 0.50;
+  if (agi > 15000) rate = Math.max(0.35, rate - Math.ceil((agi - 15000) / 2000) * 0.01);
+  const from = joint ? 150000 : 75000;
+  const step = joint ? 4000 : 2000;
+  if (agi > from) rate = Math.max(0.20, rate - Math.ceil((agi - from) / step) * 0.01);
+  return Math.round(rate * 100) / 100;
 }
 
-function calcStrategy(fsaContrib, agi, numChildren, childcareCost, marginalRate, stateRate) {
+function calcStrategy(fsaContrib, agi, numChildren, childcareCost, marginalRate, stateRate, joint) {
   const expCap = numChildren >= 2 ? EXP_CAP_2 : EXP_CAP_1;
   const cdctcBase = Math.max(0, Math.min(expCap, childcareCost) - fsaContrib);
-  const cdctcRate = getCDCTCRate(agi);
+  const cdctcRate = getCDCTCRate(agi, joint);
   const cdctcCredit = cdctcBase * cdctcRate;
   const fsaTaxSavings = fsaContrib * (marginalRate / 100 + stateRate / 100);
   const ficaSavings = fsaContrib * FICA_RATE;
@@ -64,20 +71,21 @@ export function compute(inputs = {}) {
   const fsaAvailable  = g('fsaAvailable') === 'yes';
 
   const fsaMax = filingStatus === 'mfs' ? FSA_MAX_MFS : FSA_MAX_MFJ;
+  const joint = filingStatus === 'mfj';
 
   // Strategy 1: FSA only (max FSA, no CDCTC)
   const fsaAmt = fsaAvailable ? Math.min(fsaMax, childcareCost) : 0;
-  const stratFSA = calcStrategy(fsaAmt, agi, numChildren, childcareCost, marginalRate, stateRate);
+  const stratFSA = calcStrategy(fsaAmt, agi, numChildren, childcareCost, marginalRate, stateRate, joint);
   const stratFSAOnly = { ...stratFSA, cdctcCredit: 0, totalSavings: stratFSA.fsaTaxSavings + stratFSA.ficaSavings };
 
   // Strategy 2: CDCTC only (no FSA)
-  const stratCDCTC = calcStrategy(0, agi, numChildren, childcareCost, marginalRate, stateRate);
+  const stratCDCTC = calcStrategy(0, agi, numChildren, childcareCost, marginalRate, stateRate, joint);
 
   // Strategy 3: Optimal combo — sweep FSA contributions to find max
   let bestCombo = stratCDCTC;
   if (fsaAvailable) {
     for (let f = 0; f <= fsaMax; f += 250) {
-      const s = calcStrategy(f, agi, numChildren, childcareCost, marginalRate, stateRate);
+      const s = calcStrategy(f, agi, numChildren, childcareCost, marginalRate, stateRate, joint);
       if (s.totalSavings > bestCombo.totalSavings) bestCombo = s;
     }
   }
