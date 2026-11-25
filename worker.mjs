@@ -14,6 +14,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { TOOL_SCHEMAS } from "./pilot.mjs";
 import { executionHash } from "./_hash.mjs";
+import { callerHash as callerHashOf } from "./_callerhash.mjs";
 import { runChain } from "./run_chain.mjs";
 import toolsData from "./data/tools.json" with { type: "json" };
 import workflowsData from "./data/workflows.json" with { type: "json" };
@@ -987,14 +988,14 @@ export default {
         const response = await transport.handleRequest(wireRequest);
 
         // Fire-and-forget Analytics Engine telemetry — never blocks the response.
-        // Salted, non-reversible caller hash (no PII). Mirrors ainumbers-mcp / ocs-mcp.
+        // Caller hash: keyed with the CALLER_HASH_SALT secret and rotated daily, so it
+        // can't be reversed to an IP or linked across days ("unsalted" if the secret
+        // isn't set). See _callerhash.mjs.
         if (isToolCall && env.ANALYTICS) {
           const latencyMs = Date.now() - t0;
           const success   = response.status < 500;
           const callerRaw = request.headers.get("CF-Connecting-IP") ?? request.headers.get("X-Forwarded-For") ?? "";
-          const callerBuf = await crypto.subtle.digest("SHA-256",
-            new TextEncoder().encode("apexlogics-mcp-v1:" + callerRaw));
-          const callerHash = "sha256:" + Array.from(new Uint8Array(callerBuf)).map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 16);
+          const callerHash = await callerHashOf(callerRaw, env.CALLER_HASH_SALT);
           ctx.waitUntil(Promise.resolve().then(() => {
             try {
               env.ANALYTICS.writeDataPoint({

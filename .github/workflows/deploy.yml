@@ -71,7 +71,7 @@ jobs:
       - name: 🔍 JS syntax gate — worker + all kernels
         run: |
           fail=0
-          for f in worker.mjs pilot.mjs _hash.mjs run_chain.mjs generate.mjs; do
+          for f in worker.mjs pilot.mjs _hash.mjs _callerhash.mjs run_chain.mjs generate.mjs; do
             node --check "$f" || { echo "::error::Syntax error in $f"; fail=1; }
           done
           for f in kernels/*.kernel.mjs; do
@@ -156,6 +156,12 @@ jobs:
       # the LTCG rate. Zero-dep, no network.
       - name: 🔒 #142 §1202 vectors
         run: node scripts/qsbs-1202-142.test.mjs
+
+      # ── Telemetry caller hash (AL-AUDIT2-CALLERHASH) ────────────────────────
+      # Keyed with a secret, rotated per UTC day, and never falls back to an
+      # unkeyed or public-salt hash of the IP. Zero-dep, no network.
+      - name: 🔒 Caller hash vectors
+        run: node scripts/callerhash.test.mjs
 
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes

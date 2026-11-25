@@ -385,7 +385,7 @@ async function runSuite(worker) {
 async function selfTest() {
   const dir = mkdtempSync(join(tmpdir(), 'al-mcp-728b-'));
   try {
-    for (const f of ['worker.mjs', '_hash.mjs', 'pilot.mjs', 'run_chain.mjs', 'package.json']) {
+    for (const f of ['worker.mjs', '_hash.mjs', '_callerhash.mjs', 'pilot.mjs', 'run_chain.mjs', 'package.json']) {
       cpSync(join(ROOT, f), join(dir, f));
     }
     cpSync(join(ROOT, 'data'), join(dir, 'data'), { recursive: true });
