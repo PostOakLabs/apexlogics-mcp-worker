@@ -22,7 +22,7 @@ export const TOOL_SCHEMAS = {
         .string()
         .optional()
         .describe(
-          "Filter by category slug. Options: education_path_roi, compensation_offers, career_transition_mobility, licensing_credentials, student_finance_debt, workforce_development, immigration_visa, selected_studies, hr_analytics, obbba_student_loans, equity_tax, freelance_tax."
+          "Filter by category slug. Exact match. Options: education_path_roi, compensation_offers, career_transition_mobility, licensing_credentials, student_finance_debt, workforce_development, immigration_visa, workforce_exit, personal_finance_life_events, showcase, selected_studies_methods, compensation_benefits, selected_studies_education, selected_studies_esl, selected_studies_history, selected_studies_sport, selected_studies_economics, career_planning, education_finance, selected_studies_esl_tefl, career_workforce, agentic_tooling, digital_assets, retirement, real_estate, small_business, family_law, estate, long_term_care."
         ),
       limit: z
         .number()

@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "org.apexlogics/tools",
   "title": "ApexLogics Careertech & Edtech Suite",
-  "description": "Deterministic, privacy-first edtech & careertech decision tools — education ROI, compensation, licensing, immigration, student finance, workforce analytics. Emits ChainGraph AP2 artifacts with reproducible execution_hash. Zero PII.",
+  "description": "Deterministic, privacy-first edtech & careertech decision tools — education ROI, compensation, licensing, immigration, student finance, workforce analytics. Emits OpenChainGraph Policy Mandate artifacts (not Google AP2) with reproducible execution_hash. Zero PII.",
   "repository": {
     "url": "https://github.com/PostOakLabs/apexlogics-mcp-worker",
     "source": "github"
