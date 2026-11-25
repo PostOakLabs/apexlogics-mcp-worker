@@ -3,7 +3,7 @@
  * OpenChainGraph server-side kernel — COBRA vs. ACA Marketplace Optimizer (AL-141).
  *
  * Compute ported VERBATIM from repo/tools/134-cobra-vs-aca-optimizer/index.html
- * (getFPL/getPTCContributionPct L305-317, calculate() L324-375 + exportAP2 preimage
+ * (getFPL/applicablePct/getPTCContributionPct/getEnhancedContributionPct, calculate() L324-375 + exportAP2 preimage
  * L510-552). _cgDomain-family preimage. Reproduces the browser §6 execution_hash
  * byte-for-byte; kernel-parity.mjs proves it.
  *
@@ -31,35 +31,61 @@ export const meta = {
 
 const num = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
 
-// HHS 2026 Federal Poverty Guidelines (effective January 13, 2026)
-const FPL_2026 = {
-  lower48: { base: 15960, perPerson: 5620 },
-  ak:      { base: 19950, perPerson: 7020 },
-  hi:      { base: 18360, perPerson: 6470 },
+// Premium tax credits for 2026 coverage use the 2025 HHS poverty guidelines
+// (the guidelines in effect at the start of open enrollment). Source: 2026 Form 8962 instructions.
+const FPL_FOR_2026_COVERAGE = {
+  lower48: { base: 15650, perPerson: 5500 },
+  ak:      { base: 19550, perPerson: 6880 },
+  hi:      { base: 17990, perPerson: 6330 },
 };
 
-// ACA §36B Baseline PTC contribution percentage table (2026)
-const PTC_TABLE = [
-  { maxPct: 1.33, contrib: 0.00 },
-  { maxPct: 1.50, contrib: 0.020 },
-  { maxPct: 2.00, contrib: 0.040 },
-  { maxPct: 2.50, contrib: 0.060 },
-  { maxPct: 3.00, contrib: 0.085 },
-  { maxPct: 4.00, contrib: 0.085 },
+// 2026 applicable percentage table, Rev. Proc. 2025-25 sec. 3.01 (current law: the enhanced
+// ARPA/IRA credits expired 12/31/2025). [from, to, initial, final] as a share of FPL; the
+// percentage rises linearly within each band and is rounded to 0.01%. Above 400% FPL: no credit.
+const PTC_BANDS_2026 = [
+  [1.00, 1.33, 0.0210, 0.0210],
+  [1.33, 1.50, 0.0314, 0.0419],
+  [1.50, 2.00, 0.0419, 0.0660],
+  [2.00, 2.50, 0.0660, 0.0844],
+  [2.50, 3.00, 0.0844, 0.0996],
+  [3.00, 4.00, 0.0996, 0.0996],
+];
+
+// Enhanced ARPA/IRA schedule (2021-2025), shown only as an "if the enhanced subsidies are
+// extended" comparison. No 400% cliff: 8.5% applies above 400% FPL.
+const PTC_BANDS_ENHANCED = [
+  [1.00, 1.50, 0.000, 0.000],
+  [1.50, 2.00, 0.000, 0.020],
+  [2.00, 2.50, 0.020, 0.040],
+  [2.50, 3.00, 0.040, 0.060],
+  [3.00, 4.00, 0.060, 0.085],
 ];
 
 function getFPL(householdSize, state) {
-  const tbl = FPL_2026[state];
+  const tbl = FPL_FOR_2026_COVERAGE[state];
   return tbl.base + (householdSize - 1) * tbl.perPerson;
 }
 
-function getPTCContributionPct(fplPct) {
-  if (fplPct > 4.0) return null;
-  if (fplPct < 1.0) return null;
-  for (const band of PTC_TABLE) {
-    if (fplPct <= band.maxPct) return band.contrib;
+// Applicable percentage for a household income ratio (AGI / FPL), or null when no credit.
+function applicablePct(fplPct, bands, cliff) {
+  if (!(fplPct >= 1.0)) return null; // below 100% FPL: Medicaid territory, not PTC
+  const last = bands[bands.length - 1];
+  if (fplPct > last[1]) return cliff ? null : last[3];
+  for (const b of bands) {
+    if (fplPct < b[1] || b === last) {
+      const pct = b[2] + (b[3] - b[2]) * (fplPct - b[0]) / (b[1] - b[0]);
+      return Math.round(pct * 10000) / 10000;
+    }
   }
-  return PTC_TABLE[PTC_TABLE.length - 1].contrib;
+  return null;
+}
+
+function getPTCContributionPct(fplPct) {
+  return applicablePct(fplPct, PTC_BANDS_2026, true); // 2026 law, 400% cliff
+}
+
+function getEnhancedContributionPct(fplPct) {
+  return applicablePct(fplPct, PTC_BANDS_ENHANCED, false); // if extended, no cliff
 }
 
 export function compute(inputs = {}) {
@@ -89,6 +115,17 @@ export function compute(inputs = {}) {
   const mktTotal   = mktNetMonthly * coverageMonths;
   const savings    = cobraTotal - mktTotal;
 
+  // Comparison: if the enhanced ARPA/IRA subsidies are extended (not current law).
+  const enhContribPct = getEnhancedContributionPct(fplPct);
+  let enhPtcAnnual = 0;
+  let enhNetMonthly = benchmarkMo;
+  if (enhContribPct !== null) {
+    enhPtcAnnual  = Math.max(0, benchmarkMo * 12 - enhContribPct * agi);
+    enhNetMonthly = Math.max(0, benchmarkMo - enhPtcAnnual / 12);
+  }
+  const enhTotal   = enhNetMonthly * coverageMonths;
+  const enhSavings = cobraTotal - enhTotal;
+
   const _cgDomain = {
     inputs: {
       cobraMonthly: cobraMonthly,
@@ -107,9 +144,17 @@ export function compute(inputs = {}) {
       aboveCliff: fplPct > 4.0,
       recommendedPath: mktNetMonthly < cobraMonthly ? 'marketplace' : 'cobra',
       totalSavings: Math.round(Math.abs(savings)),
+      contributionPct: contribPct,
+      ifEnhancedExtended: {
+        contributionPct: enhContribPct,
+        marketplaceNetMonthly: Math.round(enhNetMonthly),
+        ptcAnnual: Math.round(enhPtcAnnual),
+        recommendedPath: enhNetMonthly < cobraMonthly ? 'marketplace' : 'cobra',
+        totalSavings: Math.round(Math.abs(enhSavings)),
+      },
     },
     downstream_handoff_candidates: ['AL-142', 'AL-23'],
-    metadata: { license: 'CC-BY-4.0', data_vintage: 'HHS 2026 FPL' },
+    metadata: { license: 'CC-BY-4.0', data_vintage: '2025 HHS FPL (2026 coverage) · Rev. Proc. 2025-25 · ARPA/IRA if extended' },
   };
   const policy_parameters = { execution_backend: 'js', hash_precision: 'monetary_usd:2dp', inputs: _cgDomain };
   const output_payload = _cgDomain;
