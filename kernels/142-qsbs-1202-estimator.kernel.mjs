@@ -83,8 +83,16 @@ export function compute(inputs = {}) {
   const excludedGain = eligible ? excludableGain * exclusionPct : 0;
   const taxableGain  = eligible ? gain - excludedGain : gain;
 
+  // The non-excluded part of a partial exclusion is "section 1202 gain", taxed at up
+  // to 28% (26 U.S.C. 1(h)(4),(7)) plus any NIIT, not at the regular LTCG rate. Gain
+  // above the per-issuer cap is ordinary LTCG. (28% is the ceiling: someone whose
+  // ordinary rate is lower pays that rate on it.)
+  const rate1202 = 0.28 + Math.max(0, ltcgRate - 0.20);
+  const section1202Gain = eligible ? excludableGain - excludedGain : 0;
   const federalTaxWithout = gain * ltcgRate;
-  const federalTaxWith    = taxableGain * ltcgRate;
+  const federalTaxWith    = eligible
+    ? section1202Gain * rate1202 + (gain - excludableGain) * ltcgRate
+    : gain * ltcgRate;
   const federalSaving     = eligible ? federalTaxWithout - federalTaxWith : 0;
 
   const _cgDomain = {
