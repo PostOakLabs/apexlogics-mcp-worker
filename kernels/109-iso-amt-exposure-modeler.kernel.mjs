@@ -29,6 +29,9 @@ export const meta = {
 };
 
 // ── 2026 AMT parameters (ported verbatim) ─────────────────────────────────────
+// 2026 standard deduction, Rev. Proc. 2025-32 sec. 4.14(1). Regular tax is on taxable income;
+// AMTI takes no deduction. Phase-out is 50% (OBBBA, IRC 55(d)(3)) from 2026. Matches AINumbers art-759.
+const STANDARD_DEDUCTION = { single: 16100, mfj: 32200 };
 const AMT_PARAMS = {
   single: { exemption: 90100,  phaseoutStart: 500000,  rate1: 0.26, rate2: 0.28, threshold: 244500 },
   mfj:    { exemption: 140200, phaseoutStart: 1000000, rate1: 0.26, rate2: 0.28, threshold: 244500 },
@@ -39,7 +42,7 @@ const dnum = (v, d) => { const x = +v; return x || d; };
 
 function calcAMT(amti, params) {
   const phaseoutAmt = Math.max(0, amti - params.phaseoutStart);
-  const effectiveExemption = Math.max(0, params.exemption - phaseoutAmt * 0.25);
+  const effectiveExemption = Math.max(0, params.exemption - phaseoutAmt * 0.50);
   const amtBase = Math.max(0, amti - effectiveExemption);
   let tmt;
   if (amtBase <= params.threshold) {
@@ -78,7 +81,9 @@ export function compute(inputs = {}) {
   const amti = ordIncome + isoSpread + otherAMT;
 
   const { tmt, effectiveExemption } = calcAMT(amti, params);
-  const regularTax = calcRegularTax(ordIncome, status);
+  const standardDeduction = STANDARD_DEDUCTION[status];
+  const taxableIncome = Math.max(0, ordIncome - standardDeduction);
+  const regularTax = calcRegularTax(taxableIncome, status);
   const amtOwed = Math.max(0, tmt - regularTax);
   const amtCredit = amtOwed;
 
@@ -108,6 +113,8 @@ export function compute(inputs = {}) {
     iso_spread:           Math.round(isoSpread),
     amti:                 Math.round(amti),
     effective_exemption:  Math.round(effectiveExemption),
+    standard_deduction:   standardDeduction,
+    taxable_income:       Math.round(taxableIncome),
     tmt:                  Math.round(tmt),
     regular_tax:          Math.round(regularTax),
     amt_owed:             Math.round(amtOwed),
