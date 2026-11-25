@@ -49,28 +49,31 @@ export function compute(inputs = {}) {
   let phaseoutPct = 0;
   let leverW2Needed = 0;
 
+  // §199A(b)(2)-(3), (d)(3): the W-2/UBIA limit applies whenever it is lower than
+  // 20% of QBI, including when it is $0. In the phase-in range the excess over the
+  // limit is phased in; for an SSTB, QBI, W-2 wages and UBIA are first scaled by the
+  // applicable percentage (1 - phase-in %). The result is capped at 20% of taxable
+  // income (§199A(a)(1)(B); no net-capital-gain input here).
   if (taxableIncome <= threshold) {
-    deduction = Math.min(tentative, taxableIncome * 0.20);
+    deduction = tentative;
   } else if (taxableIncome >= phaseoutEnd) {
     if (isSSTB) {
       deduction = 0;
       sstbDisallowed = true;
     } else {
-      deduction = propertyLimit > 0 ? Math.min(tentative, propertyLimit) : tentative;
+      deduction = Math.min(tentative, propertyLimit);
       if (w2Wages < qbi * 0.5 && tentative > propertyLimit) {
         leverW2Needed = Math.round((tentative - propertyLimit) / 0.5);
       }
     }
   } else {
     phaseoutPct = (taxableIncome - threshold) / phaseoutBand;
-    if (isSSTB) {
-      const phasedDeduction = tentative * (1 - phaseoutPct);
-      deduction = Math.max(0, phasedDeduction);
-    } else {
-      const fullLimit = propertyLimit > 0 ? Math.min(tentative, propertyLimit) : tentative;
-      deduction = tentative - phaseoutPct * Math.max(0, tentative - fullLimit);
-    }
+    const applicablePct = isSSTB ? 1 - phaseoutPct : 1;
+    const scaledTentative = tentative * applicablePct;
+    const scaledLimit = propertyLimit * applicablePct;
+    deduction = scaledTentative - phaseoutPct * Math.max(0, scaledTentative - scaledLimit);
   }
+  deduction = Math.max(0, Math.min(deduction, taxableIncome * 0.20));
 
   const minDed = (qbi >= 1000 && deduction < 400) ? 400 : 0;
   const finalDeduction = Math.max(deduction, minDed);
@@ -98,7 +101,7 @@ export function compute(inputs = {}) {
       leverW2Needed: leverW2Needed,
     },
     downstream_handoff_candidates: ['AL-118'],
-    metadata: { license: 'CC-BY-4.0', data_vintage: '2026 §199A OBBBA-permanent; thresholds $201,775/$403,500' },
+    metadata: { license: 'CC-BY-4.0', data_vintage: '2026 §199A OBBBA-permanent; thresholds $201,750/$403,500' },
   };
   const policy_parameters = { execution_backend: 'js', hash_precision: 'monetary_usd:2dp', inputs: _cgDomain };
   const output_payload = _cgDomain;

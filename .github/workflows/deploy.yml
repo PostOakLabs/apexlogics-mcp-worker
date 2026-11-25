@@ -137,6 +137,13 @@ jobs:
       - name: 🔒 #133 FLSA weekly-rule parity vectors (art-340 adopted)
         run: node scripts/art340-parity-133.test.mjs
 
+      # ── #137 §199A vectors (AL-AUDIT2-QBI) ──────────────────────────────────
+      # W-2/UBIA limit applies even when it is $0, SSTB amounts are scaled in the
+      # phase-in range, and the deduction is capped at 20% of taxable income
+      # (Rev. Proc. 2025-32 §4.26 thresholds). Zero-dep, no network.
+      - name: 🔒 #137 §199A vectors
+        run: node scripts/qbi-199a-137.test.mjs
+
       # ── Generate fixtures ───────────────────────────────────────────────────
       # Fetches live suite-registry.json from apexlogics.org and writes
       # data/tools.json + data/workflows.json. Confirms the registry is reachable.
